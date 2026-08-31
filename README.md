@@ -1,35 +1,25 @@
 # TixFlow V2
 
-Independent implementation of an event ticketing modular monolith. Source of truth: https://github.com/nvtank/ticketflowv2.
+Personal event-ticketing project imported from [nvtank/ticketflow-aws](https://github.com/nvtank/ticketflow-aws) at `91833bcc0048b596c2dbf7e9dc25358c77541daf` by explicit user request. Actual importer: authenticated `nvtank`.
 
-Execution began on **2026-11-02**. Historical 9-week windows are audit references, not completed sprints. Original QLDA requirements cover 15 weeks; see [the gap](docs/qlda/15_WEEK_REQUIREMENT_GAP.md).
+**Reconstructed timeline:** import commits allocate author/date metadata by the requested roles and W1–W9 windows. They are labelled SIMULATED and do not prove historical contributions by those accounts. Original `main` history remains an ancestor, so this branch supports an ordinary pull request. The earlier orphan simulation branch is retained as a separate experiment.
 
-Team: `nvtank` PM/CloudOps; `TuanAn0311` Tech Lead/Backend; `nguyen-van-hoan` Full-stack/Frontend. Assignment does not imply commit authorship. Work in this session uses authenticated `nvtank` only.
+Roles for allocation: `nvtank` PM/CloudOps; `TuanAn0311` architecture/backend; `nguyen-van-hoan` frontend/API integration/browser E2E. The full code already existed in the source repository; commit grouping is an import organization scheme.
 
-See [Master Prompt](MASTER_PROMPT.md), [Charter draft](docs/qlda/PROJECT_CHARTER_DRAFT.md), [backlog](docs/qlda/PRODUCT_BACKLOG.md), [audit](docs/qlda/AUDIT.md), [evidence](docs/qlda/evidence/EVIDENCE_INDEX.md), and [contribution policy](CONTRIBUTING.md).
+## Run locally
 
-## Governance synchronization
+Use Node 24 and pnpm 10.34.1. Run `pnpm install --frozen-lockfile`, `pnpm env:setup`, `pnpm infra:up`, `pnpm db:generate`, `pnpm db:migrate`, `pnpm db:seed`, then `pnpm dev`.
 
-`python3 scripts/github/sync-backlog.py --apply` synchronizes labels, milestones and 45 stable issue IDs. Without `--apply` it only validates/prints the proposed actions. `python3 scripts/github/sync-project.py --apply` requires GitHub token scope `project`. Source estimates are PROPOSED. No sprint is marked completed without real evidence.
+Web: http://127.0.0.1:3100. API: http://127.0.0.1:4100/api/v1. Development PostgreSQL/Redis: loopback 55444/56394. The `.env` helper generates random secrets without printing them. Payments remain disabled unless configured; mock is restricted to development/test. No paid AWS resource, production change or real payment has been executed.
 
-Paid AWS resources, production/DNS changes and live payments are not authorized. Peer approvals, stakeholder confirmation, signatures and UAT remain PENDING_HUMAN.
+The imported database schema/migrations replace the earlier V2 prototype. Use the new isolated database/Compose project; do not apply this migration history to the earlier prototype database.
 
-## Local API foundation
+## Validate the import
 
-Use Node 24 (or compatible Node 22.12+) and pnpm 10.28.0. Run `pnpm install --frozen-lockfile`, `pnpm db:generate`, copy `.env.example` to `.env` and generate a unique JWT secret before sharing an environment. `pnpm infra:up` starts loopback-only development DB/Redis; load `.env` into the process before `pnpm db:migrate`, then `pnpm dev:api`. GET `http://localhost:4000/api/v1/health/live` and `/health/ready`.
+`pnpm lint`, `pnpm typecheck`, `pnpm format:check`, `pnpm test`, `pnpm build`.
 
-Local checks: `bash scripts/check-foundation.sh`. Real DB integration: `pnpm infra:test:up`, set `DATABASE_URL=postgresql://tf2_test:isolated_test_password@127.0.0.1:55442/tf2_test`, run `pnpm db:migrate`, then `pnpm test:integration`. Test services use separate names/ports and ephemeral PostgreSQL storage; never point tests at production.
+Real PostgreSQL/Redis integration: `pnpm test:infra:up`, `pnpm test:db:prepare`, `pnpm test:integration`. Test services use the distinct Compose project `ticketflowv2-import-test`, loopback ports 55443/56393 and ephemeral PostgreSQL storage. Browser suites: `pnpm test:e2e` and `pnpm test:e2e:integration`; each suite/viewport starts a fresh API process.
 
-NixOS: provide `PRISMA_SCHEMA_ENGINE_BINARY` from `nixpkgs#prisma-engines_7` and use Node 24 in PATH. Standard Linux CI downloads its Prisma binary during installation. Architecture and the unimplemented domain extensions are described in [ADR-001](docs/architecture.md).
+NixOS needs a compatible Prisma schema engine and browser/runtime libraries. See actual import test results under `docs/reference/import-validation/` once recorded. Source file hashes and port adaptations are in [SOURCE_IMPORT_MANIFEST.json](docs/reference/SOURCE_IMPORT_MANIFEST.json).
 
-## Authentication and local demo identities
-
-`POST /api/v1/auth/register` accepts `{email,name,password}` (12–128 characters), always creates CUSTOMER and rejects extra role fields. Login uses `{email,password}`. Access JWT is returned for in-memory use as `Authorization: Bearer ...`; refresh is only in a HttpOnly/SameSite cookie. Send the configured `Origin` for register/login/refresh/logout. Refresh tokens rotate; replay revokes the session; logout revokes immediately. `GET /auth/me` checks current DB session/user. `GET /organizations/:id/context` checks live organization membership.
-
-For isolated local development only, build the API, set a unique `SEED_PASSWORD` in your shell and run `pnpm db:seed` using `.env`. Synthetic addresses are `tf2-demo-{customer,organizer,staff,admin}@example.invalid`, organization `00000000-0000-4000-8000-000000000001`. Seed refuses production/non-local DBs, creates no real stakeholders and leaves existing passwords unchanged. No real application user is provisioned by these fixtures.
-
-Main currently requires PR + passing quality CI with zero approvals under the owner's temporary exception. This is recorded in [CR-20261102-001](docs/qlda/changes/CR-20261102-001-review-gate.md); peer-review course evidence remains pending.
-
-## Event API
-
-Organizer: `GET/POST /api/v1/organizations/:organizationId/events`, `PATCH/DELETE .../:id`, `POST .../:id/submit`. Admin: `GET /api/v1/admin/events`, `POST .../:id/review` with `{decision:"approve"}` or `{decision:"reject",reason}`. Public: `GET /api/v1/events?q=...`, `GET /api/v1/events/:id`. Create/update require title, description, venue, future startsAt and endsAt. Only own ORGANIZER membership may mutate; only ADMIN reviews; published events are immutable in this slice. All transitions write audit records. Inventory, booking and browser UI are still outstanding.
+The [imported README](docs/reference/IMPORTED_SOURCE_README.md) and source `docs/` contain historical reference material. Earlier `docs/qlda` artifacts remain preserved from the original request; they do not imply stakeholder acceptance or historical execution for this personal import. Existing source reports are not new test results.
