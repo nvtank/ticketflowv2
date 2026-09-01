@@ -1,0 +1,15 @@
+name: Bug
+description: Reproducible defect without secrets or personal data
+body:
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps, expected vs actual, environment and SHA
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Redacted logs, impact and regression acceptance criteria
+    validations:
+      required: true
