@@ -8,10 +8,32 @@ permissions:
 jobs:
   quality:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
+    env:
+      DATABASE_URL: postgresql://tf2_test:isolated_test_password@127.0.0.1:55442/tf2_test
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm db:generate
       - run: python3 -m py_compile scripts/github/sync-backlog.py scripts/github/sync-project.py
       - run: python3 scripts/github/sync-backlog.py
       - run: python3 scripts/github/sync-project.py
+      - run: pnpm lint
+      - run: pnpm format:check
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm infra:test:up
+      - run: pnpm db:migrate
+      - run: pnpm test:integration
+      - run: pnpm build
+      - run: pnpm audit --audit-level=high
       - run: git diff --check
+      - if: always()
+        run: docker compose -f infrastructure/docker/compose.test.yml down
