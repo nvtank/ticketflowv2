@@ -9,6 +9,12 @@ import { Cache, HealthController } from './health';
 import { AuthController, OrganizationController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { SafeExceptionFilter } from './http-errors';
+import {
+  OrganizerEventsController,
+  AdminEventsController,
+  PublicEventsController,
+} from './events/events.controller';
+import { EventsService } from './events/events.service';
 
 export type { INestApplication } from '@nestjs/common';
 
@@ -17,8 +23,21 @@ export class ApplicationModule {
   static configure(environment: Environment): DynamicModule {
     return {
       module: ApplicationModule,
-      controllers: [HealthController, AuthController, OrganizationController],
-      providers: [{ provide: ENVIRONMENT, useValue: environment }, Database, Cache, AuthService],
+      controllers: [
+        HealthController,
+        AuthController,
+        OrganizationController,
+        OrganizerEventsController,
+        AdminEventsController,
+        PublicEventsController,
+      ],
+      providers: [
+        { provide: ENVIRONMENT, useValue: environment },
+        Database,
+        Cache,
+        AuthService,
+        EventsService,
+      ],
     };
   }
 }
