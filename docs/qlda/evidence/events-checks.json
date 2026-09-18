@@ -1,0 +1,36 @@
+{
+  "observed_date": "2026-11-02",
+  "actor": "nvtank",
+  "branch": "feature/TF2-014-event-lifecycle",
+  "checks": [
+    {
+      "command": "bash scripts/check-foundation.sh (Node 24 and configured Nix schema-engine)",
+      "exit_code": 0,
+      "result": "lint, typecheck, build, format and 11 unit tests passed"
+    },
+    {
+      "command": "pnpm db:migrate (isolated PostgreSQL)",
+      "exit_code": 0,
+      "result": "20261102101800_events applied"
+    },
+    {
+      "command": "pnpm test:integration (approved local HTTP)",
+      "exit_code": 0,
+      "result": "13 tests passed, including 5 event lifecycle cases"
+    }
+  ],
+  "coverage": [
+    "four-role create/review denials",
+    "own organization scope and foreign event denial",
+    "draft CRUD, submit, reject/edit/resubmit/publish",
+    "public approved-only catalog and safe detail fields",
+    "two competing reviews yield 201/409 and exactly one approval audit",
+    "published event edit/delete denial"
+  ],
+  "remaining": [
+    "inventory/pricing/booking",
+    "Next UI and browser E2E",
+    "public HTTPS",
+    "human peer-review evidence"
+  ]
+}
