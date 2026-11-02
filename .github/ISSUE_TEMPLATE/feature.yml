@@ -1,0 +1,22 @@
+name: Feature
+description: A bounded deliverable with one DRI and verifiable acceptance
+title: 'TF2-XXX: '
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Business value, WBS, scope and dependencies
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria and test evidence
+    validations:
+      required: true
+  - type: input
+    id: owner
+    attributes:
+      label: DRI, independent reviewer and proposed SP
+    validations:
+      required: true
