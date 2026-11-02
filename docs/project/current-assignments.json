@@ -1,0 +1,13 @@
+{
+  "changed_on": "2026-11-02",
+  "reason": "User requested only Sprint 1 and Sprint 2 views; current follow-up tasks belong to Sprint 2, not a third sprint.",
+  "deadline_timezone": "Asia/Ho_Chi_Minh",
+  "issues": {
+    "6": { "sprint": "S2", "target_date": "2026-11-03" },
+    "7": { "sprint": "S2", "target_date": "2026-11-04" },
+    "37": { "sprint": "S2", "target_date": "2026-11-05" },
+    "41": { "sprint": "S2", "target_date": "2026-11-06" },
+    "42": { "sprint": "S2", "target_date": "2026-11-07" },
+    "26": { "sprint": "S2", "target_date": "2026-11-08" }
+  }
+}

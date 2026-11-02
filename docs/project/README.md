@@ -11,10 +11,10 @@ All 45 Issues are real repository Issues. The fields include Sprint, baseline it
 
 ## Sprint history and burndown
 
-| Sprint | Planned window   | Completed Issues in this snapshot | Open acceptance                                  |
-| ------ | ---------------- | --------------------------------- | ------------------------------------------------ |
-| S1     | 2026-09-07–09-20 | 9 of 10                           | TF2-017 includes a real retrospective record     |
-| S2     | 2026-09-21–10-04 | 8 of 9                            | TF2-026 includes staging and a real review/retro |
+| Sprint | Planned window   | Completed Issues in this snapshot | Open acceptance                              |
+| ------ | ---------------- | --------------------------------- | -------------------------------------------- |
+| S1     | 2026-09-07–09-20 | 9 of 10                           | TF2-017 includes a real retrospective record |
+| S2     | 2026-09-21–10-04 | 8 of 14                           | Follow-up tasks #6, #7, #26, #37, #41, #42   |
 
 The planned windows do not prove execution during September. Actual repository Issue/PR observations and closures are on 2026-11-02. No earlier board transitions, meeting records or completion dates have been backfilled. The reconstructed import commits are explicitly excluded from chart calculations.
 
@@ -47,3 +47,5 @@ Rendering requires Matplotlib (`3.10.5` was used for this snapshot). Synchroniza
 Current implementation evidence: [merged PR #50](https://github.com/nvtank/ticketflowv2/pull/50), [passing CI](https://github.com/nvtank/ticketflowv2/actions/runs/41435710841), and [130 unit / 106 integration / 54 E2E results](../reference/import-validation/RESULTS.json). Twenty-five technical Issues were actually closed after that merge. AWS/public deployment, live bank settlement and stakeholder acceptance remain open.
 
 API references: [GitHub Projects GraphQL](https://docs.github.com/en/graphql/reference/projects), [Project items REST](https://docs.github.com/en/rest/projects/items), [Project views REST](https://docs.github.com/en/rest/projects/views), [historical Insights](https://docs.github.com/en/issues/planning-and-tracking-with-projects/viewing-insights-from-your-project/about-insights-for-projects).
+
+Only Sprint 1 (view 4) and Sprint 2 (view 5) are used as sprint views. On 2026-11-02, the user moved six follow-up tasks into Sprint 2 with deadlines 03–08 November; the separate current-sprint view was deleted. The current-scope charts show actual Issue lifecycle events for current members; they do not claim these tasks belonged to Sprint 2 before this reassignment. Original baseline Sprint values remain in `baseline_sprint`.
