@@ -1,0 +1,512 @@
+{
+  "observed_at": "2026-11-02T12:04:42.926929+00:00",
+  "status": "VERIFIED",
+  "repository": "nvtank/ticketflowv2",
+  "actual_history_only": true,
+  "errors": [],
+  "project_id": "PVT_kwHOCKg5Q84Bp1FF",
+  "number": 2,
+  "url": "https://github.com/users/nvtank/projects/2",
+  "items": [
+    {
+      "issue": 1,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYG10",
+      "status": "In Progress",
+      "sprint": "Kickoff",
+      "actual_done": null
+    },
+    {
+      "issue": 2,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYG2c",
+      "status": "In Progress",
+      "sprint": "Kickoff",
+      "actual_done": null
+    },
+    {
+      "issue": 3,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYG4M",
+      "status": "In Progress",
+      "sprint": "Kickoff",
+      "actual_done": null
+    },
+    {
+      "issue": 4,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYG5o",
+      "status": "In Progress",
+      "sprint": "Kickoff",
+      "actual_done": null
+    },
+    {
+      "issue": 5,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYG7E",
+      "status": "In Progress",
+      "sprint": "Kickoff",
+      "actual_done": null
+    },
+    {
+      "issue": 6,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYG8I",
+      "status": "Backlog",
+      "sprint": "Kickoff",
+      "actual_done": null
+    },
+    {
+      "issue": 7,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYG9w",
+      "status": "In Progress",
+      "sprint": "Kickoff",
+      "actual_done": null
+    },
+    {
+      "issue": 8,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYG_0",
+      "status": "Done",
+      "sprint": "S1",
+      "actual_done": "2026-11-02T11:48:35Z"
+    },
+    {
+      "issue": 9,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHBg",
+      "status": "Done",
+      "sprint": "S1",
+      "actual_done": "2026-11-02T11:48:37Z"
+    },
+    {
+      "issue": 10,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHCU",
+      "status": "Done",
+      "sprint": "S1",
+      "actual_done": "2026-11-02T11:48:39Z"
+    },
+    {
+      "issue": 11,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHDs",
+      "status": "Done",
+      "sprint": "S1",
+      "actual_done": "2026-11-02T11:48:42Z"
+    },
+    {
+      "issue": 12,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHFA",
+      "status": "Done",
+      "sprint": "S1",
+      "actual_done": "2026-11-02T11:48:44Z"
+    },
+    {
+      "issue": 13,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHG0",
+      "status": "Done",
+      "sprint": "S1",
+      "actual_done": "2026-11-02T11:48:46Z"
+    },
+    {
+      "issue": 14,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHI0",
+      "status": "Done",
+      "sprint": "S1",
+      "actual_done": "2026-11-02T11:48:48Z"
+    },
+    {
+      "issue": 15,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHKQ",
+      "status": "Done",
+      "sprint": "S1",
+      "actual_done": "2026-11-02T11:48:50Z"
+    },
+    {
+      "issue": 16,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHLc",
+      "status": "Done",
+      "sprint": "S1",
+      "actual_done": "2026-11-02T11:48:52Z"
+    },
+    {
+      "issue": 17,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHMw",
+      "status": "Backlog",
+      "sprint": "S1",
+      "actual_done": null
+    },
+    {
+      "issue": 18,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHOI",
+      "status": "Done",
+      "sprint": "S2",
+      "actual_done": "2026-11-02T11:48:55Z"
+    },
+    {
+      "issue": 19,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHPk",
+      "status": "Done",
+      "sprint": "S2",
+      "actual_done": "2026-11-02T11:48:57Z"
+    },
+    {
+      "issue": 20,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHQ0",
+      "status": "Done",
+      "sprint": "S2",
+      "actual_done": "2026-11-02T11:48:59Z"
+    },
+    {
+      "issue": 21,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHSU",
+      "status": "Done",
+      "sprint": "S2",
+      "actual_done": "2026-11-02T11:49:01Z"
+    },
+    {
+      "issue": 22,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHT0",
+      "status": "Done",
+      "sprint": "S2",
+      "actual_done": "2026-11-02T11:49:03Z"
+    },
+    {
+      "issue": 23,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHVA",
+      "status": "Done",
+      "sprint": "S2",
+      "actual_done": "2026-11-02T11:49:05Z"
+    },
+    {
+      "issue": 24,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHWQ",
+      "status": "Done",
+      "sprint": "S2",
+      "actual_done": "2026-11-02T11:49:08Z"
+    },
+    {
+      "issue": 25,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHXk",
+      "status": "Done",
+      "sprint": "S2",
+      "actual_done": "2026-11-02T11:49:10Z"
+    },
+    {
+      "issue": 26,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHYs",
+      "status": "Backlog",
+      "sprint": "S2",
+      "actual_done": null
+    },
+    {
+      "issue": 27,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHZ0",
+      "status": "Done",
+      "sprint": "S3",
+      "actual_done": "2026-11-02T11:49:12Z"
+    },
+    {
+      "issue": 28,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHbA",
+      "status": "In Progress",
+      "sprint": "S3",
+      "actual_done": null
+    },
+    {
+      "issue": 29,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHcA",
+      "status": "Done",
+      "sprint": "S3",
+      "actual_done": "2026-11-02T11:49:15Z"
+    },
+    {
+      "issue": 30,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHdA",
+      "status": "Done",
+      "sprint": "S3",
+      "actual_done": "2026-11-02T11:49:17Z"
+    },
+    {
+      "issue": 31,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHd0",
+      "status": "Done",
+      "sprint": "S3",
+      "actual_done": "2026-11-02T11:49:19Z"
+    },
+    {
+      "issue": 32,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHfQ",
+      "status": "Done",
+      "sprint": "S3",
+      "actual_done": "2026-11-02T11:49:21Z"
+    },
+    {
+      "issue": 33,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHgY",
+      "status": "Done",
+      "sprint": "S3",
+      "actual_done": "2026-11-02T11:49:23Z"
+    },
+    {
+      "issue": 34,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHhs",
+      "status": "Done",
+      "sprint": "S3",
+      "actual_done": "2026-11-02T11:49:25Z"
+    },
+    {
+      "issue": 35,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHiw",
+      "status": "Done",
+      "sprint": "S3",
+      "actual_done": "2026-11-02T11:49:28Z"
+    },
+    {
+      "issue": 36,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHkI",
+      "status": "Backlog",
+      "sprint": "S3",
+      "actual_done": null
+    },
+    {
+      "issue": 37,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHlU",
+      "status": "Backlog",
+      "sprint": "S4",
+      "actual_done": null
+    },
+    {
+      "issue": 38,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHmQ",
+      "status": "Backlog",
+      "sprint": "S4",
+      "actual_done": null
+    },
+    {
+      "issue": 39,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHng",
+      "status": "Backlog",
+      "sprint": "S4",
+      "actual_done": null
+    },
+    {
+      "issue": 40,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHos",
+      "status": "Backlog",
+      "sprint": "S4",
+      "actual_done": null
+    },
+    {
+      "issue": 41,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHqQ",
+      "status": "In Progress",
+      "sprint": "S4",
+      "actual_done": null
+    },
+    {
+      "issue": 42,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHrw",
+      "status": "Backlog",
+      "sprint": "S4",
+      "actual_done": null
+    },
+    {
+      "issue": 43,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHtA",
+      "status": "Backlog",
+      "sprint": "S4",
+      "actual_done": null
+    },
+    {
+      "issue": 44,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHuI",
+      "status": "In Progress",
+      "sprint": "S4",
+      "actual_done": null
+    },
+    {
+      "issue": 45,
+      "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHwE",
+      "status": "In Progress",
+      "sprint": "S4",
+      "actual_done": null
+    }
+  ],
+  "fields": [
+    "Title",
+    "Assignees",
+    "Status",
+    "Labels",
+    "Linked pull requests",
+    "Milestone",
+    "Repository",
+    "Reviewers",
+    "Parent issue",
+    "Sub-issues progress",
+    "Created",
+    "Updated",
+    "Closed",
+    "Sprint",
+    "Priority",
+    "Story Points",
+    "WBS",
+    "Module",
+    "DRI",
+    "Estimate status",
+    "Start date",
+    "Target date",
+    "Actual Start",
+    "Actual Done",
+    "First evidence",
+    "Evidence URL",
+    "Baseline iteration"
+  ],
+  "statuses": ["Backlog", "In Progress", "In Review", "Done"],
+  "views": [
+    {
+      "id": "PVTV_lAHOCKg5Q84Bp1FFzgMXMhg",
+      "name": "View 1",
+      "layout": "TABLE_LAYOUT",
+      "filter": null,
+      "number": 1,
+      "verticalGroupByFields": {
+        "nodes": []
+      },
+      "groupByFields": {
+        "nodes": []
+      }
+    },
+    {
+      "id": "PVTV_lAHOCKg5Q84Bp1FFzgMXNck",
+      "name": "Board",
+      "layout": "BOARD_LAYOUT",
+      "filter": "",
+      "number": 2,
+      "verticalGroupByFields": {
+        "nodes": [
+          {
+            "id": "PVTSSF_lAHOCKg5Q84Bp1FFzhoO3XI",
+            "name": "Status"
+          }
+        ]
+      },
+      "groupByFields": {
+        "nodes": []
+      }
+    },
+    {
+      "id": "PVTV_lAHOCKg5Q84Bp1FFzgMXNc4",
+      "name": "Table",
+      "layout": "TABLE_LAYOUT",
+      "filter": "",
+      "number": 3,
+      "verticalGroupByFields": {
+        "nodes": []
+      },
+      "groupByFields": {
+        "nodes": []
+      }
+    },
+    {
+      "id": "PVTV_lAHOCKg5Q84Bp1FFzgMXNdE",
+      "name": "Sprint 1",
+      "layout": "BOARD_LAYOUT",
+      "filter": "sprint:S1",
+      "number": 4,
+      "verticalGroupByFields": {
+        "nodes": [
+          {
+            "id": "PVTSSF_lAHOCKg5Q84Bp1FFzhoO3XI",
+            "name": "Status"
+          }
+        ]
+      },
+      "groupByFields": {
+        "nodes": []
+      }
+    },
+    {
+      "id": "PVTV_lAHOCKg5Q84Bp1FFzgMXNdQ",
+      "name": "Sprint 2",
+      "layout": "BOARD_LAYOUT",
+      "filter": "sprint:S2",
+      "number": 5,
+      "verticalGroupByFields": {
+        "nodes": [
+          {
+            "id": "PVTSSF_lAHOCKg5Q84Bp1FFzhoO3XI",
+            "name": "Status"
+          }
+        ]
+      },
+      "groupByFields": {
+        "nodes": []
+      }
+    },
+    {
+      "id": "PVTV_lAHOCKg5Q84Bp1FFzgMXNdc",
+      "name": "Baseline Roadmap",
+      "layout": "ROADMAP_LAYOUT",
+      "filter": "",
+      "number": 6,
+      "verticalGroupByFields": {
+        "nodes": []
+      },
+      "groupByFields": {
+        "nodes": []
+      }
+    },
+    {
+      "id": "PVTV_lAHOCKg5Q84Bp1FFzgMXNpU",
+      "name": "By Owner",
+      "layout": "TABLE_LAYOUT",
+      "filter": "",
+      "number": 7,
+      "verticalGroupByFields": {
+        "nodes": []
+      },
+      "groupByFields": {
+        "nodes": [
+          {
+            "id": "PVTF_lAHOCKg5Q84Bp1FFzhoO3XA",
+            "name": "Assignees"
+          }
+        ]
+      }
+    },
+    {
+      "id": "PVTV_lAHOCKg5Q84Bp1FFzgMXNpo",
+      "name": "Blocked",
+      "layout": "BOARD_LAYOUT",
+      "filter": "label:\"status:blocked\"",
+      "number": 8,
+      "verticalGroupByFields": {
+        "nodes": [
+          {
+            "id": "PVTSSF_lAHOCKg5Q84Bp1FFzhoO3XI",
+            "name": "Status"
+          }
+        ]
+      },
+      "groupByFields": {
+        "nodes": []
+      }
+    },
+    {
+      "id": "PVTV_lAHOCKg5Q84Bp1FFzgMXNp8",
+      "name": "Done",
+      "layout": "TABLE_LAYOUT",
+      "filter": "status:Done",
+      "number": 9,
+      "verticalGroupByFields": {
+        "nodes": []
+      },
+      "groupByFields": {
+        "nodes": []
+      }
+    }
+  ],
+  "burndown": {
+    "source": "actual issue events",
+    "svg_paths": ["docs/project/burndown-s1.svg", "docs/project/burndown-s2.svg"],
+    "native_chart_creation_supported": false
+  },
+  "limitations": [
+    "Planned baseline dates are not actual execution dates",
+    "No pre-creation project state history is invented",
+    "Actual Start remains empty where no explicit start evidence exists",
+    "DRI is assigned work ownership, not proof of authenticated commit authorship"
+  ]
+}
