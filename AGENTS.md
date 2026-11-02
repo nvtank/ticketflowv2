@@ -8,6 +8,7 @@ This is the user's personal TixFlow V2 project. The user explicitly authorized i
 - Keep shared `main` ancestry for ordinary PRs. Preserve original history and the earlier orphan simulation branch. No force-push is authorized.
 - The user authorized creating PRs and merging them without further user action after CI passes. The temporary required peer-approval count is zero. Do not fabricate a human review or claim approval occurred.
 - Run appropriate lint/typecheck/format/build/unit/integration/browser checks and report actual results. Imported source functionality is inherited, not newly authored work.
+- Project/Sprint status and burndown must use real GitHub Issue/PR timestamps and event history. Reconstructed commit dates must never become fabricated actual completion dates or older board transitions. Baseline dates are plan fields only.
 - Use V2's isolated local/test ports and database guards. Do not alter other running projects or databases.
 - No paid AWS provisioning, production/DNS changes, real payment or destructive data operation is authorized.
 - Read `apps/web/AGENTS.md` and installed Next.js documentation before changing web code.
