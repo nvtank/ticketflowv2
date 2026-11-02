@@ -6,6 +6,9 @@ import cookieParser from 'cookie-parser';
 import { ENVIRONMENT, type Environment } from './config';
 import { Database } from './database';
 import { Cache, HealthController } from './health';
+import { AuthController, OrganizationController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
+import { SafeExceptionFilter } from './http-errors';
 
 export type { INestApplication } from '@nestjs/common';
 
@@ -14,8 +17,8 @@ export class ApplicationModule {
   static configure(environment: Environment): DynamicModule {
     return {
       module: ApplicationModule,
-      controllers: [HealthController],
-      providers: [{ provide: ENVIRONMENT, useValue: environment }, Database, Cache],
+      controllers: [HealthController, AuthController, OrganizationController],
+      providers: [{ provide: ENVIRONMENT, useValue: environment }, Database, Cache, AuthService],
     };
   }
 }
@@ -27,6 +30,7 @@ export async function createApplication(environment: Environment) {
   app.setGlobalPrefix('api/v1');
   app.use(helmet());
   app.use(cookieParser());
+  app.useGlobalFilters(new SafeExceptionFilter());
   app.enableCors({ origin: environment.WEB_ORIGIN, credentials: true });
   app.enableShutdownHooks();
   return app;
