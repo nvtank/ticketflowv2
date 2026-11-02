@@ -1,14 +1,20 @@
-import { createApplication } from './app';
-import { parseEnvironment } from './config';
+import 'reflect-metadata';
+import { Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { configureApplication } from './bootstrap';
+import { parseEnvironment } from './config/environment';
 
-async function main() {
+async function bootstrap(): Promise<void> {
   const environment = parseEnvironment(process.env);
-  const app = await createApplication(environment);
-  await app.listen(environment.PORT, '0.0.0.0');
+  const app = await NestFactory.create(AppModule);
+  configureApplication(app, environment);
+  await app.listen(environment.API_PORT, '127.0.0.1');
+  Logger.log(`TixFlow API: http://localhost:${environment.API_PORT}/api/v1`, 'Bootstrap');
 }
 
-void main().catch(() => {
-  // Do not print library errors that may contain database credentials.
-  console.error('API startup failed; verify environment and dependency availability');
+void bootstrap().catch(() => {
+  // Avoid printing connection strings or credentials from driver exceptions.
+  Logger.error('API startup failed. Check configuration and local dependencies.', 'Bootstrap');
   process.exitCode = 1;
 });
