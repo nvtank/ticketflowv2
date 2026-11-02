@@ -23,3 +23,14 @@ Real PostgreSQL/Redis integration: `pnpm test:infra:up`, `pnpm test:db:prepare`,
 NixOS needs a compatible Prisma schema engine and browser/runtime libraries. See actual import test results under `docs/reference/import-validation/` once recorded. Source file hashes and port adaptations are in [SOURCE_IMPORT_MANIFEST.json](docs/reference/SOURCE_IMPORT_MANIFEST.json).
 
 The [imported README](docs/reference/IMPORTED_SOURCE_README.md) and source `docs/` contain historical reference material. Earlier `docs/qlda` artifacts remain preserved from the original request; they do not imply stakeholder acceptance or historical execution for this personal import. Existing source reports are not new test results.
+
+## Live GitHub Project and actual burndown
+
+[Delivery board](https://github.com/users/nvtank/projects/2/views/2) · [Sprint 1](https://github.com/users/nvtank/projects/2/views/4) · [Sprint 2](https://github.com/users/nvtank/projects/2/views/5).
+
+The Project has Backlog, In Progress, In Review and Done columns, all 45 backlog Issues, owner/estimate/evidence fields and baseline Sprint iterations. Actual completion dates come from GitHub Issue closure events; the reconstructed import commit dates are not used for metrics.
+
+![Sprint 1 actual burndown](docs/project/burndown-s1.svg)
+![Sprint 2 actual burndown](docs/project/burndown-s2.svg)
+
+See [actual event history and CSV exports](docs/project/README.md). The baseline Sprint 1/Sprint 2 windows are plans; chart data begins with the actual GitHub observations on 2026-11-02. Current exported snapshot: 25 technical Issues completed; Sprint 1 has 9/10 completed and Sprint 2 has 8/9 completed. Remaining mixed retrospective/staging acceptance is not claimed complete.
