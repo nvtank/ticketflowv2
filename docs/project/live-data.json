@@ -1,0 +1,5357 @@
+{
+  "repository": "nvtank/ticketflowv2",
+  "observed_at": "2026-11-02T11:55:50.440690+00:00",
+  "data_source": "GitHub REST issue metadata and paginated actual issue events",
+  "commit_dates_used": false,
+  "baseline_is_plan_only": true,
+  "baseline": {
+    "Kickoff": ["2026-08-31", "2026-09-06", 7],
+    "S1": ["2026-09-07", "2026-09-20", 14],
+    "S2": ["2026-09-21", "2026-10-04", 14],
+    "S3": ["2026-10-05", "2026-10-18", 14],
+    "S4": ["2026-10-19", "2026-11-02", 15]
+  },
+  "issues": [
+    {
+      "id": "TF2-001",
+      "number": 1,
+      "node_id": "I_kwDOVf7e3M8AAAABby3qsw",
+      "title": "TF2-001: Charter 13 mục + Business Case + SMART goals",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/1",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:56:34Z",
+      "updated_at": "2026-11-02T09:56:34Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "Kickoff",
+      "wbs": "1.1",
+      "module": "qlda",
+      "priority": "P0",
+      "points": 3,
+      "estimate_status": "PROPOSED",
+      "milestone": "Kickoff",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/1/events",
+      "events": [
+        {
+          "id": 34896116254,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:56:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896116576,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:56:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896119436,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896119778,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896119967,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:56:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896120115,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896120516,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896120658,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:56:37Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896121541,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:56:37Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896122095,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:56:38Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905275679,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905278112,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:35Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905358275,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:36Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-002",
+      "number": 2,
+      "node_id": "I_kwDOVf7e3M8AAAABby3tDA",
+      "title": "TF2-002: Stakeholder register, sourcing pathway, UAT criteria",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/2",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:56:36Z",
+      "updated_at": "2026-11-02T09:56:36Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "Kickoff",
+      "wbs": "1.2",
+      "module": "qlda",
+      "priority": "P0",
+      "points": 3,
+      "estimate_status": "PROPOSED",
+      "milestone": "Kickoff",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/2/events",
+      "events": [
+        {
+          "id": 34896119782,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:56:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896120040,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:56:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896122485,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896122734,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896123055,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:56:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896123071,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896123486,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896123797,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:56:39Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896124572,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:56:39Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896125352,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:56:40Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905275557,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905278215,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:35Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905365044,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:42Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-003",
+      "number": 3,
+      "node_id": "I_kwDOVf7e3M8AAAABby3vRg",
+      "title": "TF2-003: Scope baseline + WBS 100% + WBS Dictionary",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/3",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:56:38Z",
+      "updated_at": "2026-11-02T09:56:38Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "Kickoff",
+      "wbs": "1.3",
+      "module": "qlda",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "Kickoff",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/3/events",
+      "events": [
+        {
+          "id": 34896122807,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:56:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896123073,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:56:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896126753,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896127068,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896127265,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:56:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896127384,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896127647,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896127919,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:56:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896128648,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:56:42Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896129358,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:56:42Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905277813,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905283763,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:38Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905375260,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:49Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-004",
+      "number": 4,
+      "node_id": "I_kwDOVf7e3M8AAAABby3xmg",
+      "title": "TF2-004: Risk Register v1, communications/change plan",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/4",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:56:40Z",
+      "updated_at": "2026-11-02T09:56:40Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "Kickoff",
+      "wbs": "1.4",
+      "module": "qlda",
+      "priority": "P0",
+      "points": 3,
+      "estimate_status": "PROPOSED",
+      "milestone": "Kickoff",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/4/events",
+      "events": [
+        {
+          "id": 34896126606,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:56:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896126827,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:56:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896129745,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:42Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896130196,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896130287,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:56:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896130540,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896130862,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896130869,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:56:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896131649,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:56:43Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896132225,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:56:44Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905278998,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:37Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905280919,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:38Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905380327,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:53Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-005",
+      "number": 5,
+      "node_id": "I_kwDOVf7e3M8AAAABby3zvQ",
+      "title": "TF2-005: GitHub Project board, issue/PR templates, labels & milestones",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/5",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:56:42Z",
+      "updated_at": "2026-11-02T09:56:42Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "Kickoff",
+      "wbs": "1.5",
+      "module": "qlda",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "Kickoff",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/5/events",
+      "events": [
+        {
+          "id": 34896129671,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:56:42Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896129923,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:56:42Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896132580,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:44Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896132928,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:44Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896132933,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:56:44Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896133259,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896133580,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:56:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896133630,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:56:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896134702,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:56:45Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896135384,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:56:46Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905280708,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905286616,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:40Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905390517,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:01Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-006",
+      "number": 6,
+      "node_id": "I_kwDOVf7e3M8AAAABby4rKQ",
+      "title": "TF2-006: Requirements, personas, user journeys, NFR",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/6",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:57:33Z",
+      "updated_at": "2026-11-02T09:57:33Z",
+      "closed_at": null,
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "Kickoff",
+      "wbs": "2.1",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "Kickoff",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/6/events",
+      "events": [
+        {
+          "id": 34896208304,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:33Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896210608,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896210955,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896211124,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:35Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896211207,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896211541,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896211679,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:36Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896211854,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896212328,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896212876,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905283744,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905288047,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:42Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-007",
+      "number": 7,
+      "node_id": "I_kwDOVf7e3M8AAAABby4szg",
+      "title": "TF2-007: ADR/C4/ERD, API contracts & DB design",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/7",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:57:35Z",
+      "updated_at": "2026-11-02T09:57:35Z",
+      "closed_at": null,
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "Kickoff",
+      "wbs": "2.2",
+      "module": "backend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "Kickoff",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/7/events",
+      "events": [
+        {
+          "id": 34896211131,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896211342,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:57:35Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896214082,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:37Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896214478,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896214788,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:38Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896214924,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896215231,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896215376,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:38Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896216069,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:39Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896216658,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:39Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905286061,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905288254,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:43Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905405862,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:12Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-008",
+      "number": 8,
+      "node_id": "I_kwDOVf7e3M8AAAABby4vMA",
+      "title": "TF2-008: pnpm monorepo, TS strict, lint/format, shared contracts",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/8",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:37Z",
+      "updated_at": "2026-11-02T11:48:36Z",
+      "closed_at": "2026-11-02T11:48:35Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S1",
+      "wbs": "3.1",
+      "module": "backend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S1 Foundation & Events",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/8/events",
+      "events": [
+        {
+          "id": 34896213580,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:37Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896213785,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:57:37Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896216365,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:39Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896216666,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:39Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896216692,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:39Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896216947,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:39Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896217246,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:39Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896217253,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:39Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896217731,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896218267,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905287606,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905290841,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:45Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905414442,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:17Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905437362,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905440176,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:37Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-009",
+      "number": 9,
+      "node_id": "I_kwDOVf7e3M8AAAABby4w8w",
+      "title": "TF2-009: Docker local/test DB, Redis, env samples, healthcheck",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/9",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:39Z",
+      "updated_at": "2026-11-02T11:48:38Z",
+      "closed_at": "2026-11-02T11:48:37Z",
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S1",
+      "wbs": "3.2",
+      "module": "cloudops",
+      "priority": "P0",
+      "points": 3,
+      "estimate_status": "PROPOSED",
+      "milestone": "S1 Foundation & Events",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/9/events",
+      "events": [
+        {
+          "id": 34896216249,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:39Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896216470,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:57:39Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896217991,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896218251,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896218252,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896218486,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896218772,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896218794,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896219427,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:41Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896220025,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:41Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905290520,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905293729,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:46Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905422685,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:24Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905440052,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905444816,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:40Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-010",
+      "number": 10,
+      "node_id": "I_kwDOVf7e3M8AAAABby4zBQ",
+      "title": "TF2-010: CI: lint/typecheck/build/test + branch rules instructions",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/10",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:40Z",
+      "updated_at": "2026-11-02T11:48:40Z",
+      "closed_at": "2026-11-02T11:48:39Z",
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S1",
+      "wbs": "3.3",
+      "module": "cloudops",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S1 Foundation & Events",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/10/events",
+      "events": [
+        {
+          "id": 34896218767,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896219024,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:57:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896221408,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896221810,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896221841,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896222232,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896222503,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896222637,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896223140,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:44Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896223833,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:44Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905290823,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905293033,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:47Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905427376,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:28Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905442627,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:39Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905445982,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:42Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-011",
+      "number": 11,
+      "node_id": "I_kwDOVf7e3M8AAAABby40kw",
+      "title": "TF2-011: Prisma schema/migrations/dev-test seed",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/11",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:42Z",
+      "updated_at": "2026-11-02T11:48:42Z",
+      "closed_at": "2026-11-02T11:48:42Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S1",
+      "wbs": "3.4",
+      "module": "backend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S1 Foundation & Events",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/11/events",
+      "events": [
+        {
+          "id": 34896221323,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896221570,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:57:43Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896224340,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:44Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896224742,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896224863,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:45Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896225047,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896225395,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896225479,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:45Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896226217,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:46Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896226828,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:46Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905293133,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:47Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905298374,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:49Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905437906,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905445306,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:42Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905448106,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:43Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-012",
+      "number": 12,
+      "node_id": "I_kwDOVf7e3M8AAAABby42ug",
+      "title": "TF2-012: JWT/refresh/session/RBAC/organization policy",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/12",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:44Z",
+      "updated_at": "2026-11-02T11:48:44Z",
+      "closed_at": "2026-11-02T11:48:44Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S1",
+      "wbs": "3.5",
+      "module": "backend",
+      "priority": "P0",
+      "points": 8,
+      "estimate_status": "PROPOSED",
+      "milestone": "S1 Foundation & Events",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/12/events",
+      "events": [
+        {
+          "id": 34896224700,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896224906,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:57:45Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896226929,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:46Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896227218,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:46Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896227425,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:47Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896227593,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:47Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896227904,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:47Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896228047,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:47Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896229075,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:48Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896229674,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:48Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905295710,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:49Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905298153,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:50Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905446310,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905448361,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:44Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905451168,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:45Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-013",
+      "number": 13,
+      "node_id": "I_kwDOVf7e3M8AAAABby44fg",
+      "title": "TF2-013: Next design system + auth/workspace UI",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/13",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:46Z",
+      "updated_at": "2026-11-02T11:48:46Z",
+      "closed_at": "2026-11-02T11:48:46Z",
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "S1",
+      "wbs": "3.6",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S1 Foundation & Events",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/13/events",
+      "events": [
+        {
+          "id": 34896226717,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:46Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896228587,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:47Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896228837,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:47Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896229148,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:48Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896229242,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:48Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896229650,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:48Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896229771,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:48Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896229890,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:48Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896230391,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:48Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896230963,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:49Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905297464,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:50Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905300529,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:52Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905452474,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905450927,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:46Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905455900,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:48Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-014",
+      "number": 14,
+      "node_id": "I_kwDOVf7e3M8AAAABby46Gw",
+      "title": "TF2-014: Event CRUD + lifecycle/review backend",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/14",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:47Z",
+      "updated_at": "2026-11-02T11:48:48Z",
+      "closed_at": "2026-11-02T11:48:48Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S1",
+      "wbs": "4.1",
+      "module": "backend",
+      "priority": "P0",
+      "points": 8,
+      "estimate_status": "PROPOSED",
+      "milestone": "S1 Foundation & Events",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/14/events",
+      "events": [
+        {
+          "id": 34896229385,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:48Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896229597,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:57:48Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896231610,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:49Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896231862,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:50Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896231963,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:50Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896232362,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:50Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896232447,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:50Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896232846,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:50Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896233269,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:51Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896233955,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:51Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905299133,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:52Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905302749,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:53Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905454111,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:48Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905456885,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:50Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905460348,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:52Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-015",
+      "number": 15,
+      "node_id": "I_kwDOVf7e3M8AAAABby471g",
+      "title": "TF2-015: Organizer/Admin event forms + review screens",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/15",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:49Z",
+      "updated_at": "2026-11-02T11:48:50Z",
+      "closed_at": "2026-11-02T11:48:50Z",
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "S1",
+      "wbs": "4.2",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S1 Foundation & Events",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/15/events",
+      "events": [
+        {
+          "id": 34896231280,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:49Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896232681,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:50Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896233023,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:50Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896233116,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:50Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896233343,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:51Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896233732,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:51Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896233880,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:51Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896234051,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:51Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896234872,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:52Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896235446,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:52Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905300371,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:53Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905306643,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:55Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905456806,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:50Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905460998,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:53Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905466774,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:57Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-016",
+      "number": 16,
+      "node_id": "I_kwDOVf7e3M8AAAABby49HQ",
+      "title": "TF2-016: Public events catalog/search/detail + integration",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/16",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:50Z",
+      "updated_at": "2026-11-02T11:48:52Z",
+      "closed_at": "2026-11-02T11:48:52Z",
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "S1",
+      "wbs": "4.3",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S1 Foundation & Events",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/16/events",
+      "events": [
+        {
+          "id": 34896233475,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:51Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896234990,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:52Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896235314,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:52Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896235508,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:52Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896235612,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:52Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896235976,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:52Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896236149,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:52Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896236358,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:53Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896237030,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:53Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896237646,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:53Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905301732,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:54Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905304804,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:55Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905459428,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:52Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905462968,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:54Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905472504,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:02Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-017",
+      "number": 17,
+      "node_id": "I_kwDOVf7e3M8AAAABby4-0Q",
+      "title": "TF2-017: Auth/event unit/integration/E2E + Sprint 1 Retro",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/17",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:57:52Z",
+      "updated_at": "2026-11-02T09:57:52Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S1",
+      "wbs": "8.1",
+      "module": "cloudops",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S1 Foundation & Events",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/17/events",
+      "events": [
+        {
+          "id": 34896235954,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:52Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896236221,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:57:53Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896238621,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:54Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896238984,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:54Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896239029,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:54Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896239426,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:55Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896239747,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:55Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896239818,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:55Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896240627,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:55Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896241377,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:56Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905305259,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:56Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905308980,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:58Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-018",
+      "number": 18,
+      "node_id": "I_kwDOVf7e3M8AAAABby5A3g",
+      "title": "TF2-018: Zone/ticket type/seat schema + validation",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/18",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:54Z",
+      "updated_at": "2026-11-02T11:48:55Z",
+      "closed_at": "2026-11-02T11:48:55Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S2",
+      "wbs": "4.4",
+      "module": "backend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S2 Inventory & Booking",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/18/events",
+      "events": [
+        {
+          "id": 34896238898,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:54Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896239189,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:57:55Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896242913,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:57Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896243264,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:57Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896243294,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:57Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896243655,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:57Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896243866,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:57Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896244020,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:58Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896244877,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:58Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896245645,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:59Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905307620,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:58Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905309347,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:46:59Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905462558,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:55Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905466092,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:57Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905486010,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:13Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-019",
+      "number": 19,
+      "node_id": "I_kwDOVf7e3M8AAAABby5CgQ",
+      "title": "TF2-019: Organizer seat grid + pricing UI",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/19",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:56Z",
+      "updated_at": "2026-11-02T11:48:57Z",
+      "closed_at": "2026-11-02T11:48:57Z",
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "S2",
+      "wbs": "4.5",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S2 Inventory & Booking",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/19/events",
+      "events": [
+        {
+          "id": 34896241688,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:56Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896243868,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:57Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896244226,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:58Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896244419,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:58Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896244544,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:58Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896244915,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:58Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896245197,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:58Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896245299,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:58Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896245950,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:57:59Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896246672,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:57:59Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905307687,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:46:59Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905312522,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:01Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905465232,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:57Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905469448,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:48:59Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905493193,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:18Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-020",
+      "number": 20,
+      "node_id": "I_kwDOVf7e3M8AAAABby5ERg",
+      "title": "TF2-020: Atomic hold service/row locks/TTL/ownership",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/20",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:57Z",
+      "updated_at": "2026-11-02T11:48:59Z",
+      "closed_at": "2026-11-02T11:48:59Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S2",
+      "wbs": "5.1",
+      "module": "backend",
+      "priority": "P0",
+      "points": 8,
+      "estimate_status": "PROPOSED",
+      "milestone": "S2 Inventory & Booking",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/20/events",
+      "events": [
+        {
+          "id": 34896244230,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:58Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896244474,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:57:58Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896246851,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:57:59Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896247278,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:00Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896247291,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:00Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896247746,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:00Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896248064,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:00Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896248091,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:00Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896248868,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:01Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896249690,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:01Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905310333,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:00Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905313365,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:02Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905468018,
+          "event": "closed",
+          "created_at": "2026-11-02T11:48:59Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905471898,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:01Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905499987,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:23Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-021",
+      "number": 21,
+      "node_id": "I_kwDOVf7e3M8AAAABby5F7g",
+      "title": "TF2-021: Seat selector, countdown, availability UI",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/21",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:57:59Z",
+      "updated_at": "2026-11-02T11:49:01Z",
+      "closed_at": "2026-11-02T11:49:01Z",
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "S2",
+      "wbs": "5.2",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S2 Inventory & Booking",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/21/events",
+      "events": [
+        {
+          "id": 34896246876,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:57:59Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896248945,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:01Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896249342,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:01Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896249543,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:01Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896249773,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:01Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896250132,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:01Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896250284,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:02Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896250600,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:02Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896250955,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:02Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896251579,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:02Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905311811,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:01Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905314472,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:02Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905470702,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:01Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905474505,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:04Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905508241,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:29Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-022",
+      "number": 22,
+      "node_id": "I_kwDOVf7e3M8AAAABby5H0Q",
+      "title": "TF2-022: Idempotent order, server amount, release/expiry",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/22",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:01Z",
+      "updated_at": "2026-11-02T11:49:03Z",
+      "closed_at": "2026-11-02T11:49:03Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S2",
+      "wbs": "5.3",
+      "module": "backend",
+      "priority": "P0",
+      "points": 8,
+      "estimate_status": "PROPOSED",
+      "milestone": "S2 Inventory & Booking",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/22/events",
+      "events": [
+        {
+          "id": 34896249195,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:01Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896249514,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:01Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896251600,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:02Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896251953,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:03Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896251956,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:03Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896252312,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:03Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896252533,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:03Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896252675,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:03Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896253425,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:04Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896253981,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:04Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905314280,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:03Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905318771,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:05Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905473491,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:03Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905476545,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:05Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905516825,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:36Z",
+          "actor": "nvtank"
+        }
+      ]
+    },
+    {
+      "id": "TF2-023",
+      "number": 23,
+      "node_id": "I_kwDOVf7e3M8AAAABby5JiA",
+      "title": "TF2-023: Concurrent booking/rollback/TTL tests",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/23",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:03Z",
+      "updated_at": "2026-11-02T11:49:06Z",
+      "closed_at": "2026-11-02T11:49:05Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S2",
+      "wbs": "8.2",
+      "module": "backend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S2 Inventory & Booking",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/23/events",
+      "events": [
+        {
+          "id": 34896252234,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:03Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896252470,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:03Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896254014,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:04Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896254335,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:04Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896254470,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:04Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896254648,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:05Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896255047,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:05Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896255140,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:05Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896256019,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:05Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896256661,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:06Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905316091,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:05Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905319226,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:07Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905476343,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:05Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905479463,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:08Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-024",
+      "number": 24,
+      "node_id": "I_kwDOVf7e3M8AAAABby5Lmg",
+      "title": "TF2-024: Realtime Socket.IO with REST resync (P1)",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/24",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:04Z",
+      "updated_at": "2026-11-02T11:49:08Z",
+      "closed_at": "2026-11-02T11:49:08Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S2",
+      "wbs": "5.4",
+      "module": "backend",
+      "priority": "P1",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S2 Inventory & Booking",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/24/events",
+      "events": [
+        {
+          "id": 34896254714,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:05Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896254973,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:05Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896257038,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:06Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896257351,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:06Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896257518,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:06Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896257657,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:07Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896257923,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:07Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896258090,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:07Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896258959,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:07Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896259592,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:08Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905316225,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:05Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905321674,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:07Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905479274,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:08Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905484352,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:10Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-025",
+      "number": 25,
+      "node_id": "I_kwDOVf7e3M8AAAABby5M9w",
+      "title": "TF2-025: Checkout UI + order history",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/25",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:06Z",
+      "updated_at": "2026-11-02T11:49:10Z",
+      "closed_at": "2026-11-02T11:49:10Z",
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "S2",
+      "wbs": "5.5",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S2 Inventory & Booking",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/25/events",
+      "events": [
+        {
+          "id": 34896257263,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:06Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896259369,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:08Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896259661,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:08Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896259855,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:08Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896259973,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:08Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896260430,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:08Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896260505,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:08Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896260824,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:09Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896261642,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:09Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896262214,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:10Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905319667,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:07Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905324993,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:09Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905482261,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:10Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905484710,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:12Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-026",
+      "number": 26,
+      "node_id": "I_kwDOVf7e3M8AAAABby5O_Q",
+      "title": "TF2-026: Staging, error logs, Sprint 2 review/retro",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/26",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:08Z",
+      "updated_at": "2026-11-02T09:58:08Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S2",
+      "wbs": "8.3",
+      "module": "cloudops",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S2 Inventory & Booking",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/26/events",
+      "events": [
+        {
+          "id": 34896260296,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:08Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896260584,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:08Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896263145,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:10Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896263458,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:10Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896263617,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:10Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896263787,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:11Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896264142,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:11Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896264326,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:11Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896265102,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:11Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896265690,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:12Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905322029,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:08Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905322662,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:10Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-027",
+      "number": 27,
+      "node_id": "I_kwDOVf7e3M8AAAABby5RDw",
+      "title": "TF2-027: Payment provider interface + mock dev/test",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/27",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:10Z",
+      "updated_at": "2026-11-02T11:49:13Z",
+      "closed_at": "2026-11-02T11:49:12Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S3",
+      "wbs": "6.1",
+      "module": "backend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S3 Payments & Check-in",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/27/events",
+      "events": [
+        {
+          "id": 34896263449,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:10Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896263693,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:11Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896265672,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:12Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896266003,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:12Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896266038,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:12Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896266516,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:12Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896266760,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:13Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896266965,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:13Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896267583,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:13Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896268353,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:14Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905322760,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:10Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905327849,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:12Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905485187,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:12Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905489589,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:15Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-028",
+      "number": 28,
+      "node_id": "I_kwDOVf7e3M8AAAABby5TQQ",
+      "title": "TF2-028: PayOS integration, signed webhook/idempotency/reconciliation",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/28",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:12Z",
+      "updated_at": "2026-11-02T09:58:13Z",
+      "closed_at": null,
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S3",
+      "wbs": "6.2",
+      "module": "backend",
+      "priority": "P0",
+      "points": 8,
+      "estimate_status": "PROPOSED",
+      "milestone": "S3 Payments & Check-in",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/28/events",
+      "events": [
+        {
+          "id": 34896266774,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:13Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896267026,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:13Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896269284,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:14Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896269663,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:14Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896269904,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:15Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896270033,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:15Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896270324,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:15Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896270541,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:15Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896271298,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:16Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896271891,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:16Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905325449,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:11Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905327453,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:13Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-029",
+      "number": 29,
+      "node_id": "I_kwDOVf7e3M8AAAABby5VCQ",
+      "title": "TF2-029: Payment screen/status/error/cancel flows",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/29",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:14Z",
+      "updated_at": "2026-11-02T11:49:15Z",
+      "closed_at": "2026-11-02T11:49:15Z",
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "S3",
+      "wbs": "6.3",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S3 Payments & Check-in",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/29/events",
+      "events": [
+        {
+          "id": 34896269313,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:14Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896271689,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:16Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896272031,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:16Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896272119,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:16Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896272351,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:16Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896272654,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:16Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896272854,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:17Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896273027,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:17Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896273603,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:17Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896274231,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:17Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905326230,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:12Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905330427,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:14Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905488019,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:15Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905491666,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:17Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-030",
+      "number": 30,
+      "node_id": "I_kwDOVf7e3M8AAAABby5XKQ",
+      "title": "TF2-030: Signed QR ticket issuance + authorization",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/30",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:16Z",
+      "updated_at": "2026-11-02T11:49:17Z",
+      "closed_at": "2026-11-02T11:49:17Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S3",
+      "wbs": "6.4",
+      "module": "backend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S3 Payments & Check-in",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/30/events",
+      "events": [
+        {
+          "id": 34896272204,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:16Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896272422,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:16Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896275789,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:18Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896276100,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:19Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896276238,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:19Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896276729,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:19Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896276754,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:19Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896277113,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:19Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896277906,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:20Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896278602,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:20Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905327113,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:13Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905332301,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:15Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905490883,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:17Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905494819,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:19Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-031",
+      "number": 31,
+      "node_id": "I_kwDOVf7e3M8AAAABby5Y2w",
+      "title": "TF2-031: My Tickets + QR frontend",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/31",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:18Z",
+      "updated_at": "2026-11-02T11:49:19Z",
+      "closed_at": "2026-11-02T11:49:19Z",
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "S3",
+      "wbs": "6.5",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 3,
+      "estimate_status": "PROPOSED",
+      "milestone": "S3 Payments & Check-in",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/31/events",
+      "events": [
+        {
+          "id": 34896275057,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:18Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896277603,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:20Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896277971,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:20Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896278234,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:20Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896278348,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:20Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896278722,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:20Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896278994,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:20Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896279066,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:21Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896279854,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:21Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896280487,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:21Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905330245,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:15Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905334219,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:17Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905493844,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:19Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905497928,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:21Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-032",
+      "number": 32,
+      "node_id": "I_kwDOVf7e3M8AAAABby5bDw",
+      "title": "TF2-032: Staff assignment + one-time check-in transaction",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/32",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:20Z",
+      "updated_at": "2026-11-02T11:49:21Z",
+      "closed_at": "2026-11-02T11:49:21Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S3",
+      "wbs": "7.1",
+      "module": "backend",
+      "priority": "P0",
+      "points": 8,
+      "estimate_status": "PROPOSED",
+      "milestone": "S3 Payments & Check-in",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/32/events",
+      "events": [
+        {
+          "id": 34896278066,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:20Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896278345,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:20Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896281226,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:22Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896281505,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:22Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896281767,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:22Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896281830,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:22Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896282206,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:23Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896282455,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:23Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896283097,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:23Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896283721,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:24Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905332182,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:17Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905337291,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:19Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905496607,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:21Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905500394,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:24Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-033",
+      "number": 33,
+      "node_id": "I_kwDOVf7e3M8AAAABby5c2Q",
+      "title": "TF2-033: Mobile check-in UI/scanner/fallback",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/33",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:21Z",
+      "updated_at": "2026-11-02T11:49:23Z",
+      "closed_at": "2026-11-02T11:49:23Z",
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "S3",
+      "wbs": "7.2",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S3 Payments & Check-in",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/33/events",
+      "events": [
+        {
+          "id": 34896280906,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:22Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896282943,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:23Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896283235,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:23Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896283394,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:23Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896283535,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:24Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896283878,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:24Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896284028,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:24Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896284260,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:24Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896284724,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:24Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896285460,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:25Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905334445,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:18Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905336682,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:19Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905499351,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:23Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905503613,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:26Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-034",
+      "number": 34,
+      "node_id": "I_kwDOVf7e3M8AAAABby5e2w",
+      "title": "TF2-034: Sales/occupancy/check-in analytics API",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/34",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:23Z",
+      "updated_at": "2026-11-02T11:49:25Z",
+      "closed_at": "2026-11-02T11:49:25Z",
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S3",
+      "wbs": "7.3",
+      "module": "backend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S3 Payments & Check-in",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/34/events",
+      "events": [
+        {
+          "id": 34896283345,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:23Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896283556,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:24Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896285968,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:25Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896286236,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:25Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896286275,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:25Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896286522,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:26Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896286801,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:26Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896286881,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:26Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896287424,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:26Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896288041,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:27Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905336168,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:20Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905339853,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:21Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905502105,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:25Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905506036,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:28Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-035",
+      "number": 35,
+      "node_id": "I_kwDOVf7e3M8AAAABby5gig",
+      "title": "TF2-035: Organizer analytics charts + filters",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/35",
+      "state": "closed",
+      "state_reason": "completed",
+      "created_at": "2026-11-02T09:58:25Z",
+      "updated_at": "2026-11-02T11:49:28Z",
+      "closed_at": "2026-11-02T11:49:28Z",
+      "actual_assignees": [],
+      "proposed_dri": "nguyen-van-hoan",
+      "sprint": "S3",
+      "wbs": "7.4",
+      "module": "frontend",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S3 Payments & Check-in",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/35/events",
+      "events": [
+        {
+          "id": 34896285667,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:25Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896287677,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:26Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896287955,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:27Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896288021,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:27Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896288403,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:27Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896288609,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:27Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896288794,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:27Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896289145,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:27Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896289401,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:28Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896289959,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:28Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905338387,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:21Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905341032,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:22Z",
+          "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34905505766,
+          "event": "closed",
+          "created_at": "2026-11-02T11:49:28Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905508761,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:49:30Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-036",
+      "number": 36,
+      "node_id": "I_kwDOVf7e3M8AAAABby5iFg",
+      "title": "TF2-036: Payment/check-in concurrency/E2E, risk evolution, S3 retro",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/36",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:26Z",
+      "updated_at": "2026-11-02T09:58:27Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S3",
+      "wbs": "8.4",
+      "module": "cloudops",
+      "priority": "P0",
+      "points": 8,
+      "estimate_status": "PROPOSED",
+      "milestone": "S3 Payments & Check-in",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/36/events",
+      "events": [
+        {
+          "id": 34896288266,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:27Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896288625,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:27Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896290132,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:28Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896290652,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:29Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896290680,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:29Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896291065,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:29Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896291353,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:29Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896291432,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:29Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896292263,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:30Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896292969,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:30Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905340093,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:22Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905342413,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:23Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-037",
+      "number": 37,
+      "node_id": "I_kwDOVf7e3M8AAAABby5kgg",
+      "title": "TF2-037: Prod Dockerfiles and immutable builds",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/37",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:29Z",
+      "updated_at": "2026-11-02T09:58:29Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S4",
+      "wbs": "8.5",
+      "module": "cloudops",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S4 Cloud & Acceptance",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/37/events",
+      "events": [
+        {
+          "id": 34896291611,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:29Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896291813,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:29Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896294146,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:31Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896294426,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:31Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896294482,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:31Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896294720,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:31Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896295012,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:32Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896295033,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:32Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896295601,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:32Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896296099,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:32Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905341970,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:24Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905345383,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:25Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-038",
+      "number": 38,
+      "node_id": "I_kwDOVf7e3M8AAAABby5mvw",
+      "title": "TF2-038: AWS IaC/IAM OIDC/ECR/SSM/HTTPS runbook",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/38",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:31Z",
+      "updated_at": "2026-11-02T09:58:31Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S4",
+      "wbs": "8.6",
+      "module": "cloudops",
+      "priority": "P0",
+      "points": 8,
+      "estimate_status": "PROPOSED",
+      "milestone": "S4 Cloud & Acceptance",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/38/events",
+      "events": [
+        {
+          "id": 34896294589,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:31Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896294860,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:31Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896297670,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:33Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896298047,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896298291,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896298331,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896298580,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896298898,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896299570,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:35Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896300200,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:35Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905344628,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:26Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905347426,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:27Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-039",
+      "number": 39,
+      "node_id": "I_kwDOVf7e3M8AAAABby5pQQ",
+      "title": "TF2-039: CD workflow, healthchecks, safe rollout/rollback",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/39",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:33Z",
+      "updated_at": "2026-11-02T09:58:34Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S4",
+      "wbs": "8.7",
+      "module": "cloudops",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S4 Cloud & Acceptance",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/39/events",
+      "events": [
+        {
+          "id": 34896297989,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896298252,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896300133,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896300454,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896300456,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896300805,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896301054,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896301120,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896301769,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:36Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896302384,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:36Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905345077,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:26Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905348514,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:28Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-040",
+      "number": 40,
+      "node_id": "I_kwDOVf7e3M8AAAABby5rtQ",
+      "title": "TF2-040: CloudWatch/logging/S3 backup + restore drill",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/40",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:35Z",
+      "updated_at": "2026-11-02T09:58:36Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S4",
+      "wbs": "8.8",
+      "module": "cloudops",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S4 Cloud & Acceptance",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/40/events",
+      "events": [
+        {
+          "id": 34896301030,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896301315,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:36Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896303057,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:37Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896303388,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:37Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896303542,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:37Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896303667,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:37Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896303991,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896304139,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896304760,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:38Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896305396,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:38Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905345528,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:27Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905348123,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:28Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-041",
+      "number": 41,
+      "node_id": "I_kwDOVf7e3M8AAAABby5ugw",
+      "title": "TF2-041: Security checks, dependency scan, test matrix, regression",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/41",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:38Z",
+      "updated_at": "2026-11-02T09:58:38Z",
+      "closed_at": null,
+      "actual_assignees": ["TuanAn0311"],
+      "proposed_dri": "TuanAn0311",
+      "sprint": "S4",
+      "wbs": "8.9",
+      "module": "backend",
+      "priority": "P0",
+      "points": 8,
+      "estimate_status": "PROPOSED",
+      "milestone": "S4 Cloud & Acceptance",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/41/events",
+      "events": [
+        {
+          "id": 34896304752,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:38Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896305036,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:38Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896307636,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896307895,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896307942,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:40Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896308220,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896308536,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896308652,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:41Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896309770,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:41Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896310343,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:42Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905349610,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:30Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905354162,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:32Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-042",
+      "number": 42,
+      "node_id": "I_kwDOVf7e3M8AAAABby5w4w",
+      "title": "TF2-042: Stakeholder UAT script, feedback & sign-off request",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/42",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:40Z",
+      "updated_at": "2026-11-02T09:58:40Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S4",
+      "wbs": "9.1",
+      "module": "qlda",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S4 Cloud & Acceptance",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/42/events",
+      "events": [
+        {
+          "id": 34896307832,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896308100,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:40Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896310856,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:42Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896311221,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896311428,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896311645,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896312157,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896312161,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:43Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896312825,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:44Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34896313599,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:44Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34905350007,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:30Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905352720,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:32Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-043",
+      "number": 43,
+      "node_id": "I_kwDOVf7e3M8AAAABby5zMA",
+      "title": "TF2-043: Actual risk/change record + final sprint retro",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/43",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:42Z",
+      "updated_at": "2026-11-02T09:58:42Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S4",
+      "wbs": "1.6",
+      "module": "qlda",
+      "priority": "P0",
+      "points": 3,
+      "estimate_status": "PROPOSED",
+      "milestone": "S4 Cloud & Acceptance",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/43/events",
+      "events": [
+        {
+          "id": 34896310786,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:42Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896311033,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:42Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896314122,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:44Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896314498,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896314587,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896314856,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896315143,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896315174,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896315909,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:45Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896316546,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:46Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905353938,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:31Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905354080,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:32Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-044",
+      "number": 44,
+      "node_id": "I_kwDOVf7e3M8AAAABby51Aw",
+      "title": "TF2-044: Final Technical Report 7 chapters, evidence index",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/44",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:44Z",
+      "updated_at": "2026-11-02T09:58:44Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S4",
+      "wbs": "9.2",
+      "module": "qlda",
+      "priority": "P0",
+      "points": 8,
+      "estimate_status": "PROPOSED",
+      "milestone": "S4 Cloud & Acceptance",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/44/events",
+      "events": [
+        {
+          "id": 34896313917,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:44Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896314157,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:44Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896315726,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:45Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896316055,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:46Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896316148,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:46Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896316383,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:46Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896316649,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:46Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896316788,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:46Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896317527,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:47Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896318197,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:47Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905353580,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:33Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905357116,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:35Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    },
+    {
+      "id": "TF2-045",
+      "number": 45,
+      "node_id": "I_kwDOVf7e3M8AAAABby53Sg",
+      "title": "TF2-045: Slides, live demo script, final release checklist",
+      "url": "https://github.com/nvtank/ticketflowv2/issues/45",
+      "state": "open",
+      "state_reason": null,
+      "created_at": "2026-11-02T09:58:46Z",
+      "updated_at": "2026-11-02T09:58:46Z",
+      "closed_at": null,
+      "actual_assignees": ["nvtank"],
+      "proposed_dri": "nvtank",
+      "sprint": "S4",
+      "wbs": "9.3",
+      "module": "qlda",
+      "priority": "P0",
+      "points": 5,
+      "estimate_status": "PROPOSED",
+      "milestone": "S4 Cloud & Acceptance",
+      "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/45/events",
+      "events": [
+        {
+          "id": 34896317256,
+          "event": "milestoned",
+          "created_at": "2026-11-02T09:58:46Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896317534,
+          "event": "assigned",
+          "created_at": "2026-11-02T09:58:47Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896320030,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:48Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896320525,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:48Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896320682,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:49Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896321156,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:49Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896321234,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:49Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896321545,
+          "event": "labeled",
+          "created_at": "2026-11-02T09:58:49Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34896321989,
+          "event": "mentioned",
+          "created_at": "2026-11-02T09:58:49Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34896322657,
+          "event": "subscribed",
+          "created_at": "2026-11-02T09:58:50Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34905356753,
+          "event": "added_to_project_v2",
+          "created_at": "2026-11-02T11:47:35Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34905358135,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:47:36Z",
+          "actor": "github-project-automation[bot]"
+        }
+      ]
+    }
+  ],
+  "pull_requests": [
+    {
+      "number": 50,
+      "title": "feat(import): reuse complete ticketflow application with verified workflows",
+      "html_url": "https://github.com/nvtank/ticketflowv2/pull/50",
+      "state": "closed",
+      "created_at": "2026-11-02T11:17:58Z",
+      "updated_at": "2026-11-02T11:46:01Z",
+      "closed_at": "2026-11-02T11:46:01Z",
+      "merged_at": "2026-11-02T11:46:01Z",
+      "body": "Imports the complete committed application from `nvtank/ticketflow-aws` at `91833bcc0048b596c2dbf7e9dc25358c77541daf`, by explicit owner request. The branch starts from V2 main, fixing the unrelated-history problem of the earlier orphan simulation branch. Original branches remain preserved; no force-push is used.\n\nIncludes Next.js/NestJS/PostgreSQL/Prisma event lifecycle, inventory, atomic booking/orders, payment adapters, signed tickets, staff check-in, analytics, optional source features and their tests. Replaces the earlier prototype modules/migrations. Use the new isolated Compose database; do not apply this migration history to the old prototype database.\n\nValidation performed on 2026-11-02:\n- Lint, typecheck, format and full API/web build PASS.\n- 130 unit tests and 106 PostgreSQL/Redis integration tests PASS.\n- 54 browser E2E tests PASS: 20 foundation, 30 across 8 suites × 2 viewport runs, and 4 additional 320px checks.\n- Audit: 0 high/critical after same-major body-parser/multer patches; 4 moderate and 1 low remain.\n- Ten source migrations applied on the separate test database at port 55443; no unrelated database was changed.\n\nAdaptations: V2 web/API ports 3100/4100, isolated development/test ports, three requested account roles and V2 links, current CI action versions, explicit optional Nix browser path, and stale E2E selectors aligned to the imported current navigation while retaining keyboard/focus/error-state assertions.\n\nThe 20 functional import commits allocate author/date metadata to the requested roles/W1–W9 dates and are explicitly labelled SIMULATED IMPORT. Actual import/adaptation actor is authenticated `nvtank`; source provenance and hashes are retained. This is not a claim of original authorship or historical execution. Current Project metrics will use actual GitHub timestamps, never these reconstructed commit dates.\n\nRefs #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #21, #22, #23, #24, #25, #27, #28, #29, #30, #31, #32, #33, #34, #35, #41. Acceptance of mixed governance/cloud/UAT issues is not claimed. No paid AWS resource, public deployment or live payment was executed.\n\nOwner explicitly authorized creating and merging this PR after green required CI with temporary approval count zero. No human peer approval is claimed. See `docs/reference/import-validation/RESULTS.json` and `docs/reference/ROLE_TIMELINE_MAP.json`.\n"
+    },
+    {
+      "number": 49,
+      "title": "Feature/tf2 014 event lifecycle",
+      "html_url": "https://github.com/nvtank/ticketflowv2/pull/49",
+      "state": "closed",
+      "created_at": "2026-11-02T10:30:58Z",
+      "updated_at": "2026-11-02T10:32:05Z",
+      "closed_at": "2026-11-02T10:32:05Z",
+      "merged_at": "2026-11-02T10:32:05Z",
+      "body": "Closes #ISSUE\n\nWBS / actual implementer / independent reviewer:\n\nDescribe the problem and resulting behavior. Include migrations/security risks and deployment impact where relevant.\n\nValidation: exact commands, exit codes and linked evidence. State unexecuted checks explicitly.\n\n- [ ] Acceptance criteria met; documentation/evidence updated\n- [ ] Lint, format, typecheck, build and appropriate tests passed\n- [ ] No credentials or personal data in diff/logs\n- [ ] Independent human approval and required CI pass before merge\n- [ ] Project status updated (In Review until merged)\n"
+    },
+    {
+      "number": 48,
+      "title": "feat(auth): add session rotation, replay defense and tenant access",
+      "html_url": "https://github.com/nvtank/ticketflowv2/pull/48",
+      "state": "closed",
+      "created_at": "2026-11-02T10:16:11Z",
+      "updated_at": "2026-11-02T10:18:20Z",
+      "closed_at": "2026-11-02T10:18:20Z",
+      "merged_at": "2026-11-02T10:18:20Z",
+      "body": "Implements register/login/refresh/logout/me with salted scrypt passwords, CUSTOMER-only registration, short-lived issuer/audience-checked JWTs and DB-backed session revocation. Refresh tokens are random, stored hashed, rotated under a session row lock; replay revocation commits before returning 401. Cookie operations enforce exact Origin and HttpOnly/SameSite (Secure in production). Organization context reads current membership; exceptions never expose raw Prisma/runtime errors. Adds local-only synthetic four-role seed.\n\nRefs #11, #12, #41. Actual author `nvtank`, assigned backend DRI `TuanAn0311`; no other identity is impersonated.\n\nValidation: lint/typecheck/build/format PASS; 9 unit tests PASS; 8 real HTTP/PostgreSQL/Redis integration tests PASS. Tests include concurrent refresh, replay revocation, forged/expired JWT, wrong issuer/audience, logout, disabled/expired sessions, extra-role registration denial and cross-organization denial. Local synthetic seed ran successfully with a generated password that was not printed. See `docs/qlda/evidence/auth-checks.json`.\n\nOwner temporarily waived mandatory other-member approval on 2026-11-02; PR and required green quality CI remain. Records the actual policy change without claiming a human approval or formal course CCB sign-off. No browser UI/E2E, public deployment, live payment or stakeholder acceptance is claimed.\n"
+    },
+    {
+      "number": 47,
+      "title": "feat(foundation): add Nest API, identity schema and real dependency tests",
+      "html_url": "https://github.com/nvtank/ticketflowv2/pull/47",
+      "state": "closed",
+      "created_at": "2026-11-02T10:08:31Z",
+      "updated_at": "2026-11-02T10:14:27Z",
+      "closed_at": "2026-11-02T10:14:26Z",
+      "merged_at": "2026-11-02T10:14:26Z",
+      "body": "Adds the first independently implemented P0 API foundation: strict pnpm workspace/shared schemas, NestJS, PostgreSQL/Prisma identity/organization/session migration, safe environment validation, security headers/CORS, liveness and DB/Redis readiness, isolated Docker test services and PR quality CI.\n\nRefs #7, #8, #9, #10, #11. These Issues include additional work and remain open. This PR is stacked on governance PR #46; merge #46 only after independent approval, then retarget this PR to main.\n\nValidation (2026-11-02): lint/typecheck/build/format PASS; 7 unit tests PASS; migration deployed to isolated PostgreSQL; 2 actual HTTP/DB/Redis integration tests PASS including 503 when Redis disconnects. Python governance validators PASS; live backlog rerun reused 45 Issues with no duplicates. Dependency audit: 0 high/critical, 1 moderate transitive minimatch tooling advisory. See `docs/qlda/evidence/foundation-checks.json`.\n\nInitial local checks exposed missing NixOS Prisma engine, incompatible tool versions and sandbox loopback denial; these were resolved and checks rerun. Node 24 and an explicit Nix schema-engine were used locally; CI uses standard Linux. Updated dependencies address identified high/critical advisories; no forced incompatible minimatch major override.\n\nLimits: no Next.js UI/browser E2E yet, no seed accounts, business auth endpoints not part of this foundation, no AWS/HTTPS/live payment or stakeholder acceptance. Production rollout remains gated. Actual author `nvtank`; planned backend DRI `TuanAn0311`, independent reviewer requested. No merge without approval/green CI.\n"
+    },
+    {
+      "number": 46,
+      "title": "chore(project): establish TixFlow V2 backlog and QLDA governance",
+      "html_url": "https://github.com/nvtank/ticketflowv2/pull/46",
+      "state": "closed",
+      "created_at": "2026-11-02T10:02:52Z",
+      "updated_at": "2026-11-02T10:11:30Z",
+      "closed_at": "2026-11-02T10:11:30Z",
+      "merged_at": "2026-11-02T10:11:30Z",
+      "body": "Establishes the Master Prompt backlog and QLDA baseline for the previously empty V2 repository: 45 stable issue IDs, 45 unique WBS leaves, acceptance criteria, dependency DAG, proposed Fibonacci points and accountable owners/reviewers. Adds unsigned Charter, risk/change/UAT/report/defense drafts and an explicit 9-vs-15-week evidence gap.\n\nRefs #1, #2, #3, #4, #5, #44, #45. Governance items remain open until their human acceptance criteria are met.\n\nValidation: Python compile and both dry-run scripts passed; live sync created 45 Issues and 10 Milestones; rerun reused all 45 with zero new Issues. Backlog dependency validation passed. No old application source was copied.\n\nLimitations: Projects call failed for missing `read:project`/`project` token scope; exact response is committed. Eleven frontend Issues cannot yet assign `nguyen-van-hoan` (not assignable in this repo), so they preserve proposed DRI and `needs:human`. Estimates and sprint capacity await Planning Poker. Meetings, signatures, stakeholder approval, UAT, cloud and payment evidence remain pending. No history was backdated.\n\nActual author: authenticated `nvtank`. Independent review requested from `TuanAn0311`. Do not merge until real approval and required CI pass.\n"
+    }
+  ],
+  "burndown": {
+    "Kickoff": [
+      {
+        "timestamp": "2026-11-02T09:56:34Z",
+        "scope_issues": 1,
+        "remaining_issues": 1,
+        "issue": 1,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:56:36Z",
+        "scope_issues": 2,
+        "remaining_issues": 2,
+        "issue": 2,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:56:38Z",
+        "scope_issues": 3,
+        "remaining_issues": 3,
+        "issue": 3,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:56:40Z",
+        "scope_issues": 4,
+        "remaining_issues": 4,
+        "issue": 4,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:56:42Z",
+        "scope_issues": 5,
+        "remaining_issues": 5,
+        "issue": 5,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:33Z",
+        "scope_issues": 6,
+        "remaining_issues": 6,
+        "issue": 6,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:35Z",
+        "scope_issues": 7,
+        "remaining_issues": 7,
+        "issue": 7,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T11:55:50.440690+00:00",
+        "scope_issues": 7,
+        "remaining_issues": 7,
+        "issue": "",
+        "event": "observed_snapshot"
+      }
+    ],
+    "S1": [
+      {
+        "timestamp": "2026-11-02T09:57:37Z",
+        "scope_issues": 1,
+        "remaining_issues": 1,
+        "issue": 8,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:39Z",
+        "scope_issues": 2,
+        "remaining_issues": 2,
+        "issue": 9,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:40Z",
+        "scope_issues": 3,
+        "remaining_issues": 3,
+        "issue": 10,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:42Z",
+        "scope_issues": 4,
+        "remaining_issues": 4,
+        "issue": 11,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:44Z",
+        "scope_issues": 5,
+        "remaining_issues": 5,
+        "issue": 12,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:46Z",
+        "scope_issues": 6,
+        "remaining_issues": 6,
+        "issue": 13,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:47Z",
+        "scope_issues": 7,
+        "remaining_issues": 7,
+        "issue": 14,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:49Z",
+        "scope_issues": 8,
+        "remaining_issues": 8,
+        "issue": 15,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:50Z",
+        "scope_issues": 9,
+        "remaining_issues": 9,
+        "issue": 16,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:52Z",
+        "scope_issues": 10,
+        "remaining_issues": 10,
+        "issue": 17,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:35Z",
+        "scope_issues": 10,
+        "remaining_issues": 9,
+        "issue": 8,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:37Z",
+        "scope_issues": 10,
+        "remaining_issues": 8,
+        "issue": 9,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:38Z",
+        "scope_issues": 10,
+        "remaining_issues": 8,
+        "issue": 9,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:39Z",
+        "scope_issues": 10,
+        "remaining_issues": 7,
+        "issue": 10,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:42Z",
+        "scope_issues": 10,
+        "remaining_issues": 6,
+        "issue": 11,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:44Z",
+        "scope_issues": 10,
+        "remaining_issues": 5,
+        "issue": 12,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:46Z",
+        "scope_issues": 10,
+        "remaining_issues": 4,
+        "issue": 13,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:48Z",
+        "scope_issues": 10,
+        "remaining_issues": 3,
+        "issue": 14,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:50Z",
+        "scope_issues": 10,
+        "remaining_issues": 2,
+        "issue": 15,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:52Z",
+        "scope_issues": 10,
+        "remaining_issues": 1,
+        "issue": 16,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:55:50.440690+00:00",
+        "scope_issues": 10,
+        "remaining_issues": 1,
+        "issue": "",
+        "event": "observed_snapshot"
+      }
+    ],
+    "S2": [
+      {
+        "timestamp": "2026-11-02T09:57:54Z",
+        "scope_issues": 1,
+        "remaining_issues": 1,
+        "issue": 18,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:56Z",
+        "scope_issues": 2,
+        "remaining_issues": 2,
+        "issue": 19,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:57Z",
+        "scope_issues": 3,
+        "remaining_issues": 3,
+        "issue": 20,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:59Z",
+        "scope_issues": 4,
+        "remaining_issues": 4,
+        "issue": 21,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:01Z",
+        "scope_issues": 5,
+        "remaining_issues": 5,
+        "issue": 22,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:03Z",
+        "scope_issues": 6,
+        "remaining_issues": 6,
+        "issue": 23,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:04Z",
+        "scope_issues": 7,
+        "remaining_issues": 7,
+        "issue": 24,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:06Z",
+        "scope_issues": 8,
+        "remaining_issues": 8,
+        "issue": 25,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:08Z",
+        "scope_issues": 9,
+        "remaining_issues": 9,
+        "issue": 26,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:55Z",
+        "scope_issues": 9,
+        "remaining_issues": 8,
+        "issue": 18,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:57Z",
+        "scope_issues": 9,
+        "remaining_issues": 7,
+        "issue": 19,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:48:59Z",
+        "scope_issues": 9,
+        "remaining_issues": 6,
+        "issue": 20,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:01Z",
+        "scope_issues": 9,
+        "remaining_issues": 5,
+        "issue": 21,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:03Z",
+        "scope_issues": 9,
+        "remaining_issues": 4,
+        "issue": 22,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:05Z",
+        "scope_issues": 9,
+        "remaining_issues": 3,
+        "issue": 23,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:08Z",
+        "scope_issues": 9,
+        "remaining_issues": 2,
+        "issue": 24,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:10Z",
+        "scope_issues": 9,
+        "remaining_issues": 1,
+        "issue": 25,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:55:50.440690+00:00",
+        "scope_issues": 9,
+        "remaining_issues": 1,
+        "issue": "",
+        "event": "observed_snapshot"
+      }
+    ],
+    "S3": [
+      {
+        "timestamp": "2026-11-02T09:58:10Z",
+        "scope_issues": 1,
+        "remaining_issues": 1,
+        "issue": 27,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:12Z",
+        "scope_issues": 2,
+        "remaining_issues": 2,
+        "issue": 28,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:14Z",
+        "scope_issues": 3,
+        "remaining_issues": 3,
+        "issue": 29,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:16Z",
+        "scope_issues": 4,
+        "remaining_issues": 4,
+        "issue": 30,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:18Z",
+        "scope_issues": 5,
+        "remaining_issues": 5,
+        "issue": 31,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:20Z",
+        "scope_issues": 6,
+        "remaining_issues": 6,
+        "issue": 32,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:21Z",
+        "scope_issues": 7,
+        "remaining_issues": 7,
+        "issue": 33,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:23Z",
+        "scope_issues": 8,
+        "remaining_issues": 8,
+        "issue": 34,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:25Z",
+        "scope_issues": 9,
+        "remaining_issues": 9,
+        "issue": 35,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:26Z",
+        "scope_issues": 10,
+        "remaining_issues": 10,
+        "issue": 36,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:12Z",
+        "scope_issues": 10,
+        "remaining_issues": 9,
+        "issue": 27,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:15Z",
+        "scope_issues": 10,
+        "remaining_issues": 8,
+        "issue": 29,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:17Z",
+        "scope_issues": 10,
+        "remaining_issues": 7,
+        "issue": 30,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:19Z",
+        "scope_issues": 10,
+        "remaining_issues": 6,
+        "issue": 31,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:21Z",
+        "scope_issues": 10,
+        "remaining_issues": 5,
+        "issue": 32,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:23Z",
+        "scope_issues": 10,
+        "remaining_issues": 4,
+        "issue": 33,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:25Z",
+        "scope_issues": 10,
+        "remaining_issues": 3,
+        "issue": 34,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:49:28Z",
+        "scope_issues": 10,
+        "remaining_issues": 2,
+        "issue": 35,
+        "event": "closed"
+      },
+      {
+        "timestamp": "2026-11-02T11:55:50.440690+00:00",
+        "scope_issues": 10,
+        "remaining_issues": 2,
+        "issue": "",
+        "event": "observed_snapshot"
+      }
+    ],
+    "S4": [
+      {
+        "timestamp": "2026-11-02T09:58:29Z",
+        "scope_issues": 1,
+        "remaining_issues": 1,
+        "issue": 37,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:31Z",
+        "scope_issues": 2,
+        "remaining_issues": 2,
+        "issue": 38,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:33Z",
+        "scope_issues": 3,
+        "remaining_issues": 3,
+        "issue": 39,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:35Z",
+        "scope_issues": 4,
+        "remaining_issues": 4,
+        "issue": 40,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:38Z",
+        "scope_issues": 5,
+        "remaining_issues": 5,
+        "issue": 41,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:40Z",
+        "scope_issues": 6,
+        "remaining_issues": 6,
+        "issue": 42,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:42Z",
+        "scope_issues": 7,
+        "remaining_issues": 7,
+        "issue": 43,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:44Z",
+        "scope_issues": 8,
+        "remaining_issues": 8,
+        "issue": 44,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:46Z",
+        "scope_issues": 9,
+        "remaining_issues": 9,
+        "issue": 45,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T11:55:50.440690+00:00",
+        "scope_issues": 9,
+        "remaining_issues": 9,
+        "issue": "",
+        "event": "observed_snapshot"
+      }
+    ]
+  }
+}
