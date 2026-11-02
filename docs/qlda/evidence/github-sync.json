@@ -1,0 +1,565 @@
+{
+  "observed_at": "2026-11-02T09:59:44.011271+00:00",
+  "repository": "nvtank/ticketflowv2",
+  "actor": "nvtank",
+  "issues": [
+    {
+      "id": "TF2-001",
+      "number": 1,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/1",
+      "node_id": "I_kwDOVf7e3M8AAAABby3qsw",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "Kickoff"
+    },
+    {
+      "id": "TF2-002",
+      "number": 2,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/2",
+      "node_id": "I_kwDOVf7e3M8AAAABby3tDA",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "Kickoff"
+    },
+    {
+      "id": "TF2-003",
+      "number": 3,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/3",
+      "node_id": "I_kwDOVf7e3M8AAAABby3vRg",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "Kickoff"
+    },
+    {
+      "id": "TF2-004",
+      "number": 4,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/4",
+      "node_id": "I_kwDOVf7e3M8AAAABby3xmg",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "Kickoff"
+    },
+    {
+      "id": "TF2-005",
+      "number": 5,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/5",
+      "node_id": "I_kwDOVf7e3M8AAAABby3zvQ",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "Kickoff"
+    },
+    {
+      "id": "TF2-006",
+      "number": 6,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/6",
+      "node_id": "I_kwDOVf7e3M8AAAABby4rKQ",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "Kickoff"
+    },
+    {
+      "id": "TF2-007",
+      "number": 7,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/7",
+      "node_id": "I_kwDOVf7e3M8AAAABby4szg",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "Kickoff"
+    },
+    {
+      "id": "TF2-008",
+      "number": 8,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/8",
+      "node_id": "I_kwDOVf7e3M8AAAABby4vMA",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S1 Foundation & Events"
+    },
+    {
+      "id": "TF2-009",
+      "number": 9,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/9",
+      "node_id": "I_kwDOVf7e3M8AAAABby4w8w",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S1 Foundation & Events"
+    },
+    {
+      "id": "TF2-010",
+      "number": 10,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/10",
+      "node_id": "I_kwDOVf7e3M8AAAABby4zBQ",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S1 Foundation & Events"
+    },
+    {
+      "id": "TF2-011",
+      "number": 11,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/11",
+      "node_id": "I_kwDOVf7e3M8AAAABby40kw",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S1 Foundation & Events"
+    },
+    {
+      "id": "TF2-012",
+      "number": 12,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/12",
+      "node_id": "I_kwDOVf7e3M8AAAABby42ug",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S1 Foundation & Events"
+    },
+    {
+      "id": "TF2-013",
+      "number": 13,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/13",
+      "node_id": "I_kwDOVf7e3M8AAAABby44fg",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "S1 Foundation & Events"
+    },
+    {
+      "id": "TF2-014",
+      "number": 14,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/14",
+      "node_id": "I_kwDOVf7e3M8AAAABby46Gw",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S1 Foundation & Events"
+    },
+    {
+      "id": "TF2-015",
+      "number": 15,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/15",
+      "node_id": "I_kwDOVf7e3M8AAAABby471g",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "S1 Foundation & Events"
+    },
+    {
+      "id": "TF2-016",
+      "number": 16,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/16",
+      "node_id": "I_kwDOVf7e3M8AAAABby49HQ",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "S1 Foundation & Events"
+    },
+    {
+      "id": "TF2-017",
+      "number": 17,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/17",
+      "node_id": "I_kwDOVf7e3M8AAAABby4-0Q",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S1 Foundation & Events"
+    },
+    {
+      "id": "TF2-018",
+      "number": 18,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/18",
+      "node_id": "I_kwDOVf7e3M8AAAABby5A3g",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S2 Inventory & Booking"
+    },
+    {
+      "id": "TF2-019",
+      "number": 19,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/19",
+      "node_id": "I_kwDOVf7e3M8AAAABby5CgQ",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "S2 Inventory & Booking"
+    },
+    {
+      "id": "TF2-020",
+      "number": 20,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/20",
+      "node_id": "I_kwDOVf7e3M8AAAABby5ERg",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S2 Inventory & Booking"
+    },
+    {
+      "id": "TF2-021",
+      "number": 21,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/21",
+      "node_id": "I_kwDOVf7e3M8AAAABby5F7g",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "S2 Inventory & Booking"
+    },
+    {
+      "id": "TF2-022",
+      "number": 22,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/22",
+      "node_id": "I_kwDOVf7e3M8AAAABby5H0Q",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S2 Inventory & Booking"
+    },
+    {
+      "id": "TF2-023",
+      "number": 23,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/23",
+      "node_id": "I_kwDOVf7e3M8AAAABby5JiA",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S2 Inventory & Booking"
+    },
+    {
+      "id": "TF2-024",
+      "number": 24,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/24",
+      "node_id": "I_kwDOVf7e3M8AAAABby5Lmg",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S2 Inventory & Booking"
+    },
+    {
+      "id": "TF2-025",
+      "number": 25,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/25",
+      "node_id": "I_kwDOVf7e3M8AAAABby5M9w",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "S2 Inventory & Booking"
+    },
+    {
+      "id": "TF2-026",
+      "number": 26,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/26",
+      "node_id": "I_kwDOVf7e3M8AAAABby5O_Q",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S2 Inventory & Booking"
+    },
+    {
+      "id": "TF2-027",
+      "number": 27,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/27",
+      "node_id": "I_kwDOVf7e3M8AAAABby5RDw",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S3 Payments & Check-in"
+    },
+    {
+      "id": "TF2-028",
+      "number": 28,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/28",
+      "node_id": "I_kwDOVf7e3M8AAAABby5TQQ",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S3 Payments & Check-in"
+    },
+    {
+      "id": "TF2-029",
+      "number": 29,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/29",
+      "node_id": "I_kwDOVf7e3M8AAAABby5VCQ",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "S3 Payments & Check-in"
+    },
+    {
+      "id": "TF2-030",
+      "number": 30,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/30",
+      "node_id": "I_kwDOVf7e3M8AAAABby5XKQ",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S3 Payments & Check-in"
+    },
+    {
+      "id": "TF2-031",
+      "number": 31,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/31",
+      "node_id": "I_kwDOVf7e3M8AAAABby5Y2w",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "S3 Payments & Check-in"
+    },
+    {
+      "id": "TF2-032",
+      "number": 32,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/32",
+      "node_id": "I_kwDOVf7e3M8AAAABby5bDw",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S3 Payments & Check-in"
+    },
+    {
+      "id": "TF2-033",
+      "number": 33,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/33",
+      "node_id": "I_kwDOVf7e3M8AAAABby5c2Q",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "S3 Payments & Check-in"
+    },
+    {
+      "id": "TF2-034",
+      "number": 34,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/34",
+      "node_id": "I_kwDOVf7e3M8AAAABby5e2w",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S3 Payments & Check-in"
+    },
+    {
+      "id": "TF2-035",
+      "number": 35,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/35",
+      "node_id": "I_kwDOVf7e3M8AAAABby5gig",
+      "action": "reused",
+      "assignees": [],
+      "proposed_owner": "nguyen-van-hoan",
+      "assignment_status": "PENDING_HUMAN_NOT_ASSIGNABLE",
+      "milestone": "S3 Payments & Check-in"
+    },
+    {
+      "id": "TF2-036",
+      "number": 36,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/36",
+      "node_id": "I_kwDOVf7e3M8AAAABby5iFg",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S3 Payments & Check-in"
+    },
+    {
+      "id": "TF2-037",
+      "number": 37,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/37",
+      "node_id": "I_kwDOVf7e3M8AAAABby5kgg",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S4 Cloud & Acceptance"
+    },
+    {
+      "id": "TF2-038",
+      "number": 38,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/38",
+      "node_id": "I_kwDOVf7e3M8AAAABby5mvw",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S4 Cloud & Acceptance"
+    },
+    {
+      "id": "TF2-039",
+      "number": 39,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/39",
+      "node_id": "I_kwDOVf7e3M8AAAABby5pQQ",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S4 Cloud & Acceptance"
+    },
+    {
+      "id": "TF2-040",
+      "number": 40,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/40",
+      "node_id": "I_kwDOVf7e3M8AAAABby5rtQ",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S4 Cloud & Acceptance"
+    },
+    {
+      "id": "TF2-041",
+      "number": 41,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/41",
+      "node_id": "I_kwDOVf7e3M8AAAABby5ugw",
+      "action": "reused",
+      "assignees": ["TuanAn0311"],
+      "proposed_owner": "TuanAn0311",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S4 Cloud & Acceptance"
+    },
+    {
+      "id": "TF2-042",
+      "number": 42,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/42",
+      "node_id": "I_kwDOVf7e3M8AAAABby5w4w",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S4 Cloud & Acceptance"
+    },
+    {
+      "id": "TF2-043",
+      "number": 43,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/43",
+      "node_id": "I_kwDOVf7e3M8AAAABby5zMA",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S4 Cloud & Acceptance"
+    },
+    {
+      "id": "TF2-044",
+      "number": 44,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/44",
+      "node_id": "I_kwDOVf7e3M8AAAABby51Aw",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S4 Cloud & Acceptance"
+    },
+    {
+      "id": "TF2-045",
+      "number": 45,
+      "url": "https://github.com/nvtank/ticketflowv2/issues/45",
+      "node_id": "I_kwDOVf7e3M8AAAABby53Sg",
+      "action": "reused",
+      "assignees": ["nvtank"],
+      "proposed_owner": "nvtank",
+      "assignment_status": "ASSIGNED",
+      "milestone": "S4 Cloud & Acceptance"
+    }
+  ],
+  "milestones": [
+    {
+      "number": 1,
+      "title": "Kickoff",
+      "html_url": "https://github.com/nvtank/ticketflowv2/milestone/1",
+      "due_on": "2026-11-08T00:00:00Z"
+    },
+    {
+      "number": 2,
+      "title": "Baseline audit — Kickoff",
+      "html_url": "https://github.com/nvtank/ticketflowv2/milestone/2",
+      "due_on": "2026-09-06T00:00:00Z"
+    },
+    {
+      "number": 3,
+      "title": "S1 Foundation & Events",
+      "html_url": "https://github.com/nvtank/ticketflowv2/milestone/3",
+      "due_on": "2026-11-22T00:00:00Z"
+    },
+    {
+      "number": 4,
+      "title": "Baseline audit — S1 Foundation & Events",
+      "html_url": "https://github.com/nvtank/ticketflowv2/milestone/4",
+      "due_on": "2026-09-20T00:00:00Z"
+    },
+    {
+      "number": 5,
+      "title": "S2 Inventory & Booking",
+      "html_url": "https://github.com/nvtank/ticketflowv2/milestone/5",
+      "due_on": "2026-12-06T00:00:00Z"
+    },
+    {
+      "number": 6,
+      "title": "Baseline audit — S2 Inventory & Booking",
+      "html_url": "https://github.com/nvtank/ticketflowv2/milestone/6",
+      "due_on": "2026-10-04T00:00:00Z"
+    },
+    {
+      "number": 7,
+      "title": "S3 Payments & Check-in",
+      "html_url": "https://github.com/nvtank/ticketflowv2/milestone/7",
+      "due_on": "2026-12-20T00:00:00Z"
+    },
+    {
+      "number": 8,
+      "title": "Baseline audit — S3 Payments & Check-in",
+      "html_url": "https://github.com/nvtank/ticketflowv2/milestone/8",
+      "due_on": "2026-10-18T00:00:00Z"
+    },
+    {
+      "number": 9,
+      "title": "S4 Cloud & Acceptance",
+      "html_url": "https://github.com/nvtank/ticketflowv2/milestone/9",
+      "due_on": "2027-01-03T00:00:00Z"
+    },
+    {
+      "number": 10,
+      "title": "Baseline audit — S4 Cloud & Acceptance",
+      "html_url": "https://github.com/nvtank/ticketflowv2/milestone/10",
+      "due_on": "2026-11-02T00:00:00Z"
+    }
+  ],
+  "errors": []
+}

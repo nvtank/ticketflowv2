@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.next/
+.env
+.env.*
+!.env.example
+coverage/
+test-results/
+playwright-report/
+*.tsbuildinfo
+__pycache__/
+.terraform/
+*.tfstate*
+*.tfplan
+TixFlow_V2_Codex_9_Week_Pack/
+TIXFLOW_V2_CODEX_MASTER_PROMPT_9_WEEKS.md

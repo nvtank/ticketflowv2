@@ -1,0 +1,7 @@
+{
+  "observed_at": "2026-11-02T09:56:40.553279+00:00",
+  "status": "BLOCKED",
+  "url": null,
+  "error": "error: your authentication token is missing required scopes [read:project]\nTo request it, run:  gh auth refresh -s read:project",
+  "remediation": "Authorized account: gh auth refresh -h github.com -s project; then rerun this script --apply."
+}

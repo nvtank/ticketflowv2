@@ -1,0 +1,46 @@
+id,title,wbs,owner,reviewer,sprint,target_week,points,priority,dependencies,status
+TF2-001,Charter 13 mục + Business Case + SMART goals,1.1,nvtank,TuanAn0311,Kickoff,W1,3,P0,,Backlog
+TF2-002,"Stakeholder register, sourcing pathway, UAT criteria",1.2,nvtank,nguyen-van-hoan,Kickoff,W1,3,P0,,Backlog
+TF2-003,Scope baseline + WBS 100% + WBS Dictionary,1.3,nvtank,TuanAn0311,Kickoff,W1,5,P0,"TF2-001,TF2-006",Backlog
+TF2-004,"Risk Register v1, communications/change plan",1.4,nvtank,nguyen-van-hoan,Kickoff,W1,3,P0,TF2-001,Backlog
+TF2-005,"GitHub Project board, issue/PR templates, labels & milestones",1.5,nvtank,TuanAn0311,Kickoff,W1,5,P0,TF2-003,Backlog
+TF2-006,"Requirements, personas, user journeys, NFR",2.1,nguyen-van-hoan,nvtank,Kickoff,W1,5,P0,,Backlog
+TF2-007,"ADR/C4/ERD, API contracts & DB design",2.2,TuanAn0311,nguyen-van-hoan,Kickoff,W1,5,P0,TF2-006,Backlog
+TF2-008,"pnpm monorepo, TS strict, lint/format, shared contracts",3.1,TuanAn0311,nvtank,S1,W2,5,P0,TF2-007,Backlog
+TF2-009,"Docker local/test DB, Redis, env samples, healthcheck",3.2,nvtank,TuanAn0311,S1,W2,3,P0,TF2-008,Backlog
+TF2-010,CI: lint/typecheck/build/test + branch rules instructions,3.3,nvtank,TuanAn0311,S1,W2,5,P0,"TF2-008,TF2-009",Backlog
+TF2-011,Prisma schema/migrations/dev-test seed,3.4,TuanAn0311,nguyen-van-hoan,S1,W2,5,P0,"TF2-007,TF2-009",Backlog
+TF2-012,JWT/refresh/session/RBAC/organization policy,3.5,TuanAn0311,nvtank,S1,W2–3,8,P0,TF2-011,Backlog
+TF2-013,Next design system + auth/workspace UI,3.6,nguyen-van-hoan,TuanAn0311,S1,W2–3,5,P0,"TF2-008,TF2-012",Backlog
+TF2-014,Event CRUD + lifecycle/review backend,4.1,TuanAn0311,nguyen-van-hoan,S1,W3,8,P0,"TF2-011,TF2-012",Backlog
+TF2-015,Organizer/Admin event forms + review screens,4.2,nguyen-van-hoan,TuanAn0311,S1,W3,5,P0,"TF2-013,TF2-014",Backlog
+TF2-016,Public events catalog/search/detail + integration,4.3,nguyen-van-hoan,TuanAn0311,S1,W3,5,P0,"TF2-014,TF2-013",Backlog
+TF2-017,Auth/event unit/integration/E2E + Sprint 1 Retro,8.1,nvtank,TuanAn0311,S1,W3,5,P0,"TF2-012,TF2-014,TF2-015,TF2-016",Backlog
+TF2-018,Zone/ticket type/seat schema + validation,4.4,TuanAn0311,nguyen-van-hoan,S2,W4,5,P0,"TF2-011,TF2-014",Backlog
+TF2-019,Organizer seat grid + pricing UI,4.5,nguyen-van-hoan,TuanAn0311,S2,W4,5,P0,"TF2-015,TF2-018",Backlog
+TF2-020,Atomic hold service/row locks/TTL/ownership,5.1,TuanAn0311,nguyen-van-hoan,S2,W4,8,P0,"TF2-012,TF2-018",Backlog
+TF2-021,"Seat selector, countdown, availability UI",5.2,nguyen-van-hoan,TuanAn0311,S2,W4–5,5,P0,"TF2-016,TF2-020",Backlog
+TF2-022,"Idempotent order, server amount, release/expiry",5.3,TuanAn0311,nvtank,S2,W5,8,P0,TF2-020,Backlog
+TF2-023,Concurrent booking/rollback/TTL tests,8.2,TuanAn0311,nguyen-van-hoan,S2,W5,5,P0,"TF2-020,TF2-022",Backlog
+TF2-024,Realtime Socket.IO with REST resync (P1),5.4,TuanAn0311,nguyen-van-hoan,S2,W5,5,P1,TF2-020,Backlog
+TF2-025,Checkout UI + order history,5.5,nguyen-van-hoan,TuanAn0311,S2,W5,5,P0,"TF2-021,TF2-022",Backlog
+TF2-026,"Staging, error logs, Sprint 2 review/retro",8.3,nvtank,nguyen-van-hoan,S2,W5,5,P0,"TF2-010,TF2-017",Backlog
+TF2-027,Payment provider interface + mock dev/test,6.1,TuanAn0311,nvtank,S3,W6,5,P0,TF2-022,Backlog
+TF2-028,"PayOS integration, signed webhook/idempotency/reconciliation",6.2,TuanAn0311,nvtank,S3,W6,8,P0,TF2-027,Backlog
+TF2-029,Payment screen/status/error/cancel flows,6.3,nguyen-van-hoan,TuanAn0311,S3,W6,5,P0,"TF2-025,TF2-027",Backlog
+TF2-030,Signed QR ticket issuance + authorization,6.4,TuanAn0311,nguyen-van-hoan,S3,W6,5,P0,"TF2-027,TF2-028",Backlog
+TF2-031,My Tickets + QR frontend,6.5,nguyen-van-hoan,TuanAn0311,S3,W6,3,P0,TF2-030,Backlog
+TF2-032,Staff assignment + one-time check-in transaction,7.1,TuanAn0311,nvtank,S3,W7,8,P0,"TF2-012,TF2-030",Backlog
+TF2-033,Mobile check-in UI/scanner/fallback,7.2,nguyen-van-hoan,TuanAn0311,S3,W7,5,P0,"TF2-031,TF2-032",Backlog
+TF2-034,Sales/occupancy/check-in analytics API,7.3,TuanAn0311,nguyen-van-hoan,S3,W7,5,P0,"TF2-022,TF2-032",Backlog
+TF2-035,Organizer analytics charts + filters,7.4,nguyen-van-hoan,TuanAn0311,S3,W7,5,P0,TF2-034,Backlog
+TF2-036,"Payment/check-in concurrency/E2E, risk evolution, S3 retro",8.4,nvtank,TuanAn0311,S3,W7,8,P0,"TF2-028,TF2-030,TF2-032,TF2-035",Backlog
+TF2-037,Prod Dockerfiles and immutable builds,8.5,nvtank,TuanAn0311,S4,W8,5,P0,"TF2-008,TF2-009",Backlog
+TF2-038,AWS IaC/IAM OIDC/ECR/SSM/HTTPS runbook,8.6,nvtank,TuanAn0311,S4,W8,8,P0,TF2-037,Backlog
+TF2-039,"CD workflow, healthchecks, safe rollout/rollback",8.7,nvtank,TuanAn0311,S4,W8,5,P0,"TF2-010,TF2-037,TF2-038",Backlog
+TF2-040,CloudWatch/logging/S3 backup + restore drill,8.8,nvtank,TuanAn0311,S4,W8,5,P0,"TF2-038,TF2-039",Backlog
+TF2-041,"Security checks, dependency scan, test matrix, regression",8.9,TuanAn0311,nvtank,S4,W8–9,8,P0,"TF2-017,TF2-023,TF2-036",Backlog
+TF2-042,"Stakeholder UAT script, feedback & sign-off request",9.1,nvtank,nguyen-van-hoan,S4,W9,5,P0,"TF2-016,TF2-025,TF2-031,TF2-033,TF2-035,TF2-041",Backlog
+TF2-043,Actual risk/change record + final sprint retro,1.6,nvtank,TuanAn0311,S4,W9,3,P0,"TF2-004,TF2-036",Backlog
+TF2-044,"Final Technical Report 7 chapters, evidence index",9.2,nvtank,TuanAn0311,S4,W9,8,P0,"TF2-003,TF2-041,TF2-042,TF2-043",Backlog
+TF2-045,"Slides, live demo script, final release checklist",9.3,nvtank,TuanAn0311,S4,W9,5,P0,TF2-044,Backlog
