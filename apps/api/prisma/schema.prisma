@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CUSTOMER
+  ORGANIZER
+  STAFF
+  ADMIN
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         Role     @default(CUSTOMER)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  memberships Membership[]
+  sessions     Session[]
+}
+
+model Organization {
+  id          String       @id @default(uuid()) @db.Uuid
+  name        String
+  memberships Membership[]
+}
+
+model Membership {
+  userId         String       @db.Uuid
+  organizationId String       @db.Uuid
+  role           Role
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  @@id([userId, organizationId])
+  @@index([organizationId])
+}
+
+model Session {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  createdAt DateTime  @default(now())
+  expiresAt DateTime
+  revokedAt DateTime?
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokens    RefreshToken[]
+  @@index([userId])
+}
+
+model RefreshToken {
+  id         String    @id @default(uuid()) @db.Uuid
+  sessionId  String    @db.Uuid
+  tokenHash  String    @unique
+  consumedAt DateTime?
+  expiresAt  DateTime
+  session    Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  @@index([sessionId])
+}
