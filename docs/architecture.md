@@ -1,33 +1,127 @@
-# Architecture ADR-001 — proposed, awaiting Tech Lead review
+# Architecture
 
-Use a modular monolith: NestJS REST owns authentication, event policy and PostgreSQL transactions; Next.js consumes shared validated contracts. PostgreSQL is authoritative for sessions, tenant membership and booking/settlement. Redis supports readiness now and optional realtime/cache later. Its availability never substitutes for a database lock.
+Local pnpm monorepo, Next.js App Router + NestJS modular monolith. Browser requests
+use same-origin /api/v1 proxy; TanStack Query stores server state, Zod validates
+responses, Zustand holds UI state and memory-only access token. Inter is local.
 
 ```mermaid
 flowchart LR
-  Browser -->|HTTPS| Caddy
-  Caddy --> Web[Next.js web — planned]
-  Caddy --> API[NestJS REST]
-  API --> DB[(PostgreSQL / Prisma)]
-  API --> Cache[(Redis)]
-  CI[GitHub Actions] --> Checks[lint / types / tests / build / audit]
+  Browser -->|same origin REST| Next[Next.js :3000]
+  Next -->|proxy /api/v1| Nest[NestJS :4000]
+  Nest -->|Prisma adapter and transactions| PG[(PostgreSQL :5432)]
+  Nest -->|readiness PING| Redis[(Redis :6379)]
 ```
 
-Initial implementation: environment validation, security headers, explicit CORS origin, liveness/readiness, identity/organization/session schema. No application code from the reference repository is reused. API namespace `/api/v1`; liveness `/health/live`, readiness `/health/ready` checks DB and Redis. Dependency failure returns 503 without connection strings. Startup fails if the database is unreachable.
+Implemented modules: configuration, health, monitoring, database, auth, users,
+organizations, events, booking/orders and realtime. Guards default-deny and enforce JWT sessions/roles. Organization
+service checks membership with explicit ADMIN bypass. Controllers handle DTO/HTTP;
+services own transactions. Frontend gates provide loading/error/denial UX.
 
-Auth design: password scrypt, 15m JWT with issuer/audience/session ID; random refresh cookie, hash stored in DB; stable session lock serializes rotation and replay revokes session in a committed transaction. Role is read from the current DB user. Organization membership is required independently of role. Registration never grants elevated roles. Cookie refresh/logout require exact allowed Origin; production uses Secure/HttpOnly/SameSite cookies. No access token or password is logged.
+AuthProvider abstracts local JWT authentication. Access JWT validates algorithm,
+issuer/audience/expiry/type; DB decides current role, account and session activity.
+Bcrypt cost 12 hashes passwords outside transactions. Random refresh tokens are
+hash-only in DB, rotated transactionally, sent through HttpOnly cookies. Replay
+revokes a session; logout/password change revoke sessions. Hard session age is enforced.
 
-```mermaid
-erDiagram
-  User ||--o{ Membership : has
-  Organization ||--o{ Membership : includes
-  User ||--o{ Session : owns
-  Session ||--o{ RefreshToken : rotates
-```
+Frontend refresh uses one in-tab promise and Web Locks across tabs to avoid cookie
+reuse. Epoch checks reject stale bootstrap results. Query cache clears on identity
+change. Tokens never persist in browser storage. Without Web Locks, concurrent
+refresh fails closed and may require login again.
 
-Planned event/booking extension: Organization → Event → Zone/Seat; User → Hold → Order; Order → Payment/Ticket → CheckIn. Draft → pending review → approved/published transitions are server enforced. Seats are row locked in canonical order; TTL uses database time; order amount comes from immutable server price snapshots. Provider signature/amount/order/currency/reference must match before once-only ticket issue. Check-in uses an atomic conditional VALID→USED write after staff assignment validation. Unique constraints and idempotency keys support replay safety. These planned entities are not claimed implemented in the foundation schema.
+Helmet, CORS whitelist, validation, per-process throttle, request IDs, sanitized
+logs/errors and Swagger are configured. Metrics/Swagger remain disabled in production.
+Health queries actual PostgreSQL/Redis with timeouts; local metrics measure HTTP,
+booking outcomes, valid held seats and live Socket.IO connections. Redis provides
+the optional Socket.IO adapter; PostgreSQL owns authentication and reservations.
 
-REST draft: auth register/login/refresh/logout/me; organization-scoped event create/update/submit, ADMIN review, public approved-only catalog; hold/create/release, orders, verified payment webhook, owned tickets, assigned staff check-in and scoped analytics. Each request validates a shared schema, validates tenant/role and returns controlled 400/401/403/404/409 errors. Avoid returning foreign tenant existence.
+PostgreSQL 17/Redis 7.4 run in Docker, loopback ports, persistent dev volumes. Test
+stack uses 55443/56393 and PostgreSQL tmpfs. Domain schema prepares later phases;
+seed only runs development/test. No business dashboards are hardcoded.
 
-NFR baseline: fail closed on unavailable auth/session storage; 100KB JSON limit; no secrets in errors; bounded input; isolated test database; responsive 320/390px and keyboard behavior tested when UI is implemented. No public capacity/HA claim. Single-node AWS demo and HTTPS/backup/rollback require approved deployment; no resources have been created.
+## Event management (Phase 3)
 
-References: [NestJS first steps](https://docs.nestjs.com/first-steps), [GitHub Projects API scope](https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-api-to-manage-projects), supplied Master Prompt and QLDA guidelines. Prisma is pinned to 7.10.1; do not apply incompatible latest-major examples without migration review.
+EventsModule contains separate public/organizer/admin controllers, validated DTOs,
+lifecycle policy, draft/grid/review/staff services and shared record projection.
+Organizer writes require membership in an approved organization. Review belongs to
+ADMIN; public reads require published events and approved organizations. Rows are
+locked during lifecycle changes, preventing concurrent grid edits from invalidating
+a submitted event. Audit is stored inside the same transaction.
+
+Frontend uses real catalog, organizer aggregates, editable draft forms, seat grid,
+staff assignments and admin review/history APIs. URL filters, pagination, validation,
+confirm dialogs and server errors are handled without mocked business responses.
+Image URLs render directly in browsers without server image fetching/optimization.
+
+Read snapshots include inventory revision for the upcoming realtime phase. Phase 4 now implements Socket.IO broadcasts and reservation endpoints. API/database remain the
+source of truth. Detailed analytics and admin system dashboards are still planned.
+
+## Remaining phases
+
+- Phase 5 is implemented below; real bank transfer/public webhook delivery remains unverified.
+- Phase 6: staff-event authorization, atomic VALID → USED check-in and aggregates.
+- Phase 7: Redis Lua admission prototype, concurrency/E2E coverage, measured load.
+
+Do not wait for Redis/payment/email in database transactions. Persist before realtime
+publication. Add durable outbox/job interface when needed; BullMQ and future SQS
+need distinct adapters and retry/idempotency semantics.
+
+Future adapters may target Cognito, RDS/Aurora, ElastiCache, S3, SQS, ECS, CloudWatch.
+No AWS resources are provisioned and no AWS SDK is required for local execution.
+
+## Booking and realtime (Phase 4)
+
+BookingModule contains DTO/policy/lock helpers, atomic hold service, owner snapshots,
+release/reconciliation and order creation. InventoryPublisher separates domain
+transactions from Socket.IO. The global RealtimeModule authenticates rooms and
+optionally uses Redis Pub/Sub across instances. Domain services emit only after
+commit; delivery failure does not undo committed ownership. Redis/Socket payloads
+never authorize a purchase.
+
+Frontend selection is transient Zustand state, distinct from PostgreSQL holds.
+Confirmation, idempotent retries, server-based countdown and reload snapshots keep
+ownership explicit. Map colors reflect private effective states; stale REST and
+out-of-order event revisions cannot replace newer snapshots. Periodic REST sync
+covers missed emissions and reconnect. Checkout is a pending order, not payment.
+
+Local scheduler runs in the API process (no BullMQ worker needed yet); each scan is
+idempotent across instances and PostgreSQL remains authoritative. Startup with the
+Redis adapter configured requires Redis; default single-instance mode keeps
+readiness diagnostics available when dependencies fail. No AWS resources exist.
+
+Documentation records actual execution dates. Git author/committer dates have been
+explicitly reconstructed for the user's project timeline; see commit-timeline.md.
+
+## Payment and ticketing (Phase 5)
+
+PaymentsModule owns provider/session/finalization/reconciliation/controller layers.
+PaymentProvider selects official PayOS SDK, local mock or disabled adapter. Channel
+secrets are backend-only. SDK network calls run after reservation preparation commits;
+settlement transactions follow the existing inventory lock order and emit after commit.
+Concurrent callback deduplication uses an advisory event lock plus unique webhook
+reference, then order/payment/seat checks. Refund review never reclaims another hold
+or sale; distinct extra transfers preserve already valid tickets.
+
+TicketsService checks order ownership and reproduces a signed opaque credential
+only when its stored hash/version matches and ticket is VALID. No browser totals,
+return flags or QR-declared rights are trusted. REST owner status polling and a
+local periodic provider reconciliation supplement webhooks. Exact settlement is
+supported; partial transfers and refunds need manual review. Check-in remains Phase 6.
+
+A real PayOS channel link was created, read with SDK signature verification and
+cancelled on 23/10/2026, without money transfer. Public webhook registration and a
+real bank settlement were not performed; see payments.md and progress.md.
+
+## Check-in, reporting and waiting (Phases 6–7)
+
+CheckInModule uses event/user/ticket locks, active staff assignment and unique
+CheckIn.ticketId to atomically consume a VALID ticket. Private attendance rooms
+invalidate authoritative REST statistics. Analytics aggregates scoped paid revenue
+and Vietnam day boundaries. Admin metrics report actual DB/process values.
+
+WaitingRoomModule is an admission adapter, separate from PostgreSQL seat ownership.
+An atomic Redis Lua operation allocates bounded FIFO leases with Redis server time;
+HMAC nonce credentials are verified with user/session ownership. Gate I/O happens
+before a booking transaction and the database deadline is rechecked inside it.
+Notifications exposes already persisted payment receipts by owner. No AWS SDK,
+worker, external email service or durable outbox is introduced. Operational limits
+and recovery are described in [waiting-room.md](waiting-room.md).
