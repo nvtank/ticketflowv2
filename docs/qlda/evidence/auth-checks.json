@@ -1,0 +1,33 @@
+{
+  "observed_date": "2026-11-02",
+  "actor": "nvtank",
+  "branch": "feature/TF2-012-auth-rbac",
+  "checks": [
+    {
+      "command": "bash scripts/check-foundation.sh (Node 24, Nix schema-engine)",
+      "exit_code": 0,
+      "result": "lint/typecheck/build/format and 9 unit tests passed"
+    },
+    {
+      "command": "pnpm test:integration (approved loopback)",
+      "exit_code": 0,
+      "result": "8 tests passed, including 6 auth/session/tenant scenarios and 2 foundation checks"
+    },
+    {
+      "command": "synthetic seed against tf2_test with runtime-generated password",
+      "exit_code": 0,
+      "result": "four synthetic roles initialized; no credentials printed or existing passwords changed"
+    }
+  ],
+  "coverage": [
+    "registration never grants client-selected roles",
+    "salted password hashes",
+    "refresh cookie HttpOnly/SameSite and Origin checks",
+    "rotated refresh replay commits revocation",
+    "concurrent refresh yields one success and revokes session on replay",
+    "forged/expired JWT and wrong issuer/audience denied",
+    "logout and expired/disabled sessions denied",
+    "current organization membership and foreign-tenant denial"
+  ],
+  "not_claimed": ["browser E2E", "production HTTPS", "live settlement", "human peer approval"]
+}

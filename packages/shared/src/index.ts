@@ -6,8 +6,10 @@ export type Role = z.infer<typeof roleSchema>;
 export const registerSchema = z
   .object({
     email: z
-      .email()
+      .string()
+      .trim()
       .max(254)
+      .pipe(z.email())
       .transform((value) => value.trim().toLowerCase()),
     name: z.string().trim().min(1).max(120),
     password: z.string().min(12).max(128),

@@ -21,3 +21,11 @@ Use Node 24 (or compatible Node 22.12+) and pnpm 10.28.0. Run `pnpm install --fr
 Local checks: `bash scripts/check-foundation.sh`. Real DB integration: `pnpm infra:test:up`, set `DATABASE_URL=postgresql://tf2_test:isolated_test_password@127.0.0.1:55442/tf2_test`, run `pnpm db:migrate`, then `pnpm test:integration`. Test services use separate names/ports and ephemeral PostgreSQL storage; never point tests at production.
 
 NixOS: provide `PRISMA_SCHEMA_ENGINE_BINARY` from `nixpkgs#prisma-engines_7` and use Node 24 in PATH. Standard Linux CI downloads its Prisma binary during installation. Architecture and the unimplemented domain extensions are described in [ADR-001](docs/architecture.md).
+
+## Authentication and local demo identities
+
+`POST /api/v1/auth/register` accepts `{email,name,password}` (12–128 characters), always creates CUSTOMER and rejects extra role fields. Login uses `{email,password}`. Access JWT is returned for in-memory use as `Authorization: Bearer ...`; refresh is only in a HttpOnly/SameSite cookie. Send the configured `Origin` for register/login/refresh/logout. Refresh tokens rotate; replay revokes the session; logout revokes immediately. `GET /auth/me` checks current DB session/user. `GET /organizations/:id/context` checks live organization membership.
+
+For isolated local development only, build the API, set a unique `SEED_PASSWORD` in your shell and run `pnpm db:seed` using `.env`. Synthetic addresses are `tf2-demo-{customer,organizer,staff,admin}@example.invalid`, organization `00000000-0000-4000-8000-000000000001`. Seed refuses production/non-local DBs, creates no real stakeholders and leaves existing passwords unchanged. No real application user is provisioned by these fixtures.
+
+Main currently requires PR + passing quality CI with zero approvals under the owner's temporary exception. This is recorded in [CR-20261102-001](docs/qlda/changes/CR-20261102-001-review-gate.md); peer-review course evidence remains pending.

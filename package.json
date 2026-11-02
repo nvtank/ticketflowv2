@@ -17,6 +17,7 @@
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "dev:api": "pnpm --filter @tf2/api dev",
     "db:generate": "pnpm --filter @tf2/api db:generate",
+    "db:seed": "pnpm --filter @tf2/api db:seed",
     "db:migrate": "pnpm --filter @tf2/api db:migrate",
     "infra:up": "docker compose --env-file .env -f infrastructure/docker/compose.yml up -d --wait",
     "infra:test:up": "docker compose -f infrastructure/docker/compose.test.yml up -d --wait"
