@@ -1,0 +1,91 @@
+{
+  "observed_at": "2026-11-02T11:04:29.297248+00:00",
+  "source_sha": "91833bcc0048b596c2dbf7e9dc25358c77541daf",
+  "source_repository": "https://github.com/nvtank/ticketflow-aws",
+  "actor": "nvtank",
+  "branch": "feature/TF2-import-reference",
+  "quality_exit_code": 0,
+  "browser_exit_code": 0,
+  "unit_tests": 130,
+  "integration_tests": 106,
+  "e2e": {
+    "foundation": 20,
+    "regression": 30,
+    "suite_viewport_runs": 16,
+    "responsive_320px": 4,
+    "total": 54
+  },
+  "checks": [
+    {
+      "command": "bash scripts/validate-reference-import.sh",
+      "exit_code": 0,
+      "result": "lint/typecheck/format/build/unit/integration/migrations/high-level dependency gate passed"
+    },
+    {
+      "command": "pnpm exec playwright test",
+      "exit_code": 0,
+      "passed": 20
+    },
+    {
+      "command": "node scripts/run-browser-regression.mjs",
+      "exit_code": 0,
+      "passed": 30,
+      "suites": [
+        "waiting",
+        "auth",
+        "events",
+        "booking",
+        "payments",
+        "checkin",
+        "google",
+        "experience"
+      ],
+      "viewports": [
+        "desktop-chromium",
+        "mobile-chromium"
+      ]
+    },
+    {
+      "command": "pnpm exec playwright test --config playwright.responsive.config.ts",
+      "exit_code": 0,
+      "passed": 4,
+      "viewport_width": 320
+    }
+  ],
+  "audit": {
+    "critical": 0,
+    "high": 0,
+    "moderate": 4,
+    "low": 1,
+    "fixed_high_modules": [
+      "body-parser 2.4.0",
+      "multer 2.5.0"
+    ]
+  },
+  "database": {
+    "compose_project": "ticketflowv2-import-test",
+    "host_port": 55443,
+    "redis_port": 56393,
+    "migration_count": 10,
+    "destructive_production_changes": false
+  },
+  "runtime": {
+    "node": "24.18.0",
+    "pnpm": "10.34.1",
+    "prisma_client": "7.10.1",
+    "local_nixos_schema_engine": "7.5.0",
+    "browser": "Google Chrome 148.0.7778.167 (Nix executable override)"
+  },
+  "initial_failures_resolved": [
+    "Removed empty superseded prototype migration directories after Prisma P3015",
+    "Replaced stale pre-redesign E2E selectors while retaining inventory-error, keyboard and focus assertions"
+  ],
+  "limitations": [
+    "Checks apply to final import snapshot, not intermediate role-grouped commits",
+    "No paid cloud/public HTTPS/production rollout or live payment was executed",
+    "Payment provider integration was checked with isolated mock/signed test fixtures",
+    "Legacy standalone world smoke/performance scripts are preserved but are not part of the validated active suite matrix",
+    "Four moderate and one low dependency advisories remain",
+    "pg adapter emits a deprecation warning for concurrent query scheduling; tests still passed"
+  ]
+}
