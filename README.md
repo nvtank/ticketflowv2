@@ -29,3 +29,7 @@ NixOS: provide `PRISMA_SCHEMA_ENGINE_BINARY` from `nixpkgs#prisma-engines_7` and
 For isolated local development only, build the API, set a unique `SEED_PASSWORD` in your shell and run `pnpm db:seed` using `.env`. Synthetic addresses are `tf2-demo-{customer,organizer,staff,admin}@example.invalid`, organization `00000000-0000-4000-8000-000000000001`. Seed refuses production/non-local DBs, creates no real stakeholders and leaves existing passwords unchanged. No real application user is provisioned by these fixtures.
 
 Main currently requires PR + passing quality CI with zero approvals under the owner's temporary exception. This is recorded in [CR-20261102-001](docs/qlda/changes/CR-20261102-001-review-gate.md); peer-review course evidence remains pending.
+
+## Event API
+
+Organizer: `GET/POST /api/v1/organizations/:organizationId/events`, `PATCH/DELETE .../:id`, `POST .../:id/submit`. Admin: `GET /api/v1/admin/events`, `POST .../:id/review` with `{decision:"approve"}` or `{decision:"reject",reason}`. Public: `GET /api/v1/events?q=...`, `GET /api/v1/events/:id`. Create/update require title, description, venue, future startsAt and endsAt. Only own ORGANIZER membership may mutate; only ADMIN reviews; published events are immutable in this slice. All transitions write audit records. Inventory, booking and browser UI are still outstanding.
