@@ -46,9 +46,13 @@ jobs:
       - run: pnpm audit --audit-level=high
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm exec playwright test
+        env:
+          PLAYWRIGHT_HTML_OUTPUT_DIR: .local/browser-reports/foundation
       - run: node scripts/run-browser-regression.mjs
       - run: python3 scripts/sprint_evidence.py
       - run: pnpm exec playwright test --config playwright.responsive.config.ts
+        env:
+          PLAYWRIGHT_HTML_OUTPUT_DIR: .local/browser-reports/responsive
       - run: pnpm test:infra:down
         if: always()
       - run: python3 scripts/setup-staging.py
