@@ -38,6 +38,8 @@ def main():
         ax.grid(axis='y',alpha=.2);ax.spines[['top','right']].set_visible(False)
         ax.legend(loc='upper left',frameon=False)
         fig.savefig(OUT/f'burndown-{sprint.lower()}.svg',metadata={'Date':data['observed_at']})
+        svg = OUT/f'burndown-{sprint.lower()}.svg'
+        svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
         fig.savefig(OUT/f'burndown-{sprint.lower()}.png',dpi=160)
         plt.close(fig)
     print('Rendered S1/S2 SVG and PNG charts from actual GitHub issue events')

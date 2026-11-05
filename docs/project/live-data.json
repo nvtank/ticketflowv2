@@ -1,6 +1,6 @@
 {
   "repository": "nvtank/ticketflowv2",
-  "observed_at": "2026-11-02T11:55:50.440690+00:00",
+  "observed_at": "2026-11-02T13:28:30.720462+00:00",
   "data_source": "GitHub REST issue metadata and paginated actual issue events",
   "commit_dates_used": false,
   "baseline_is_plan_only": true,
@@ -26,6 +26,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "Kickoff",
+      "baseline_sprint": "Kickoff",
+      "target_date": null,
       "wbs": "1.1",
       "module": "qlda",
       "priority": "P0",
@@ -128,6 +130,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "Kickoff",
+      "baseline_sprint": "Kickoff",
+      "target_date": null,
       "wbs": "1.2",
       "module": "qlda",
       "priority": "P0",
@@ -230,6 +234,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "Kickoff",
+      "baseline_sprint": "Kickoff",
+      "target_date": null,
       "wbs": "1.3",
       "module": "qlda",
       "priority": "P0",
@@ -332,6 +338,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "Kickoff",
+      "baseline_sprint": "Kickoff",
+      "target_date": null,
       "wbs": "1.4",
       "module": "qlda",
       "priority": "P0",
@@ -434,6 +442,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "Kickoff",
+      "baseline_sprint": "Kickoff",
+      "target_date": null,
       "wbs": "1.5",
       "module": "qlda",
       "priority": "P0",
@@ -531,17 +541,19 @@
       "state": "open",
       "state_reason": null,
       "created_at": "2026-11-02T09:57:33Z",
-      "updated_at": "2026-11-02T09:57:33Z",
+      "updated_at": "2026-11-02T13:25:54Z",
       "closed_at": null,
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
-      "sprint": "Kickoff",
+      "sprint": "S2",
+      "baseline_sprint": "Kickoff",
+      "target_date": "2026-11-03",
       "wbs": "2.1",
       "module": "frontend",
       "priority": "P0",
       "points": 5,
       "estimate_status": "PROPOSED",
-      "milestone": "Kickoff",
+      "milestone": "Sprint 2 — delivery deadlines 02–08 Nov 2026",
       "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/6/events",
       "events": [
         {
@@ -615,6 +627,36 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:46:42Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34909206991,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:33:41Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34912925158,
+          "event": "demilestoned",
+          "created_at": "2026-11-02T13:17:54Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912925266,
+          "event": "milestoned",
+          "created_at": "2026-11-02T13:17:54Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912956381,
+          "event": "mentioned",
+          "created_at": "2026-11-02T13:18:16Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34912957030,
+          "event": "subscribed",
+          "created_at": "2026-11-02T13:18:16Z",
+          "actor": "TuanAn0311"
         }
       ]
     },
@@ -627,17 +669,19 @@
       "state": "open",
       "state_reason": null,
       "created_at": "2026-11-02T09:57:35Z",
-      "updated_at": "2026-11-02T09:57:35Z",
+      "updated_at": "2026-11-02T13:25:57Z",
       "closed_at": null,
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
-      "sprint": "Kickoff",
+      "sprint": "S2",
+      "baseline_sprint": "Kickoff",
+      "target_date": "2026-11-04",
       "wbs": "2.2",
       "module": "backend",
       "priority": "P0",
       "points": 5,
       "estimate_status": "PROPOSED",
-      "milestone": "Kickoff",
+      "milestone": "Sprint 2 — delivery deadlines 02–08 Nov 2026",
       "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/7/events",
       "events": [
         {
@@ -717,6 +761,30 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:48:12Z",
           "actor": "nvtank"
+        },
+        {
+          "id": 34912930768,
+          "event": "demilestoned",
+          "created_at": "2026-11-02T13:17:58Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912930818,
+          "event": "milestoned",
+          "created_at": "2026-11-02T13:17:58Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912959751,
+          "event": "mentioned",
+          "created_at": "2026-11-02T13:18:18Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912960446,
+          "event": "subscribed",
+          "created_at": "2026-11-02T13:18:18Z",
+          "actor": "nvtank"
         }
       ]
     },
@@ -734,6 +802,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S1",
+      "baseline_sprint": "S1",
+      "target_date": null,
       "wbs": "3.1",
       "module": "backend",
       "priority": "P0",
@@ -848,6 +918,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S1",
+      "baseline_sprint": "S1",
+      "target_date": null,
       "wbs": "3.2",
       "module": "cloudops",
       "priority": "P0",
@@ -962,6 +1034,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S1",
+      "baseline_sprint": "S1",
+      "target_date": null,
       "wbs": "3.3",
       "module": "cloudops",
       "priority": "P0",
@@ -1076,6 +1150,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S1",
+      "baseline_sprint": "S1",
+      "target_date": null,
       "wbs": "3.4",
       "module": "backend",
       "priority": "P0",
@@ -1190,6 +1266,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S1",
+      "baseline_sprint": "S1",
+      "target_date": null,
       "wbs": "3.5",
       "module": "backend",
       "priority": "P0",
@@ -1299,11 +1377,13 @@
       "state": "closed",
       "state_reason": "completed",
       "created_at": "2026-11-02T09:57:46Z",
-      "updated_at": "2026-11-02T11:48:46Z",
+      "updated_at": "2026-11-02T12:33:43Z",
       "closed_at": "2026-11-02T11:48:46Z",
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
       "sprint": "S1",
+      "baseline_sprint": "S1",
+      "target_date": null,
       "wbs": "3.6",
       "module": "frontend",
       "priority": "P0",
@@ -1401,6 +1481,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:48:48Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34909210256,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:33:44Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -1418,6 +1504,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S1",
+      "baseline_sprint": "S1",
+      "target_date": null,
       "wbs": "4.1",
       "module": "backend",
       "priority": "P0",
@@ -1515,6 +1603,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:48:52Z",
           "actor": "nvtank"
+        },
+        {
+          "id": 34906080218,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:56:24Z",
+          "actor": "nvtank"
         }
       ]
     },
@@ -1527,11 +1621,13 @@
       "state": "closed",
       "state_reason": "completed",
       "created_at": "2026-11-02T09:57:49Z",
-      "updated_at": "2026-11-02T11:48:50Z",
+      "updated_at": "2026-11-02T12:33:45Z",
       "closed_at": "2026-11-02T11:48:50Z",
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
       "sprint": "S1",
+      "baseline_sprint": "S1",
+      "target_date": null,
       "wbs": "4.2",
       "module": "frontend",
       "priority": "P0",
@@ -1629,6 +1725,18 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:48:57Z",
           "actor": "nvtank"
+        },
+        {
+          "id": 34906083642,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:56:26Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34909212929,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:33:46Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -1641,11 +1749,13 @@
       "state": "closed",
       "state_reason": "completed",
       "created_at": "2026-11-02T09:57:50Z",
-      "updated_at": "2026-11-02T11:48:52Z",
+      "updated_at": "2026-11-02T12:33:48Z",
       "closed_at": "2026-11-02T11:48:52Z",
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
       "sprint": "S1",
+      "baseline_sprint": "S1",
+      "target_date": null,
       "wbs": "4.3",
       "module": "frontend",
       "priority": "P0",
@@ -1743,6 +1853,18 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:02Z",
           "actor": "nvtank"
+        },
+        {
+          "id": 34906085222,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:56:27Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34909216130,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:33:48Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -1760,6 +1882,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S1",
+      "baseline_sprint": "S1",
+      "target_date": null,
       "wbs": "8.1",
       "module": "cloudops",
       "priority": "P0",
@@ -1856,6 +1980,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S2",
+      "baseline_sprint": "S2",
+      "target_date": null,
       "wbs": "4.4",
       "module": "backend",
       "priority": "P0",
@@ -1953,6 +2079,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:13Z",
           "actor": "nvtank"
+        },
+        {
+          "id": 34906090225,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:56:31Z",
+          "actor": "nvtank"
         }
       ]
     },
@@ -1965,11 +2097,13 @@
       "state": "closed",
       "state_reason": "completed",
       "created_at": "2026-11-02T09:57:56Z",
-      "updated_at": "2026-11-02T11:48:57Z",
+      "updated_at": "2026-11-02T12:33:50Z",
       "closed_at": "2026-11-02T11:48:57Z",
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
       "sprint": "S2",
+      "baseline_sprint": "S2",
+      "target_date": null,
       "wbs": "4.5",
       "module": "frontend",
       "priority": "P0",
@@ -2067,6 +2201,18 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:18Z",
           "actor": "nvtank"
+        },
+        {
+          "id": 34906094099,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:56:34Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34909218881,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:33:50Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -2084,6 +2230,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S2",
+      "baseline_sprint": "S2",
+      "target_date": null,
       "wbs": "5.1",
       "module": "backend",
       "priority": "P0",
@@ -2181,6 +2329,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:23Z",
           "actor": "nvtank"
+        },
+        {
+          "id": 34906094652,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:56:35Z",
+          "actor": "nvtank"
         }
       ]
     },
@@ -2193,11 +2347,13 @@
       "state": "closed",
       "state_reason": "completed",
       "created_at": "2026-11-02T09:57:59Z",
-      "updated_at": "2026-11-02T11:49:01Z",
+      "updated_at": "2026-11-02T12:33:51Z",
       "closed_at": "2026-11-02T11:49:01Z",
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
       "sprint": "S2",
+      "baseline_sprint": "S2",
+      "target_date": null,
       "wbs": "5.2",
       "module": "frontend",
       "priority": "P0",
@@ -2295,6 +2451,18 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:29Z",
           "actor": "nvtank"
+        },
+        {
+          "id": 34906099679,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:56:37Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34909221174,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:33:52Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -2312,6 +2480,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S2",
+      "baseline_sprint": "S2",
+      "target_date": null,
       "wbs": "5.3",
       "module": "backend",
       "priority": "P0",
@@ -2409,6 +2579,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:36Z",
           "actor": "nvtank"
+        },
+        {
+          "id": 34906103362,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:56:41Z",
+          "actor": "nvtank"
         }
       ]
     },
@@ -2426,6 +2602,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S2",
+      "baseline_sprint": "S2",
+      "target_date": null,
       "wbs": "8.2",
       "module": "backend",
       "priority": "P0",
@@ -2534,6 +2712,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S2",
+      "baseline_sprint": "S2",
+      "target_date": null,
       "wbs": "5.4",
       "module": "backend",
       "priority": "P1",
@@ -2637,11 +2817,13 @@
       "state": "closed",
       "state_reason": "completed",
       "created_at": "2026-11-02T09:58:06Z",
-      "updated_at": "2026-11-02T11:49:10Z",
+      "updated_at": "2026-11-02T12:33:53Z",
       "closed_at": "2026-11-02T11:49:10Z",
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
       "sprint": "S2",
+      "baseline_sprint": "S2",
+      "target_date": null,
       "wbs": "5.5",
       "module": "frontend",
       "priority": "P0",
@@ -2733,6 +2915,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:12Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34909223642,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:33:53Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -2745,17 +2933,19 @@
       "state": "open",
       "state_reason": null,
       "created_at": "2026-11-02T09:58:08Z",
-      "updated_at": "2026-11-02T09:58:08Z",
+      "updated_at": "2026-11-02T13:26:09Z",
       "closed_at": null,
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S2",
+      "baseline_sprint": "S2",
+      "target_date": "2026-11-08",
       "wbs": "8.3",
       "module": "cloudops",
       "priority": "P0",
       "points": 5,
       "estimate_status": "PROPOSED",
-      "milestone": "S2 Inventory & Booking",
+      "milestone": "Sprint 2 — delivery deadlines 02–08 Nov 2026",
       "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/26/events",
       "events": [
         {
@@ -2829,6 +3019,18 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:47:10Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34912955636,
+          "event": "demilestoned",
+          "created_at": "2026-11-02T13:18:15Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912955752,
+          "event": "milestoned",
+          "created_at": "2026-11-02T13:18:15Z",
+          "actor": "nvtank"
         }
       ]
     },
@@ -2846,6 +3048,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S3",
+      "baseline_sprint": "S3",
+      "target_date": null,
       "wbs": "6.1",
       "module": "backend",
       "priority": "P0",
@@ -2954,6 +3158,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S3",
+      "baseline_sprint": "S3",
+      "target_date": null,
       "wbs": "6.2",
       "module": "backend",
       "priority": "P0",
@@ -3033,6 +3239,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:47:13Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34906134505,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:57:04Z",
+          "actor": "nvtank"
         }
       ]
     },
@@ -3045,11 +3257,13 @@
       "state": "closed",
       "state_reason": "completed",
       "created_at": "2026-11-02T09:58:14Z",
-      "updated_at": "2026-11-02T11:49:15Z",
+      "updated_at": "2026-11-02T12:33:55Z",
       "closed_at": "2026-11-02T11:49:15Z",
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
       "sprint": "S3",
+      "baseline_sprint": "S3",
+      "target_date": null,
       "wbs": "6.3",
       "module": "frontend",
       "priority": "P0",
@@ -3141,6 +3355,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:17Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34909225977,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:33:55Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -3158,6 +3378,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S3",
+      "baseline_sprint": "S3",
+      "target_date": null,
       "wbs": "6.4",
       "module": "backend",
       "priority": "P0",
@@ -3261,11 +3483,13 @@
       "state": "closed",
       "state_reason": "completed",
       "created_at": "2026-11-02T09:58:18Z",
-      "updated_at": "2026-11-02T11:49:19Z",
+      "updated_at": "2026-11-02T12:33:56Z",
       "closed_at": "2026-11-02T11:49:19Z",
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
       "sprint": "S3",
+      "baseline_sprint": "S3",
+      "target_date": null,
       "wbs": "6.5",
       "module": "frontend",
       "priority": "P0",
@@ -3357,6 +3581,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:21Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34909228183,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:33:57Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -3374,6 +3604,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S3",
+      "baseline_sprint": "S3",
+      "target_date": null,
       "wbs": "7.1",
       "module": "backend",
       "priority": "P0",
@@ -3477,11 +3709,13 @@
       "state": "closed",
       "state_reason": "completed",
       "created_at": "2026-11-02T09:58:21Z",
-      "updated_at": "2026-11-02T11:49:23Z",
+      "updated_at": "2026-11-02T12:33:58Z",
       "closed_at": "2026-11-02T11:49:23Z",
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
       "sprint": "S3",
+      "baseline_sprint": "S3",
+      "target_date": null,
       "wbs": "7.2",
       "module": "frontend",
       "priority": "P0",
@@ -3573,6 +3807,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:26Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34909230260,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:33:58Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -3590,6 +3830,8 @@
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
       "sprint": "S3",
+      "baseline_sprint": "S3",
+      "target_date": null,
       "wbs": "7.3",
       "module": "backend",
       "priority": "P0",
@@ -3693,11 +3935,13 @@
       "state": "closed",
       "state_reason": "completed",
       "created_at": "2026-11-02T09:58:25Z",
-      "updated_at": "2026-11-02T11:49:28Z",
+      "updated_at": "2026-11-02T12:34:00Z",
       "closed_at": "2026-11-02T11:49:28Z",
-      "actual_assignees": [],
+      "actual_assignees": ["nguyen-van-hoan"],
       "proposed_dri": "nguyen-van-hoan",
       "sprint": "S3",
+      "baseline_sprint": "S3",
+      "target_date": null,
       "wbs": "7.4",
       "module": "frontend",
       "priority": "P0",
@@ -3789,6 +4033,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:49:30Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34909232566,
+          "event": "assigned",
+          "created_at": "2026-11-02T12:34:00Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -3806,6 +4056,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S3",
+      "baseline_sprint": "S3",
+      "target_date": null,
       "wbs": "8.4",
       "module": "cloudops",
       "priority": "P0",
@@ -3897,17 +4149,19 @@
       "state": "open",
       "state_reason": null,
       "created_at": "2026-11-02T09:58:29Z",
-      "updated_at": "2026-11-02T09:58:29Z",
+      "updated_at": "2026-11-02T13:26:00Z",
       "closed_at": null,
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
-      "sprint": "S4",
+      "sprint": "S2",
+      "baseline_sprint": "S4",
+      "target_date": "2026-11-05",
       "wbs": "8.5",
       "module": "cloudops",
       "priority": "P0",
       "points": 5,
       "estimate_status": "PROPOSED",
-      "milestone": "S4 Cloud & Acceptance",
+      "milestone": "Sprint 2 — delivery deadlines 02–08 Nov 2026",
       "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/37/events",
       "events": [
         {
@@ -3981,6 +4235,18 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:47:25Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34912936357,
+          "event": "demilestoned",
+          "created_at": "2026-11-02T13:18:02Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912936413,
+          "event": "milestoned",
+          "created_at": "2026-11-02T13:18:02Z",
+          "actor": "nvtank"
         }
       ]
     },
@@ -3998,6 +4264,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S4",
+      "baseline_sprint": "S4",
+      "target_date": null,
       "wbs": "8.6",
       "module": "cloudops",
       "priority": "P0",
@@ -4094,6 +4362,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S4",
+      "baseline_sprint": "S4",
+      "target_date": null,
       "wbs": "8.7",
       "module": "cloudops",
       "priority": "P0",
@@ -4190,6 +4460,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S4",
+      "baseline_sprint": "S4",
+      "target_date": null,
       "wbs": "8.8",
       "module": "cloudops",
       "priority": "P0",
@@ -4281,17 +4553,19 @@
       "state": "open",
       "state_reason": null,
       "created_at": "2026-11-02T09:58:38Z",
-      "updated_at": "2026-11-02T09:58:38Z",
+      "updated_at": "2026-11-02T13:26:03Z",
       "closed_at": null,
       "actual_assignees": ["TuanAn0311"],
       "proposed_dri": "TuanAn0311",
-      "sprint": "S4",
+      "sprint": "S2",
+      "baseline_sprint": "S4",
+      "target_date": "2026-11-06",
       "wbs": "8.9",
       "module": "backend",
       "priority": "P0",
       "points": 8,
       "estimate_status": "PROPOSED",
-      "milestone": "S4 Cloud & Acceptance",
+      "milestone": "Sprint 2 — delivery deadlines 02–08 Nov 2026",
       "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/41/events",
       "events": [
         {
@@ -4365,6 +4639,36 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:47:32Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34906198392,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:57:54Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912942260,
+          "event": "demilestoned",
+          "created_at": "2026-11-02T13:18:06Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912942332,
+          "event": "milestoned",
+          "created_at": "2026-11-02T13:18:06Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912972694,
+          "event": "mentioned",
+          "created_at": "2026-11-02T13:18:26Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34912973438,
+          "event": "subscribed",
+          "created_at": "2026-11-02T13:18:27Z",
+          "actor": "nguyen-van-hoan"
         }
       ]
     },
@@ -4377,17 +4681,19 @@
       "state": "open",
       "state_reason": null,
       "created_at": "2026-11-02T09:58:40Z",
-      "updated_at": "2026-11-02T09:58:40Z",
+      "updated_at": "2026-11-02T13:26:06Z",
       "closed_at": null,
-      "actual_assignees": ["nvtank"],
+      "actual_assignees": ["nvtank", "nguyen-van-hoan"],
       "proposed_dri": "nvtank",
-      "sprint": "S4",
+      "sprint": "S2",
+      "baseline_sprint": "S4",
+      "target_date": "2026-11-07",
       "wbs": "9.1",
       "module": "qlda",
       "priority": "P0",
       "points": 5,
       "estimate_status": "PROPOSED",
-      "milestone": "S4 Cloud & Acceptance",
+      "milestone": "Sprint 2 — delivery deadlines 02–08 Nov 2026",
       "events_url": "https://api.github.com/repos/nvtank/ticketflowv2/issues/42/events",
       "events": [
         {
@@ -4461,6 +4767,36 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:47:32Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34912948395,
+          "event": "demilestoned",
+          "created_at": "2026-11-02T13:18:10Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912948463,
+          "event": "milestoned",
+          "created_at": "2026-11-02T13:18:10Z",
+          "actor": "nvtank"
+        },
+        {
+          "id": 34912950851,
+          "event": "assigned",
+          "created_at": "2026-11-02T13:18:12Z",
+          "actor": "nguyen-van-hoan"
+        },
+        {
+          "id": 34912978679,
+          "event": "mentioned",
+          "created_at": "2026-11-02T13:18:30Z",
+          "actor": "TuanAn0311"
+        },
+        {
+          "id": 34912979407,
+          "event": "subscribed",
+          "created_at": "2026-11-02T13:18:30Z",
+          "actor": "TuanAn0311"
         }
       ]
     },
@@ -4478,6 +4814,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S4",
+      "baseline_sprint": "S4",
+      "target_date": null,
       "wbs": "1.6",
       "module": "qlda",
       "priority": "P0",
@@ -4574,6 +4912,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S4",
+      "baseline_sprint": "S4",
+      "target_date": null,
       "wbs": "9.2",
       "module": "qlda",
       "priority": "P0",
@@ -4653,6 +4993,12 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:47:35Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34906211016,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:58:04Z",
+          "actor": "nvtank"
         }
       ]
     },
@@ -4670,6 +5016,8 @@
       "actual_assignees": ["nvtank"],
       "proposed_dri": "nvtank",
       "sprint": "S4",
+      "baseline_sprint": "S4",
+      "target_date": null,
       "wbs": "9.3",
       "module": "qlda",
       "priority": "P0",
@@ -4749,11 +5097,39 @@
           "event": "project_v2_item_status_changed",
           "created_at": "2026-11-02T11:47:36Z",
           "actor": "github-project-automation[bot]"
+        },
+        {
+          "id": 34906216036,
+          "event": "project_v2_item_status_changed",
+          "created_at": "2026-11-02T11:58:08Z",
+          "actor": "nvtank"
         }
       ]
     }
   ],
   "pull_requests": [
+    {
+      "number": 52,
+      "title": "docs(sprint): assign team tasks and restore required peer approval",
+      "html_url": "https://github.com/nvtank/ticketflowv2/pull/52",
+      "state": "open",
+      "created_at": "2026-11-02T13:18:33Z",
+      "updated_at": "2026-11-02T13:26:14Z",
+      "closed_at": null,
+      "merged_at": null,
+      "body": "Assign six existing Issues to the three team members for the 02–08 November 2026 delivery timebox, with individual deadlines at 17:00 UTC+7, reviewers, dependencies and acceptance outcomes. GitHub milestone 11, actual assignees and Project target dates have been updated; historical baseline Sprint membership is preserved.\n\nRestore mandatory independent peer approval in the workspace instructions. Live main protection now requires one approval, dismissal after new commits, approval of the latest push by another person, strict quality CI, resolved conversations and enforcement for administrators. Direct main pushes, force pushes and protection bypass are prohibited. This PR must remain open until a genuine reviewer approves it.\n\nValidation: Prettier on changed Markdown and git diff --check passed. No application behavior changed. Attendance, stakeholder sign-off and team capacity confirmation are pending, not fabricated.\n\nRelated: #6, #7, #26, #37, #41, #42. These Issues are not automatically closed by this planning PR.\n"
+    },
+    {
+      "number": 51,
+      "title": "feat(project): publish actual Sprint history and burndown",
+      "html_url": "https://github.com/nvtank/ticketflowv2/pull/51",
+      "state": "closed",
+      "created_at": "2026-11-02T12:17:31Z",
+      "updated_at": "2026-11-02T12:25:58Z",
+      "closed_at": "2026-11-02T12:25:57Z",
+      "merged_at": "2026-11-02T12:25:57Z",
+      "body": "Creates and verifies the real [TixFlow V2 Project](https://github.com/users/nvtank/projects/2), with 45 existing Issues, Backlog/In Progress/In Review/Done columns, baseline Sprint iterations, owner/estimate/evidence fields, and eight configured views. [Sprint 1](https://github.com/users/nvtank/projects/2/views/4) filters exactly Issues #8–#17; [Sprint 2](https://github.com/users/nvtank/projects/2/views/5) filters exactly #18–#26. Board grouping by Status was verified through the API.\n\nAdds idempotent public REST/GraphQL synchronization, paginated actual Issue event export, CSV histories and Matplotlib SVG/PNG burndown charts embedded in the repository and Project overview. Reconstructed import commit dates are never used as metrics. Planned September Sprint dates are explicitly separated from real GitHub observations/closures on 2026-11-02.\n\nActual state after merged import PR #50 and passing CI: 25 technical Issues closed as completed; Sprint 1 has 9/10 complete and Sprint 2 has 8/9 complete. The mixed retrospective/staging Issues remain open. Unknown Actual Start fields are not invented, estimates remain PROPOSED, and actual GitHub assignees remain distinct from requested DRI ownership.\n\nRefs #5, #17, #23, #36, #41. No human meeting, peer approval, older board transition, paid cloud, live payment or stakeholder acceptance is claimed. Public GitHub exposes no chart-creation mutation; this change publishes reproducible real-data SVG/PNG charts rather than claiming a native custom Insights chart was created.\n\nValidation: four metric reconstruction unit tests PASS (close/reopen, no pre-creation data, duplicate close/fallback and snapshot mismatch rejection); Python compilation PASS; formatting/diff checks PASS; live synchronization VERIFIED 45 items, correct Sprint filters and Status grouping. Charts were rendered from actual API data and visually inspected. CI also runs the metric tests and Python compilation alongside existing application gates.\n\nActual author and operator: authenticated nvtank. Owner authorized automatic merge after required CI passes, with temporary required approval count zero.\n"
+    },
     {
       "number": 50,
       "title": "feat(import): reuse complete ticketflow application with verified workflows",
@@ -4848,23 +5224,9 @@
         "event": "created"
       },
       {
-        "timestamp": "2026-11-02T09:57:33Z",
-        "scope_issues": 6,
-        "remaining_issues": 6,
-        "issue": 6,
-        "event": "created"
-      },
-      {
-        "timestamp": "2026-11-02T09:57:35Z",
-        "scope_issues": 7,
-        "remaining_issues": 7,
-        "issue": 7,
-        "event": "created"
-      },
-      {
-        "timestamp": "2026-11-02T11:55:50.440690+00:00",
-        "scope_issues": 7,
-        "remaining_issues": 7,
+        "timestamp": "2026-11-02T13:28:30.720462+00:00",
+        "scope_issues": 5,
+        "remaining_issues": 5,
         "issue": "",
         "event": "observed_snapshot"
       }
@@ -5011,7 +5373,7 @@
         "event": "closed"
       },
       {
-        "timestamp": "2026-11-02T11:55:50.440690+00:00",
+        "timestamp": "2026-11-02T13:28:30.720462+00:00",
         "scope_issues": 10,
         "remaining_issues": 1,
         "issue": "",
@@ -5020,128 +5382,163 @@
     ],
     "S2": [
       {
-        "timestamp": "2026-11-02T09:57:54Z",
+        "timestamp": "2026-11-02T09:57:33Z",
         "scope_issues": 1,
         "remaining_issues": 1,
+        "issue": 6,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:35Z",
+        "scope_issues": 2,
+        "remaining_issues": 2,
+        "issue": 7,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:57:54Z",
+        "scope_issues": 3,
+        "remaining_issues": 3,
         "issue": 18,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:57:56Z",
-        "scope_issues": 2,
-        "remaining_issues": 2,
+        "scope_issues": 4,
+        "remaining_issues": 4,
         "issue": 19,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:57:57Z",
-        "scope_issues": 3,
-        "remaining_issues": 3,
+        "scope_issues": 5,
+        "remaining_issues": 5,
         "issue": 20,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:57:59Z",
-        "scope_issues": 4,
-        "remaining_issues": 4,
+        "scope_issues": 6,
+        "remaining_issues": 6,
         "issue": 21,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:58:01Z",
-        "scope_issues": 5,
-        "remaining_issues": 5,
+        "scope_issues": 7,
+        "remaining_issues": 7,
         "issue": 22,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:58:03Z",
-        "scope_issues": 6,
-        "remaining_issues": 6,
+        "scope_issues": 8,
+        "remaining_issues": 8,
         "issue": 23,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:58:04Z",
-        "scope_issues": 7,
-        "remaining_issues": 7,
+        "scope_issues": 9,
+        "remaining_issues": 9,
         "issue": 24,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:58:06Z",
-        "scope_issues": 8,
-        "remaining_issues": 8,
+        "scope_issues": 10,
+        "remaining_issues": 10,
         "issue": 25,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:58:08Z",
-        "scope_issues": 9,
-        "remaining_issues": 9,
+        "scope_issues": 11,
+        "remaining_issues": 11,
         "issue": 26,
         "event": "created"
       },
       {
+        "timestamp": "2026-11-02T09:58:29Z",
+        "scope_issues": 12,
+        "remaining_issues": 12,
+        "issue": 37,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:38Z",
+        "scope_issues": 13,
+        "remaining_issues": 13,
+        "issue": 41,
+        "event": "created"
+      },
+      {
+        "timestamp": "2026-11-02T09:58:40Z",
+        "scope_issues": 14,
+        "remaining_issues": 14,
+        "issue": 42,
+        "event": "created"
+      },
+      {
         "timestamp": "2026-11-02T11:48:55Z",
-        "scope_issues": 9,
-        "remaining_issues": 8,
+        "scope_issues": 14,
+        "remaining_issues": 13,
         "issue": 18,
         "event": "closed"
       },
       {
         "timestamp": "2026-11-02T11:48:57Z",
-        "scope_issues": 9,
-        "remaining_issues": 7,
+        "scope_issues": 14,
+        "remaining_issues": 12,
         "issue": 19,
         "event": "closed"
       },
       {
         "timestamp": "2026-11-02T11:48:59Z",
-        "scope_issues": 9,
-        "remaining_issues": 6,
+        "scope_issues": 14,
+        "remaining_issues": 11,
         "issue": 20,
         "event": "closed"
       },
       {
         "timestamp": "2026-11-02T11:49:01Z",
-        "scope_issues": 9,
-        "remaining_issues": 5,
+        "scope_issues": 14,
+        "remaining_issues": 10,
         "issue": 21,
         "event": "closed"
       },
       {
         "timestamp": "2026-11-02T11:49:03Z",
-        "scope_issues": 9,
-        "remaining_issues": 4,
+        "scope_issues": 14,
+        "remaining_issues": 9,
         "issue": 22,
         "event": "closed"
       },
       {
         "timestamp": "2026-11-02T11:49:05Z",
-        "scope_issues": 9,
-        "remaining_issues": 3,
+        "scope_issues": 14,
+        "remaining_issues": 8,
         "issue": 23,
         "event": "closed"
       },
       {
         "timestamp": "2026-11-02T11:49:08Z",
-        "scope_issues": 9,
-        "remaining_issues": 2,
+        "scope_issues": 14,
+        "remaining_issues": 7,
         "issue": 24,
         "event": "closed"
       },
       {
         "timestamp": "2026-11-02T11:49:10Z",
-        "scope_issues": 9,
-        "remaining_issues": 1,
+        "scope_issues": 14,
+        "remaining_issues": 6,
         "issue": 25,
         "event": "closed"
       },
       {
-        "timestamp": "2026-11-02T11:55:50.440690+00:00",
-        "scope_issues": 9,
-        "remaining_issues": 1,
+        "timestamp": "2026-11-02T13:28:30.720462+00:00",
+        "scope_issues": 14,
+        "remaining_issues": 6,
         "issue": "",
         "event": "observed_snapshot"
       }
@@ -5274,7 +5671,7 @@
         "event": "closed"
       },
       {
-        "timestamp": "2026-11-02T11:55:50.440690+00:00",
+        "timestamp": "2026-11-02T13:28:30.720462+00:00",
         "scope_issues": 10,
         "remaining_issues": 2,
         "issue": "",
@@ -5283,72 +5680,51 @@
     ],
     "S4": [
       {
-        "timestamp": "2026-11-02T09:58:29Z",
+        "timestamp": "2026-11-02T09:58:31Z",
         "scope_issues": 1,
         "remaining_issues": 1,
-        "issue": 37,
-        "event": "created"
-      },
-      {
-        "timestamp": "2026-11-02T09:58:31Z",
-        "scope_issues": 2,
-        "remaining_issues": 2,
         "issue": 38,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:58:33Z",
-        "scope_issues": 3,
-        "remaining_issues": 3,
+        "scope_issues": 2,
+        "remaining_issues": 2,
         "issue": 39,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:58:35Z",
-        "scope_issues": 4,
-        "remaining_issues": 4,
+        "scope_issues": 3,
+        "remaining_issues": 3,
         "issue": 40,
         "event": "created"
       },
       {
-        "timestamp": "2026-11-02T09:58:38Z",
-        "scope_issues": 5,
-        "remaining_issues": 5,
-        "issue": 41,
-        "event": "created"
-      },
-      {
-        "timestamp": "2026-11-02T09:58:40Z",
-        "scope_issues": 6,
-        "remaining_issues": 6,
-        "issue": 42,
-        "event": "created"
-      },
-      {
         "timestamp": "2026-11-02T09:58:42Z",
-        "scope_issues": 7,
-        "remaining_issues": 7,
+        "scope_issues": 4,
+        "remaining_issues": 4,
         "issue": 43,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:58:44Z",
-        "scope_issues": 8,
-        "remaining_issues": 8,
+        "scope_issues": 5,
+        "remaining_issues": 5,
         "issue": 44,
         "event": "created"
       },
       {
         "timestamp": "2026-11-02T09:58:46Z",
-        "scope_issues": 9,
-        "remaining_issues": 9,
+        "scope_issues": 6,
+        "remaining_issues": 6,
         "issue": 45,
         "event": "created"
       },
       {
-        "timestamp": "2026-11-02T11:55:50.440690+00:00",
-        "scope_issues": 9,
-        "remaining_issues": 9,
+        "timestamp": "2026-11-02T13:28:30.720462+00:00",
+        "scope_issues": 6,
+        "remaining_issues": 6,
         "issue": "",
         "event": "observed_snapshot"
       }
