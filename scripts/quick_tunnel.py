@@ -60,22 +60,29 @@ def main():
         run(COMPOSE + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
         print('Stopped the owned public tunnel; restored local-only browser origin. Data volumes retained.')
         return
-    if not container:
-        # Existing local staging must be healthy; this operation never builds images.
-        run(COMPOSE + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
-        cert = run(COMPOSE + ['exec', '-T', 'gateway', 'cat', '/data/caddy/pki/authorities/local/root.crt'], capture_output=True).stdout
-        (OUT / 'local-root.crt').write_text(cert)
-        run(['docker', 'run', '-d', '--name', NAME, '--label', LABEL + '=approved-quick-tunnel',
-             '--network', 'ticketflowv2-staging_default', '--restart', 'unless-stopped',
-             '--read-only', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges:true',
-             '--log-driver', 'json-file', '--log-opt', 'max-size=5m', '--log-opt', 'max-file=2',
-             '--mount', f'type=bind,src={OUT / "local-root.crt"},dst=/certs/root.crt,readonly',
-             IMAGE, 'tunnel', '--no-autoupdate', '--url', 'https://gateway:3443',
-             '--http-host-header', 'localhost:3443', '--origin-server-name', 'localhost',
-             '--origin-ca-pool', '/certs/root.crt', '--protocol', 'http2'], capture_output=True)
-    elif not container['State']['Running']:
-        raise RuntimeError('Owned tunnel is stopped; inspect its logs and use stop before retrying start')
     try:
+        if not container:
+            # Existing local staging must be healthy; this operation never builds images.
+            run(COMPOSE + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
+            for attempt in range(30):
+                probe = subprocess.run(COMPOSE + ['exec', '-T', 'gateway', 'test', '-f', '/data/caddy/pki/authorities/local/root.crt'], capture_output=True)
+                if probe.returncode == 0:
+                    break
+                if attempt == 29:
+                    raise RuntimeError('Local origin CA is not ready')
+                time.sleep(1)
+            cert = run(COMPOSE + ['exec', '-T', 'gateway', 'cat', '/data/caddy/pki/authorities/local/root.crt'], capture_output=True).stdout
+            (OUT / 'local-root.crt').write_text(cert)
+            run(['docker', 'run', '-d', '--name', NAME, '--label', LABEL + '=approved-quick-tunnel',
+                 '--network', 'ticketflowv2-staging_default', '--restart', 'unless-stopped',
+                 '--read-only', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges:true',
+                 '--log-driver', 'json-file', '--log-opt', 'max-size=5m', '--log-opt', 'max-file=2',
+                 '--mount', f'type=bind,src={OUT / "local-root.crt"},dst=/certs/root.crt,readonly',
+                 IMAGE, 'tunnel', '--no-autoupdate', '--url', 'https://gateway:3443',
+                 '--http-host-header', 'localhost:3443', '--origin-server-name', 'localhost',
+                 '--origin-ca-pool', '/certs/root.crt', '--protocol', 'http2'], capture_output=True)
+        elif not container['State']['Running']:
+            raise RuntimeError('Owned tunnel is stopped; inspect its logs and use stop before retrying start')
         for attempt in range(90):
             logs = run(['docker', 'logs', NAME], capture_output=True)
             matches = re.findall(r'https://[a-z0-9-]+\.trycloudflare\.com', logs.stdout + logs.stderr)
