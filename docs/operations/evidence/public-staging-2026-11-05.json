@@ -1,0 +1,45 @@
+{
+  "observed_at": "2026-11-05T14:20:32.221867+00:00",
+  "url": "https://achievement-rpg-camcorder-delicious.trycloudflare.com",
+  "status": "VERIFIED_PUBLIC_TEMPORARY",
+  "payment_provider": "disabled",
+  "ephemeral": true,
+  "checks": [
+    {
+      "name": "Public HTTPS certificate and hostname verified with system CA trust",
+      "passed": true
+    },
+    {
+      "name": "Public browser assets are served",
+      "passed": true
+    },
+    {
+      "name": "Public API reports real PostgreSQL and Redis readiness",
+      "passed": true
+    },
+    {
+      "name": "Public authentication issues Secure HttpOnly SameSite cookies",
+      "passed": true
+    },
+    {
+      "name": "Public bearer authentication resolves the actual registered user",
+      "passed": true
+    },
+    {
+      "name": "Cross-origin write requests are rejected",
+      "passed": true
+    },
+    {
+      "name": "Authenticated realtime connects through public WSS proxy",
+      "passed": true
+    },
+    {
+      "name": "Public error responses retain request correlation without stack traces",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Temporary demonstration URL; availability requires the local machine and tunnel.",
+    "Automated verification is not stakeholder UAT or a human Sprint meeting."
+  ]
+}

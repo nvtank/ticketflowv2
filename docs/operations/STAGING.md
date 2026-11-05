@@ -50,7 +50,7 @@ Do not add `-v`; it would delete staging data.
 
 ## Public staging gate
 
-Public deployment is BLOCKED until a host/domain and access are approved. No DNS/production change, billable resource or live payment is authorized by this task. Before enabling a public site: approve hosting/cost and domain; replace the local gateway site/certificate and API allowed/return origins together; keep API/DB/Redis private; provision protected runtime secrets; verify TLS from an external client; run full workflow/UAT; attach actual URL, logs and release identity. Socket.IO uses the browser's same origin through `/socket.io/`; the web image's internal HTTP rewrite targets Compose service `api:4100`.
+The user approved a free temporary Quick Tunnel on 05 November 2026; see [Quick Tunnel operations](QUICK_TUNNEL.md) for its observed URL, verification and stop command. Durable hosting/domain remains unprovisioned. No DNS/production change, billable resource or live payment is authorized by this task. Before a durable public deployment: approve hosting/cost and domain; configure gateway certificates and API allowed/return origins together; keep API/DB/Redis private; provision protected runtime secrets; verify TLS from an external client; run full workflow/UAT; attach actual URL, logs and release identity. Socket.IO uses the browser's same origin through `/socket.io/`; the web image's internal HTTP rewrite targets Compose service `api:4100`.
 
 ## Sprint 2 review and retrospective
 

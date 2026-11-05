@@ -77,9 +77,9 @@ services:
       TICKET_SIGNING_KEY: ${STAGING_TICKET_KEY:?Generate a staging environment first}
       JWT_ISSUER: tixflow-staging
       JWT_AUDIENCE: tixflow-web
-      CORS_ORIGINS: https://localhost:3443
+      CORS_ORIGINS: https://localhost:3443,${STAGING_ORIGIN:-https://localhost:3443}
       PAYMENT_PROVIDER: disabled
-      PAYMENT_RETURN_ORIGIN: https://localhost:3443
+      PAYMENT_RETURN_ORIGIN: ${STAGING_ORIGIN:-https://localhost:3443}
     depends_on:
       migrate: { condition: service_completed_successfully }
       redis: { condition: service_healthy }
