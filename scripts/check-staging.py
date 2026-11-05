@@ -47,7 +47,20 @@ def main():
         if args.build:
             compose('build')
         compose('up', '-d', '--wait', '--wait-timeout', '180', 'api', 'web', 'gateway')
-        compose('cp', 'gateway:/data/caddy/pki/authorities/local/root.crt', str(OUT / 'local-root.crt'))
+        # Compose considers the gateway started before its asynchronous CA exists.
+        for attempt in range(30):
+            probe = subprocess.run(COMPOSE + ['exec', '-T', 'gateway', 'test', '-f',
+                                              '/data/caddy/pki/authorities/local/root.crt'],
+                                   cwd=ROOT, capture_output=True)
+            if probe.returncode == 0:
+                break
+            if attempt == 29:
+                raise RuntimeError('Local TLS authority did not become ready')
+            time.sleep(1)
+        # docker cp's archive endpoint does not see this ephemeral tmpfs mount.
+        certificate = compose('exec', '-T', 'gateway', 'cat',
+                              '/data/caddy/pki/authorities/local/root.crt', capture_output=True).stdout
+        (OUT / 'local-root.crt').write_text(certificate)
         context = ssl.create_default_context(cafile=str(OUT / 'local-root.crt'))
 
         def request(path, expected=200, data=None, headers=None):
@@ -118,6 +131,8 @@ def main():
         check('API logs exclude request password and bearer token', password not in logs and user['accessToken'] not in logs)
         (OUT / 'api.log').write_text(logs)
         report['source_revision'] = values['VCS_REF']
+        report['tested_worktree_revision'] = command(['git', 'rev-parse', 'HEAD'], capture_output=True).stdout.strip()
+        report['image_label_identifies_build_base'] = values['VCS_REF'] != report['tested_worktree_revision']
         report['working_tree_dirty'] = bool(command(['git', 'status', '--porcelain'], capture_output=True).stdout.strip())
         report['status'] = 'VERIFIED_LOCAL'
         (OUT / 'release.override.yml').write_text('services:\n' + ''.join(
