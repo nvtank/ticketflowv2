@@ -17,6 +17,7 @@ jobs:
       API_INTERNAL_URL: http://127.0.0.1:4100
       PLAYWRIGHT_HTML_OUTPUT_DIR: .local/browser-reports
       PLAYWRIGHT_RESULTS_ROOT: .local/browser-results
+      PLAYWRIGHT_JSON_OUTPUT_DIR: .local/browser-json
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -36,10 +37,10 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm format:check
       - run: pnpm build
-      - run: pnpm exec vitest run
+      - run: pnpm exec vitest run --reporter=default --reporter=json --outputFile=.local/test-reports/unit.json
       - run: pnpm test:infra:up
       - run: pnpm test:db:prepare
-      - run: pnpm --filter @tixflow/api test:integration
+      - run: pnpm --filter @tixflow/api test:integration --reporter=default --reporter=json --outputFile=${{ github.workspace }}/.local/test-reports/integration.json
       - run: pnpm audit --audit-level=high
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm exec playwright test
@@ -58,6 +59,8 @@ jobs:
             test-results/
             .local/browser-reports/
             .local/browser-results/
+            .local/browser-json/
+            .local/test-reports/
             .local/staging/results.json
             .local/staging/api.log
           if-no-files-found: ignore

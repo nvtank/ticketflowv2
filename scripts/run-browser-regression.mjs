@@ -28,11 +28,16 @@ for (const suite of requested.length ? requested : supported) {
     ];
     if (process.env.PLAYWRIGHT_RESULTS_ROOT)
       args.push('--output', resolve(process.env.PLAYWRIGHT_RESULTS_ROOT, suite, project));
+    const jsonRoot = process.env.PLAYWRIGHT_JSON_OUTPUT_DIR;
+    if (jsonRoot) args.push('--reporter=list,html,json');
     const result = spawnSync('pnpm', args, {
       stdio: 'inherit',
       env: {
         ...process.env,
         ...(report ? { PLAYWRIGHT_HTML_OUTPUT_DIR: resolve(report, suite, project) } : {}),
+        ...(jsonRoot
+          ? { PLAYWRIGHT_JSON_OUTPUT_FILE: resolve(jsonRoot, suite, `${project}.json`) }
+          : {}),
       },
     });
     if (result.error) throw result.error;
