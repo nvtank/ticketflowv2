@@ -137,7 +137,8 @@ Views: Board, Table, Sprint 1, Sprint 2, Baseline Roadmap, By Owner, Blocked, Do
             desired='Done' if issue['state']=='closed' and issue.get('state_reason')!='not_planned' else 'In Review' if open_prs else 'In Progress' if related or issue['number']==5 else 'Backlog'
             # Preserve a human-chosen active state when no API lifecycle event contradicts it.
             if desired=='Backlog' and current in ('In Progress','In Review'):desired=current
-            date_start,date_end,_=BASELINE[issue['sprint']]
+            baseline_sprint=issue.get('baseline_sprint',issue['sprint'])
+            date_start,date_end,_=BASELINE[baseline_sprint]
             values={
                 'Status':{'singleSelectOptionId':status_options[desired]},
                 'Sprint':{'singleSelectOptionId':selects['Sprint'][issue['sprint']]},
@@ -145,8 +146,8 @@ Views: Board, Table, Sprint 1, Sprint 2, Baseline Roadmap, By Owner, Blocked, Do
                 'Story Points':{'number':issue['points']}, 'Estimate status':{'text':'PROPOSED'},
                 'WBS':{'text':issue['wbs']},'Module':{'text':issue['module']},
                 'DRI':{'text':issue['proposed_dri']},
-                'Start date':{'date':date_start},'Target date':{'date':date_end},
-                'Baseline iteration':{'iterationId':iterations[issue['sprint']]},
+                'Start date':{'date':date_start},'Target date':{'date':issue.get('target_date') or date_end},
+                'Baseline iteration':{'iterationId':iterations[baseline_sprint]},
                 'Evidence URL':{'text':(open_prs[-1]['html_url'] if open_prs else related[-1]['html_url'] if related else issue['url'])},
             }
             if related:values['First evidence']={'date':related[0]['created_at'][:10]}
