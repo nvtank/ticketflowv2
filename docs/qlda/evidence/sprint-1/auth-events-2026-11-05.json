@@ -1,0 +1,400 @@
+{
+  "issue": 17,
+  "status": "VERIFIED_AUTOMATED",
+  "observed_at": "2026-11-05T14:19:22.218944+00:00",
+  "collection_revision": "5ad9ceced9ab54d84e9807b656b4c6b0f3afcc5b",
+  "counts": {
+    "unit": 28,
+    "integration": 37,
+    "browser": 8
+  },
+  "unit": [
+    {
+      "file": "auth-policy.test.ts",
+      "name": "Password hashing and input policy uses a salted bcrypt hash and rejects a wrong password",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "Password hashing and input policy rejects UTF-8 truncation aliases and short passwords",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "Password hashing and input policy normalizes emails and refuses client-supplied roles in the DTO",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "Authentication and role guard allows explicitly public routes and requires bearer auth everywhere else",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "Authentication and role guard rejects a CUSTOMER on ADMIN routes",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "JWT verification before any database lookup rejects expired tokens",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "JWT verification before any database lookup rejects wrong issuer tokens",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "JWT verification before any database lookup rejects wrong audience tokens",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "JWT verification before any database lookup rejects wrong algorithm tokens",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "JWT verification before any database lookup rejects wrong key tokens",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "JWT verification before any database lookup rejects a signed token with the wrong token type",
+      "status": "passed"
+    },
+    {
+      "file": "auth-policy.test.ts",
+      "name": "Cookie request origin policy rejects foreign origins and cross-site browser requests",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy accepts a future event with an ordered sales window",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy rejects an invalid event/sales window: { startsAt: '2025-01-01T00:00:00Z' }",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy rejects an invalid event/sales window: { endsAt: '2026-02-01T00:00:00Z' }",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy rejects an invalid event/sales window: { salesEndAt: '2026-01-01T00:00:00Z' }",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy rejects an invalid event/sales window: { salesEndAt: '2026-02-02T00:00:00Z' }",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy rejects an invalid event/sales window: { startsAt: 'not-a-date' }",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy freezes edits in PENDING_APPROVAL",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy freezes edits in PUBLISHED",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy freezes edits in CANCELLED",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy freezes edits in COMPLETED",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy permits edit in DRAFT",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy permits edit in REJECTED",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy labels rows beyond Z without duplicate seat codes",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy rejects duplicate trimmed section names",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy rejects different prices for a shared ticket type",
+      "status": "passed"
+    },
+    {
+      "file": "events-policy.test.ts",
+      "name": "Event lifecycle and grid policy bounds generation to 2000 seats",
+      "status": "passed"
+    }
+  ],
+  "integration": [
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis registers normalized CUSTOMER accounts and stores only hashes",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis rejects public role elevation and cross-origin cookie requests",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis resolves concurrent duplicate registrations with one database user",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis logs in through HTTP and rejects incorrect passwords",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis enforces all four role policies using current database roles",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis prevents cross-organization access while allowing explicit admin access",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis rotates once and commits family revocation on refresh replay",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis serializes concurrent refreshes and fails closed on replay",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis rejects expired refresh credentials",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis logs out idempotently and immediately invalidates the access JWT",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis revokes a bearer session when its refresh cookie is absent",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis updates only the authenticated user profile",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis revokes all sessions after a password change",
+      "status": "passed"
+    },
+    {
+      "file": "auth.integration.test.ts",
+      "name": "Authentication with real PostgreSQL and Redis checks account lock status on every authenticated request",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis requires authentication, organizer role and organization membership",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis creates a private draft and hides all public snapshots",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis validates DTOs, date windows and immutable ownership fields",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis rejects cross organization detail, writes, history and staff access",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis updates its draft and keeps venue edits isolated",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis rejects submission without inventory",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis generates 200 unique seats with VIP and Standard prices",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis rolls back invalid grid replacement without losing inventory",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis disables a seat and increments the inventory revision",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis assigns only active STAFF and keeps assignment unique",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis submits a complete event and freezes content and grid edits",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis restricts review to admins and requires a rejection reason",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis records rejection and supports correction/resubmission",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis serializes conflicting review decisions and preserves one winner",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis lists only published events with price filters, sorting and pagination",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis serves published details/inventory without user or hold identities",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis reports expired held seats as available without releasing sold seats",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis protects sold seats and historical orders even in a draft fixture",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis aggregates only the organizer own successful orders",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis deletes only unused drafts while retaining an audit tombstone",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis serializes grid generation with submission",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis persists a visual layout, enforces ownership/revision and sells seats at zone prices",
+      "status": "passed"
+    },
+    {
+      "file": "events.integration.test.ts",
+      "name": "Event management with real PostgreSQL and Redis documents DTO fields and event paths in Swagger",
+      "status": "passed"
+    }
+  ],
+  "browser": [
+    {
+      "suite": "auth",
+      "project": "desktop-chromium",
+      "passed": 3
+    },
+    {
+      "suite": "auth",
+      "project": "mobile-chromium",
+      "passed": 3
+    },
+    {
+      "suite": "events",
+      "project": "desktop-chromium",
+      "passed": 1
+    },
+    {
+      "suite": "events",
+      "project": "mobile-chromium",
+      "passed": 1
+    }
+  ],
+  "sources": [
+    {
+      "path": ".local/test-reports/unit.json",
+      "sha256": "551da5f148dc67fea4a9086c6290ed2f507f38ab37a5544c9f8eaeb92a84645e",
+      "started_at": 1793887303031
+    },
+    {
+      "path": ".local/test-reports/integration.json",
+      "sha256": "ed78834412708d8e4867141604437fd34bf8f400b6e45a85aa1a458da399be1e",
+      "started_at": 1793887668415
+    },
+    {
+      "path": ".local/browser-json/auth/desktop-chromium.json",
+      "sha256": "c59f2b988726f15a78e6b4a4d71bd74c593ea17310135043930415b780638317",
+      "started_at": "2026-11-05T14:12:17.646Z"
+    },
+    {
+      "path": ".local/browser-json/auth/mobile-chromium.json",
+      "sha256": "512a57fb1b11b59e8775b6a388d0f1a6e30b814506acfabd6b5baeba84c7c7b8",
+      "started_at": "2026-11-05T14:12:29.120Z"
+    },
+    {
+      "path": ".local/browser-json/events/desktop-chromium.json",
+      "sha256": "9733d2d1003fc85dae8d5e8101e470531bd65d70051fa6ae4b5d38cef8fdef48",
+      "started_at": "2026-11-05T14:12:40.641Z"
+    },
+    {
+      "path": ".local/browser-json/events/mobile-chromium.json",
+      "sha256": "c0eab2be9dc74b0c952c07a73c3dc71a3ed0b9dc700fed12300b32dadd03c3b6",
+      "started_at": "2026-11-05T14:12:58.933Z"
+    }
+  ],
+  "limitations": [
+    "Collection revision is metadata, not proof every report ran at that commit.",
+    "Original report timestamps and hashes identify the actual executions.",
+    "Automated tests are not a retrospective, UAT sign-off or a historical sprint meeting."
+  ],
+  "sprint_1_retrospective": "PENDING_HUMAN"
+}
