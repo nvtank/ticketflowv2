@@ -31,6 +31,7 @@ jobs:
       - run: pnpm env:setup
       - run: python3 scripts/github/test_project_data.py
       - run: python3 scripts/test_sprint_evidence.py
+      - run: python3 scripts/test_quick_tunnel.py
       - run: python3 -m py_compile scripts/github/*.py
       - run: docker compose --env-file .env.example -f infrastructure/docker-compose.yml config --quiet
       - run: pnpm --filter @tixflow/shared build
