@@ -26,6 +26,8 @@ The imported schema/migrations replace the prototype's history. Run them only
 against the new isolated database, not the earlier prototype database. A clean
 test database successfully applied all ten source migrations during import validation.
 
-The source contains local Compose infrastructure. Production Dockerfiles, AWS
-IaC, public HTTPS, backup/restore and rollout evidence have not been imported
-because they were not present in the source snapshot. No AWS deployment is claimed.
+The original source contained local Compose infrastructure only. Production
+Dockerfiles and the isolated local-TLS staging stack are added in TF2-037/026;
+see [staging operations](../docs/operations/STAGING.md) for commands, actual checks
+and pending public deployment gates. AWS IaC, public HTTPS and backup/restore
+are separate deliverables. No AWS deployment is claimed.
