@@ -1,0 +1,120 @@
+name: ticketflowv2-staging
+
+x-app: &app
+  init: true
+  restart: unless-stopped
+  read_only: true
+  tmpfs:
+    - /tmp:rw,noexec,nosuid,size=64m
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  logging:
+    driver: json-file
+    options: { max-size: 10m, max-file: '3' }
+
+services:
+  postgres:
+    image: postgres:16-alpine@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab
+    environment:
+      POSTGRES_USER: tixflow
+      POSTGRES_DB: tixflow_staging
+      POSTGRES_PASSWORD: ${STAGING_DB_PASSWORD:?Generate a staging environment first}
+    volumes: [staging_db:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U tixflow -d tixflow_staging']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options: { max-size: 10m, max-file: '3' }
+
+  redis:
+    image: redis:7-alpine@sha256:6ab0b6e7381779332f97b8ca76193e45b0756f38d4c0dcda72dbb3c32061ab99
+    environment:
+      REDIS_PASSWORD: ${STAGING_REDIS_PASSWORD:?Generate a staging environment first}
+    command: [/bin/sh, -ec, 'exec redis-server --requirepass "$$REDIS_PASSWORD" --appendonly yes']
+    volumes: [staging_redis:/data]
+    healthcheck:
+      test: [CMD-SHELL, 'REDISCLI_AUTH="$$REDIS_PASSWORD" redis-cli ping | grep -q PONG']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options: { max-size: 10m, max-file: '3' }
+
+  migrate:
+    image: tixflow-v2-migrate:${RELEASE_TAG:?Set immutable release tag}
+    build:
+      context: ..
+      dockerfile: infrastructure/Dockerfile
+      target: migrate
+      args: { VCS_REF: '${VCS_REF:?Set source revision}' }
+    environment:
+      DATABASE_URL: postgresql://tixflow:${STAGING_DB_PASSWORD}@postgres:5432/tixflow_staging
+    depends_on:
+      postgres: { condition: service_healthy }
+    restart: 'no'
+
+  api:
+    <<: *app
+    image: tixflow-v2-api:${RELEASE_TAG:?Set immutable release tag}
+    build:
+      context: ..
+      dockerfile: infrastructure/Dockerfile
+      target: api
+      args: { VCS_REF: '${VCS_REF:?Set source revision}' }
+    environment:
+      NODE_ENV: production
+      API_HOST: 0.0.0.0
+      API_PORT: 4100
+      DATABASE_URL: postgresql://tixflow:${STAGING_DB_PASSWORD}@postgres:5432/tixflow_staging
+      REDIS_URL: redis://:${STAGING_REDIS_PASSWORD}@redis:6379
+      JWT_SECRET: ${STAGING_JWT_SECRET:?Generate a staging environment first}
+      TICKET_SIGNING_KEY: ${STAGING_TICKET_KEY:?Generate a staging environment first}
+      JWT_ISSUER: tixflow-staging
+      JWT_AUDIENCE: tixflow-web
+      CORS_ORIGINS: https://localhost:3443
+      PAYMENT_PROVIDER: disabled
+      PAYMENT_RETURN_ORIGIN: https://localhost:3443
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      redis: { condition: service_healthy }
+
+  web:
+    <<: *app
+    image: tixflow-v2-web:${RELEASE_TAG:?Set immutable release tag}
+    build:
+      context: ..
+      dockerfile: infrastructure/Dockerfile
+      target: web
+      args: { VCS_REF: '${VCS_REF:?Set source revision}' }
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+      - /app/apps/web/.next/cache:rw,nosuid,uid=1000,gid=1000,size=128m
+    depends_on:
+      api: { condition: service_healthy }
+
+  gateway:
+    <<: *app
+    image: caddy:2-alpine@sha256:f6228111e5fafa1a5238258d0858e103f10599b8d1659a146e7726681a002bb9
+    user: '1000:1000'
+    environment:
+      XDG_DATA_HOME: /data
+      XDG_CONFIG_HOME: /config
+    ports: ['127.0.0.1:3443:3443']
+    volumes:
+      - ./staging/Caddyfile:/etc/caddy/Caddyfile:ro
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+      - /data:rw,nosuid,uid=1000,gid=1000,size=16m
+      - /config:rw,nosuid,uid=1000,gid=1000,size=16m
+    depends_on:
+      web: { condition: service_healthy }
+
+volumes:
+  staging_db:
+  staging_redis:

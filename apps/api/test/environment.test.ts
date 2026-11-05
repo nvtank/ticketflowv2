@@ -50,6 +50,12 @@ describe('Environment validation', () => {
   it('rejects wildcard CORS configuration', () => {
     expect(() => parseEnvironment({ ...local, CORS_ORIGINS: '*' })).toThrow('CORS_ORIGINS');
   });
+
+  it('keeps development on loopback and permits explicit container binding', () => {
+    expect(parseEnvironment(local).API_HOST).toBe('127.0.0.1');
+    expect(parseEnvironment({ ...local, API_HOST: '0.0.0.0' }).API_HOST).toBe('0.0.0.0');
+    expect(() => parseEnvironment({ ...local, API_HOST: 'arbitrary-host' })).toThrow('API_HOST');
+  });
 });
 
 describe('Payment environment', () => {
