@@ -2,6 +2,9 @@
   "name": "@tixflow/api",
   "version": "0.1.0",
   "private": true,
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "dotenv -e ../../.env -- nest start --watch",
     "build": "nest build",
