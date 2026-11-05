@@ -25,6 +25,8 @@ The checker verifies dependency readiness, production Swagger removal, request-I
 
 `.local/staging/results.json` records actual timestamps, checks, Git revision/dirty state and immutable local image IDs. `.local/staging/api.log` contains request IDs/status/duration, not request bodies, query strings, tokens or secrets. The JSON-file driver rotates logs at 10 MB × 3 per service. Full cloud log aggregation is TF2-040 and is not claimed here.
 
+When `image_label_identifies_build_base` is true, the OCI revision label identifies the original build base, not an exact clean source snapshot. Consult `tested_worktree_revision` and `working_tree_dirty` and the actual image IDs. Fresh CI builds generate their environment from the checked-out commit; local development evidence must not be presented as a registry-published release.
+
 `release.override.yml` pins the tested web/API image IDs; it is generated only after a successful smoke test. For an exact local replay, append this override to the same Compose command:
 
 ```sh
