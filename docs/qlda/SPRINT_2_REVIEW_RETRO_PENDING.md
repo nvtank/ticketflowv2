@@ -2,6 +2,10 @@
 
 Status: PENDING_HUMAN. Facilitator: nvtank. Requested participants: TuanAn0311 and nguyen-van-hoan; attendance is not confirmed. Target from the current assignment: 08/11/2026, 17:00 Asia/Ho_Chi_Minh. Actual date/time: PENDING. This document does not claim a meeting occurred.
 
+## Technical evidence available on 05 November
+
+The PM authorized a free temporary Quick Tunnel. The deployed URL was verified at https://achievement-rpg-camcorder-delicious.trycloudflare.com with 8 passing public HTTPS/auth/CORS/WSS checks. The local production stack also had 24 passing checks, including actual Redis outage/recovery and correlated error logs. Evidence: `docs/operations/evidence/public-staging-2026-11-05.json` and the earlier local staging report. These observations resolve the temporary-host technical blocker, not the pending meeting or durable production hosting.
+
 ## Review agenda
 
 1. Open the shared Sprint 2 board (Project 2, view 5); compare accepted outcomes against each Issue's criteria and actual PR evidence.
