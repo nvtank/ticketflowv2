@@ -83,6 +83,7 @@ def history_series(issues, observed_at):
 
 def collect():
     backlog = {row['id']: row for row in json.loads((ROOT / 'docs/qlda/backlog.json').read_text())}
+    assignments = json.loads((OUT / 'current-assignments.json').read_text())['issues']
     remote = pages(f'repos/{REPO}/issues?state=all&per_page=100')
     issues = []
     for issue in remote:
@@ -90,13 +91,15 @@ def collect():
         if 'pull_request' in issue or not match or match[1] not in backlog:
             continue
         item = backlog[match[1]]
+        assignment = assignments.get(str(issue['number']), {})
         issues.append({
             'id': item['id'], 'number': issue['number'], 'node_id': issue['node_id'],
             'title': issue['title'], 'url': issue['html_url'], 'state': issue['state'],
             'state_reason': issue.get('state_reason'), 'created_at': issue['created_at'],
             'updated_at': issue['updated_at'], 'closed_at': issue.get('closed_at'),
             'actual_assignees': [a['login'] for a in issue['assignees']],
-            'proposed_dri': item['owner'], 'sprint': item['sprint'], 'wbs': item['wbs'],
+            'proposed_dri': item['owner'], 'sprint': assignment.get('sprint', item['sprint']),
+            'baseline_sprint': item['sprint'], 'target_date': assignment.get('target_date'), 'wbs': item['wbs'],
             'module': item['module'], 'priority': item['priority'], 'points': item['points'],
             'estimate_status': item['estimate_status'],
             'milestone': issue['milestone']['title'] if issue.get('milestone') else None,
@@ -129,17 +132,17 @@ def collect():
     (OUT / 'live-data.json').write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n')
     columns = ['id', 'number', 'sprint', 'state', 'state_reason', 'created_at', 'closed_at', 'proposed_dri', 'actual_assignees', 'url']
     with (OUT / 'issues.csv').open('w') as file:
-        writer = csv.DictWriter(file, fieldnames=columns)
+        writer = csv.DictWriter(file, fieldnames=columns, lineterminator="\n")
         writer.writeheader()
         for row in issues:
             writer.writerow({k: ','.join(row[k]) if isinstance(row[k], list) else row[k] for k in columns})
     for sprint in ['S1', 'S2']:
         with (OUT / f'burndown-{sprint.lower()}.csv').open('w') as file:
-            writer = csv.DictWriter(file, fieldnames=['timestamp', 'scope_issues', 'remaining_issues', 'issue', 'event'])
+            writer = csv.DictWriter(file, fieldnames=['timestamp', 'scope_issues', 'remaining_issues', 'issue', 'event'], lineterminator="\n")
             writer.writeheader()
             writer.writerows(series[sprint])
     with (OUT / 'issue-history.csv').open('w') as file:
-        writer = csv.DictWriter(file, fieldnames=['issue', 'sprint', 'event', 'created_at', 'actor', 'source'])
+        writer = csv.DictWriter(file, fieldnames=['issue', 'sprint', 'event', 'created_at', 'actor', 'source'], lineterminator="\n")
         writer.writeheader()
         for issue in issues:
             writer.writerow({'issue':issue['number'], 'sprint':issue['sprint'], 'event':'created', 'created_at':issue['created_at'], 'source':issue['url']})
