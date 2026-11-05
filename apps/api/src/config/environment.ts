@@ -40,6 +40,7 @@ const environmentSchema = z
     TICKET_SIGNING_KEY: z.string().min(48).optional(),
     PAYMENT_RECONCILE_INTERVAL_MS: z.coerce.number().int().min(0).max(60000).default(15000),
     API_PORT: z.coerce.number().int().min(1).max(65535).default(4100),
+    API_HOST: z.enum(['127.0.0.1', '0.0.0.0', '::']).default('127.0.0.1'),
     JWT_SECRET: z
       .string()
       .min(48)

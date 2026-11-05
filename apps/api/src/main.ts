@@ -9,7 +9,7 @@ async function bootstrap(): Promise<void> {
   const environment = parseEnvironment(process.env);
   const app = await NestFactory.create(AppModule);
   configureApplication(app, environment);
-  await app.listen(environment.API_PORT, '127.0.0.1');
+  await app.listen(environment.API_PORT, environment.API_HOST);
   Logger.log(`TixFlow API: http://localhost:${environment.API_PORT}/api/v1`, 'Bootstrap');
 }
 
