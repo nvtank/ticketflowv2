@@ -1,4 +1,6 @@
 import { io } from 'socket.io-client';
+import process from 'node:process';
+import console from 'node:console';
 
 let input = '';
 for await (const chunk of process.stdin) input += chunk;
