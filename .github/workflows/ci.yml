@@ -30,6 +30,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm env:setup
       - run: python3 scripts/github/test_project_data.py
+      - run: python3 scripts/test_sprint_evidence.py
       - run: python3 -m py_compile scripts/github/*.py
       - run: docker compose --env-file .env.example -f infrastructure/docker-compose.yml config --quiet
       - run: pnpm --filter @tixflow/shared build
@@ -45,6 +46,7 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm exec playwright test
       - run: node scripts/run-browser-regression.mjs
+      - run: python3 scripts/sprint_evidence.py
       - run: pnpm exec playwright test --config playwright.responsive.config.ts
       - run: pnpm test:infra:down
         if: always()
@@ -61,6 +63,7 @@ jobs:
             .local/browser-results/
             .local/browser-json/
             .local/test-reports/
+            .local/sprint-evidence/
             .local/staging/results.json
             .local/staging/api.log
           if-no-files-found: ignore
