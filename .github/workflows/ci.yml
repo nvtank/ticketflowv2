@@ -47,6 +47,8 @@ jobs:
       - run: pnpm exec playwright test --config playwright.responsive.config.ts
       - run: pnpm test:infra:down
         if: always()
+      - run: python3 scripts/setup-staging.py
+      - run: python3 scripts/check-staging.py --build --down
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -56,6 +58,8 @@ jobs:
             test-results/
             .local/browser-reports/
             .local/browser-results/
+            .local/staging/results.json
+            .local/staging/api.log
           if-no-files-found: ignore
           include-hidden-files: true
           retention-days: 7
