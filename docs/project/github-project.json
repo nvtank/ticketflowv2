@@ -47,14 +47,14 @@
       "issue": 6,
       "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYG8I",
       "status": "Backlog",
-      "sprint": "Kickoff",
+      "sprint": "S2",
       "actual_done": null
     },
     {
       "issue": 7,
       "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYG9w",
       "status": "In Progress",
-      "sprint": "Kickoff",
+      "sprint": "S2",
       "actual_done": null
     },
     {
@@ -264,7 +264,7 @@
       "issue": 37,
       "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHlU",
       "status": "Backlog",
-      "sprint": "S4",
+      "sprint": "S2",
       "actual_done": null
     },
     {
@@ -292,14 +292,14 @@
       "issue": 41,
       "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHqQ",
       "status": "In Progress",
-      "sprint": "S4",
+      "sprint": "S2",
       "actual_done": null
     },
     {
       "issue": 42,
       "item_id": "PVTI_lAHOCKg5Q84Bp1FFzhFYHrw",
       "status": "Backlog",
-      "sprint": "S4",
+      "sprint": "S2",
       "actual_done": null
     },
     {
@@ -508,5 +508,7 @@
     "No pre-creation project state history is invented",
     "Actual Start remains empty where no explicit start evidence exists",
     "DRI is assigned work ownership, not proof of authenticated commit authorship"
-  ]
+  ],
+  "scope_changed_on": "2026-11-02",
+  "scope_change": "Six follow-up tasks moved to Sprint 2; extra current-sprint view removed. Prior verification timestamp is retained for other unchanged fields."
 }
