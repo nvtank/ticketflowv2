@@ -68,7 +68,7 @@ def main():
         run(['docker', 'run', '-d', '--name', NAME, '--label', LABEL + '=approved-quick-tunnel',
              '--network', 'ticketflowv2-staging_default', '--restart', 'unless-stopped',
              '--read-only', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges:true',
-             '--log-opt', 'max-size=5m', '--log-opt', 'max-file=2',
+             '--log-driver', 'json-file', '--log-opt', 'max-size=5m', '--log-opt', 'max-file=2',
              '--mount', f'type=bind,src={OUT / "local-root.crt"},dst=/certs/root.crt,readonly',
              IMAGE, 'tunnel', '--no-autoupdate', '--url', 'https://gateway:3443',
              '--http-host-header', 'localhost:3443', '--origin-server-name', 'localhost',
