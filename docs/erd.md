@@ -214,16 +214,15 @@ erDiagram
 
 ## Design rules encoded in the schema
 
-| Rule                                     | Mechanism                                                                         |
-| ---------------------------------------- | --------------------------------------------------------------------------------- |
-| Seat, section and event stay consistent  | composite FKs `(id, eventId)` on Seat, EventSection, SeatHold, Order, OrderItem   |
-| One order per hold, retries idempotent   | `Order.holdId` unique; `(userId, idempotencyKey)` unique on SeatHold and Order    |
-| One payment attempt per order/provider   | `Payment @@unique([orderId, provider])`, unique `providerOrderCode`/`idempotencyKey` |
-| Duplicate webhook events are detected    | `WebhookEvent @@unique([provider, providerEventId])` plus `payloadHash`           |
-| One ticket per order item                | `Ticket.orderItemId` unique                                                       |
-| Check-in is once-only                    | `CheckIn.ticketId` unique, plus conditional `VALID → USED`                        |
-| Tenant scoping                           | `OrganizationMember` unique `(organizationId, userId)`; service-level checks      |
-| Money is integer VND, time is UTC        | `Int` columns, `Timestamptz(3)`                                                   |
+| Rule                                    | Mechanism                                                                            |
+| --------------------------------------- | ------------------------------------------------------------------------------------ |
+| Seat, section and event stay consistent | composite FKs `(id, eventId)` on Seat, EventSection, SeatHold, Order, OrderItem      |
+| One order per hold, retries idempotent  | `Order.holdId` unique; `(userId, idempotencyKey)` unique on SeatHold and Order       |
+| One payment attempt per order/provider  | `Payment @@unique([orderId, provider])`, unique `providerOrderCode`/`idempotencyKey` |
+| Duplicate webhook events are detected   | `WebhookEvent @@unique([provider, providerEventId])` plus `payloadHash`              |
+| One ticket per order item               | `Ticket.orderItemId` unique                                                          |
+| Check-in is once-only                   | `CheckIn.ticketId` unique, plus conditional `VALID → USED`                           |
+| Tenant scoping                          | `OrganizationMember` unique `(organizationId, userId)`; service-level checks         |
+| Money is integer VND, time is UTC       | `Int` columns, `Timestamptz(3)`                                                      |
 
 Raw-SQL CHECK constraints and partial unique indexes live in the migration SQL (for example one active `VALID`/`USED` ticket per seat) and are described in `docs/database.md`.
-
