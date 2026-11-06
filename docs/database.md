@@ -160,4 +160,3 @@ to existing demo music events. It never modifies sold seats or seeds customer re
 ## ERD
 
 Mermaid ERD for all 25 current models: [erd.md](erd.md). The schema now has 25 models (earlier text above says 21).
-

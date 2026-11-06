@@ -13,17 +13,17 @@ Use **one NestJS process** (`apps/api`) split into feature modules, plus a Next.
 
 ## Module boundaries
 
-| Module                                      | Owns                                                           | Writes transactionally to                          |
-| ------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------- |
-| `auth`, `users`                             | credentials, sessions, refresh tokens, Google identity         | User, UserSession, RefreshToken, ExternalIdentity  |
-| `organizations`                             | tenancy and membership                                         | Organization, OrganizationMember                   |
-| `events`, `discovery`                       | event lifecycle, seat grid, review/approval, catalog, reviews  | Event, TicketType, EventSection, Seat, EventReview |
-| `booking`, `orders`                         | holds, hold expiry/reconciliation, orders                      | SeatHold, Seat(HELD), Order, OrderItem             |
-| `payments`                                  | provider adapters, payment sessions, settlement, reconciliation | Payment, WebhookEvent, Order(PAID), Seat(SOLD)     |
-| `tickets`                                   | signed QR credential issuance/read                             | Ticket                                             |
-| `check-in`                                  | staff verify/confirm                                           | CheckIn, Ticket(USED)                              |
-| `analytics`, `admin`, `monitoring`, `health` | read-side aggregates, admin actions, metrics, readiness        | AuditLog (admin actions)                           |
-| `realtime`, `waiting-room`, `notifications` | Socket.IO hints, Redis admission lease, persisted receipts     | WaitingRoomSession, Notification                   |
+| Module                                       | Owns                                                            | Writes transactionally to                          |
+| -------------------------------------------- | --------------------------------------------------------------- | -------------------------------------------------- |
+| `auth`, `users`                              | credentials, sessions, refresh tokens, Google identity          | User, UserSession, RefreshToken, ExternalIdentity  |
+| `organizations`                              | tenancy and membership                                          | Organization, OrganizationMember                   |
+| `events`, `discovery`                        | event lifecycle, seat grid, review/approval, catalog, reviews   | Event, TicketType, EventSection, Seat, EventReview |
+| `booking`, `orders`                          | holds, hold expiry/reconciliation, orders                       | SeatHold, Seat(HELD), Order, OrderItem             |
+| `payments`                                   | provider adapters, payment sessions, settlement, reconciliation | Payment, WebhookEvent, Order(PAID), Seat(SOLD)     |
+| `tickets`                                    | signed QR credential issuance/read                              | Ticket                                             |
+| `check-in`                                   | staff verify/confirm                                            | CheckIn, Ticket(USED)                              |
+| `analytics`, `admin`, `monitoring`, `health` | read-side aggregates, admin actions, metrics, readiness         | AuditLog (admin actions)                           |
+| `realtime`, `waiting-room`, `notifications`  | Socket.IO hints, Redis admission lease, persisted receipts      | WaitingRoomSession, Notification                   |
 
 ## Transaction ownership rules
 
