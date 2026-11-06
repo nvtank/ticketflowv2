@@ -125,3 +125,7 @@ before a booking transaction and the database deadline is rechecked inside it.
 Notifications exposes already persisted payment receipts by owner. No AWS SDK,
 worker, external email service or durable outbox is introduced. Operational limits
 and recovery are described in [waiting-room.md](waiting-room.md).
+
+## Design records
+
+Formal decisions and diagrams (TF2-007): [ADRs](adr/README.md), [C4 diagrams](c4.md) and [ERD](erd.md). Local default ports are in the C4 document; the diagram above uses legacy ports.
