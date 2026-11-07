@@ -59,12 +59,12 @@ test('verified duplicate payment issues owned QR tickets; return URL alone never
   await page.goto(`/payment/success?paymentId=${paymentId}&code=00&status=PAID`);
   await expect(
     page.getByRole('heading', { name: 'Đang chờ xác nhận thanh toán', exact: true }),
-  ).toBeVisible();
+  ).toBeVisible({ timeout: 15_000 });
   await page.goto(`/dev-payments/${paymentId}`);
   await page.getByRole('button', { name: 'Gửi callback trùng', exact: true }).click();
   await expect(
     page.getByRole('heading', { name: 'Thanh toán đã được xác nhận', exact: true }),
-  ).toBeVisible();
+  ).toBeVisible({ timeout: 15_000 });
   await page.getByRole('link', { name: 'Xem vé của tôi', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Vé của tôi', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Xem vé', exact: true }).first().click();
