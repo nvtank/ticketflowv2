@@ -1,0 +1,45 @@
+{
+  "observed_date": "2026-11-07",
+  "actor": "TuanAn0311",
+  "branch": "feature/TF2-028-payos-integration",
+  "task": "TF2-028",
+  "checks": [
+    {
+      "command": "pnpm exec vitest run apps/api/test/payments-policy.test.ts",
+      "exit_code": 0,
+      "result": "16 unit tests passed in 46ms"
+    },
+    {
+      "command": "pnpm test:infra:up && pnpm test:db:prepare (PostgreSQL 17 tmpfs & Redis 7.4 test stack)",
+      "exit_code": 0,
+      "result": "10 migrations applied to isolated test database"
+    },
+    {
+      "command": "npx vitest run --config vitest.integration.config.ts apps/api/test/payments.integration.test.ts",
+      "exit_code": 0,
+      "result": "21 integration tests passed in 38.15s"
+    }
+  ],
+  "coverage": [
+    "rejects unsigned, malformed and tampered callbacks without selling seats",
+    "concurrent duplicate callbacks serialize via pg_advisory_xact_lock and issue exactly one ticket per item",
+    "records a second distinct bank transfer for review while preserving already issued tickets",
+    "rejects changed content reusing a transaction reference (payloadHash mismatch)",
+    "never trusts unsigned outer success/code fields over signed payment data",
+    "late payment after expiry and another customer reclaim marks REFUND_REQUIRED without selling seats",
+    "late payment cannot change seats already SOLD by a newer paid order",
+    "rolls back inventory, settlement and webhook when ticket uniqueness fails; retries safely after repair",
+    "rejects changing provider on an existing order without calling PayOS",
+    "callback after explicit cancellation requires refund and creates no tickets",
+    "signed webhook with a different link reference is rejected",
+    "acknowledges signed provider verification samples without issuing tickets",
+    "callback racing order cancellation has exactly one valid terminal outcome",
+    "creates one stable session for concurrent retries without extending expiry",
+    "binds a payment retry key to one order",
+    "waits for the scheduled mock result rather than accepting a frontend return"
+  ],
+  "remaining": [
+    "real bank transfer settlement (pending approval; automated tests use mock/fixture only)",
+    "public webhook tunnel registration (pending authorized staging host)"
+  ]
+}
