@@ -156,3 +156,7 @@ Additive migration `20261024010000_discovery_reviews` introduces:
 Existing seat, hold, order, payment, ticket and authentication columns are preserved.
 `db:seed:discovery` only upserts labelled fictional artist profiles and missing links
 to existing demo music events. It never modifies sold seats or seeds customer reviews.
+
+## ERD
+
+Mermaid ERD for all 25 current models: [erd.md](erd.md). The schema now has 25 models (earlier text above says 21).
