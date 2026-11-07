@@ -17,6 +17,7 @@ jobs:
       API_INTERNAL_URL: http://127.0.0.1:4100
       PLAYWRIGHT_HTML_OUTPUT_DIR: .local/browser-reports
       PLAYWRIGHT_RESULTS_ROOT: .local/browser-results
+      PLAYWRIGHT_JSON_OUTPUT_DIR: .local/browser-json
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -29,6 +30,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm env:setup
       - run: python3 scripts/github/test_project_data.py
+      - run: python3 scripts/test_sprint_evidence.py
+      - run: python3 scripts/test_quick_tunnel.py
       - run: python3 -m py_compile scripts/github/*.py
       - run: docker compose --env-file .env.example -f infrastructure/docker-compose.yml config --quiet
       - run: pnpm --filter @tixflow/shared build
@@ -36,15 +39,20 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm format:check
       - run: pnpm build
-      - run: pnpm exec vitest run
+      - run: pnpm exec vitest run --reporter=default --reporter=json --outputFile=.local/test-reports/unit.json
       - run: pnpm test:infra:up
       - run: pnpm test:db:prepare
-      - run: pnpm --filter @tixflow/api test:integration
+      - run: pnpm --filter @tixflow/api test:integration --reporter=default --reporter=json --outputFile=${{ github.workspace }}/.local/test-reports/integration.json
       - run: pnpm audit --audit-level=high
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm exec playwright test
+        env:
+          PLAYWRIGHT_HTML_OUTPUT_DIR: .local/browser-reports/foundation
       - run: node scripts/run-browser-regression.mjs
+      - run: python3 scripts/sprint_evidence.py
       - run: pnpm exec playwright test --config playwright.responsive.config.ts
+        env:
+          PLAYWRIGHT_HTML_OUTPUT_DIR: .local/browser-reports/responsive
       - run: pnpm test:infra:down
         if: always()
       - run: python3 scripts/setup-staging.py
@@ -58,6 +66,9 @@ jobs:
             test-results/
             .local/browser-reports/
             .local/browser-results/
+            .local/browser-json/
+            .local/test-reports/
+            .local/sprint-evidence/
             .local/staging/results.json
             .local/staging/api.log
           if-no-files-found: ignore
