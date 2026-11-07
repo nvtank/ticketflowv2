@@ -1,4 +1,6 @@
+import { Buffer } from 'node:buffer';
 import { execSync } from 'node:child_process';
+import console from 'node:console';
 import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
