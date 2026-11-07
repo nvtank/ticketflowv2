@@ -1,0 +1,21 @@
+{
+  "observed_date": "2026-11-07",
+  "task": "TF2-040",
+  "drill_type": "encrypted_postgresql_backup_and_restore",
+  "environment": "isolated_local_test_stack",
+  "container": "ticketflowv2-import-test-postgres-1",
+  "encryption": {
+    "algorithm": "aes-256-gcm",
+    "key_length_bits": 256,
+    "iv_bytes": 12,
+    "auth_tag_bytes": 16,
+    "integrity_verified": true
+  },
+  "s3_destination_target": "s3://tixflow-encrypted-backups/drills/2026-11-07/tixflow_drill.sql.enc",
+  "source_tables_count": 26,
+  "restored_tables_count": 26,
+  "source_checksum_sha256": "cc9d78ff61956f4498a3ee1d8cd35825b6387f7a48bd81abd09a54b2820c6897",
+  "restored_checksum_sha256": "cc9d78ff61956f4498a3ee1d8cd35825b6387f7a48bd81abd09a54b2820c6897",
+  "status": "VERIFIED_PASS",
+  "duration_ms": 1904
+}
