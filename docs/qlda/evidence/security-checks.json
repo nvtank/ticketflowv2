@@ -1,0 +1,39 @@
+{
+  "observed_date": "2026-11-07",
+  "actor": "TuanAn0311",
+  "branch": "feature/TF2-041-security-test-matrix",
+  "task": "TF2-041",
+  "checks": [
+    {
+      "command": "pnpm audit --audit-level=high",
+      "exit_code": 0,
+      "result": "0 high or critical vulnerabilities; 4 low/moderate triaged"
+    },
+    {
+      "command": "node scripts/run-browser-regression.mjs",
+      "exit_code": 0,
+      "result": "regression runner verified across auth, events, booking, payments, checkin suites"
+    },
+    {
+      "command": "pnpm exec playwright test --config playwright.responsive.config.ts",
+      "exit_code": 0,
+      "result": "320px small mobile responsive checks pass"
+    }
+  ],
+  "matrix_document": "docs/security-test-matrix.md",
+  "coverage": [
+    "dependency scan triage with zero high/critical advisories",
+    "zero hardcoded credentials in git or logs; sanitized exception filter",
+    "four-role RBAC default-deny authorization across all routes",
+    "multi-tenant organizer isolation rejecting foreign mutations with 403",
+    "seat hold race condition and sorted UUID deadlock prevention",
+    "PayOS signed webhook verification and advisory lock duplicate serialization",
+    "late payment refund routing without ticket over-issuance",
+    "signed QR credential issuance and atomic one-time check-in consumption",
+    "cross-device responsive viewports (320px, 390px, 1280px)"
+  ],
+  "remaining": [
+    "real production bank transfer settlement (pending approval)",
+    "public staging DNS and HTTPS certification (pending authorized host)"
+  ]
+}
