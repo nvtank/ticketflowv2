@@ -71,6 +71,16 @@ test('customer buys a ticket, assigned staff admits once and organizer sees the 
   await staff.goto(`/staff/events/${event.id}/scan`);
   await expect(staff.getByRole('heading', { name: 'Quét vé vào cổng', exact: true })).toBeVisible();
   const before = await metric(staff, 'Đã check-in');
+  const simultaneousContext = await browser.newContext({
+    baseURL: 'http://127.0.0.1:3100',
+    viewport: page.viewportSize() ?? undefined,
+  });
+  const simultaneousStaff = await simultaneousContext.newPage();
+  await loginAs(simultaneousStaff, 'staff@tixflow.local');
+  await simultaneousStaff.goto('/staff/events/' + event.id + '/scan');
+  await expect(
+    simultaneousStaff.getByRole('heading', { name: 'Quét vé vào cổng', exact: true }),
+  ).toBeVisible();
   const orgContext = await browser.newContext({
     baseURL: 'http://127.0.0.1:3100',
     viewport: page.viewportSize() ?? undefined,
@@ -80,11 +90,44 @@ test('customer buys a ticket, assigned staff admits once and organizer sees the 
   await org.goto('/organizer/analytics');
   await expect(org.getByText('Tổng check-in', { exact: true })).toBeVisible();
   const prior = await metric(org, 'Tổng check-in');
-  await staff.getByLabel('Mã vé hoặc dữ liệu QR', { exact: true }).fill(code);
-  await staff.getByRole('button', { name: 'Kiểm tra vé', exact: true }).click();
-  await expect(staff.getByText('Vé hợp lệ, sẵn sàng check-in.', { exact: true })).toBeVisible();
-  await staff.getByRole('button', { name: 'Xác nhận vào cổng', exact: true }).click();
-  await expect(staff.getByText('Check-in thành công.', { exact: true })).toBeVisible();
+
+  await Promise.all(
+    [staff, simultaneousStaff].map(async (operator) => {
+      await operator.getByLabel('Mã vé hoặc dữ liệu QR', { exact: true }).fill(code);
+      await operator.getByRole('button', { name: 'Kiểm tra vé', exact: true }).click();
+      await expect(
+        operator.getByText('Vé hợp lệ, sẵn sàng check-in.', { exact: true }),
+      ).toBeVisible();
+    }),
+  );
+  const confirmationStatuses: number[] = [];
+  for (const operator of [staff, simultaneousStaff]) {
+    operator.on('response', (response) => {
+      if (new URL(response.url()).pathname === '/api/v1/check-in/confirm')
+        confirmationStatuses.push(response.status());
+    });
+  }
+  await Promise.all(
+    [staff, simultaneousStaff].map((operator) =>
+      operator.getByRole('button', { name: 'Xác nhận vào cổng', exact: true }).click(),
+    ),
+  );
+  await expect.poll(() => confirmationStatuses.length).toBe(2);
+  expect([...confirmationStatuses].sort((a, b) => a - b)).toEqual([201, 409]);
+  await expect
+    .poll(
+      async () =>
+        (await staff.getByText('Check-in thành công.', { exact: true }).count()) +
+        (await simultaneousStaff.getByText('Check-in thành công.', { exact: true }).count()),
+    )
+    .toBe(1);
+  await expect
+    .poll(
+      async () =>
+        (await staff.getByText('Vé đã được sử dụng.', { exact: true }).count()) +
+        (await simultaneousStaff.getByText('Vé đã được sử dụng.', { exact: true }).count()),
+    )
+    .toBe(1);
   await expect.poll(() => metric(staff, 'Đã check-in')).toBe(before + 1);
   await staff.getByRole('button', { name: 'Kiểm tra vé', exact: true }).click();
   await expect(staff.getByText('Vé đã được sử dụng.', { exact: true })).toBeVisible();
