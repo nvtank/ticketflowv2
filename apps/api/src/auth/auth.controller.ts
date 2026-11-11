@@ -1,132 +1,96 @@
 import {
-  BadRequestException,
   Body,
   Controller,
-  ForbiddenException,
   Get,
+  HttpCode,
   Inject,
-  Param,
   Post,
   Req,
   Res,
+  UseGuards,
   UnauthorizedException,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiCookieAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import type { Request, Response } from 'express';
-import { loginSchema, registerSchema } from '@tf2/shared';
-import { z } from 'zod';
-import { ENVIRONMENT, type Environment } from '../config';
-import { Database } from '../database';
+import type { AuthResponse } from '@tixflow/shared';
 import { AuthService } from './auth.service';
+import { LoginDto, RegisterDto } from './auth.dto';
+import { Public, CurrentPrincipal } from './auth.decorators';
+import type { AuthResult, Principal } from './auth.types';
+import { AuthCookieService } from './auth-cookie.service';
+import { CookieOriginGuard } from './cookie-origin.guard';
 
-export function bearer(request: Request) {
-  const header = request.headers.authorization;
-  if (!header?.startsWith('Bearer ')) throw new UnauthorizedException('Bearer token required');
-  return header.slice(7);
-}
-
-export function parse<T>(schema: z.ZodType<T>, input: unknown): T {
-  const result = schema.safeParse(input);
-  if (!result.success) throw new BadRequestException('Invalid request');
-  return result.data;
-}
-
-const refreshCookie = (req: Request): string | undefined => {
-  const candidate: unknown = req.cookies?.tf2_refresh;
-  return typeof candidate === 'string' && candidate.length <= 256 ? candidate : undefined;
-};
-
+@ApiTags('Authentication')
+@UseGuards(CookieOriginGuard)
 @Controller('auth')
 export class AuthController {
   constructor(
     @Inject(AuthService) private readonly auth: AuthService,
-    @Inject(ENVIRONMENT) private readonly env: Environment,
+    @Inject(AuthCookieService) private readonly cookies: AuthCookieService,
   ) {}
 
-  private origin(request: Request) {
-    if (request.headers.origin !== this.env.WEB_ORIGIN)
-      throw new ForbiddenException('Origin not allowed');
+  private respond(response: Response, result: AuthResult): AuthResponse {
+    response.setHeader('Cache-Control', 'no-store');
+    this.cookies.set(response, result.refreshToken, result.refreshExpiresAt);
+    return { user: result.user, accessToken: result.accessToken, expiresIn: result.expiresIn };
   }
 
-  private options() {
-    return {
-      httpOnly: true,
-      secure: this.env.NODE_ENV === 'production',
-      sameSite: 'strict' as const,
-      path: '/api/v1/auth',
-    };
-  }
-
-  private send(res: Response, result: Awaited<ReturnType<AuthService['register']>>) {
-    res.cookie('tf2_refresh', result.refreshToken, {
-      ...this.options(),
-      expires: result.refreshExpiresAt,
-    });
-    res.setHeader('Cache-Control', 'no-store');
-    return { user: result.user, accessToken: result.accessToken };
-  }
-
+  @Public()
   @Post('register')
-  async register(
-    @Body() body: unknown,
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    this.origin(req);
-    return this.send(res, await this.auth.register(parse(registerSchema, body)));
+  @ApiBody({ type: RegisterDto })
+  @ApiOperation({ summary: 'Register a CUSTOMER; roles cannot be supplied by the client' })
+  @Throttle({ default: { limit: 3, ttl: 60_000 } })
+  async register(@Body() input: RegisterDto, @Res({ passthrough: true }) response: Response) {
+    return this.respond(response, await this.auth.register(input));
   }
 
+  @Public()
   @Post('login')
-  async login(
-    @Body() body: unknown,
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    this.origin(req);
-    return this.send(res, await this.auth.login(parse(loginSchema, body)));
+  @HttpCode(200)
+  @ApiBody({ type: LoginDto })
+  @Throttle({ default: { limit: 5, ttl: 60_000 } })
+  async login(@Body() input: LoginDto, @Res({ passthrough: true }) response: Response) {
+    return this.respond(response, await this.auth.login(input));
   }
 
+  @Public()
   @Post('refresh')
-  async refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    this.origin(req);
-    const value = refreshCookie(req);
-    if (!value) throw new UnauthorizedException('Refresh cookie required');
-    return this.send(res, await this.auth.refresh(value));
+  @HttpCode(200)
+  @ApiCookieAuth('tixflow_refresh')
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
+  async refresh(@Req() request: Request, @Res({ passthrough: true }) response: Response) {
+    try {
+      return this.respond(response, await this.auth.refresh(this.cookies.read(request)));
+    } catch (error) {
+      if (error instanceof UnauthorizedException) this.cookies.clear(response);
+      throw error;
+    }
   }
 
+  @Public()
   @Post('logout')
-  async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    this.origin(req);
-    const access = req.headers.authorization?.startsWith('Bearer ')
-      ? req.headers.authorization.slice(7)
-      : undefined;
-    await this.auth.logout(refreshCookie(req), access);
-    res.clearCookie('tf2_refresh', this.options());
-    return { status: 'ok' };
+  @HttpCode(204)
+  async logout(@Req() request: Request, @Res({ passthrough: true }) response: Response) {
+    const header = request.headers.authorization;
+    const accessToken =
+      header && header.length < 4096 ? /^Bearer ([^\s]+)$/.exec(header)?.[1] : undefined;
+    await this.auth.logout(this.cookies.read(request), accessToken);
+    this.cookies.clear(response);
+    response.setHeader('Cache-Control', 'no-store');
+  }
+
+  @Get('methods')
+  @ApiBearerAuth()
+  methods(@CurrentPrincipal() p: Principal, @Res({ passthrough: true }) res: Response) {
+    res.setHeader('Cache-Control', 'no-store');
+    return this.auth.methods(p.user.id);
   }
 
   @Get('me')
-  async me(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    res.setHeader('Cache-Control', 'no-store');
-    return (await this.auth.authenticate(bearer(req))).user;
-  }
-}
-
-@Controller('organizations')
-export class OrganizationController {
-  constructor(
-    @Inject(AuthService) private readonly auth: AuthService,
-    @Inject(Database) private readonly db: Database,
-  ) {}
-
-  @Get(':id/context')
-  async context(@Param('id') input: string, @Req() req: Request) {
-    const id = parse(z.uuid(), input);
-    const { user } = await this.auth.authenticate(bearer(req));
-    const membership = await this.db.membership.findUnique({
-      where: { userId_organizationId: { userId: user.id, organizationId: id } },
-    });
-    if (!membership || !['ORGANIZER', 'STAFF'].includes(membership.role))
-      throw new ForbiddenException('Organization access denied');
-    return { organizationId: id, role: membership.role };
+  @ApiBearerAuth()
+  me(@CurrentPrincipal() principal: Principal, @Res({ passthrough: true }) response: Response) {
+    response.setHeader('Cache-Control', 'no-store');
+    return principal.user;
   }
 }

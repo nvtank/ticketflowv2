@@ -2,8 +2,8 @@ import { defineConfig } from 'prisma/config';
 
 export default defineConfig({
   schema: 'prisma/schema.prisma',
-  migrations: { path: 'prisma/migrations' },
+  migrations: { path: 'prisma/migrations', seed: 'node dist/seed.js' },
   datasource: {
-    url: process.env.DATABASE_URL ?? 'postgresql://invalid:invalid@127.0.0.1:1/invalid',
+    url: process.env.DATABASE_URL ?? 'postgresql://unused:unused@localhost:5432/unused',
   },
 });
