@@ -1,0 +1,120 @@
+name: CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      confirm_migration_restore:
+        description: 'Type "yes" to also run the gated migration-restore drill (isolated DB only, see docs/operations/BACKUP_RESTORE_DRILL.md)'
+        required: false
+        default: 'no'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # Proves the health gate and automatic rollback against real local
+  # containers. No AWS, no remote host — this is the "demonstrate
+  # failure/rollback locally" scope of TF2-039. It runs on every push so
+  # the rollback path is continuously exercised, independent of whether
+  # remote deploy below is wired up.
+  local-rollout-demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/setup-staging.py
+      - run: docker compose --env-file .local/staging/runtime.env -f infrastructure/docker-compose.staging.yml build
+      - name: Deploy a known-good release
+        run: python3 scripts/deploy/rollout.py "$(git rev-parse --short HEAD)"
+      - name: Deploy a release with a deliberately broken config and verify automatic rollback
+        run: python3 scripts/deploy/rollout.py "$(git rev-parse --short HEAD)-bad" --demo-failure
+      - name: Capture API logs
+        if: always()
+        run: |
+          mkdir -p .local/deploy
+          docker compose --env-file .local/staging/runtime.env -f infrastructure/docker-compose.staging.yml \
+            logs --no-color api > .local/deploy/api.log || true
+      - name: Tear down the isolated local stack
+        if: always()
+        run: |
+          docker compose --env-file .local/staging/runtime.env -f infrastructure/docker-compose.staging.yml \
+            down --remove-orphans
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cd-rollout-demo-evidence
+          path: .local/deploy/
+          if-no-files-found: ignore
+          include-hidden-files: true
+          retention-days: 7
+
+  # Real remote deploy. Gated three ways: the `production` GitHub
+  # environment requires reviewer approval (configured in repo Settings,
+  # not in this file), `id-token: write` is only usable once the OIDC trust
+  # policy from TF2-038 is applied, and this job is entirely skipped
+  # (not failed) until AWS_DEPLOY_ROLE_ARN is actually configured —
+  # "remote deployment remains gated by access/approval" per Issue #39.
+  deploy-production:
+    needs: local-rollout-demo
+    if: vars.AWS_DEPLOY_ROLE_ARN != ''
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      id-token: write
+      contents: read
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'ap-southeast-1' }}
+      - name: Build, push by exact digest, and point SSM at the new release
+        env:
+          DEPLOY_ENV: ${{ vars.DEPLOY_ENV || 'staging' }}
+          SSM_PREFIX: ${{ vars.SSM_PREFIX || '/tixflow-v2' }}
+        run: |
+          set -euo pipefail
+          vcs_ref="${{ github.sha }}"
+          region="${{ vars.AWS_REGION || 'ap-southeast-1' }}"
+          aws ecr get-login-password --region "$region" \
+            | docker login --username AWS --password-stdin "${{ vars.ECR_REGISTRY }}"
+          for target in migrate api web; do
+            docker build --target "$target" --build-arg VCS_REF="$vcs_ref" \
+              -t "local/$target:$vcs_ref" -f infrastructure/Dockerfile .
+            repo="${{ vars.ECR_REGISTRY }}/tixflow-v2/$target"
+            docker tag "local/$target:$vcs_ref" "$repo:$vcs_ref"
+            docker push "$repo:$vcs_ref"
+            digest="$(docker inspect --format='{{index .RepoDigests 0}}' "$repo:$vcs_ref")"
+            echo "- \`$target\` deployed digest: \`$digest\`" >> "$GITHUB_STEP_SUMMARY"
+            # The parameter's previous value is this exact deploy's rollback
+            # target; it is not overwritten anywhere else, by design.
+            aws ssm put-parameter --name "$SSM_PREFIX/$DEPLOY_ENV/deploy/$target-digest" \
+              --type String --overwrite --value "$digest"
+          done
+      - name: Rollback note
+        run: |
+          echo 'No compute target consumes these SSM digest parameters yet (out of scope of TF2-038/039).' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Once one exists, its rollback procedure is: redeploy the previous *-digest SSM value above; the health-gate/rollback state machine proven in local-rollout-demo is the same logic that job would run.' >> "$GITHUB_STEP_SUMMARY"
+
+  # Migration restore is never run automatically. It requires a human to
+  # explicitly type "yes" on a manual dispatch AND approval of the separate
+  # `production-migration` protected environment.
+  migration-restore-gate:
+    needs: local-rollout-demo
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.confirm_migration_restore == 'yes'
+    runs-on: ubuntu-latest
+    environment: production-migration
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f infrastructure/docker-compose.test.yml up -d --wait
+      - run: node scripts/backup-restore-drill.mjs
+      - if: always()
+        run: docker compose -f infrastructure/docker-compose.test.yml down
