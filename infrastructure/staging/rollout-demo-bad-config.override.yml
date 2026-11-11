@@ -1,0 +1,21 @@
+# Used only by scripts/deploy/rollout.py --demo-failure to prove the
+# rollback path. Points the api service at an unreachable database host so
+# its real readiness endpoint (/api/v1/health) and container-level
+# HEALTHCHECK both go unhealthy, the same way a bad config bundled in a
+# release would in production. The healthcheck cadence is shortened only so
+# the demo does not sit idle for minutes; it is the same check command as
+# infrastructure/Dockerfile.
+services:
+  api:
+    environment:
+      DATABASE_URL: postgresql://tixflow:wrong@postgres-unreachable-demo:5432/tixflow_staging
+    healthcheck:
+      test:
+        [
+          CMD-SHELL,
+          'node -e "fetch(''http://127.0.0.1:4100/api/v1/health'').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"',
+        ]
+      interval: 3s
+      timeout: 2s
+      start_period: 2s
+      retries: 3

@@ -1,0 +1,35 @@
+{
+  "observed_at": "2026-11-11T12:26:09.810307+00:00",
+  "scope": "local docker-compose staging stack only; no AWS, no remote host",
+  "steps": [
+    {
+      "step": "deploy known-good release",
+      "label": "5c0ea42",
+      "healthy": true,
+      "started_at": "2026-11-11T12:25:25.211571+00:00",
+      "finished_at": "2026-11-11T12:25:40.691627+00:00"
+    },
+    {
+      "step": "deploy release with deliberately broken DATABASE_URL override",
+      "label": "5c0ea42-bad",
+      "healthy": false,
+      "observed_failure": "docker compose: dependency failed to start: container ticketflowv2-staging-api-1 is unhealthy",
+      "rollback": {
+        "rolled_back_to": "5c0ea42",
+        "recovered": true,
+        "finished_at": "2026-11-11T12:26:09.810028+00:00"
+      }
+    }
+  ],
+  "final_state": {
+    "label": "5c0ea42",
+    "config_hash": "596ce4ba72ce9cb3",
+    "digests": {
+      "api": "sha256:66a753d544cbc38884a4386c356f578eb7b329659553b9e698237fbd064d8013",
+      "web": "sha256:9dffdb2168057c961643230f1b0bd8a6adb79bdc0433b761179b245046cb7d37",
+      "migrate": "sha256:9b1fa711b6c7bb6f7affdd551194e5311571168219f917f6653c93a61f19ca7c"
+    }
+  },
+  "status": "VERIFIED_LOCAL_ROLLBACK",
+  "no_aws_resource_used": true
+}
