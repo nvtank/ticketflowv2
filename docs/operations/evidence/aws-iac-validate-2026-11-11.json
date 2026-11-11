@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-11-11T12:15:35.427831+00:00",
+  "scope": "static validation of infrastructure/aws Terraform only; no AWS credentials configured, no apply performed",
+  "tested_worktree_revision": "5c0ea42fb5da338d62c0cbe42746327dd8724adb",
+  "terraform_version": "{\n  \"terraform_version\": \"1.14.0\",\n  \"platform\": \"linux_amd64\",\n  \"provider_selections\": {\n    \"registry.terraform.io/hashicorp/aws\": \"5.100.0\",\n    \"registry.terraform.io/hashicorp/tls\": \"4.4.2\"\n  },\n  \"terraform_outdated\": true\n}\n",
+  "fmt_check": {
+    "passed": true,
+    "exit_code": 0,
+    "stdout": ""
+  },
+  "validate": {
+    "format_version": "1.0",
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 0,
+    "diagnostics": []
+  },
+  "plan_without_credentials": {
+    "expected": "fails with no valid credential sources; confirms apply cannot run accidentally",
+    "exit_code": 1,
+    "stderr_tail": "data.tls_certificate.github_actions: Reading...\ndata.tls_certificate.github_actions: Read complete after 0s [id=971f0877d5c8ee4a631a46b5509679ce58ff025d]\n\nPlanning failed. Terraform encountered an error while generating this plan.\n"
+  },
+  "status": "VALIDATED_NO_APPLY",
+  "no_aws_resource_created": true,
+  "no_paid_resource_created": true,
+  "no_dns_change": true
+}
