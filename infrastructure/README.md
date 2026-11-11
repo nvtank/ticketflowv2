@@ -29,5 +29,6 @@ test database successfully applied all ten source migrations during import valid
 The original source contained local Compose infrastructure only. Production
 Dockerfiles and the isolated local-TLS staging stack are added in TF2-037/026;
 see [staging operations](../docs/operations/STAGING.md) for commands, actual checks
-and pending public deployment gates. AWS IaC, public HTTPS and backup/restore
-are separate deliverables. No AWS deployment is claimed.
+and pending public deployment gates. Public HTTPS and backup/restore
+are separate deliverables. AWS IaC (TF2-038) lives in [`aws/`](aws/README.md);
+it is statically validated only. No AWS deployment is claimed.

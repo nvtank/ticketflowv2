@@ -1,0 +1,11 @@
+# Copy to terraform.tfvars and adjust before a reviewed, approved
+# `terraform plan`/`apply`. This example file is not loaded automatically
+# and no values here are secret.
+
+aws_region                = "ap-southeast-1"
+environment                = "staging"
+github_org                 = "nvtank"
+github_repo                = "ticketflowv2"
+github_deploy_environment  = "production"
+ssm_parameter_prefix       = "/tixflow-v2"
+tls_domain_name             = "staging.tixflow.example"
