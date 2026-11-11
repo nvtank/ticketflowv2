@@ -17,3 +17,10 @@ Actual operator and commit author: nvtank. Date: 11 November 2026. This is stati
 
 - `aws-iac-validate-2026-11-11.json`: `terraform fmt -check`, `terraform validate` (0 errors), and a credential-less `terraform plan`, which fails with "No valid credential sources found" as expected — that failure is the evidence that apply cannot happen by accident, not a bug. See [`../AWS_RUNBOOK.md`](../AWS_RUNBOOK.md) for the gated procedure to actually provision this.
 - No AWS resource, ECR repository, SSM parameter, KMS key, VPC, or DNS record exists anywhere as a result of this work. Status is `VALIDATED_NO_APPLY`.
+
+# TF2-039 local rollout/rollback evidence
+
+Actual operator and commit author: nvtank. Date: 11 November 2026. Local `docker-compose.staging.yml` stack only — no AWS, no remote host.
+
+- `cd-rollout-2026-11-11.json`: `scripts/deploy/rollout.py` deployed a known-good release (healthy), then deployed a release with a deliberately broken `DATABASE_URL` override; Docker Compose reported `dependency failed to start: container ticketflowv2-staging-api-1 is unhealthy`, the script detected the failed health gate and automatically redeployed the previous release, which recovered to healthy. Final state and both releases' image IDs/config hash are recorded.
+- The real remote deploy job (`deploy-production` in `.github/workflows/cd.yml`) is gated on the `production` GitHub environment and an `AWS_DEPLOY_ROLE_ARN` repository variable that is not set; it is skipped, not faked, until TF2-038's IaC is actually applied and approved. The `migration-restore-gate` job requires an explicit `workflow_dispatch` confirmation plus a separate `production-migration` environment approval, and only then runs the existing isolated-DB restore drill from TF2-040.
