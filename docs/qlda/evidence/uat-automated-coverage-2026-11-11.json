@@ -1,0 +1,56 @@
+{
+  "observed_at": "2026-11-11T13:00:00+00:00",
+  "scope": "Mapping of the 8 UAT scenarios in docs/qlda/UAT.md to existing automated tests, and the real CI run that most recently executed them on main.",
+  "note": "This is automated regression evidence, not a substitute for a human stakeholder UAT session. That session, its feedback and any sign-off remain PENDING_HUMAN.",
+  "cited_ci_run": {
+    "url": "https://github.com/nvtank/ticketflowv2/actions/runs/42488671782",
+    "head_sha": "5c0ea42fb5da338d62c0cbe42746327dd8724adb",
+    "conclusion": "success",
+    "created_at": "2026-11-08T14:12:33Z",
+    "note": "Most recent successful required quality CI run on main at the time this mapping was written; main has not changed since."
+  },
+  "local_rerun_status": "BLOCKED_ENV",
+  "local_rerun_blocker": "This session's sandbox cannot regenerate the Prisma client: `prisma generate` fails fetching a 'linux-nixos' engine binary from binaries.prisma.sh (404), and nixpkgs only ships prisma-engines 6.18.0 against an installed @prisma/client 7.10.1, an incompatible major version. GitHub Actions runs on ubuntu and is unaffected; the CI run cited above is real and verifiable.",
+  "scenarios": [
+    {
+      "scenario": "Organizer drafts event and two prices",
+      "test": "e2e/events.spec.ts:20 \"organizer creates seats, admin rejects and approves, customer discovers the real event\"",
+      "result": "PASS"
+    },
+    {
+      "scenario": "Admin approves/rejects",
+      "test": "e2e/events.spec.ts:20 (same test; covers both reject and approve transitions)",
+      "result": "PASS"
+    },
+    {
+      "scenario": "Customer competes for seat",
+      "test": "e2e/booking.spec.ts:27 \"two customers hold seats, receive realtime updates, reload and cancel a server-priced order\"",
+      "result": "PASS"
+    },
+    {
+      "scenario": "Expired hold/retry order",
+      "test": "apps/api/test/booking.integration.test.ts:73 \"handles duplicate retry keys without creating another hold or extending expiry\"; :114 \"lets another user reclaim expired seats before reconciliation\"; :198 \"expires pending orders and never releases SOLD inventory\"",
+      "result": "PASS"
+    },
+    {
+      "scenario": "Payment verified/forged redirect",
+      "test": "e2e/payments.spec.ts:54 \"verified duplicate payment issues owned QR tickets; return URL alone never marks paid\"; :81 \"failed payment releases the reservation and does not show a paid result\"",
+      "result": "PASS"
+    },
+    {
+      "scenario": "Customer opens ticket",
+      "test": "e2e/checkin.spec.ts:39 \"customer buys a ticket, assigned staff admits once and organizer sees the updated attendance\"",
+      "result": "PASS"
+    },
+    {
+      "scenario": "Staff verifies then confirms twice",
+      "test": "apps/api/test/check-in.integration.test.ts:44 \"requires assigned STAFF and verify does not consume a ticket\"; :78 \"rejects a forged QR and wrong event without consumption\"",
+      "result": "PASS"
+    },
+    {
+      "scenario": "Organizer views analytics",
+      "test": "apps/api/test/check-in.integration.test.ts:112 \"reports exact paid revenue, no other organizer data, Vietnam boundaries\"",
+      "result": "PASS"
+    }
+  ]
+}
