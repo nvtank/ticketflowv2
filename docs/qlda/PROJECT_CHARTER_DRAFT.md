@@ -6,7 +6,7 @@ TixFlow V2, repository nvtank/ticketflowv2. PM: nvtank. Instructor: TS. Nguyễn
 
 ## 2. Sourcing pathway
 
-PROPOSED Pathway 3: an actual VKU event organizer. Organization/contact/consent: PENDING_HUMAN. Pathway 1 only if genuine parallel coursework is confirmed.
+Pathway 1 — kế thừa/song hành đồ án chuyên ngành.
 
 ## 3. Business case
 
