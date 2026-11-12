@@ -67,6 +67,9 @@ Each of the 45 issue deliverables occurs at one leaf. Prefix groups aggregate le
 - 8.7 TF2-039: CD workflow, healthchecks, safe rollout/rollback
 - 8.8 TF2-040: CloudWatch/logging/S3 backup + restore drill
 - 8.9 TF2-041: Security checks, dependency scan, test matrix, regression
+- 8.10 TF2-046: Vercel Node.js version config and apps/web-only deploy
+- 8.11 TF2-047: CR hosting-split decision record + runbook update
+- 8.12 TF2-048: Verify apps/web↔API wiring on Vercel (env/CORS/build)
 
 ## 9.0 UAT & Closure
 
