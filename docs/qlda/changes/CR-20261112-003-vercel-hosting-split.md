@@ -33,9 +33,12 @@ Alternatives considered:
 
 Scope impact: adds one new deployment target (Vercel, web only) to WBS 8.0;
 does not remove or replace the AWS target for the API. Schedule impact: new
-work items TF2-046/047/048, placed on the **S4 Cloud & Acceptance** milestone
-(due 2027-01-03) to match the existing cloud/release grouping in
-`SPRINTS.md`, not forced into the closing Sprint 2 or an unrelated sprint.
+work items TF2-046/047/048, placed on the **Sprint 2 — active delivery**
+milestone (extended to 2026-11-19 to include this added work, same pattern
+as the 05 November additional-task round) rather than the still-future S4
+forecast window (2026-12-21–2027-01-03) — matching how this project actually
+assigns real, immediately-actionable work per `CURRENT_SPRINT_ASSIGNMENTS.md`,
+not the forecast category by feature area.
 Cloud/payment cost impact: none — Vercel Hobby tier, no AWS resource
 touched. Risk: `apps/web` on Vercel will have no real API to call until the
 API is reachable at a durable public URL (AWS apply is still gated per
