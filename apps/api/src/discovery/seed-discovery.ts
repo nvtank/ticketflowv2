@@ -118,8 +118,7 @@ export async function seedDiscovery(db: Prisma.TransactionClient) {
     // databases upgraded from the smaller seed, where upsert preserves these links.
     const lineup = events.filter(
       (event, eventIndex) =>
-        (index < 4 &&
-          ['tixflow-music-festival', 'summer-live-concert'].includes(event.slug)) ||
+        (index < 4 && ['tixflow-music-festival', 'summer-live-concert'].includes(event.slug)) ||
         eventIndex === index % events.length ||
         eventIndex === (index + 1) % events.length,
     );
