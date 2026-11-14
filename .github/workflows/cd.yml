@@ -33,7 +33,16 @@ jobs:
       - name: Deploy a known-good release
         run: python3 scripts/deploy/rollout.py "$(git rev-parse --short HEAD)"
       - name: Deploy a release with a deliberately broken config and verify automatic rollback
-        run: python3 scripts/deploy/rollout.py "$(git rev-parse --short HEAD)-bad" --demo-failure
+        run: |
+          set +e
+          output=$(python3 scripts/deploy/rollout.py "$(git rev-parse --short HEAD)-bad" --demo-failure 2>&1)
+          echo "$output"
+          set -e
+          # rollout.py intentionally exits 1 here: the deliberately broken
+          # deploy failed its health gate, which is the whole point of this
+          # demo. The step only fails if the automatic rollback itself did
+          # not recover, not because the broken deploy failed on purpose.
+          echo "$output" | grep -q 'PASS rollback: previous release healthy again'
       - name: Capture API logs
         if: always()
         run: |
