@@ -1,0 +1,57 @@
+{
+  "observed_at": "2026-11-14T00:00:00+00:00",
+  "task": "TF2-046",
+  "issue": 67,
+  "scope": "repo-side Node version pin for the Vercel apps/web project; no Vercel dashboard setting applied from this environment, no AWS resource touched",
+  "observed_failure": {
+    "where": "Vercel status check on pull requests, e.g. PR #72 (docs-only changes)",
+    "project": "ticketflowv2",
+    "deployment_inspector": "https://vercel.com/tuananh2005889s-projects/ticketflowv2/7s3FZWi76rHjk45cYeicUY65Jev8",
+    "state": "FAILURE",
+    "error": "ERR_PNPM_UNSUPPORTED_ENGINE: Expected version: >=24.0.0 <25, Got: v26.13.1",
+    "note": "The failing deployments are unrelated to the content of the pull requests they appear on. Vercel builds every pushed commit, so the one misconfigured project reports FAILURE on every branch until it is fixed."
+  },
+  "root_cause": {
+    "repo_root_package_json": "engines.node = \">=24.0.0 <25\"",
+    "apps_web_package_json_before": "no engines field",
+    "mechanism": "With the Vercel project Root Directory pointing at apps/web, Vercel reads apps/web/package.json to pick the Node major. With no engines field there it falls back to the project default (26.x); pnpm then reads the workspace root engines constraint and aborts the install."
+  },
+  "repo_fix": {
+    "file": "apps/web/package.json",
+    "change": "added engines.node = \"24.x\", semver-equivalent to the workspace root's \">=24.0.0 <25\"",
+    "rationale": "Makes the correct Node major a property of the repo rather than of one dashboard field, so the build stays correct if the Vercel project default changes again. The \"24.x\" spelling is used rather than the root's range form because that is the form Vercel documents for selecting a Node major; a range may be ignored in favour of the project default.",
+    "local_verification": {
+      "node_version": "v24.22.2",
+      "pnpm_c_apps_web_build": "PASS (next build --webpack completed; static/dynamic route manifest generated)",
+      "prettier_check_apps_web_package_json": "PASS",
+      "engines_readback": "24.x"
+    }
+  },
+  "dashboard_settings_required": {
+    "applied": false,
+    "status": "PENDING_HUMAN",
+    "reason": "No Vercel account access from this environment; these are dashboard-only fields and must be applied by the Vercel project owner.",
+    "settings": {
+      "root_directory": "apps/web",
+      "include_files_outside_root_directory": true,
+      "node_js_version": "24.x",
+      "framework_preset": "Next.js",
+      "services": "apps/api must NOT be added as a Vercel Service (see CR-20261112-003)",
+      "environment_variables": "API_INTERNAL_URL set to the currently reachable API origin, scoped to Preview and Production"
+    }
+  },
+  "team_access": {
+    "members_added": false,
+    "decision": "Do not invite members to Vercel.",
+    "reasons": [
+      "Deployments run under the connected GitHub integration, so the member list has no effect on whether a build succeeds.",
+      "The project is on the Hobby (personal) tier; inviting members requires a paid plan, which would break the zero-cost constraint recorded in CR-20261112-003 and issue #67.",
+      "Reviewers can read the preview URL posted by the Vercel bot on each pull request, and build log excerpts are recorded in evidence notes instead."
+    ]
+  },
+  "deployment_url": null,
+  "build_log_url": null,
+  "status": "REPO_FIX_VERIFIED_LOCAL__VERCEL_BUILD_NOT_YET_GREEN",
+  "no_aws_resource_used": true,
+  "no_paid_resource_used": true
+}
