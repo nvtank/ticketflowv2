@@ -16,6 +16,7 @@ accident in this environment).
 
 ## What's intentionally out of scope here
 
+- No frontend hosting resources on AWS. Per [CR-20261112-003](../qlda/changes/CR-20261112-003-vercel-hosting-split.md), `apps/web` deploys to Vercel (Hobby tier, Node 24.x) with its own global CDN and HTTPS. AWS only scopes backend services (`apps/api`, database, and cache).
 - No NAT gateway (paid; private subnets reach AWS APIs via VPC endpoints as
   a follow-up, not a NAT gateway).
 - No ALB/listener resource yet — attaching one is meaningless before the

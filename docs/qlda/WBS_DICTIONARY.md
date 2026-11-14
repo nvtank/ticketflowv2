@@ -412,6 +412,36 @@ Acceptance: Dependency/security scans, tenant permission matrix and regression r
 
 Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-041); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
 
+## 8.10 — TF2-046
+
+Parent: 8.0. Description/deliverable: Vercel Node.js version config and apps/web-only deploy. Owner: @nguyen-van-hoan; reviewer: @nvtank.
+
+Inputs/dependencies: TF2-037, CR-20261112-003. Estimate: 3 SP PROPOSED; due: S4 Cloud & Acceptance (SPRINTS.md). Historical classification: W9.
+
+Acceptance: Vercel project targets `apps/web` with Node 24.x engine setting matching `package.json`; build succeeds without `ERR_PNPM_UNSUPPORTED_ENGINE`; `apps/api` remains excluded from Vercel services.
+
+Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-046); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
+
+## 8.11 — TF2-047
+
+Parent: 8.0. Description/deliverable: CR hosting-split decision record + runbook update. Owner: @nvtank; reviewer: @TuanAn0311.
+
+Inputs/dependencies: CR-20261112-003. Estimate: 3 SP PROPOSED; due: S4 Cloud & Acceptance (SPRINTS.md). Historical classification: W9.
+
+Acceptance: Independent architecture review recorded in CR-20261112-003; `infrastructure/README.md` and operations runbooks document hosting split and `API_INTERNAL_URL` wiring; no contradiction between CR, SCOPE_BASELINE.md, and WBS.md.
+
+Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-047); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
+
+## 8.12 — TF2-048
+
+Parent: 8.0. Description/deliverable: Verify apps/web↔API wiring on Vercel (env/CORS/build). Owner: @nguyen-van-hoan; reviewer: @TuanAn0311.
+
+Inputs/dependencies: TF2-046, TF2-047. Estimate: 3 SP PROPOSED; due: S4 Cloud & Acceptance (SPRINTS.md). Historical classification: W9.
+
+Acceptance: Vercel environment variable `API_INTERNAL_URL` verified against backend targets; Next.js same-origin API rewrite and CORS policy validated; blocked/gated external API state recorded in evidence.
+
+Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-048); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
+
 ## 9.1 — TF2-042
 
 Parent: 9.0. Description/deliverable: Stakeholder UAT script, feedback & sign-off request. Owner: @nvtank; reviewer: @nguyen-van-hoan.
