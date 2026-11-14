@@ -1,0 +1,55 @@
+{
+  "observed_at": "2026-11-14T00:00:00+00:00",
+  "task": "TF2-050",
+  "issue": 75,
+  "scope": "apps/api connected to a Supabase-hosted PostgreSQL instance (Session pooler) and its 10 existing Prisma migrations applied; no AWS resource touched, no code change required",
+  "connection": {
+    "mode": "Session pooler (IPv4, persistent-connection compatible)",
+    "host_pattern": "aws-1-ap-southeast-1.pooler.supabase.com:5432",
+    "database": "postgres",
+    "user_pattern": "postgres.<project-ref>",
+    "credential_handling": "DATABASE_URL set directly into the operator's local .env by the operator; never pasted into chat, never printed by any command run here, not committed."
+  },
+  "local_environment_obstacle": {
+    "problem": "Running `prisma migrate deploy` directly on this NixOS dev machine fails: Prisma's CLI tries to download a prebuilt schema-engine binary for a 'linux-nixos' target that does not exist upstream (404), and a nix-store prisma-engines package found locally (6.18.0) is a different major version than the installed Prisma CLI (7.10.1), which produces a JSON-RPC parse error when forced.",
+    "pre_existing": "Same root cause already observed and recorded while verifying the Vercel fix (root `pnpm build` failing at apps/api prebuild for the same reason); unrelated to Supabase and unrelated to this task's correctness.",
+    "workaround_used": "Built the `migrate` target from infrastructure/Dockerfile (base image node:24-bookworm-slim, a normal Debian target Prisma ships real binaries for) and ran it once with `docker run --env-file .env <image>`, overriding its compose-time DATABASE_URL with the operator's local .env. This reuses the exact migration path infrastructure/docker-compose.staging.yml already uses for CD, just pointed at Supabase instead of the staging Postgres container."
+  },
+  "steps": [
+    {
+      "step": "docker build -f infrastructure/Dockerfile --target migrate -t tixflow-migrate-supabase .",
+      "result": "PASS"
+    },
+    {
+      "step": "docker run --rm --env-file .env tixflow-migrate-supabase (prisma migrate deploy)",
+      "result": "PASS",
+      "migrations_applied": 10,
+      "migration_names": [
+        "20261022000000_initial",
+        "20261022010000_event_catalog",
+        "20261023000000_reservation_retries",
+        "20261023010000_payment_sessions",
+        "20261023020000_payment_settlement_refs",
+        "20261023030000_attendance_reporting",
+        "20261023040000_waiting_capacity",
+        "20261023050000_google_identity",
+        "20261024010000_discovery_reviews",
+        "20261028000000_seat_layout"
+      ]
+    },
+    {
+      "step": "docker run --rm --env-file .env --entrypoint sh tixflow-migrate-supabase -c \"pnpm exec prisma migrate status\"",
+      "result": "PASS",
+      "output": "Database schema is up to date!"
+    }
+  ],
+  "not_covered_by_this_task": [
+    "Seeding demo data (pnpm db:seed) — not run; Supabase instance currently has schema only, no rows",
+    "Pointing a running apps/api instance at this DATABASE_URL and smoke-testing a real request end-to-end — the Docker build above only ran the one-shot migrate entrypoint, not the api service itself",
+    "Updating the deployment secret store (vs. the operator's local .env) for any environment beyond this machine",
+    "Supabase Free-tier auto-pause behavior (7 days no traffic) was not exercised or timed in this session; recorded as a known limitation in CR-20261114-004, not re-verified here"
+  ],
+  "status": "MIGRATIONS_APPLIED_VERIFIED__API_RUNTIME_SMOKE_TEST_PENDING",
+  "no_aws_resource_used": true,
+  "no_credential_recorded": true
+}

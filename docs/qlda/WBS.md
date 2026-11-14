@@ -71,6 +71,7 @@ Each of the 45 issue deliverables occurs at one leaf. Prefix groups aggregate le
 - 8.11 TF2-047: CR hosting-split decision record + runbook update
 - 8.12 TF2-048: Verify apps/web↔API wiring on Vercel (env/CORS/build)
 - 8.13 TF2-049: Build @tixflow/shared before the Vercel apps/web build
+- 8.14 TF2-050: Move apps/api database to Supabase-hosted PostgreSQL
 - 8.15 TF2-051: CD local-rollout-demo honors successful rollback exit
 
 ## 9.0 UAT & Closure
