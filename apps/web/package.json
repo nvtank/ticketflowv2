@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "node ../../scripts/wait-for-api.mjs && dotenv -e ../../.env -- next dev --hostname 127.0.0.1 --port 3100",
+    "prebuild": "pnpm --filter @tixflow/shared build",
     "build": "next build --webpack",
     "start": "dotenv -e ../../.env -- next start --hostname 127.0.0.1 --port 3100",
     "typecheck": "tsc --noEmit"
