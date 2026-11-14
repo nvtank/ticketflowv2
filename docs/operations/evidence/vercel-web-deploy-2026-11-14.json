@@ -49,9 +49,18 @@
       "Reviewers can read the preview URL posted by the Vercel bot on each pull request, and build log excerpts are recorded in evidence notes instead."
     ]
   },
+  "post_fix_observation": {
+    "commit": "faf720c",
+    "branch": "chore/TF2-046-vercel-node-engines",
+    "vercel_state": "failure",
+    "vercel_description": "Deployment has failed — run this Vercel CLI command: npx vercel inspect dpl_CQpJ9zsbfSm116oj6YTN74Pr5sTy --logs",
+    "deployment_inspector": "https://vercel.com/tuananh2005889s-projects/ticketflowv2/CQpJ9zsbfSm116oj6YTN74Pr5sTy",
+    "conclusion": "The repo-side engines pin alone did NOT turn the build green. This is consistent with the project's Root Directory still being the repository root: in that case Vercel reads the root package.json (range form, likely ignored) and runs the root build script `pnpm -r --if-present build`, which also builds apps/api. The dashboard settings below are therefore required, not optional.",
+    "build_log_not_read": "No Vercel credentials are available in this environment, so the build log behind the inspector URL was not read and the exact post-fix error line is not claimed here."
+  },
   "deployment_url": null,
   "build_log_url": null,
-  "status": "REPO_FIX_VERIFIED_LOCAL__VERCEL_BUILD_NOT_YET_GREEN",
+  "status": "REPO_FIX_VERIFIED_LOCAL__VERCEL_BUILD_STILL_FAILING__DASHBOARD_SETTINGS_PENDING",
   "no_aws_resource_used": true,
   "no_paid_resource_used": true
 }
