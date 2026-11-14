@@ -105,7 +105,7 @@ export async function seedDiscovery(db: Prisma.TransactionClient) {
       category: 'MUSIC',
       status: 'PUBLISHED',
     },
-    select: { id: true },
+    select: { id: true, slug: true },
     orderBy: { slug: 'asc' },
   });
   for (const [index, profile] of profiles.entries()) {
@@ -114,11 +114,15 @@ export async function seedDiscovery(db: Prisma.TransactionClient) {
       update: {},
       create: { ...profile, isDemo: true, isPublished: true },
     });
-    const lineup = events.length
-      ? [events[index % events.length], events[(index + 1) % events.length]].filter(
-          (event): event is NonNullable<typeof event> => event !== undefined,
-        )
-      : [];
+    // Fresh databases must retain the same original artist/event journeys as
+    // databases upgraded from the smaller seed, where upsert preserves these links.
+    const lineup = events.filter(
+      (event, eventIndex) =>
+        (index < 4 &&
+          ['tixflow-music-festival', 'summer-live-concert'].includes(event.slug)) ||
+        eventIndex === index % events.length ||
+        eventIndex === (index + 1) % events.length,
+    );
     for (const event of lineup)
       await db.eventArtist.upsert({
         where: { eventId_artistId: { eventId: event.id, artistId: artist.id } },
