@@ -77,9 +77,15 @@ services:
       TICKET_SIGNING_KEY: ${STAGING_TICKET_KEY:?Generate a staging environment first}
       JWT_ISSUER: tixflow-staging
       JWT_AUDIENCE: tixflow-web
-      CORS_ORIGINS: https://localhost:3443,${STAGING_ORIGIN:-https://localhost:3443}
+      # STAGING_ORIGIN is owned by scripts/quick_tunnel.py and is always this
+      # stack's own browser origin. PUBLIC_WEB_ORIGIN is for a frontend hosted
+      # elsewhere that calls this API (apps/web on Vercel, per
+      # CR-20261112-003); it needs CORS because Socket.IO connects to the API
+      # directly rather than through the Next.js rewrite. It defaults to the
+      # local origin, so a duplicate entry is the no-op case.
+      CORS_ORIGINS: https://localhost:3443,${STAGING_ORIGIN:-https://localhost:3443},${PUBLIC_WEB_ORIGIN:-https://localhost:3443}
       PAYMENT_PROVIDER: disabled
-      PAYMENT_RETURN_ORIGIN: ${STAGING_ORIGIN:-https://localhost:3443}
+      PAYMENT_RETURN_ORIGIN: ${PUBLIC_WEB_ORIGIN:-${STAGING_ORIGIN:-https://localhost:3443}}
     depends_on:
       migrate: { condition: service_completed_successfully }
       redis: { condition: service_healthy }
