@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* global fetch */
 /**
  * NixOS-only developer setup for the Prisma CLI.
  *
@@ -13,6 +14,9 @@
  * Safe to re-run; it is a no-op when everything is already in place.
  */
 import { execFileSync } from 'node:child_process';
+import { Buffer } from 'node:buffer';
+import console from 'node:console';
+import process from 'node:process';
 import { createRequire } from 'node:module';
 import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
