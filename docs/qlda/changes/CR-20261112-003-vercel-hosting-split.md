@@ -47,3 +47,29 @@ Implementation authorization: actual user instruction in this session
 Formal course CCB/PO/instructor acceptance: PENDING_HUMAN. This record
 documents a real technical decision and its reasoning; it is not presented as
 a signed, approved course CR.
+
+## Independent Review (TF2-047)
+
+- **Reviewer**: `@TuanAn0311` (Architecture & Backend DRI)
+- **Review Date**: 2026-11-13
+- **Review Status**: **APPROVED (Technical Architecture Review)**
+- **Formal Course Sign-off**: `PENDING_HUMAN` (Formal CCB/PO approval remains pending authentic course sign-off)
+
+### Architectural Assessment & Concurrence
+
+1. **NestJS Lifecycle Incompatibility with Serverless**:
+   - Concur with the rejection of Vercel for `apps/api`.
+   - `HoldLifecycleService` relies on an active in-process `setInterval` to enforce the 300-second seat hold TTL (`pg_advisory_xact_lock` + release). Vercel serverless functions freeze/terminate execution immediately after returning HTTP responses, which would cause seat holds to remain unreleased indefinitely until a subsequent request happens to trigger garbage collection.
+   - `realtime.gateway.ts` and `realtime-redis.adapter.ts` (TF2-024) require persistent TCP connections for Socket.IO. Ephemeral serverless lambdas drop WebSocket client sessions on scale-down.
+   - Direct connection pooling with `@prisma/adapter-pg` against PostgreSQL 17 risks rapid connection exhaustion under serverless burst concurrency without an RDS Proxy.
+2. **Frontend Suitability for Edge / Static Deployment**:
+   - `apps/web` (Next.js 16 App Router) is stateless and delegates API calls through Next.js rewrites (`/api/v1/:path*` to `API_INTERNAL_URL`).
+   - Hosting `apps/web` on Vercel provides a durable, zero-cost public HTTPS URL with edge caching, satisfying public UI demo requirements without provisioning billable AWS CloudFront/ALB resources prematurely.
+3. **Configuration & Wiring Integrity**:
+   - `API_INTERNAL_URL` abstraction in `apps/web/next.config.ts` cleanly isolates frontend code from backend physical locations:
+     - Local dev: `http://localhost:4100`
+     - Docker staging / local TLS: `http://api:4100` or gateway `https://localhost:3443`
+     - Temporary Cloudflare Tunnel: `https://<tunnel-domain>`
+     - Eventual AWS production target: `https://api.<domain>` (ALB endpoint terminating at ECS Fargate)
+4. **Conclusion**:
+   - The hosting-split decision is technically sound, preserves system reliability, avoids architectural regressions, and maintains strict adherence to budget constraints ($0 incurred).

@@ -32,3 +32,30 @@ see [staging operations](../docs/operations/STAGING.md) for commands, actual che
 and pending public deployment gates. Public HTTPS and backup/restore
 are separate deliverables. AWS IaC (TF2-038) lives in [`aws/`](aws/README.md);
 it is statically validated only. No AWS deployment is claimed.
+
+## Hosting Split Decision (Vercel + Docker/AWS)
+
+Per [CR-20261112-003](../docs/qlda/changes/CR-20261112-003-vercel-hosting-split.md), the deployment architecture is split across two targets:
+
+| Component      | Target Platform  | Justification & Architecture                                                                                                                                                                                                                                                                                                                         |
+| :------------- | :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`apps/web`** | **Vercel**       | Next.js 16 App Router (Node 24.x project setting). Stateless SSR/SSG/ISR with zero-cost global edge CDN, automatic TLS, and durable public HTTPS.                                                                                                                                                                                                    |
+| **`apps/api`** | **Docker / AWS** | NestJS 11 Modular Monolith on ECS Fargate / Docker Compose staging (TF2-037/038/039). Requires a **persistent daemon process** for in-process seat hold expiry intervals (`HoldLifecycleService`), Socket.IO WebSocket gateway (`realtime.gateway.ts`), and PostgreSQL/Redis connection pool management. Cannot run on ephemeral serverless lambdas. |
+
+### `apps/web` API Base URL Wiring (`API_INTERNAL_URL`)
+
+The frontend never exposes backend addresses directly to the client browser. Instead, browser calls go to the same-origin relative path `/api/v1/:path*`, and Next.js rewrites these requests server-side via `apps/web/next.config.ts`:
+
+```typescript
+const apiUrl = process.env.API_INTERNAL_URL ?? 'http://localhost:4100';
+// rewrites: [{ source: '/api/v1/:path*', destination: `${parsedApiUrl.origin}/api/v1/:path*` }]
+```
+
+Depending on the environment, configure `API_INTERNAL_URL` as follows:
+
+| Environment                  | `API_INTERNAL_URL` Target                      | Description                                                                                                    |
+| :--------------------------- | :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
+| **Local Development**        | `http://localhost:4100` _(default)_            | Direct loopback connection to local NestJS process.                                                            |
+| **Docker Staging**           | `http://api:4100` or `https://localhost:3443`  | Internal Docker Compose network DNS or local staging gateway.                                                  |
+| **Temporary Staging Tunnel** | `https://<tunnel-subdomain>.trycloudflare.com` | Public Cloudflare Quick Tunnel (TF2-026) for testing Vercel previews against local staging API.                |
+| **Eventual AWS Target**      | `https://api.<domain>`                         | Production AWS Application Load Balancer (ALB) terminating TLS and routing to ECS Fargate tasks (TF2-038/039). |
