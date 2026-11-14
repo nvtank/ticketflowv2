@@ -2,8 +2,12 @@
   "name": "@tixflow/web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "node ../../scripts/wait-for-api.mjs && dotenv -e ../../.env -- next dev --hostname 127.0.0.1 --port 3100",
+    "prebuild": "pnpm --filter @tixflow/shared build",
     "build": "next build --webpack",
     "start": "dotenv -e ../../.env -- next start --hostname 127.0.0.1 --port 3100",
     "typecheck": "tsc --noEmit"

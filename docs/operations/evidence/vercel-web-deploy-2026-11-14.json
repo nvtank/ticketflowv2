@@ -1,0 +1,86 @@
+{
+  "observed_at": "2026-11-14T00:00:00+00:00",
+  "tasks": ["TF2-046", "TF2-049"],
+  "issues": [67, 74],
+  "scope": "two repo-side fixes that made the Vercel apps/web build pass: a Node version pin (TF2-046) and building the @tixflow/shared workspace dependency (TF2-049). No Vercel dashboard setting was changed and no AWS resource was touched.",
+  "observed_failure": {
+    "where": "Vercel status check on pull requests, e.g. PR #72 (docs-only changes)",
+    "project": "ticketflowv2",
+    "deployment_inspector": "https://vercel.com/tuananh2005889s-projects/ticketflowv2/7s3FZWi76rHjk45cYeicUY65Jev8",
+    "state": "FAILURE",
+    "error": "ERR_PNPM_UNSUPPORTED_ENGINE: Expected version: >=24.0.0 <25, Got: v26.13.1",
+    "note": "The failing deployments are unrelated to the content of the pull requests they appear on. Vercel builds every pushed commit, so the one misconfigured project reports FAILURE on every branch until it is fixed."
+  },
+  "root_cause": {
+    "repo_root_package_json": "engines.node = \">=24.0.0 <25\"",
+    "apps_web_package_json_before": "no engines field",
+    "mechanism": "With the Vercel project Root Directory pointing at apps/web, Vercel reads apps/web/package.json to pick the Node major. With no engines field there it falls back to the project default (26.x); pnpm then reads the workspace root engines constraint and aborts the install."
+  },
+  "repo_fix": {
+    "file": "apps/web/package.json",
+    "change": "added engines.node = \"24.x\", semver-equivalent to the workspace root's \">=24.0.0 <25\"",
+    "rationale": "Makes the correct Node major a property of the repo rather than of one dashboard field, so the build stays correct if the Vercel project default changes again. The \"24.x\" spelling is used rather than the root's range form because that is the form Vercel documents for selecting a Node major; a range may be ignored in favour of the project default.",
+    "local_verification": {
+      "node_version": "v24.22.2",
+      "pnpm_c_apps_web_build": "PASS (next build --webpack completed; static/dynamic route manifest generated)",
+      "prettier_check_apps_web_package_json": "PASS",
+      "engines_readback": "24.x"
+    }
+  },
+  "dashboard_settings": {
+    "changed_by_this_work": "none",
+    "root_directory": "already apps/web; confirmed by the build log running in /vercel/path0/apps/web",
+    "node_js_version": "project setting is 26.x and was left alone; the repo's engines.node overrides it, which Vercel states explicitly in the build log",
+    "framework_preset": "Next.js, detected automatically (Detected Next.js version: 16.4.2)",
+    "still_pending_human": {
+      "api_internal_url": "Not set. apps/web/next.config.ts falls back to http://localhost:4100, which is why the build succeeds without it, but the deployed site cannot reach a real API until this is set to a reachable API origin for the Preview and Production scopes. Tracked by TF2-048 (issue #69), not by TF2-046.",
+      "services": "apps/api must NOT be added as a Vercel Service (CR-20261112-003); nothing was added.",
+      "deployment_protection": "see deployment_protection_finding below"
+    }
+  },
+  "team_access": {
+    "members_added": false,
+    "decision": "Do not invite members to Vercel.",
+    "reasons": [
+      "Deployments run under the connected GitHub integration, so the member list has no effect on whether a build succeeds.",
+      "The project is on the Hobby (personal) tier; inviting members requires a paid plan, which would break the zero-cost constraint recorded in CR-20261112-003 and issue #67.",
+      "The Vercel bot posts a preview URL on each pull request and build log excerpts are recorded in evidence notes, so reviewers do not need dashboard access to see the outcome.",
+      "Caveat, measured not assumed: preview deployments on this project are behind Vercel Authentication (see deployment_protection_finding), so the preview URL itself currently does require a Vercel login. The free way to let reviewers open it is to disable Vercel Authentication for preview deployments, not to buy seats."
+    ]
+  },
+  "second_defect": {
+    "task": "TF2-049",
+    "issue": 74,
+    "found_from": "the real Vercel build log for commit faf720c, read by the project owner with `npx vercel inspect dpl_CQpJ9zsbfSm116oj6YTN74Pr5sTy --logs`",
+    "node_pin_confirmed_working": "Vercel log line: \"Due to \\\"engines\\\": { \\\"node\\\": \\\"24.x\\\" } in your package.json file, the Node.js Version defined in your Project Settings (\\\"26.x\\\") will not apply, Node.js Version \\\"24.x\\\" will be used instead.\"",
+    "root_directory_already_correct": "The log shows the build running in /vercel/path0/apps/web with all 5 workspace projects installed, so Root Directory was already apps/web. The earlier guess that it was the repository root was wrong.",
+    "error": "Module not found: Can't resolve '@tixflow/shared' in five booking components (booking-page, checkout-panel, mock-payment, my-orders, payment-result)",
+    "cause": "@tixflow/shared resolves through main: ./dist/index.js, which only exists after tsc runs in packages/shared. CI builds it explicitly before `pnpm build` (.github/workflows/ci.yml), but Vercel runs only apps/web's own build script, so dist was never produced in a clean checkout. The earlier local build passed only because dist was already on disk.",
+    "fix": "added a prebuild hook to apps/web (`pnpm --filter @tixflow/shared build`), matching the existing apps/api prebuild convention",
+    "local_reproduction": {
+      "removed": "packages/shared/dist",
+      "before_fix": "pnpm -C apps/web build FAILED with the same five 'Can't resolve @tixflow/shared' errors as Vercel",
+      "after_fix": "pnpm -C apps/web build PASSED from the same clean state and regenerated packages/shared/dist"
+    }
+  },
+  "successful_deployment": {
+    "commit": "c9afa4c",
+    "branch": "chore/TF2-046-vercel-node-engines",
+    "pull_request": 73,
+    "vercel_state": "success",
+    "vercel_status_description": "Deployment has completed",
+    "deployment_inspector": "https://vercel.com/tuananh2005889s-projects/ticketflowv2/Qax9L99i8rpTTJkzJvv5dsPUihfH",
+    "preview_url": "https://ticketflowv2-git-chore-tf2-046-5b3730-tuananh2005889s-projects.vercel.app",
+    "note": "First green Vercel deployment this project has had. Both fixes are repo-side; no dashboard setting was changed to achieve it."
+  },
+  "deployment_protection_finding": {
+    "observed": "curl against the preview URL returns 302 to https://vercel.com/sso-api?url=... for /, /events and /login, with a _vercel_sso_nonce cookie set.",
+    "meaning": "Vercel Deployment Protection (Vercel Authentication) is enabled for preview deployments on this project, so the preview URL requires a Vercel login and is not publicly reachable.",
+    "corrects": "an earlier claim in this file and in README.md that preview URLs are public by default on this project; that claim was wrong and is retracted here.",
+    "consequence_for_reviewers": "Reviewers without Vercel access cannot open the preview URL. Either disable Vercel Authentication for preview deployments (free, keeps the Hobby tier intact) or review against the production URL once this is merged to main. Production is not covered by the preview protection.",
+    "public_production_url_status": "https://ticketflowv2.vercel.app returned 404 at the time of writing because main has never produced a successful build; it should become live once this fix is merged."
+  },
+  "status": "VERCEL_PREVIEW_BUILD_GREEN__MERGE_TO_MAIN_PENDING_HUMAN_REVIEW",
+  "no_aws_resource_used": true,
+  "no_paid_resource_used": true
+}
