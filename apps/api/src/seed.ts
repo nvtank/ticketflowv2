@@ -115,6 +115,66 @@ async function seed(): Promise<void> {
             columns: 10,
             vipRows: 0,
           },
+          {
+            n: 4,
+            title: 'Neon Waves Festival',
+            slug: 'neon-waves-festival',
+            city: 'TP. Hồ Chí Minh',
+            venue: 'Khu đô thị sáng tạo Thủ Thiêm',
+            category: 'MUSIC',
+            offset: 20,
+            rows: 12,
+            columns: 20,
+            vipRows: 3,
+          },
+          {
+            n: 5,
+            title: 'Acoustic Night: Chuyện Mùa Đông',
+            slug: 'acoustic-night-chuyen-mua-dong',
+            city: 'Hà Nội',
+            venue: 'Nhà hát Tuổi Trẻ',
+            category: 'MUSIC',
+            offset: 25,
+            rows: 6,
+            columns: 12,
+            vipRows: 1,
+          },
+          {
+            n: 6,
+            title: 'Indie Garden Stage',
+            slug: 'indie-garden-stage',
+            city: 'Đà Lạt',
+            venue: 'Quảng trường Lâm Viên',
+            category: 'MUSIC',
+            offset: 38,
+            rows: 8,
+            columns: 15,
+            vipRows: 2,
+          },
+          {
+            n: 7,
+            title: 'AI Product Workshop',
+            slug: 'ai-product-workshop',
+            city: 'TP. Hồ Chí Minh',
+            venue: 'Không gian làm việc chung Quận 1',
+            category: 'WORKSHOP',
+            offset: 18,
+            rows: 3,
+            columns: 8,
+            vipRows: 0,
+          },
+          {
+            n: 8,
+            title: `City Run Expo ${future(70).getFullYear()}`,
+            slug: 'city-run-expo',
+            city: 'Hà Nội',
+            venue: 'Sân vận động Quốc gia Mỹ Đình',
+            category: 'SPORTS',
+            offset: 70,
+            rows: 10,
+            columns: 25,
+            vipRows: 0,
+          },
         ];
         for (const config of configs) {
           const venue = await tx.venue.upsert({
@@ -308,8 +368,19 @@ async function seed(): Promise<void> {
       { timeout: 60_000 },
     );
     await seedDiscovery(prisma);
+    const [users, events, seats, artists, lineups, organizations, paidOrders, tickets] =
+      await Promise.all([
+        prisma.user.count(),
+        prisma.event.count(),
+        prisma.seat.count(),
+        prisma.artist.count(),
+        prisma.eventArtist.count(),
+        prisma.organization.count(),
+        prisma.order.count({ where: { status: 'PAID' } }),
+        prisma.ticket.count(),
+      ]);
     console.log(
-      'Seed completed: 5 users, 1 organization, 3 events, 300 seats, 1 paid order, 2 tickets. Existing demo passwords and sold inventory preserved.',
+      `Seed completed. Database totals: ${users} users, ${events} events, ${seats} seats, ${artists} artists, ${lineups} line-up links, ${organizations} organizations, ${paidOrders} paid orders, ${tickets} tickets. Existing demo passwords and sold inventory preserved.`,
     );
   } finally {
     await prisma.$disconnect();
