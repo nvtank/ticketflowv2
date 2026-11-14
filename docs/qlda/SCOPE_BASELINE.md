@@ -9,3 +9,7 @@ P1: TF2-024 Socket.IO with REST resync. Excluded: advanced Venue Studio, waiting
 Acceptance: DoD, actual independent approval, CI and relevant test results, approved staging smoke tests, real stakeholder UAT. A prepared workflow/IaC is not a deployed system. Do not mark merged code as stakeholder acceptance.
 
 Changes use CHANGE_REQUEST_TEMPLATE.md and an authentic CCB decision; no retroactive baseline approvals. Actual artifact evidence is recorded under evidence/.
+
+## Change Requests & Scope Amendments
+
+- **CR-20261112-003 (Hosting Split)**: Adds Vercel as a zero-cost public deployment target for `apps/web` (WBS 8.10/8.11/8.12); preserves the Docker/AWS deployment path for `apps/api` (TF2-037/038/039) to protect persistent backend requirements (in-process hold TTL interval, Socket.IO WebSocket gateway, PostgreSQL connection pooling). Formal course sign-off remains PENDING_HUMAN.
