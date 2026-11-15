@@ -34,4 +34,8 @@ If the gateway is recreated, its ephemeral CA changes. Stop and start the tunnel
 
 TF2-026's technical public HTTPS/readiness/error-log work is verified. Its real Sprint 2 Review/Retro attendance, observations and decisions remain PENDING_HUMAN until the team provides genuine records. See `docs/qlda/SPRINT_2_REVIEW_RETRO_PENDING.md`. A green smoke test or PR approval alone does not constitute the meeting.
 
+## Transition to Durable Named Tunnel (TF2-057)
+
+Per [CR-20261115-005](../qlda/changes/CR-20261115-005-durable-api-hosting.md), the ephemeral Quick Tunnel (`*.trycloudflare.com`) is superseded for Vercel frontend integration by a Durable Cloudflare Named Tunnel with a static hostname. This eliminates the requirement to update Vercel environment variables on each workstation restart while maintaining zero infrastructure cost.
+
 Configuration references: [Cloudflare private HTTPS origins](https://developers.cloudflare.com/tunnel/troubleshooting/https-origins/) and [origin parameters](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/origin-parameters/).

@@ -35,7 +35,7 @@ it is statically validated only. No AWS deployment is claimed.
 
 ## Hosting Split Decision (Vercel + Docker/AWS)
 
-Per [CR-20261112-003](../docs/qlda/changes/CR-20261112-003-vercel-hosting-split.md), the deployment architecture is split across two targets:
+Per [CR-20261112-003](../docs/qlda/changes/CR-20261112-003-vercel-hosting-split.md) and [CR-20261115-005](../docs/qlda/changes/CR-20261115-005-durable-api-hosting.md), the deployment architecture is split across two targets:
 
 | Component      | Target Platform  | Justification & Architecture                                                                                                                                                                                                                                                                                                                         |
 | :------------- | :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,9 +53,10 @@ const apiUrl = process.env.API_INTERNAL_URL ?? 'http://localhost:4100';
 
 Depending on the environment, configure `API_INTERNAL_URL` as follows:
 
-| Environment                  | `API_INTERNAL_URL` Target                      | Description                                                                                                    |
-| :--------------------------- | :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
-| **Local Development**        | `http://localhost:4100` _(default)_            | Direct loopback connection to local NestJS process.                                                            |
-| **Docker Staging**           | `http://api:4100` or `https://localhost:3443`  | Internal Docker Compose network DNS or local staging gateway.                                                  |
-| **Temporary Staging Tunnel** | `https://<tunnel-subdomain>.trycloudflare.com` | Public Cloudflare Quick Tunnel (TF2-026) for testing Vercel previews against local staging API.                |
-| **Eventual AWS Target**      | `https://api.<domain>`                         | Production AWS Application Load Balancer (ALB) terminating TLS and routing to ECS Fargate tasks (TF2-038/039). |
+| Environment                  | `API_INTERNAL_URL` Target                      | Description                                                                                                                                     |
+| :--------------------------- | :--------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Local Development**        | `http://localhost:4100` _(default)_            | Direct loopback connection to local NestJS process.                                                                                             |
+| **Docker Staging**           | `http://api:4100` or `https://localhost:3443`  | Internal Docker Compose network DNS or local staging gateway.                                                                                   |
+| **Temporary Staging Tunnel** | `https://<tunnel-subdomain>.trycloudflare.com` | Ephemeral Cloudflare Quick Tunnel (TF2-026); rotates domain on restart.                                                                         |
+| **Durable Named Tunnel**     | `https://api.<custom-domain>`                  | Permanent Cloudflare Tunnel token (CR-20261115-005 / TF2-057) for stable Vercel integration at $0.                                              |
+| **Eventual AWS Target**      | `https://api.<domain>`                         | Production AWS Application Load Balancer (ALB) terminating TLS and routing to ECS Fargate tasks (TF2-038/039; gated PENDING_HUMAN for billing). |
