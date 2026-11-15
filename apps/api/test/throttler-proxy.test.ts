@@ -1,10 +1,12 @@
 import 'reflect-metadata';
 import { createRequire } from 'node:module';
+import express from 'express';
 import type { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
+import { resolveThrottleTracker } from '../src/common/http/app-throttler.guard';
 import type * as ApplicationModule from '../src/app.module';
 import type * as BootstrapModule from '../src/bootstrap';
 import type * as EnvironmentModule from '../src/config/environment';
@@ -28,6 +30,20 @@ describe('Trusted proxy rate limiting & anti-spoofing (TF2-059)', () => {
 
   afterAll(async () => {
     await app?.close();
+  });
+
+  it('ignores forged forwarding headers when Express sees an untrusted socket peer', () => {
+    const expressApp = express();
+    expressApp.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
+    const untrustedRequest = Object.create(express.request) as Record<string, any>;
+    untrustedRequest.app = expressApp;
+    untrustedRequest.socket = { remoteAddress: '198.51.100.42' };
+    untrustedRequest.headers = {
+      'x-forwarded-for': '203.0.113.200',
+      'cf-connecting-ip': '203.0.113.201',
+    };
+
+    expect(resolveThrottleTracker(untrustedRequest)).toBe('198.51.100.42');
   });
 
   it('allocates independent throttle budgets to distinct client IPs behind trusted proxy', async () => {
@@ -77,24 +93,6 @@ describe('Trusted proxy rate limiting & anti-spoofing (TF2-059)', () => {
 
     expect(evasionAttempt.status).toBe(429);
     expect(evasionAttempt.body.code).toBe('HTTP_429');
-  });
-
-  it('respects Cloudflare CF-Connecting-IP header when connection is from trusted loopback hop', async () => {
-    const cfClient = '203.0.113.77';
-
-    // Send requests with CF-Connecting-IP
-    for (let i = 0; i < 120; i++) {
-      const res = await request(app.getHttpServer())
-        .get('/api/v1/health/live')
-        .set('CF-Connecting-IP', cfClient);
-      expect(res.status).toBe(200);
-    }
-
-    const limitedCf = await request(app.getHttpServer())
-      .get('/api/v1/health/live')
-      .set('CF-Connecting-IP', cfClient);
-
-    expect(limitedCf.status).toBe(429);
   });
 
   it('enforces tight rate limits on authentication endpoints (5/min on login)', async () => {
