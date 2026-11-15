@@ -14,7 +14,7 @@ export class HealthService implements OnApplicationShutdown {
   constructor(@Inject(ENVIRONMENT) private readonly environment: Environment) {
     this.pool = new Pool({
       connectionString: environment.DATABASE_URL,
-      max: 2,
+      max: 1,
       connectionTimeoutMillis: 1500,
       query_timeout: 1500,
       idleTimeoutMillis: 1000,

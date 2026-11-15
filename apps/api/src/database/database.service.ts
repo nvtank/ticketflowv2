@@ -12,7 +12,7 @@ export class DatabaseService extends PrismaClient implements OnApplicationShutdo
       adapter: new PrismaPg({
         connectionString: environment.DATABASE_URL,
         connectionTimeoutMillis: 2000,
-        max: 10,
+        max: 5,
       }),
     });
   }
