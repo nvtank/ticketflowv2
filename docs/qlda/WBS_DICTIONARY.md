@@ -442,6 +442,16 @@ Acceptance: Vercel environment variable `API_INTERNAL_URL` verified against back
 
 Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-048); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
 
+## 8.18 — TF2-057
+
+Parent: 8.0. Description/deliverable: CR durable apps/api hosting decision record. Owner: @TuanAn0311; reviewer: @nvtank.
+
+Inputs/dependencies: CR-20261112-003, CR-20261114-004. Estimate: 3 SP PROPOSED; due: S2 active continuation forecast (SPRINTS.md). Historical classification: W9.
+
+Acceptance: CR recorded with code-level constraints (HoldLifecycleService interval, Socket.IO, Redis), candidate options evaluated, decision (Dual-Track Named Tunnel + AWS gated), explicit costs and "who pays"; persistent-process and Redis requirements addressed; what is not solved clearly stated; spending/accounts flagged PENDING_HUMAN.
+
+Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-057); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
+
 ## 9.1 — TF2-042
 
 Parent: 9.0. Description/deliverable: Stakeholder UAT script, feedback & sign-off request. Owner: @nvtank; reviewer: @nguyen-van-hoan.
