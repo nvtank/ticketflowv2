@@ -442,6 +442,16 @@ Acceptance: Vercel environment variable `API_INTERNAL_URL` verified against back
 
 Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-048); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
 
+## 8.19 — TF2-058
+
+Parent: 8.0. Description/deliverable: Review and document Supabase connection limits and outage behavior. Owner: @TuanAn0311; reviewer: @nvtank.
+
+Inputs/dependencies: TF2-050. Estimate: 2 SP PROPOSED; due: S2 active continuation forecast (SPRINTS.md). Historical classification: W9.
+
+Acceptance: Documented limits of Supabase Free Tier (direct 60, session pooler 15); pool sizing analyzed and safely tuned (DatabaseService max: 5, HealthService max: 1); observed behavior for unreachable/paused DB recorded (readiness 503, liveness 200, sanitized logs, seamless recovery); evidence recorded in evidence/supabase-pool-and-outage-2026-11-15.json; integration tests pass.
+
+Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-058); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
+
 ## 9.1 — TF2-042
 
 Parent: 9.0. Description/deliverable: Stakeholder UAT script, feedback & sign-off request. Owner: @nvtank; reviewer: @nguyen-van-hoan.
