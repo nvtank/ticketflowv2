@@ -1,12 +1,15 @@
 import 'reflect-metadata';
 import { createRequire } from 'node:module';
-import express from 'express';
 import type { INestApplication } from '@nestjs/common';
+import { ExpressAdapter } from '@nestjs/platform-express';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
-import { resolveThrottleTracker } from '../src/common/http/app-throttler.guard';
+import {
+  resolveThrottleTracker,
+  type ThrottleRequest,
+} from '../src/common/http/app-throttler.guard';
 import type * as ApplicationModule from '../src/app.module';
 import type * as BootstrapModule from '../src/bootstrap';
 import type * as EnvironmentModule from '../src/config/environment';
@@ -33,15 +36,16 @@ describe('Trusted proxy rate limiting & anti-spoofing (TF2-059)', () => {
   });
 
   it('ignores forged forwarding headers when Express sees an untrusted socket peer', () => {
-    const expressApp = express();
+    const expressApp = new ExpressAdapter().getInstance();
     expressApp.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
-    const untrustedRequest = Object.create(express.request) as Record<string, any>;
-    untrustedRequest.app = expressApp;
-    untrustedRequest.socket = { remoteAddress: '198.51.100.42' };
-    untrustedRequest.headers = {
-      'x-forwarded-for': '203.0.113.200',
-      'cf-connecting-ip': '203.0.113.201',
-    };
+    const untrustedRequest = Object.assign(Object.create(expressApp.request), {
+      app: expressApp,
+      socket: { remoteAddress: '198.51.100.42' },
+      headers: {
+        'x-forwarded-for': '203.0.113.200',
+        'cf-connecting-ip': '203.0.113.201',
+      },
+    }) as ThrottleRequest;
 
     expect(resolveThrottleTracker(untrustedRequest)).toBe('198.51.100.42');
   });
@@ -76,7 +80,7 @@ describe('Trusted proxy rate limiting & anti-spoofing (TF2-059)', () => {
     const realClientIp = '198.51.100.99';
 
     // Send 120 requests where the attacker tries prepending random fake IPs
-    // In a real proxy setup (Caddy/Vercel), the proxy appends the real remote IP at the end
+    // Model a forwarding proxy that appends its observed client IP after untrusted prefixes.
     for (let i = 0; i < 120; i++) {
       const spoofedChain = `1.2.3.${i}, 10.0.0.1, ${realClientIp}`;
       const res = await request(app.getHttpServer())
