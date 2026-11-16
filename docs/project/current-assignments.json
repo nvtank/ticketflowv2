@@ -1,13 +1,67 @@
 {
-  "changed_on": "2026-11-02",
-  "reason": "User requested only Sprint 1 and Sprint 2 views; current follow-up tasks belong to Sprint 2, not a third sprint.",
+  "changed_on": "2026-11-05",
+  "reason": "Existing Sprint 2 follow-up allocation expanded by the user on 05 November. Earlier task deadlines are retained; additional deadlines are within one week. No third sprint.",
   "deadline_timezone": "Asia/Ho_Chi_Minh",
   "issues": {
-    "6": { "sprint": "S2", "target_date": "2026-11-03" },
-    "7": { "sprint": "S2", "target_date": "2026-11-04" },
-    "37": { "sprint": "S2", "target_date": "2026-11-05" },
-    "41": { "sprint": "S2", "target_date": "2026-11-06" },
-    "42": { "sprint": "S2", "target_date": "2026-11-07" },
-    "26": { "sprint": "S2", "target_date": "2026-11-08" }
+    "6": {
+      "sprint": "S2",
+      "target_date": "2026-11-03"
+    },
+    "7": {
+      "sprint": "S2",
+      "target_date": "2026-11-04"
+    },
+    "37": {
+      "sprint": "S2",
+      "target_date": "2026-11-05"
+    },
+    "41": {
+      "sprint": "S2",
+      "target_date": "2026-11-06"
+    },
+    "42": {
+      "sprint": "S2",
+      "target_date": "2026-11-07"
+    },
+    "26": {
+      "sprint": "S2",
+      "target_date": "2026-11-08"
+    },
+    "38": {
+      "sprint": "S2",
+      "target_date": "2026-11-09",
+      "owner": "nvtank",
+      "reviewer": "TuanAn0311"
+    },
+    "39": {
+      "sprint": "S2",
+      "target_date": "2026-11-12",
+      "owner": "nvtank",
+      "reviewer": "nguyen-van-hoan"
+    },
+    "28": {
+      "sprint": "S2",
+      "target_date": "2026-11-09",
+      "owner": "TuanAn0311",
+      "reviewer": "nguyen-van-hoan"
+    },
+    "40": {
+      "sprint": "S2",
+      "target_date": "2026-11-11",
+      "owner": "TuanAn0311",
+      "reviewer": "nvtank"
+    },
+    "36": {
+      "sprint": "S2",
+      "target_date": "2026-11-10",
+      "owner": "nguyen-van-hoan",
+      "reviewer": "TuanAn0311"
+    },
+    "45": {
+      "sprint": "S2",
+      "target_date": "2026-11-12",
+      "owner": "nguyen-van-hoan",
+      "reviewer": "nvtank"
+    }
   }
 }
