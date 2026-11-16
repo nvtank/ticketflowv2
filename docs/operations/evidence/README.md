@@ -46,3 +46,24 @@ Actual operator and commit author: nvtank. Date: 14 November 2026. Decision reco
 - Workaround: built the existing `migrate` target in `infrastructure/Dockerfile` (base image `node:24-bookworm-slim`, a normal Debian target Prisma ships real binaries for) and ran it once with `docker run --env-file .env <image>`, which is the same migration path `docker-compose.staging.yml` already uses for CD, just pointed at Supabase instead of the staging Postgres container. No Dockerfile or compose change was needed.
 - Result: all 10 existing migrations applied cleanly (`20261022000000_initial` through `20261028000000_seat_layout`); `prisma migrate status` afterward reports `Database schema is up to date!`.
 - Not yet done, and not claimed: seeding demo data, pointing a running `apps/api` instance at this database and smoke-testing a real request end-to-end, and exercising the Free-tier 7-day auto-pause behavior described in the CR.
+
+# TF2-058 Supabase connection limits, pool sizing and outage/pause evidence
+
+Actual operator and commit author: TuanAn0311. Date: 15 November 2026. Review and measurement for issue #84.
+
+- `supabase-pool-and-outage-2026-11-15.json`: empirical measurement and theoretical sizing review of Supabase Free Tier (Shared Micro compute, AWS `ap-southeast-1`).
+- Documented limits (cited from Supabase Official Docs):
+  - Direct PostgreSQL (port 5432): `max_connections = 60` (15 reserved for internal stats/replication/services, leaving 45 usable).
+  - Supavisor Session Pooler (port 5432): max 200 client connections, but `default_pool_size = 15` backend server connections allocated to PostgreSQL.
+  - Supavisor Transaction Pooler (port 6543): incompatible due to Prisma prepared queries and session-level advisory locks (`pg_advisory_xact_lock`) in `HoldLifecycleService` and `SeatHoldsService`.
+- Sizing Analysis & Code Change:
+  - Previously, each API process unthinkingly opened up to 12 connections: `DatabaseService` (`max: 10`) + `HealthService` (`max: 2`).
+  - Running 2 processes concurrently (e.g. Local Dev + Staging Compose container) opened 24 connections, exceeding the Supavisor default pool size of 15 (160% saturation), triggering connection timeouts.
+  - Code adjustment: Tuned `DatabaseService` to `max: 5` and `HealthService` to `max: 1` with `idleTimeoutMillis: 1000`. This cuts per-process connection footprint in half (6 connections total). Two concurrent processes now hold 12 connections, remaining comfortably under the 15-connection pooler limit.
+  - Health pool justification: Keeping a separate `max: 1` pool for `HealthService` remains architecturally justified so readiness probes are never blocked behind queued application transactions when the primary pool is busy, while minimizing resource waste.
+- Outage & 7-Day Auto-Pause Simulation:
+  - Probed an unreachable/paused database endpoint with `connectionTimeoutMillis: 1500`.
+  - Process liveness (`GET /api/v1/health/live`) stays 200 OK without blocking.
+  - Readiness (`GET /api/v1/health`) returns 503 degraded (`dependencies: { postgres: "down" }`) bounded within 1500ms timeout with `Cache-Control: no-store`.
+  - Zero credential leaks detected: driver exceptions are cleanly intercepted and redacted from response bodies and logs.
+  - Recovery: `HealthService` does not cache permanent failure; once the database wakes from pause, the subsequent probe evaluates `SELECT 1` and recovers to 200 OK without restarting the API process.
