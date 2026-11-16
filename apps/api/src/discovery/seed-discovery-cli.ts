@@ -12,7 +12,7 @@ async function main() {
   try {
     await db.$transaction((tx) => seedDiscovery(tx), { timeout: 30_000 });
     console.log(
-      'Seeded 4 labelled fictional artists and links to existing demo events. No reviews, accounts or inventory changed.',
+      'Seeded 10 labelled fictional artists and links to existing demo events. No reviews, accounts or inventory changed.',
     );
   } finally {
     await db.$disconnect();

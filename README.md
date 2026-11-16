@@ -10,6 +10,10 @@ Roles for allocation: `nvtank` PM/CloudOps; `TuanAn0311` architecture/backend; `
 
 Use Node 24 and pnpm 10.34.1. Run `pnpm install --frozen-lockfile`, `pnpm env:setup`, `pnpm infra:up`, `pnpm db:generate`, `pnpm db:migrate`, `pnpm db:seed`, then `pnpm dev`.
 
+On NixOS with nix-ld enabled, run `node scripts/setup-prisma-nixos.mjs` after installing dependencies and before Prisma commands. Repeat after upgrading Prisma. This selects the matching runnable schema engine through the ignored `apps/api/.env`.
+
+Stop `pnpm dev` before running `pnpm build` or `pnpm db:seed`: the API build replaces `dist`, which the dev watcher also uses. After building/seeding, restart `pnpm dev`. The seed adds 8 demo events and 10 fictional artists, preserving existing demo passwords and sold inventory. Sign in as `admin@tixflow.local` with `DEMO_PASSWORD` from your root `.env`, then open `/admin` (an existing account keeps its current password).
+
 Web: http://127.0.0.1:3100. API: http://127.0.0.1:4100/api/v1. Development PostgreSQL/Redis: loopback 55444/56394. The `.env` helper generates random secrets without printing them. Payments remain disabled unless configured; mock is restricted to development/test. No paid AWS resource, production change or real payment has been executed.
 
 The imported database schema/migrations replace the earlier V2 prototype. Use the new isolated database/Compose project; do not apply this migration history to the earlier prototype database.

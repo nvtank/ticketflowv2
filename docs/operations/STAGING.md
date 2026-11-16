@@ -13,6 +13,14 @@ python3 scripts/check-staging.py --build
 
 The setup script refuses to overwrite existing keys. The ignored `.local/staging/runtime.env` is mode 0600. Keep the JWT and ticket keys across restarts; do not regenerate them against an existing database. Never paste this file or expanded `docker compose config` output into an Issue.
 
+### Serving a frontend hosted elsewhere (`PUBLIC_WEB_ORIGIN`)
+
+`STAGING_ORIGIN` is owned by `scripts/quick_tunnel.py` and always refers to _this_ stack's own browser origin — either `https://localhost:3443` or the generated Quick Tunnel URL; the script rewrites it on every start/stop and accepts no other value. It therefore cannot express the TF2-048 case, where `apps/web` is hosted separately on Vercel (per [CR-20261112-003](../qlda/changes/CR-20261112-003-vercel-hosting-split.md)) and calls this API across origins.
+
+Set `PUBLIC_WEB_ORIGIN` in `.local/staging/runtime.env` to that frontend's origin. It is appended to `CORS_ORIGINS` and becomes `PAYMENT_RETURN_ORIGIN`. It defaults to the local origin, so leaving it unset is a no-op. CORS matters here even though browser REST calls reach the API through the Next.js rewrite in `apps/web/next.config.ts`: Socket.IO connects to the API **directly**, and `realtime.gateway.ts` rejects any handshake whose `Origin` is not in `CORS_ORIGINS`.
+
+Restarting the tunnel changes `STAGING_ORIGIN` but leaves `PUBLIC_WEB_ORIGIN` intact; the separately-hosted frontend still has to be pointed at the new tunnel URL on its own host.
+
 The production images use Node 24 (digest pinned), pnpm 10.34.1, frozen lockfile installation, multi-stage builds and non-root web/API processes. The API artifact has production dependencies; the Prisma CLI remains in a separate migration target. Next standalone tracing includes the monorepo and public/static assets. `.dockerignore` excludes credentials, Git metadata, local outputs, input packs and docs. No secret is an image build argument.
 
 Compose project `ticketflowv2-staging` has its own PostgreSQL database `tixflow_staging` and named volumes. DB, Redis, API and web publish no host ports. Only the gateway binds **127.0.0.1:3443**. Existing development and test stacks are unaffected. Payments are disabled, not mock production settlement. No seeded administrator or demo accounts are created automatically; smoke registration creates a unique isolated CUSTOMER record.
