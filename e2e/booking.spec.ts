@@ -59,8 +59,8 @@ test('two customers hold seats, receive realtime updates, reload and cancel a se
   await login(other, 'customer2@tixflow.local');
   await page.goto(`/events/${slug}/booking`);
   await other.goto(`/events/${slug}/booking`);
-  await expect(page.getByText('Đã kết nối thời gian thực', { exact: true })).toBeVisible();
-  await expect(other.getByText('Đã kết nối thời gian thực', { exact: true })).toBeVisible();
+  await expect(page.getByText('Đã kết nối cập nhật trực tiếp', { exact: true })).toBeVisible();
+  await expect(other.getByText('Đã kết nối cập nhật trực tiếp', { exact: true })).toBeVisible();
   const choices = page.getByRole('button', { name: /^Ghế .*: Còn trống$/ });
   await expect(choices.first()).toBeVisible();
   const labels = await choices.evaluateAll((elements) =>
