@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { QueryNotice } from '@/components/events/event-detail';
 import { MetricGrid, AttendanceChart } from '@/components/analytics/report-widgets';
 import { useAttendance } from './use-attendance';
+import { RealtimeStatus } from '@/components/realtime/realtime-status';
 const formSchema = z.object({
   credential: z.string().trim().min(1, 'Nhập mã vé hoặc quét QR.').max(256),
 });
@@ -38,7 +39,7 @@ export function StaffScanner({ eventId }: { eventId: string }) {
     refetchInterval: 5000,
     retry: false,
   });
-  useAttendance(eventId);
+  const realtime = useAttendance(eventId);
   useEffect(() => {
     if (stats.isError) controls.current?.stop();
   }, [stats.isError]);
@@ -121,6 +122,7 @@ export function StaffScanner({ eventId }: { eventId: string }) {
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold">Quét vé vào cổng</h1>
+      <RealtimeStatus status={realtime} feature="attendance" />
       <MetricGrid
         items={[
           { label: 'Tổng vé hợp lệ', value: stats.data.totalTickets },

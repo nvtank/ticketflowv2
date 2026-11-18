@@ -17,6 +17,24 @@ test.beforeAll(() => {
     env: { ...process.env, NODE_ENV: 'test', DATABASE_URL: url, DEMO_PASSWORD: password },
   });
 });
+
+test('warns customers when deployed realtime is not configured', async ({ page }, info) => {
+  await login(page, 'customer@tixflow.local');
+  const response = await page.request.get('http://127.0.0.1:4100/api/v1/events?q=TixFlow%20Music');
+  expect(response.ok()).toBe(true);
+  const result = (await response.json()) as { items: { slug: string }[] };
+  const slug = result.items[0]!.slug;
+
+  await page.goto(`/events/${slug}/booking`);
+  await expect(
+    page.getByRole('alert').filter({ hasText: 'Cập nhật sơ đồ ghế trực tiếp chưa được cấu hình' }),
+  ).toBeVisible();
+  await page.screenshot({
+    path: info.outputPath('realtime-degraded-seat-map.png'),
+    fullPage: true,
+  });
+});
+
 async function login(page: Page, email: string) {
   await page.goto('/login');
   await page.getByLabel('Email', { exact: true }).fill(email);

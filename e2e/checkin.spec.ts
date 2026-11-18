@@ -142,3 +142,16 @@ test('customer buys a ticket, assigned staff admits once and organizer sees the 
   await context.close();
   await orgContext.close();
 });
+
+test('warns staff when deployed realtime is not configured', async ({ page }, info) => {
+  await loginAs(page, 'staff@tixflow.local');
+  await page.goto('/staff');
+  await page.getByRole('link', { name: 'Mở cổng check-in', exact: true }).first().click();
+  await expect(
+    page.getByRole('alert').filter({ hasText: 'Cập nhật check-in trực tiếp chưa được cấu hình' }),
+  ).toBeVisible();
+  await page.screenshot({
+    path: info.outputPath('realtime-degraded-staff-attendance.png'),
+    fullPage: true,
+  });
+});
