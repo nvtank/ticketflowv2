@@ -20,6 +20,7 @@ import { QueryNotice } from '@/components/events/event-detail';
 import { SeatMap } from './seat-map';
 import { HoldCountdown } from './hold-countdown';
 import { useBookingRealtime } from './use-booking-realtime';
+import { RealtimeStatus } from '@/components/realtime/realtime-status';
 export function BookingPage({ slug }: { slug: string }) {
   return (
     <AuthGate roles={[UserRole.CUSTOMER]} embedded>
@@ -174,11 +175,7 @@ function BookingFlow({ event, admissionToken }: { event: EventDetail; admissionT
         <p className="mt-3 text-sm text-muted-foreground">
           {dateTime(event.startsAt)} · {event.venue.name}
         </p>
-        <p className="mt-3 text-xs" role="status">
-          {connection === 'connected'
-            ? 'Đã kết nối thời gian thực'
-            : 'Đang kết nối lại · tự đồng bộ ghế định kỳ'}
-        </p>
+        <RealtimeStatus status={connection} feature="booking" />
       </div>
       {query.isError && (
         <p role="alert" className="rounded-xl bg-warning/10 p-4 text-sm">
