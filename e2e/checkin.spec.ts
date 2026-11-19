@@ -152,6 +152,8 @@ test('warns staff when realtime connection fails', async ({ page }, info) => {
   });
   await page.goto('/staff');
   await page.getByRole('link', { name: 'Mở cổng check-in', exact: true }).first().click();
+  await expect(page.getByRole('heading', { name: 'Quét vé vào cổng', exact: true })).toBeVisible();
+  await expect(page.getByText('Đã check-in', { exact: true })).toBeVisible();
   await expect.poll(() => realtimeAttempts).toBeGreaterThan(0);
   await expect(
     page.getByRole('alert').filter({ hasText: 'Mất kết nối cập nhật trực tiếp' }),
