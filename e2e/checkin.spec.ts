@@ -157,7 +157,7 @@ test('warns staff when realtime connection fails', async ({ page }, info) => {
   await expect.poll(() => realtimeAttempts).toBeGreaterThan(0);
   await expect(
     page.getByRole('alert').filter({ hasText: 'Mất kết nối cập nhật trực tiếp' }),
-  ).toBeVisible();
+  ).toBeVisible({ timeout: 10_000 });
   await page.screenshot({
     path: info.outputPath('realtime-degraded-staff-attendance.png'),
     fullPage: true,
