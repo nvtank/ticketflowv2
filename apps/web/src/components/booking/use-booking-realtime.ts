@@ -36,18 +36,23 @@ export function useBookingRealtime(eventId: string) {
       reconnectionDelay: 500,
       reconnectionDelayMax: 5000,
     });
+    const connectionTimeout = setTimeout(() => {
+      if (!disposed) setConnection('reconnecting');
+    }, 5000);
     const resync = () => {
       void cache.invalidateQueries({ queryKey: ['booking', eventId] });
     };
     socket.on('connect', () => {
       socket.timeout(5000).emit('event:join', { eventId }, (error, result) => {
         if (disposed) return;
+        clearTimeout(connectionTimeout);
         setConnection(!error && result?.ok ? 'connected' : 'reconnecting');
         resync();
       });
     });
     socket.on('disconnect', () => setConnection('reconnecting'));
     socket.on('connect_error', (error) => {
+      clearTimeout(connectionTimeout);
       setConnection('reconnecting');
       const data: unknown = 'data' in error ? error.data : null;
       if (
@@ -77,6 +82,7 @@ export function useBookingRealtime(eventId: string) {
     socket.on('inventory:updated', hint);
     return () => {
       disposed = true;
+      clearTimeout(connectionTimeout);
       socket.removeAllListeners();
       socket.disconnect();
     };

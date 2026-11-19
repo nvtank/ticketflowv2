@@ -32,12 +32,16 @@ export function useAttendance(eventId: string) {
       transports: ['websocket'],
       auth: (cb) => cb({ token: useAuthState.getState().accessToken }),
     });
+    const connectionTimeout = setTimeout(() => {
+      if (!disposed) setConnection('reconnecting');
+    }, 5000);
     const resync = () => {
       void cache.invalidateQueries({ queryKey: ['staff'] });
     };
     socket.on('connect', () => {
       socket.timeout(5000).emit('staff:event:join', { eventId }, (error, result) => {
         if (disposed) return;
+        clearTimeout(connectionTimeout);
         setConnection(!error && result?.ok ? 'connected' : 'reconnecting');
         resync();
       });
@@ -48,6 +52,7 @@ export function useAttendance(eventId: string) {
       if (hint.success && hint.data.eventId === eventId) resync();
     });
     socket.on('connect_error', (error) => {
+      clearTimeout(connectionTimeout);
       setConnection('reconnecting');
       const data: unknown = 'data' in error ? error.data : null;
       if (
@@ -70,6 +75,7 @@ export function useAttendance(eventId: string) {
     });
     return () => {
       disposed = true;
+      clearTimeout(connectionTimeout);
       socket.removeAllListeners();
       socket.disconnect();
     };
