@@ -143,12 +143,18 @@ test('customer buys a ticket, assigned staff admits once and organizer sees the 
   await orgContext.close();
 });
 
-test('warns staff when deployed realtime is not configured', async ({ page }, info) => {
+test('warns staff when realtime connection fails', async ({ page }, info) => {
   await loginAs(page, 'staff@tixflow.local');
+  let realtimeAttempts = 0;
+  await page.routeWebSocket('**/socket.io/**', (socket) => {
+    realtimeAttempts += 1;
+    socket.close({ code: 1011, reason: 'Simulated realtime outage' });
+  });
   await page.goto('/staff');
   await page.getByRole('link', { name: 'Mở cổng check-in', exact: true }).first().click();
+  await expect.poll(() => realtimeAttempts).toBeGreaterThan(0);
   await expect(
-    page.getByRole('alert').filter({ hasText: 'Cập nhật check-in trực tiếp chưa được cấu hình' }),
+    page.getByRole('alert').filter({ hasText: 'Mất kết nối cập nhật trực tiếp' }),
   ).toBeVisible();
   await page.screenshot({
     path: info.outputPath('realtime-degraded-staff-attendance.png'),

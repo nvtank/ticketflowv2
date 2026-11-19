@@ -39,6 +39,8 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm format:check
       - run: pnpm build
+        env:
+          NEXT_PUBLIC_REALTIME_URL: http://127.0.0.1:4100
       - run: pnpm exec vitest run --reporter=default --reporter=json --outputFile=.local/test-reports/unit.json
       - run: pnpm test:infra:up
       - run: pnpm test:db:prepare

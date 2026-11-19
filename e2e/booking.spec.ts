@@ -18,16 +18,22 @@ test.beforeAll(() => {
   });
 });
 
-test('warns customers when deployed realtime is not configured', async ({ page }, info) => {
+test('warns customers when realtime connection fails', async ({ page }, info) => {
   await login(page, 'customer@tixflow.local');
+  let realtimeAttempts = 0;
+  await page.routeWebSocket('**/socket.io/**', (socket) => {
+    realtimeAttempts += 1;
+    socket.close({ code: 1011, reason: 'Simulated realtime outage' });
+  });
   const response = await page.request.get('http://127.0.0.1:4100/api/v1/events?q=TixFlow%20Music');
   expect(response.ok()).toBe(true);
   const result = (await response.json()) as { items: { slug: string }[] };
   const slug = result.items[0]!.slug;
 
   await page.goto(`/events/${slug}/booking`);
+  await expect.poll(() => realtimeAttempts).toBeGreaterThan(0);
   await expect(
-    page.getByRole('alert').filter({ hasText: 'Cập nhật sơ đồ ghế trực tiếp chưa được cấu hình' }),
+    page.getByRole('alert').filter({ hasText: 'Mất kết nối cập nhật trực tiếp' }),
   ).toBeVisible();
   await page.screenshot({
     path: info.outputPath('realtime-degraded-seat-map.png'),
