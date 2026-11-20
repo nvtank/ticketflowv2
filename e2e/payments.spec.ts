@@ -56,10 +56,16 @@ test('verified duplicate payment issues owned QR tickets; return URL alone never
 }, info) => {
   await login(page);
   const { orderId, paymentId } = await checkout(page);
+  const statusResponse = page.waitForResponse(
+    (response) =>
+      response.url().endsWith(`/api/v1/payments/${paymentId}/status`) &&
+      response.request().method() === 'GET',
+  );
   await page.goto(`/payment/success?paymentId=${paymentId}&code=00&status=PAID`);
-  await expect(
-    page.getByRole('heading', { name: 'Đang chờ xác nhận thanh toán', exact: true }),
-  ).toBeVisible({ timeout: 15_000 });
+  const response = await statusResponse;
+  expect(response.ok()).toBe(true);
+  const status = await response.json();
+  expect(status).toMatchObject({ status: 'PENDING', orderStatus: 'PENDING_PAYMENT' });
   await page.goto(`/dev-payments/${paymentId}`);
   await page.getByRole('button', { name: 'Gửi callback trùng', exact: true }).click();
   await expect(
