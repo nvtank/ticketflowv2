@@ -57,9 +57,19 @@ test('verified duplicate payment issues owned QR tickets; return URL alone never
   await login(page);
   const { orderId, paymentId } = await checkout(page);
   await page.goto(`/payment/success?paymentId=${paymentId}&code=00&status=PAID`);
+  await expect(page.getByRole('status', { name: 'Đang xác minh quyền truy cập' })).toHaveCount(0, {
+    timeout: 15_000,
+  });
   await expect(
     page.getByRole('heading', { name: 'Đang chờ xác nhận thanh toán', exact: true }),
   ).toBeVisible({ timeout: 15_000 });
+  await expect(
+    page.getByText(
+      'Máy chủ chưa xác nhận thanh toán thành công. Trang sẽ tự kiểm tra lại; chỉ chuyển hướng về đây không làm đơn thành công.',
+      { exact: true },
+    ),
+  ).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Xem vé của tôi', exact: true })).toHaveCount(0);
   await page.goto(`/dev-payments/${paymentId}`);
   await page.getByRole('button', { name: 'Gửi callback trùng', exact: true }).click();
   await expect(
