@@ -23,7 +23,8 @@ function Result({ id }: { id: string | null }) {
     queryFn: () => apiGet(`/payments/${id}/status`, paymentSchema),
     enabled: !!id,
     refetchOnMount: 'always',
-    retry: false,
+    retry: 3,
+    retryDelay: 500,
     refetchInterval: (q) => (q.state.data?.status === 'PENDING' ? 5000 : false),
   });
   if (!id)
