@@ -23,14 +23,14 @@ export function AuthGate({
 }) {
   const Container = embedded ? 'div' : 'main';
   const status = useAuthState((state) => state.status);
-  const userId = useAuthState((state) => state.user?.id);
+  const user = useAuthState((state) => state.user);
   const pathname = usePathname();
   const router = useRouter();
   const me = useQuery({
-    queryKey: ['auth', 'me', userId],
+    queryKey: ['auth', 'me', user?.id],
     queryFn: ({ signal }) => apiGet('/auth/me', authUserSchema, { signal }),
     enabled: status === 'authenticated',
-    staleTime: 0,
+    staleTime: 15_000,
     retry: false,
   });
   useEffect(() => {
@@ -39,7 +39,8 @@ export function AuthGate({
   useEffect(() => {
     if (me.data) useAuthState.getState().updateUser(me.data);
   }, [me.data]);
-  if (status === 'error' || (status === 'authenticated' && me.isError))
+  const activeUser = me.data ?? user;
+  if (status === 'error' || (status === 'authenticated' && me.isError && !activeUser))
     return (
       <Container id={embedded ? undefined : 'main-content'} className="container py-16">
         <EmptyState
@@ -58,14 +59,14 @@ export function AuthGate({
         />
       </Container>
     );
-  if (status !== 'authenticated' || !me.data)
+  if (status !== 'authenticated' || !activeUser)
     return (
       <div role="status" aria-label="Đang xác minh quyền truy cập" className="container py-16">
         <Skeleton className="h-8 w-64" />
         <Skeleton className="mt-6 h-40" />
       </div>
     );
-  if (roles && !roles.includes(me.data.role))
+  if (roles && !roles.includes(activeUser.role))
     return (
       <Container id={embedded ? undefined : 'main-content'} className="container py-16">
         <EmptyState
@@ -73,7 +74,7 @@ export function AuthGate({
           description="Không gian này dành cho vai trò được phân quyền. Quyền truy cập cũng được kiểm tra ở backend."
           action={
             <Button asChild>
-              <Link href={roleHome(me.data.role)}>Về không gian của tôi</Link>
+              <Link href={roleHome(activeUser.role)}>Về không gian của tôi</Link>
             </Button>
           }
         />
