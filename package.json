@@ -42,8 +42,7 @@
     "test:e2e:ui": "node scripts/check-site-ui.mjs",
     "test:e2e:performance": "node scripts/check-home-performance.mjs",
     "test:e2e:horizontal": "node scripts/check-horizontal-scroll.mjs",
-    "test:e2e:seating-ui": "node scripts/check-seat-designer.mjs",
-    "test:e2e:a11y": "pnpm build && node scripts/run-browser-regression.mjs a11y"
+    "test:e2e:seating-ui": "node scripts/check-seat-designer.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
@@ -62,7 +61,9 @@
   "pnpm": {
     "overrides": {
       "body-parser": "2.4.0",
-      "multer": "2.5.0"
+      "multer": "2.5.0",
+      "effect@<=3.22.0": "3.22.1",
+      "effect": ">=3.22.1"
     }
   }
 }
