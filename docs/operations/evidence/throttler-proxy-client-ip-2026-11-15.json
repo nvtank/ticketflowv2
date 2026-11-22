@@ -1,0 +1,47 @@
+{
+  "task": "TF2-059",
+  "record_type": "implementation_notes",
+  "observed_at": "2026-11-15",
+  "status": "IMPLEMENTATION_PRESENT_VERIFICATION_PENDING",
+  "trusted_proxy_boundary": {
+    "express_setting": "app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])",
+    "meaning": "Only loopback, IPv4/IPv6 link-local, and RFC 1918/IPv6 unique-local immediate hops are trusted. Express resolves req.ip from the socket and the X-Forwarded-For chain, stopping at the first untrusted hop.",
+    "limitation": "The checked-in Caddyfile is a local Docker gateway. AWS deployment is not applied, and Vercel-to-API ingress is not verified. Vercel's server-side rewrite followed by Caddy does not preserve the browser IP unless Caddy is explicitly configured to trust Vercel's verified ingress headers and ranges; this repository does not configure that boundary. The configured Express boundary alone does not establish deployment network policy.",
+    "header_policy": "The throttle guard uses only Express req.ip and never reads X-Forwarded-For or CF-Connecting-IP directly."
+  },
+  "storage_decision": {
+    "selected": "Per-process @nestjs/throttler in-memory storage",
+    "reasoning": "The runnable local Caddy topology targets one API process, while the AWS deployment is not applied. Keeping the existing in-memory backend avoids adding Redis latency and test infrastructure to that single-process topology. This is not a shared counter: it resets on process restart and does not coordinate multiple API processes. Revisit before horizontal scaling.",
+    "redis": "Redis is a required project service for other features, but no Redis-backed @nestjs/throttler adapter is installed or configured."
+  },
+  "endpoint_limits": {
+    "general": { "requests": 120, "window_ms": 60000 },
+    "login": {
+      "requests": 5,
+      "window_ms": 60000,
+      "rationale": "Bounds password guesses per client while leaving a small allowance for user retries."
+    },
+    "registration": {
+      "requests": 3,
+      "window_ms": 60000,
+      "rationale": "Constrains account-creation bursts per client."
+    },
+    "refresh": {
+      "requests": 30,
+      "window_ms": 60000,
+      "rationale": "Allows refresh-cookie rotation across concurrent SPA tabs while bounding abuse."
+    },
+    "google_auth": {
+      "requests": "15 challenge / 8 login",
+      "window_ms": 60000,
+      "rationale": "Bounds challenge creation and credential verification separately."
+    }
+  },
+  "verification": {
+    "status": "API_TESTS_PASS_BROWSER_UNVERIFIED",
+    "command": "nest build; vitest run apps/api/test/throttler-proxy.test.ts",
+    "result": "PASS: 1 test file, 4 tests.",
+    "additional_checks": "API source and test TypeScript checks passed; ESLint passed; Prettier passed.",
+    "browser_suites": "Not run: isolated web/API/test-database ports 3100, 4100, 55443, and 56393 were closed, and the Docker engine was unavailable. No test services were started."
+  }
+}
