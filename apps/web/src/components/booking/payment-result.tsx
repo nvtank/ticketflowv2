@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { UserRole } from '@tixflow/shared';
 import { CheckCircle2, Clock3, CircleAlert } from 'lucide-react';
-import { AuthGate } from '@/components/auth/auth-gate';
+import { AuthGate, useAuthState } from '@/components/auth/auth-gate';
 import { apiGet } from '@/lib/api-client';
 import { paymentSchema } from '@/lib/payments';
 import { Card } from '@/components/ui/card';
@@ -18,10 +18,11 @@ export function PaymentResult({ id }: { id: string | null }) {
   );
 }
 function Result({ id }: { id: string | null }) {
+  const { status: authStatus } = useAuthState();
   const query = useQuery({
     queryKey: ['payments', id],
     queryFn: () => apiGet(`/payments/${id}/status`, paymentSchema),
-    enabled: !!id,
+    enabled: !!id && authStatus === 'authenticated',
     refetchOnMount: 'always',
     retry: 3,
     retryDelay: 500,
