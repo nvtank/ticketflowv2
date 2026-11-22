@@ -10,7 +10,8 @@ import { RealtimeModule } from './realtime/realtime.module';
 import { EventsModule } from './events/events.module';
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { AppThrottlerGuard } from './common/http/app-throttler.guard';
 import { MetricsModule } from './common/http/metrics.service';
 import { ConfigurationModule } from './config/configuration.module';
 import { HealthModule } from './health/health.module';
@@ -44,7 +45,7 @@ import { OrganizationsModule } from './organizations/organizations.module';
   ],
   controllers: [MonitoringController],
   providers: [
-    { provide: APP_GUARD, useClass: ThrottlerGuard },
+    { provide: APP_GUARD, useClass: AppThrottlerGuard },
     { provide: APP_GUARD, useClass: AuthGuard },
   ],
 })

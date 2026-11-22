@@ -452,6 +452,7 @@ Acceptance: CR recorded with code-level constraints (HoldLifecycleService interv
 
 Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-057); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
 
+
 ## 9.1 — TF2-042
 
 Parent: 9.0. Description/deliverable: Stakeholder UAT script, feedback & sign-off request. Owner: @nvtank; reviewer: @nguyen-van-hoan.

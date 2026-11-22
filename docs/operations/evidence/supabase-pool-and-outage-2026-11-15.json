@@ -1,0 +1,107 @@
+{
+  "observed_at": "2026-11-15T04:05:47.009Z",
+  "task": "TF2-058",
+  "wbs": "8.19",
+  "issue": 84,
+  "title": "Supabase connection limits, pool sizing, and database outage/pause behavioral evidence",
+  "documented_limits": {
+    "provider": "Supabase",
+    "tier": "Free Tier (Shared Micro compute, 1GB RAM, ap-southeast-1)",
+    "direct_connection": {
+      "port": 5432,
+      "max_connections": 60,
+      "system_reserved": 15,
+      "effective_usable": 45,
+      "citation": "Supabase Official Docs - Managing Database Connections & Compute Add-ons (Free Micro max_connections=60)"
+    },
+    "session_pooler": {
+      "port": 5432,
+      "service": "Supavisor (Session mode)",
+      "max_client_connections": 200,
+      "default_pool_size": 15,
+      "citation": "Supabase Official Docs - Connection Pooling with Supavisor (Free tier default_pool_size=15)"
+    },
+    "transaction_pooler": {
+      "port": 6543,
+      "service": "Supavisor (Transaction mode)",
+      "compatible_with_tixflow": false,
+      "reason": "Incompatible with Prisma prepared statements and in-process pg_advisory_xact_lock session locks in HoldLifecycleService and SeatHoldsService"
+    }
+  },
+  "pool_sizing_analysis": {
+    "historical_unreviewed_allocation": {
+      "primary_prisma_pool": 10,
+      "health_probe_pool": 2,
+      "total_per_process": 12
+    },
+    "tuned_production_allocation": {
+      "primary_prisma_pool": 5,
+      "health_probe_pool": 1,
+      "total_per_process": 6
+    },
+    "concurrency_scenarios": [
+      {
+        "scenario": "1 process (Local Dev only)",
+        "process_count": 1,
+        "historical_connections": 12,
+        "historical_session_pooler_load_pct": 80,
+        "tuned_connections": 6,
+        "tuned_session_pooler_load_pct": 40,
+        "safety_evaluation": "SAFE: Comfortably within Supavisor session pooler default size (15)"
+      },
+      {
+        "scenario": "2 processes (Local Dev + Staging Compose container)",
+        "process_count": 2,
+        "historical_connections": 24,
+        "historical_session_pooler_load_pct": 160,
+        "tuned_connections": 12,
+        "tuned_session_pooler_load_pct": 80,
+        "safety_evaluation": "SAFE: Historical settings caused 160% pooler saturation and connection timeouts; tuned setting (12) stays safely within pooler limit (15)"
+      },
+      {
+        "scenario": "3 processes (Dev + Staging + Vitest integration runners)",
+        "process_count": 3,
+        "historical_connections": 36,
+        "historical_direct_conn_load_pct": 80,
+        "tuned_connections": 18,
+        "tuned_direct_conn_load_pct": 40,
+        "safety_evaluation": "ACCEPTABLE ON DIRECT: Requires direct connection (port 5432) or test database isolation (port 55443), consuming 40% of usable server connections"
+      }
+    ],
+    "health_pool_justification": "Retaining a separate pg.Pool for HealthService with max: 1 and idleTimeoutMillis: 1000 is architecturally justified. If the primary Prisma pool is saturated under concurrent order creation or advisory locks, readiness probes must independently verify PostgreSQL availability without queuing behind application transactions. Reducing max from 2 to 1 with immediate idle release minimizes connection overhead."
+  },
+  "outage_and_pause_behavior": {
+    "simulated_condition": "Database unreachable / paused (Supabase 7-day auto-pause or network partition)",
+    "liveness_probe": {
+      "endpoint": "/api/v1/health/live",
+      "observed_status": 200,
+      "behavior": "Process stays healthy, continues serving non-database routes and static assets, and does not crash or exit."
+    },
+    "readiness_probe": {
+      "endpoint": "/api/v1/health",
+      "observed_status": 503,
+      "observed_body": {
+        "status": "degraded",
+        "service": "tixflow-api",
+        "dependencies": {
+          "postgres": "down"
+        }
+      },
+      "headers": {
+        "cache-control": "no-store"
+      },
+      "bounded_by_timeout": true,
+      "connection_timeout_ms": 1500
+    },
+    "credential_sanitization": {
+      "credential_leak_detected": false,
+      "connection_string_leak_detected": false,
+      "summary": "HealthService swallows connection errors without logging raw connection strings; main.ts startup catch block redacts driver exceptions."
+    },
+    "recovery_behavior": {
+      "observed_recovery": "HealthService does not cache failed probe promises permanently. Once the database wakes from pause, the subsequent probe evaluates SELECT 1 immediately, recovering readiness to HTTP 200 OK without requiring an API process restart."
+    }
+  },
+  "status": "VERIFIED_AND_DOCUMENTED",
+  "no_credentials_recorded": true
+}
