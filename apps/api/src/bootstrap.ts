@@ -11,6 +11,16 @@ import type { Environment } from './config/environment';
 
 export function configureApplication(app: INestApplication, environment: Environment): void {
   app.setGlobalPrefix(API_PREFIX.slice(1));
+  const httpAdapter = app.getHttpAdapter();
+  if (httpAdapter && typeof httpAdapter.getInstance === 'function') {
+    const expressApp = httpAdapter.getInstance();
+    if (expressApp && typeof expressApp.set === 'function') {
+      // Explicitly define trusted reverse proxy hops (loopback and RFC 1918 private subnets).
+      // This allows real client IPs forwarded by Caddy, Vercel edge, or Cloudflare tunnel to be resolved,
+      // while preventing untrusted direct connections from spoofing X-Forwarded-For headers (TF2-059).
+      expressApp.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
+    }
+  }
   app.use(helmet());
   app.use(cookieParser());
   app.use(requestContext(app.get(MetricsService)));
