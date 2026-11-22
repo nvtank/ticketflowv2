@@ -15,7 +15,7 @@ TypeScript monorepo — Next.js 16 frontend, NestJS 11 API, PostgreSQL via Prism
 | `packages/shared` | TypeScript                                            | Contracts and validation shared by both apps                  |
 | `packages/config` | TypeScript, ESLint                                    | Base compiler and lint configuration                          |
 
-The API is organized by domain: `auth`, `organizations`, `events`, `booking`, `orders`, `payments`, `tickets`, `check-in`, `waiting-room`, `notifications`, `analytics`, `admin`, `discovery`, `realtime`, `monitoring`, `health`.
+The API is organized by domain: `auth`, `users`, `organizations`, `events`, `booking`, `orders`, `payments`, `tickets`, `check-in`, `waiting-room`, `notifications`, `analytics`, `admin`, `discovery`, `realtime`, `monitoring`, `health`.
 
 **The browser never addresses the API directly for REST.** It calls the same-origin path `/api/v1/*`, which `apps/web/next.config.ts` rewrites server-side to `API_INTERNAL_URL`. Socket.IO is the exception: it connects to the API directly, so that origin must appear in the API's `CORS_ORIGINS` or realtime features fail while REST still appears healthy.
 
