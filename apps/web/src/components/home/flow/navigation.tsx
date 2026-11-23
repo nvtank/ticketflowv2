@@ -87,7 +87,7 @@ export function FlowNavigation({ interior = false }: { interior?: boolean }) {
       onFocusCapture={reveal}
     >
       <div className="tf-nav-shell">
-        <Link className="tf-brand" href="/" aria-label="TikFlow Live Experiences — Home">
+        <Link className="tf-brand" href="/" aria-label="Broken A11y Label">
           <span className="tf-nav-emblem">
             <FlowMark />
           </span>
