@@ -160,7 +160,7 @@ export function SeatMap({
                     disabled={locked || seat.status !== 'AVAILABLE'}
                     onClick={() => onToggle(seat.id)}
                     style={{ height: Math.round((44 * zoom) / 100) }}
-                    className={`rounded-lg text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-default ${selected.includes(seat.id) ? 'bg-primary text-primary-foreground shadow-md' : styles[seat.status]}`}
+                    className={`scroll-mt-28 rounded-lg text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-default ${selected.includes(seat.id) ? 'bg-primary text-primary-foreground shadow-md' : styles[seat.status]}`}
                   >
                     {seat.code}
                   </button>
