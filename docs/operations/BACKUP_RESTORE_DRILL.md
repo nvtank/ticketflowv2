@@ -128,8 +128,9 @@ $env:TIXFLOW_BACKUP_KEY = [BitConverter]::ToString($key).Replace('-', '')
 [Array]::Clear($key, 0, $key.Length)
 ```
 
-Clear the secret environment variables when finished. Keep the encrypted
-artifacts in the host's ignored `.local/live-backups/` directory. The Windows
+Clear `TIXFLOW_BACKUP_SOURCE_URL` and `TIXFLOW_BACKUP_KEY` from the shell after
+the run. Keep the encrypted artifacts in the host's ignored
+`.local/live-backups/` directory. The Windows
 account that protected the key can decrypt them. Recovery of the laptop or
 Windows profile itself requires a separately escrowed key and a second copy
 of the archive. Both are **PENDING_HUMAN**. No artifact is published to Git,
@@ -140,6 +141,11 @@ one backup per day while the demo is active and one before a live migration.
 Review local copies weekly and retain 30 days of verified archives. There
 is no scheduled job, automatic pruning, or guaranteed maximum gap between
 backups. Keep at least one known-good restore point when applying retention.
+
+This utility buffers the compressed archive in memory and caps captured
+output at 128 MiB. The isolated restore uses a 1 GiB tmpfs for both the
+decrypted archive and PostgreSQL data. Reassess both limits before using
+the procedure on a larger database.
 
 The verified archive represents a consistent snapshot captured between
 21:22:11.616 and 21:22:23.057 on 24 November 2026 (UTC+7). The observed
