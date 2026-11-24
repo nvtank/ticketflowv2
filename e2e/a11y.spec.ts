@@ -100,7 +100,7 @@ test('guards WCAG 2.1 AA compliance and interactive semantics across catalog, de
   // 3. Booking & Seat Map semantics (/events/:slug/booking)
   await registerCustomer(page);
   await page.goto(`/events/${slug}/booking`);
-  await expect(page.getByText('Đã kết nối thời gian thực', { exact: true })).toBeVisible();
+  await expect(page.getByText('Đã kết nối cập nhật trực tiếp', { exact: true })).toBeVisible();
 
   const availableSeats = page.getByRole('button', { name: /^Ghế [A-Z]+\d+: Còn trống$/ });
   await expect(availableSeats.first()).toBeVisible();
