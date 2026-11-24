@@ -290,6 +290,7 @@ model Order {
   updatedAt      DateTime    @updatedAt @db.Timestamptz(3)
   items          OrderItem[]
   payments       Payment[]
+  emailDelivery  OrderEmailDelivery?
 
   @@unique([id, eventId])
   @@unique([userId, idempotencyKey])
@@ -313,6 +314,32 @@ model OrderItem {
   @@unique([id, seatId, eventId])
   @@unique([orderId, seatId])
   @@index([seatId])
+}
+
+enum OrderEmailMode {
+  STUB
+  RESEND
+}
+
+enum OrderEmailStatus {
+  PENDING
+  STUBBED
+  ACCEPTED
+  DEAD_LETTER
+}
+
+model OrderEmailDelivery {
+  orderId     String           @id @db.Uuid
+  order       Order            @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  mode        OrderEmailMode
+  status      OrderEmailStatus @default(PENDING)
+  attempts    Int              @default(0)
+  availableAt DateTime         @default(now()) @db.Timestamptz(3)
+  createdAt   DateTime         @default(now()) @db.Timestamptz(3)
+  finishedAt  DateTime?        @db.Timestamptz(3)
+  lastFailure String?          @db.VarChar(40)
+
+  @@index([mode, status, availableAt])
 }
 
 model Payment {
