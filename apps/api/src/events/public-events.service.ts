@@ -2,7 +2,7 @@ import { BadRequestException, Inject, Injectable, NotFoundException } from '@nes
 import { Prisma } from '../generated/prisma/client';
 import { DatabaseService } from '../database/database.service';
 import type { EventQueryDto } from './events.dto';
-import { eventInclude, eventView, pagination } from './event-record';
+import { eventInclude, eventView, pagination, publicEventStatuses } from './event-record';
 
 @Injectable()
 export class PublicEventsService {
@@ -58,7 +58,7 @@ export class PublicEventsService {
   async resolve(key: string) {
     const event = await this.db.event.findFirst({
       where: {
-        status: { in: ['PUBLISHED', 'COMPLETED'] },
+        status: { in: publicEventStatuses },
         organization: { status: 'APPROVED' },
         ...(/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(key)
           ? { id: key }
@@ -69,8 +69,14 @@ export class PublicEventsService {
     if (!event) throw new NotFoundException('Sự kiện chưa công bố hoặc không tồn tại.');
     return event;
   }
-  async detail(key: string) {
-    return eventView(await this.resolve(key));
+  async detail(key: string, userId?: string) {
+    const event = eventView(await this.resolve(key));
+    if (!userId) return event;
+    const favorite = await this.db.favoriteEvent.findUnique({
+      where: { userId_eventId: { userId, eventId: event.id } },
+      select: { eventId: true },
+    });
+    return { ...event, isFavorite: Boolean(favorite) };
   }
   async seats(key: string) {
     return this.db.$transaction(

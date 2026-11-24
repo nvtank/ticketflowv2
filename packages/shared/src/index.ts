@@ -64,6 +64,24 @@ export interface EventListResponse {
   pagination: Pagination;
 }
 
+export interface FavoriteEventsQuery {
+  page?: number;
+  pageSize?: number;
+}
+
+export interface FavoriteEventParams {
+  eventId: string;
+}
+
+export interface FavoriteEventResponse extends FavoriteEventParams {
+  isFavorite: boolean;
+}
+
+export interface FavoriteEventsResponse {
+  items: { event: EventSummary; createdAt: string }[];
+  pagination: Pagination;
+}
+
 export type DependencyStatus = 'up' | 'down';
 export interface HealthResponse {
   status: 'ok' | 'degraded';
@@ -98,6 +116,7 @@ export interface EventSectionSummary {
   soldSeats: number;
 }
 export interface EventDetail extends EventSummary {
+  isFavorite?: boolean;
   status: EventStatus;
   description: string;
   endsAt: string;
