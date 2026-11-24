@@ -13,7 +13,20 @@ OUT = ROOT / '.local/staging'
 NAME = 'ticketflowv2-staging-quick-tunnel'
 LABEL = 'tixflow.component'
 IMAGE = 'cloudflare/cloudflared@sha256:4955524aeaa379e154023d5a027c250f7b35041a2e7e950cf13f144bc9b9c5ba'
-COMPOSE = ['docker', 'compose', '--env-file', str(OUT / 'runtime.env'), '-f', str(ROOT / 'infrastructure/docker-compose.staging.yml')]
+
+
+def compose_args(overrides):
+    args = ['docker', 'compose', '--env-file', str(OUT / 'runtime.env'),
+            '-f', str(ROOT / 'infrastructure/docker-compose.staging.yml')]
+    if not overrides:
+        default = OUT / 'compose.override.yml'
+        overrides = [default] if default.exists() or default.is_symlink() else []
+    for override in overrides:
+        path = ROOT / override
+        if not path.is_file():
+            raise ValueError(f'Compose override must be an existing file: {path}')
+        args.extend(['-f', str(path)])
+    return args
 
 
 def run(args, **kwargs):
@@ -45,9 +58,18 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=['start', 'status', 'stop'])
     parser.add_argument('--allow-public', action='store_true', help='Explicit permission to publish this temporary staging application')
+    parser.add_argument('--compose-override', type=Path, action='append', metavar='FILE',
+                        help='Layer FILE after the staging Compose file. Repeat for multiple files. '
+                             'Defaults to .local/staging/compose.override.yml if present.')
     args = parser.parse_args()
     if args.action == 'start' and not args.allow_public:
         parser.error('Public exposure requires --allow-public; no tunnel was created')
+    if args.action != 'status':
+        try:
+            # Use the same layers when recreating services, including failure recovery.
+            compose = compose_args(args.compose_override)
+        except ValueError as error:
+            parser.error(str(error))
     container = owned_container()
     if args.action == 'status':
         state = json.loads((OUT / 'public-tunnel.json').read_text()) if (OUT / 'public-tunnel.json').exists() else {}
@@ -57,21 +79,21 @@ def main():
         if container:
             run(['docker', 'rm', '-f', NAME], capture_output=True)
         set_origin('https://localhost:3443')
-        run(COMPOSE + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
+        run(compose + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
         print('Stopped the owned public tunnel; restored local-only browser origin. Data volumes retained.')
         return
     try:
         if not container:
             # Existing local staging must be healthy; this operation never builds images.
-            run(COMPOSE + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
+            run(compose + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
             for attempt in range(30):
-                probe = subprocess.run(COMPOSE + ['exec', '-T', 'gateway', 'test', '-f', '/data/caddy/pki/authorities/local/root.crt'], capture_output=True)
+                probe = subprocess.run(compose + ['exec', '-T', 'gateway', 'test', '-f', '/data/caddy/pki/authorities/local/root.crt'], capture_output=True)
                 if probe.returncode == 0:
                     break
                 if attempt == 29:
                     raise RuntimeError('Local origin CA is not ready')
                 time.sleep(1)
-            cert = run(COMPOSE + ['exec', '-T', 'gateway', 'cat', '/data/caddy/pki/authorities/local/root.crt'], capture_output=True).stdout
+            cert = run(compose + ['exec', '-T', 'gateway', 'cat', '/data/caddy/pki/authorities/local/root.crt'], capture_output=True).stdout
             (OUT / 'local-root.crt').write_text(cert)
             run(['docker', 'run', '-d', '--name', NAME, '--label', LABEL + '=approved-quick-tunnel',
                  '--network', 'ticketflowv2-staging_default', '--restart', 'unless-stopped',
@@ -94,7 +116,7 @@ def main():
                 raise RuntimeError('Quick Tunnel did not provide a URL; public staging is not verified')
             time.sleep(1)
         set_origin(origin)
-        run(COMPOSE + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
+        run(compose + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
         state = {'observed_at': datetime.now(timezone.utc).isoformat(), 'url': origin, 'container': NAME,
                  'image': IMAGE, 'origin_tls_verified': True, 'status': 'STARTED_NOT_VERIFIED',
                  'payment_provider': 'disabled', 'ephemeral': True,
@@ -106,7 +128,7 @@ def main():
         if owned_container():
             run(['docker', 'rm', '-f', NAME], capture_output=True)
         set_origin('https://localhost:3443')
-        run(COMPOSE + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
+        run(compose + ['up', '-d', '--wait', '--no-build', 'api', 'web', 'gateway'])
         raise
 
 

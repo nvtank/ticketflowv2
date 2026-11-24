@@ -20,6 +20,31 @@ The generated HTTPS origin is added alongside the local origin in API CORS. Cook
 
 Docker hosts using journald require the helper's explicit json-file driver for its 5 MB × 2 log rotation. This incompatibility was observed and corrected during the actual startup; it was not an invented historical risk.
 
+## Preserve the staging database target
+
+For a staging API configured to use Supabase, keep the Compose file that sets
+`services.api.environment.DATABASE_URL` at `.local/staging/compose.override.yml`.
+The helper automatically layers that ignored file over
+`infrastructure/docker-compose.staging.yml` on every start and stop, including
+the initial startup and rollback after a failed start. These operations
+can recreate `api`, `web`, and `gateway`, so use the same Compose layers
+when starting staging manually and when managing its tunnel.
+
+If the staging override lives elsewhere, pass `--compose-override FILE`
+on both commands. Repeat the flag in the same order for multiple layers.
+Explicit flags supply the full override list. Relative paths are resolved
+from the repository root. The helper rejects a missing explicit file before
+changing the tunnel or origin. Keep any connection string in ignored local
+configuration.
+
+```sh
+python3 scripts/quick_tunnel.py start --allow-public --compose-override .local/staging/supabase.override.yml
+python3 scripts/quick_tunnel.py stop --compose-override .local/staging/supabase.override.yml
+```
+
+With no conventional override or explicit flags, the helper uses the base
+staging configuration with local PostgreSQL.
+
 ## Stop and restore local use
 
 ```sh
