@@ -20,11 +20,7 @@ function FloatingTicket({
       <div data-depth={variant === 'neon' ? '22' : variant === 'echo' ? '32' : '44'}>
         <div data-ticket-float>
           <div data-ticket-enter>
-            <Link
-              href="/events?category=MUSIC"
-              className="ch-ticket"
-              aria-label={`${title} — concept ticket, discover live music`}
-            >
+            <Link href="/events?category=MUSIC" className="ch-ticket">
               <div className="ch-ticket-art">
                 {image && <FlowImage src={image} sizes="280px" />}
                 <span className="ch-ticket-brand">
