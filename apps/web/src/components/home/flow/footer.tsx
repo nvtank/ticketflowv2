@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { FlowMark } from './primitives';
 import { repositoryUrl } from '@/lib/site';
@@ -16,7 +16,7 @@ export function FlowFooter() {
         <Link href="/events">
           Explore events <ArrowUpRight />
         </Link>
-        <Link href="/organizer">
+        <Link href="/for-organizers">
           For organizers <ArrowUpRight />
         </Link>
         <Link href="/guide">
