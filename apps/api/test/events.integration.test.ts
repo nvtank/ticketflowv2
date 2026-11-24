@@ -654,4 +654,77 @@ describe('Event management with real PostgreSQL and Redis', () => {
     expect(swagger.body.paths['/api/v1/organizer/events']).toBeDefined();
     expect(swagger.body.components.schemas.CreateEventDto.properties.organizationId).toBeDefined();
   });
+  it('streams only paid active tickets to event members and admins', async () => {
+    const event = await events.create(users.get('ORGANIZER')!, body());
+    await seats.generate(event.id, users.get('ORGANIZER')!, grid);
+    const buyer = await db.user.create({
+      data: { email: `${prefix}-buyer@events.local`, name: 'Nguyễn, "An"\nPhạm' },
+    });
+    users.set('CSV_BUYER', buyer.id);
+    const eventSeats = await db.seat.findMany({
+      where: { eventId: event.id, section: { name: 'VIP' } },
+      orderBy: { code: 'asc' },
+      take: 5,
+    });
+    const paidAt = new Date('2026-11-24T08:00:00Z');
+    const checkedAt = new Date('2026-11-24T09:00:00Z');
+    for (const [index, seat] of eventSeats.entries()) {
+      const paid = index !== 2;
+      const hold = await db.seatHold.create({
+        data: { eventId: event.id, userId: buyer.id, expiresAt: paidAt },
+      });
+      const order = await db.order.create({
+        data: {
+          eventId: event.id,
+          userId: buyer.id,
+          holdId: hold.id,
+          idempotencyKey: `${prefix}-csv-${index}`,
+          status: paid ? 'PAID' : 'PENDING_PAYMENT',
+          paidAt: paid ? paidAt : null,
+          expiresAt: hold.expiresAt,
+          totalVnd: 1200000,
+        },
+      });
+      const item = await db.orderItem.create({
+        data: { eventId: event.id, orderId: order.id, seatId: seat.id, priceVnd: 1200000 },
+      });
+      if (index === 4) continue;
+      const code = `${prefix}-csv-${index}`;
+      await db.ticket.create({
+        data: {
+          eventId: event.id,
+          seatId: seat.id,
+          orderItemId: item.id,
+          code,
+          qrTokenHash: createHash('sha256').update(code).digest('hex'),
+          status: index === 0 ? 'USED' : index === 3 ? 'CANCELLED' : 'VALID',
+          ...(index === 0
+            ? { checkIn: { create: { staffId: users.get('STAFF')!, createdAt: checkedAt } } }
+            : {}),
+        },
+      });
+    }
+
+    const path = `/api/v1/organizer/events/${event.id}/attendees.csv`;
+    await http().get(path).expect(401);
+    for (const role of ['OTHER', 'CUSTOMER', 'STAFF'])
+      await http().get(path).set('Authorization', bearer(role)).expect(403);
+    const owner = await http()
+      .get(path)
+      .set('Authorization', bearer())
+      .expect(200)
+      .expect('Content-Type', 'text/csv; charset=utf-8')
+      .expect('Content-Disposition', `attachment; filename="${event.slug}-attendees.csv"`)
+      .expect('Cache-Control', 'private, no-store');
+    expect(owner.text.startsWith('\uFEFF"Ticket code","Ticket type"')).toBe(true);
+    expect(owner.text).toContain(
+      `"${prefix}-csv-0","VIP","VIP","${eventSeats[0]!.code}","Nguyễn, ""An""\nPhạm","${buyer.email}","${paidAt.toISOString()}","CHECKED_IN","${checkedAt.toISOString()}"`,
+    );
+    expect(owner.text).toContain(`"${prefix}-csv-1"`);
+    expect(owner.text).toContain('"NOT_CHECKED_IN",""');
+    for (const index of [2, 3, 4]) expect(owner.text).not.toContain(`${prefix}-csv-${index}`);
+    expect(owner.text).not.toContain(createHash('sha256').update(`${prefix}-csv-0`).digest('hex'));
+    const admin = await http().get(path).set('Authorization', bearer('ADMIN')).expect(200);
+    expect(admin.text).toBe(owner.text);
+  });
 });

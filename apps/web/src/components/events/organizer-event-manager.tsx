@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { apiGet, apiRequest } from '@/lib/api-client';
+import { apiGet, apiRequest, downloadCsv } from '@/lib/api-client';
 import { eventDetailSchema, statusLabel, dateTime } from '@/lib/events';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -21,6 +21,10 @@ export function OrganizerEventManager({ id }: { id: string }) {
     router = useRouter();
   const [seatDraftDirty, setSeatDraftDirty] = useState(false);
   const [removing, setRemoving] = useState(false);
+  const exportAttendees = useMutation({
+    mutationFn: () => downloadCsv(`/organizer/events/${id}/attendees.csv`),
+    onError: (error) => toast.error(error.message),
+  });
   const remove = useMutation({
     mutationFn: () => apiRequest('DELETE', `/organizer/events/${id}`, z.undefined()),
     onSuccess: async () => {
@@ -66,20 +70,29 @@ export function OrganizerEventManager({ id }: { id: string }) {
           </p>
           <p className="mt-2 text-xs text-muted-foreground">{event.organization.name}</p>
         </div>
-        {['DRAFT', 'REJECTED'].includes(event.status) && (
+        <div className="flex flex-wrap gap-2">
+          {['DRAFT', 'REJECTED'].includes(event.status) && (
+            <Button
+              disabled={submit.isPending || seatDraftDirty}
+              title={seatDraftDirty ? 'Lưu sơ đồ chỗ ngồi trước khi gửi duyệt.' : undefined}
+              onClick={() => submit.mutate()}
+            >
+              {submit.isPending ? 'Đang gửi…' : 'Gửi duyệt sự kiện'}
+            </Button>
+          )}
+          {event.status === 'PUBLISHED' && (
+            <Button asChild variant="outline">
+              <Link href={`/events/${event.slug}`}>Xem trang công khai</Link>
+            </Button>
+          )}
           <Button
-            disabled={submit.isPending || seatDraftDirty}
-            title={seatDraftDirty ? 'Lưu sơ đồ chỗ ngồi trước khi gửi duyệt.' : undefined}
-            onClick={() => submit.mutate()}
+            variant="outline"
+            disabled={exportAttendees.isPending}
+            onClick={() => exportAttendees.mutate()}
           >
-            {submit.isPending ? 'Đang gửi…' : 'Gửi duyệt sự kiện'}
+            {exportAttendees.isPending ? 'Đang xuất…' : 'Xuất CSV'}
           </Button>
-        )}
-        {event.status === 'PUBLISHED' && (
-          <Button asChild variant="outline">
-            <Link href={`/events/${event.slug}`}>Xem trang công khai</Link>
-          </Button>
-        )}
+        </div>
       </div>
       {event.rejectionReason && (
         <p className="rounded-xl border border-danger/30 bg-danger/10 p-4 text-sm text-danger">
