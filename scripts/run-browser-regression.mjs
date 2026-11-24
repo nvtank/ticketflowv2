@@ -11,6 +11,7 @@ const supported = [
   'checkin',
   'google',
   'experience',
+  'a11y',
 ];
 const requested = process.argv.slice(2);
 if (requested.some((suite) => !supported.includes(suite))) throw new Error('Unknown browser suite');
