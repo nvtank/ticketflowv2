@@ -79,3 +79,73 @@ node scripts/backup-restore-drill.mjs
 # 3. Stop and clean up test container
 docker compose -f infrastructure/docker-compose.test.yml down
 ```
+
+## 5. Live Supabase backup and recovery (TF2-060)
+
+The Supabase Free plan requires operator-managed backups. The live backup uses the
+same Docker PostgreSQL tooling and AES-256-GCM used in the local TF2-040 drill.
+It captures TixFlow's `public` schema and its data, including Prisma migration
+history. Supabase-managed schemas, database roles and grants, object storage
+files, and deployment secrets require their own recovery procedures.
+[Supabase backup policy](https://supabase.com/kb/faqs/platform/free-plan-backups)
+
+From the repository root, supply the current Supabase IPv4 session-pooler URL
+as `TIXFLOW_BACKUP_SOURCE_URL` through the operator's secret store or current
+shell session. Obtain the Supabase root CA from Database Settings and save it
+as `.local/backup-secrets/supabase-ca.crt`, or set `TIXFLOW_BACKUP_CA_FILE`
+to its path. The client uses `sslmode=verify-full` and read-only mode.
+Supply `TIXFLOW_BACKUP_KEY` from the separate key store as 32 random bytes
+encoded as 64 hex characters. Keep the URL and the raw key out of the shell
+history, Git, and operation logs.
+[Supabase SSL setup](https://supabase.com/docs/guides/platform/ssl-enforcement)
+
+```sh
+node scripts/supabase-backup.mjs backup
+node scripts/supabase-backup.mjs restore BACKUP_FILENAME
+```
+
+Use the artifact basename printed by the first command. For restore, only the
+matching backup key is needed. The restore command creates its own PostgreSQL 17
+container with no network or published ports and a fresh database on tmpfs.
+It authenticates the encrypted archive before restoring, requires `pg_restore`
+to succeed in a single transaction, and checks the counts of application tables,
+users, events, orders, tickets, and migrations. PostgreSQL's initialized empty
+`public` namespace is reused. Both containers disable the Docker logging driver.
+The restore container and its temporary data are removed when the command
+finishes. The operator receives only metadata and aggregate counts.
+
+On the Windows drill host the backup key is stored separately in
+`.local/backup-secrets/tf2-060-key.dpapi` under the operator's Windows account.
+That account can load it into a PowerShell session for either command.
+
+```powershell
+Add-Type -AssemblyName System.Security
+$protectedKey = [IO.File]::ReadAllBytes((Resolve-Path .local/backup-secrets/tf2-060-key.dpapi).Path)
+$key = [Security.Cryptography.ProtectedData]::Unprotect(
+  $protectedKey, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser
+)
+$env:TIXFLOW_BACKUP_KEY = [BitConverter]::ToString($key).Replace('-', '')
+[Array]::Clear($key, 0, $key.Length)
+```
+
+Clear the secret environment variables when finished. Keep the encrypted
+artifacts in the host's ignored `.local/live-backups/` directory. The Windows
+account that protected the key can decrypt them. Recovery of the laptop or
+Windows profile itself requires a separately escrowed key and a second copy
+of the archive. Both are **PENDING_HUMAN**. No artifact is published to Git,
+GitHub Actions, S3, or the Supabase project.
+
+The active trigger is a **manual operator run**. The operating target is
+one backup per day while the demo is active and one before a live migration.
+Review local copies weekly and retain 30 days of verified archives. There
+is no scheduled job, automatic pruning, or guaranteed maximum gap between
+backups. Keep at least one known-good restore point when applying retention.
+
+The verified archive represents a consistent snapshot captured between
+21:22:11.616 and 21:22:23.057 on 24 November 2026 (UTC+7). The observed
+backup took 11.444 seconds. Restoring from the local encrypted archive
+through successful count checks took 6.332 seconds. The snapshot was
+34.3–45.7 seconds old at verification. Writes after that snapshot would
+need to be recovered separately. This timing measures a database drill
+from local storage and does not measure service cutover or off-host
+retrieval. [Execution evidence](evidence/TF2-060-live-backup-restore.json)
