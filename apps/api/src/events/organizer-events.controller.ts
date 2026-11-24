@@ -5,13 +5,18 @@ import {
   Get,
   HttpCode,
   Inject,
+  Logger,
   Param,
   ParseUUIDPipe,
   Patch,
   Post,
   Query,
+  Res,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiTags, ApiQuery } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiProduces, ApiTags, ApiQuery } from '@nestjs/swagger';
+import type { Response } from 'express';
+import { Readable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 import { UserRole } from '@tixflow/shared';
 import { CurrentPrincipal, Roles } from '../auth/auth.decorators';
 import type { Principal } from '../auth/auth.types';
@@ -28,16 +33,19 @@ import { SeatDesignDto } from './seat-design.dto';
 import { SeatManagementService } from './seat-management.service';
 import { EventReviewService } from './event-review.service';
 import { EventStaffService } from './event-staff.service';
+import { AttendeesService } from './attendees.service';
 @ApiTags('Organizer events')
 @ApiBearerAuth()
 @Roles(UserRole.ORGANIZER)
 @Controller('organizer')
 export class OrganizerEventsController {
+  private readonly logger = new Logger(OrganizerEventsController.name);
   constructor(
     @Inject(OrganizerEventsService) private readonly events: OrganizerEventsService,
     @Inject(SeatManagementService) private readonly seats: SeatManagementService,
     @Inject(EventReviewService) private readonly review: EventReviewService,
     @Inject(EventStaffService) private readonly staff: EventStaffService,
+    @Inject(AttendeesService) private readonly attendees: AttendeesService,
   ) {}
   @Get('dashboard') overview(@CurrentPrincipal() p: Principal) {
     return this.events.overview(p.user.id);
@@ -64,6 +72,25 @@ export class OrganizerEventsController {
     @CurrentPrincipal() p: Principal,
   ) {
     return this.events.detail(id, p.user.id);
+  }
+  @Get('events/:eventId/attendees.csv')
+  @Roles(UserRole.ORGANIZER, UserRole.ADMIN)
+  @ApiProduces('text/csv')
+  async exportAttendees(
+    @Param('eventId', ParseUUIDPipe) eventId: string,
+    @CurrentPrincipal() principal: Principal,
+    @Res() response: Response,
+  ) {
+    const { filename, rows } = await this.attendees.export(eventId, principal);
+    response.set({
+      'Content-Type': 'text/csv; charset=utf-8',
+      'Content-Disposition': `attachment; filename="${filename}"`,
+      'Cache-Control': 'private, no-store',
+    });
+    await pipeline(Readable.from(rows, { objectMode: false }), response).catch((error: unknown) => {
+      if ((error as NodeJS.ErrnoException).code !== 'ERR_STREAM_PREMATURE_CLOSE')
+        this.logger.error('Attendee CSV stream failed.');
+    });
   }
   @Patch('events/:id') @ApiBody({ type: EventFieldsDto }) update(
     @Param('id', ParseUUIDPipe) id: string,

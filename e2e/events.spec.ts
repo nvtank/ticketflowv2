@@ -1,4 +1,5 @@
 import { execFileSync } from 'node:child_process';
+import { readFile } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 const password = 'TixFlowDemo!2026';
 test.beforeAll(() => {
@@ -42,6 +43,12 @@ test('organizer creates seats, admin rejects and approves, customer discovers th
   await page.getByRole('button', { name: 'Lưu bản nháp', exact: true }).click();
   await expect(page).toHaveURL(/\/organizer\/events\/[a-f0-9-]+$/);
   const id = page.url().split('/').pop()!;
+  const downloaded = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Xuất CSV', exact: true }).click();
+  const csv = await downloaded;
+  expect(csv.suggestedFilename()).toMatch(/^event-[a-f0-9-]+-attendees\.csv$/);
+  const file = await csv.path();
+  expect((await readFile(file, 'utf8')).startsWith('\uFEFF"Ticket code","Ticket type"')).toBe(true);
   await page.getByRole('button', { name: 'Dãy 10 ghế', exact: true }).click();
   await page.getByLabel('Số hàng', { exact: true }).fill('2');
   await page.getByLabel('Ghế mỗi hàng', { exact: true }).fill('5');
