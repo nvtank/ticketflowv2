@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process';
+﻿import { execFileSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 const password = 'TixFlowDemo!2026';
