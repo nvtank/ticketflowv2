@@ -86,7 +86,7 @@ export function EventCatalog({ searchable = false }: { searchable?: boolean }) {
     const nextParams = buildCatalogSearchParams(urlState, patch);
     const nextString = nextParams.toString();
     if (nextString === paramsKey) return;
-    router.replace(nextString ? `/events?${nextString}` : '/events', { scroll: false });
+    router.push(nextString ? `/events?${nextString}` : '/events', { scroll: false });
   };
 
   useEffect(() => {
