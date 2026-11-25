@@ -112,7 +112,10 @@ test('organizer creates seats, admin rejects and approves, customer discovers th
   await customer.goto('/events');
   const mobileToggle = customer.getByRole('button', { name: /Bộ lọc/ });
   if (await mobileToggle.isVisible()) {
-    await mobileToggle.click();
+    await expect(async () => {
+      await mobileToggle.click();
+      await expect(mobileToggle).toHaveAttribute('aria-expanded', 'true', { timeout: 500 });
+    }).toPass({ timeout: 10_000 });
   }
   await customer.getByLabel('Thành phố', { exact: true }).selectOption('Đà Nẵng');
   await expect(customer).toHaveURL(/city=/);
