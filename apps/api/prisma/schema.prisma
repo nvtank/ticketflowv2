@@ -22,6 +22,18 @@ enum OrganizationStatus {
   REJECTED
 }
 
+enum ContactTopic {
+  GENERAL
+  ORGANIZER
+  TICKET
+  BUG
+}
+
+enum ContactMessageStatus {
+  NEW
+  HANDLED
+}
+
 model User {
   id               String                 @id @default(uuid()) @db.Uuid
   email            String                 @unique @db.VarChar(254)
@@ -44,6 +56,7 @@ model User {
   notifications    Notification[]
   reviews          EventReview[]
   favoriteEvents   FavoriteEvent[]
+  handledMessages  ContactMessage[]
 
   @@index([role, createdAt])
 }
@@ -110,6 +123,21 @@ model AuditLog {
 
   @@index([entityType, entityId, createdAt])
   @@index([actorId, createdAt])
+}
+
+model ContactMessage {
+  id          String               @id @default(uuid()) @db.Uuid
+  name        String               @db.VarChar(100)
+  email       String               @db.VarChar(254)
+  topic       ContactTopic
+  message     String               @db.VarChar(5000)
+  status      ContactMessageStatus @default(NEW)
+  createdAt   DateTime             @default(now()) @db.Timestamptz(3)
+  handledAt   DateTime?            @db.Timestamptz(3)
+  handledById String?              @db.Uuid
+  handledBy   User?                @relation(fields: [handledById], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt, id])
 }
 
 enum EventStatus {
