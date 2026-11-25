@@ -101,10 +101,13 @@ test('rolls back the optimistic heart when the save fails', async ({ page, reque
   await expect(page.getByRole('heading', { name: 'Tech Innovation Summit' })).toBeVisible();
 
   const failure = 'Không thể lưu sự kiện trong lần thử này.';
-  const responseGate = Promise.withResolvers<void>();
+  let releaseResponse = () => {};
+  const responseGate = new Promise<void>((resolve) => {
+    releaseResponse = resolve;
+  });
   await page.route(favoriteEndpoint, async (route) => {
     if (route.request().method() !== 'PUT') return route.continue();
-    await responseGate.promise;
+    await responseGate;
     await route.fulfill({ status: 503, json: { message: failure } });
   });
   const heart = page.getByRole('button', { name: heartName });
@@ -112,7 +115,7 @@ test('rolls back the optimistic heart when the save fails', async ({ page, reque
     await heart.click();
     await expect(heart).toHaveAttribute('aria-pressed', 'true');
   } finally {
-    responseGate.resolve();
+    releaseResponse();
   }
   await expect(heart).toHaveAttribute('aria-pressed', 'false');
   await expect(page.getByText(failure, { exact: true })).toBeVisible();
