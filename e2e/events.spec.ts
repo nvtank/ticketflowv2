@@ -110,6 +110,7 @@ test('organizer creates seats, admin rejects and approves, customer discovers th
   });
   const customer = await customerContext.newPage();
   await customer.goto('/events');
+  await expect(customer.getByLabel('Tìm sự kiện theo tên')).toBeVisible();
   const mobileToggle = customer.getByRole('button', { name: /Bộ lọc/ });
   const filterControls = customer.locator('#catalog-filter-controls');
   if (await mobileToggle.isVisible()) {
