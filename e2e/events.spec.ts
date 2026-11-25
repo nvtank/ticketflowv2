@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process';
+﻿import { execFileSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 const password = 'TixFlowDemo!2026';
@@ -116,6 +116,7 @@ test('organizer creates seats, admin rejects and approves, customer discovers th
   await customer.getByRole('link', { name: 'Xem chi tiết', exact: true }).click();
   await expect(customer.getByRole('heading', { name: title, exact: true })).toBeVisible();
   await expect(customer.getByText('Còn 2/2 ghế', { exact: false })).toBeVisible();
+  await expect(customer.getByTestId('event-countdown')).toBeVisible();
   await customer.screenshot({ path: info.outputPath('published-event.png'), fullPage: true });
   expect(await customer.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
     true,
