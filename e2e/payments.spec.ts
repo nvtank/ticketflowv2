@@ -56,6 +56,10 @@ test('verified duplicate payment issues owned QR tickets; return URL alone never
 }, info) => {
   await login(page);
   const { orderId, paymentId } = await checkout(page);
+  // Wait for the authenticated simulator before leaving it for the return URL.
+  await expect(
+    page.getByRole('heading', { name: 'Mô phỏng thanh toán', exact: true }),
+  ).toBeVisible();
   await page.goto(`/payment/success?paymentId=${paymentId}&code=00&status=PAID`);
   await expect(
     page.getByRole('heading', { name: 'Đang chờ xác nhận thanh toán', exact: true }),
