@@ -11,6 +11,7 @@ export const eventStatusSchema = z.enum([
   'COMPLETED',
 ]);
 export const eventDetailSchema = eventListSchema.shape.items.element.extend({
+  isFavorite: z.boolean().optional(),
   status: eventStatusSchema,
   description: z.string(),
   endsAt: z.iso.datetime(),

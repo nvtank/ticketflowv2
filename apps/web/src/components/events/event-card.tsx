@@ -6,6 +6,7 @@ import type { z } from 'zod';
 import type { eventListSchema } from '@/lib/api-client';
 import { categoryLabel } from '@/lib/events';
 import { formatCurrency } from '@/lib/utils';
+import { FavoriteToggle } from './favorite-toggle';
 
 type Event = z.infer<typeof eventListSchema>['items'][number];
 export function EventCard({ event }: { event: Event }) {
@@ -18,29 +19,32 @@ export function EventCard({ event }: { event: Event }) {
   const fallback = event.category === 'MUSIC' ? '/images/live-stage.jpg' : '/images/microphone.jpg';
   return (
     <article className="experience-card group flex h-full flex-col">
-      <Link
-        href={`/events/${event.slug}`}
-        tabIndex={-1}
-        aria-hidden="true"
-        className="relative block aspect-[1.55] overflow-hidden bg-muted"
-      >
-        <Image
-          unoptimized={!!event.coverUrl}
-          src={event.coverUrl || fallback}
-          alt=""
-          fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        <span className="absolute top-4 left-4 rounded-full border border-white/30 bg-card/95 px-3 py-1.5 text-[10px] font-semibold text-foreground">
-          {categoryLabel[event.category] ?? event.category}
-        </span>
-        <span className="absolute right-4 bottom-4 rounded-xl bg-card px-3 py-2 text-center text-foreground">
-          <strong className="block text-xl leading-6">{day}</strong>
-          <span className="text-[9px] font-semibold uppercase">Tháng {month}</span>
-        </span>
-      </Link>
+      <div className="relative">
+        <Link
+          href={`/events/${event.slug}`}
+          tabIndex={-1}
+          aria-hidden="true"
+          className="relative block aspect-[1.55] overflow-hidden bg-muted"
+        >
+          <Image
+            unoptimized={!!event.coverUrl}
+            src={event.coverUrl || fallback}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          <span className="absolute top-4 left-4 rounded-full border border-white/30 bg-card/95 px-3 py-1.5 text-[10px] font-semibold text-foreground">
+            {categoryLabel[event.category] ?? event.category}
+          </span>
+          <span className="absolute right-4 bottom-4 rounded-xl bg-card px-3 py-2 text-center text-foreground">
+            <strong className="block text-xl leading-6">{day}</strong>
+            <span className="text-[9px] font-semibold uppercase">Tháng {month}</span>
+          </span>
+        </Link>
+        <FavoriteToggle event={event} className="absolute top-4 right-4 z-10" />
+      </div>
       <div className="flex flex-1 flex-col p-5">
         <p
           className={`flex items-center gap-1.5 text-[10px] font-semibold ${event.availableSeats ? 'text-success' : 'text-muted-foreground'}`}

@@ -54,6 +54,7 @@ export function FlowNavigation({ interior = false }: { interior?: boolean }) {
         ? [
             { href: '/profile', label: 'My profile' },
             { href: '/notifications', label: 'Notifications' },
+            { href: '/favorites', label: 'Favorites' },
             ...(user.role !== 'CUSTOMER'
               ? [
                   {
