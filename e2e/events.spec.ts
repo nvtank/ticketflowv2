@@ -111,10 +111,13 @@ test('organizer creates seats, admin rejects and approves, customer discovers th
   const customer = await customerContext.newPage();
   await customer.goto('/events');
   const mobileToggle = customer.getByRole('button', { name: /Bộ lọc/ });
+  const filterControls = customer.locator('#catalog-filter-controls');
   if (await mobileToggle.isVisible()) {
     await expect(async () => {
-      await mobileToggle.click();
-      await expect(mobileToggle).toHaveAttribute('aria-expanded', 'true', { timeout: 500 });
+      if ((await mobileToggle.getAttribute('aria-expanded')) !== 'true') {
+        await mobileToggle.click();
+      }
+      await expect(filterControls).toBeVisible({ timeout: 500 });
     }).toPass({ timeout: 10_000 });
   }
   await customer.getByLabel('Thành phố', { exact: true }).selectOption('Đà Nẵng');
