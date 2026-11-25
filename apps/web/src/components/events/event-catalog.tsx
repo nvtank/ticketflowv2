@@ -237,7 +237,8 @@ export function EventCatalog({ searchable = false }: { searchable?: boolean }) {
 
           <div
             id="catalog-filter-controls"
-            data-open={mobileFiltersOpen}`n            className="mt-4 hidden gap-3 data-[open=true]:grid sm:grid-cols-2 lg:grid-cols-4 md:grid"
+            data-open={mobileFiltersOpen}
+            className="mt-4 hidden gap-3 data-[open=true]:grid sm:grid-cols-2 lg:grid-cols-4 md:grid"
           >
             <label className="text-xs font-medium text-muted-foreground">
               Thành phố
@@ -367,7 +368,8 @@ export function EventCatalog({ searchable = false }: { searchable?: boolean }) {
           </div>
 
           <div
-            data-open={mobileFiltersOpen}`n            className="mt-4 hidden flex-wrap items-center gap-2 border-t pt-4 data-[open=true]:flex md:flex"
+            data-open={mobileFiltersOpen}
+            className="mt-4 hidden flex-wrap items-center gap-2 border-t pt-4 data-[open=true]:flex md:flex"
           >
             <span className="text-[11px] font-medium text-muted-foreground">Thời gian:</span>
             {datePresets.map((preset) => {
