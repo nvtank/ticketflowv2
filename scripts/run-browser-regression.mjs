@@ -11,6 +11,7 @@ const supported = [
   'checkin',
   'google',
   'experience',
+  'contact',
   'a11y',
 ];
 const requested = process.argv.slice(2);
