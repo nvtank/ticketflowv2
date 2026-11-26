@@ -1,8 +1,14 @@
 import { randomUUID } from 'node:crypto';
 import { ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import type { SavedSeatLayout } from '@tixflow/shared';
 import { DatabaseService } from '../database/database.service';
 import type { EventStatus } from '../generated/prisma/client';
-import type { CreateEventDto, EventFieldsDto, OrganizerQueryDto } from './events.dto';
+import type {
+  CreateEventDto,
+  EventDatesDto,
+  EventFieldsDto,
+  OrganizerQueryDto,
+} from './events.dto';
 import { assertEditable, validateDates } from './event-policy';
 import {
   auditEvent,
@@ -13,19 +19,25 @@ import {
   requireMember,
 } from './event-record';
 
+function eventDates(input: EventDatesDto) {
+  validateDates(input);
+  return {
+    startsAt: new Date(input.startsAt),
+    endsAt: new Date(input.endsAt),
+    salesStartAt: new Date(input.salesStartAt),
+    salesEndAt: new Date(input.salesEndAt),
+  };
+}
+
 @Injectable()
 export class OrganizerEventsService {
   constructor(@Inject(DatabaseService) private readonly db: DatabaseService) {}
   private data(input: EventFieldsDto) {
-    validateDates(input);
     return {
+      ...eventDates(input),
       title: input.title,
       description: input.description,
       category: input.category,
-      startsAt: new Date(input.startsAt),
-      endsAt: new Date(input.endsAt),
-      salesStartAt: new Date(input.salesStartAt),
-      salesEndAt: new Date(input.salesEndAt),
       coverUrl: input.coverUrl ?? null,
       galleryUrls: input.galleryUrls,
       ticketPolicy: input.ticketPolicy,
@@ -48,6 +60,109 @@ export class OrganizerEventsService {
       await auditEvent(tx, event.id, userId, 'EVENT_CREATED');
       return eventView(event);
     });
+  }
+  async duplicate(id: string, userId: string, dates: EventDatesDto) {
+    const schedule = eventDates(dates);
+    return this.db.$transaction(
+      async (tx) => {
+        const source = await lockEvent(tx, id);
+        await requireMember(tx, source.organizationId, userId);
+        const originalInventory = await tx.event.findUniqueOrThrow({
+          where: { id },
+          select: {
+            ticketTypes: { select: { id: true, name: true, priceVnd: true } },
+            seats: { select: { sectionId: true, code: true, rowLabel: true, columnNumber: true } },
+          },
+        });
+        const eventId = randomUUID();
+        const { name, address, city } = source.venue;
+        const venue = await tx.venue.create({ data: { name, address, city } });
+        const titleSuffix = ' (bản sao)';
+        const title =
+          Array.from(source.title)
+            .slice(0, 180 - titleSuffix.length)
+            .join('')
+            .trimEnd() + titleSuffix;
+        const slugBase = Array.from(source.slug);
+        for (let sequence = 1; ; sequence++) {
+          const suffix = `-copy-${sequence}`;
+          const slug = slugBase.slice(0, 200 - suffix.length).join('') + suffix;
+          // Let the unique index arbitrate collisions, including concurrent inserts.
+          const inserted = await tx.event.createMany({
+            skipDuplicates: true,
+            data: {
+              ...schedule,
+              id: eventId,
+              slug,
+              title,
+              status: 'DRAFT',
+              organizationId: source.organizationId,
+              venueId: venue.id,
+              category: source.category,
+              description: source.description,
+              coverUrl: source.coverUrl,
+              galleryUrls: source.galleryUrls,
+              ticketPolicy: source.ticketPolicy,
+              maxTicketsPerOrder: source.maxTicketsPerOrder,
+            },
+          });
+          if (inserted.count === 1) break;
+        }
+        const typeIds = new Map(originalInventory.ticketTypes.map(({ id }) => [id, randomUUID()]));
+        const sectionIds = new Map(source.sections.map(({ id }) => [id, randomUUID()]));
+        if (typeIds.size)
+          await tx.ticketType.createMany({
+            data: originalInventory.ticketTypes.map(({ id, name, priceVnd }) => ({
+              id: typeIds.get(id)!,
+              eventId,
+              name,
+              priceVnd,
+            })),
+          });
+        if (sectionIds.size)
+          await tx.eventSection.createMany({
+            data: source.sections.map(({ id, name, ticketTypeId, rowCount, columnCount }) => ({
+              id: sectionIds.get(id)!,
+              eventId,
+              ticketTypeId: typeIds.get(ticketTypeId)!,
+              name,
+              rowCount,
+              columnCount,
+            })),
+          });
+        if (originalInventory.seats.length)
+          await tx.seat.createMany({
+            data: originalInventory.seats.map(({ sectionId, ...seat }) => ({
+              ...seat,
+              eventId,
+              sectionId: sectionIds.get(sectionId)!,
+              status: 'AVAILABLE',
+            })),
+          });
+        const layout = source.seatMapLayout as unknown as SavedSeatLayout | null;
+        if (layout)
+          await tx.event.update({
+            where: { id: eventId },
+            data: {
+              seatMapLayout: {
+                ...layout,
+                stage: { ...layout.stage },
+                zones: layout.zones.map((zone) => ({ ...zone, id: sectionIds.get(zone.id)! })),
+                blocks: layout.blocks.map((block) => ({
+                  ...block,
+                  zoneId: sectionIds.get(block.zoneId)!,
+                  disabledSeats: [],
+                })),
+              },
+            },
+          });
+        await auditEvent(tx, eventId, userId, 'EVENT_DUPLICATED', { sourceEventId: id });
+        return eventView(
+          await tx.event.findUniqueOrThrow({ where: { id: eventId }, include: eventInclude }),
+        );
+      },
+      { timeout: 15_000 },
+    );
   }
   async update(id: string, userId: string, input: EventFieldsDto) {
     const data = this.data(input);

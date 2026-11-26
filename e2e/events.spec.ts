@@ -122,4 +122,21 @@ test('organizer creates seats, admin rejects and approves, customer discovers th
   );
   await adminContext.close();
   await customerContext.close();
+
+  await page.getByRole('button', { name: 'Nhân bản', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'Nhân bản sự kiện', exact: true });
+  const date = (days: number) =>
+    new Date(Date.now() + days * 86_400_000).toISOString().slice(0, 16);
+  await dialog.getByLabel('Bắt đầu sự kiện', { exact: true }).fill(date(60));
+  await dialog.getByLabel('Kết thúc sự kiện', { exact: true }).fill(date(61));
+  await dialog.getByLabel('Bắt đầu bán vé', { exact: true }).fill(date(40));
+  await dialog.getByLabel('Kết thúc bán vé', { exact: true }).fill(date(59));
+  await dialog.getByRole('button', { name: 'Tạo bản nháp', exact: true }).click();
+  await expect(
+    page.getByRole('heading', { name: `${title} (bản sao)`, exact: true }),
+  ).toBeVisible();
+  await expect(page).toHaveURL(/\/organizer\/events\/[a-f0-9-]+$/);
+  expect(new URL(page.url()).pathname).not.toBe(`/organizer/events/${id}`);
+  await expect(page.getByText('Bản nháp', { exact: true })).toBeVisible();
+  await expect(page.locator('[data-layout-block]')).toHaveCount(2);
 });

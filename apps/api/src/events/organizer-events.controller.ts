@@ -22,6 +22,7 @@ import { CurrentPrincipal, Roles } from '../auth/auth.decorators';
 import type { Principal } from '../auth/auth.types';
 import {
   CreateEventDto,
+  EventDatesDto,
   EventFieldsDto,
   GridDto,
   OrganizerQueryDto,
@@ -72,6 +73,15 @@ export class OrganizerEventsController {
     @CurrentPrincipal() p: Principal,
   ) {
     return this.events.detail(id, p.user.id);
+  }
+  @Post('events/:id/duplicate')
+  @ApiBody({ type: EventDatesDto })
+  duplicate(
+    @Param('id', ParseUUIDPipe) id: string,
+    @CurrentPrincipal() p: Principal,
+    @Body() dates: EventDatesDto,
+  ) {
+    return this.events.duplicate(id, p.user.id, dates);
   }
   @Get('events/:eventId/attendees.csv')
   @Roles(UserRole.ORGANIZER, UserRole.ADMIN)
