@@ -1,4 +1,5 @@
 import { NotificationsModule } from './notifications/notifications.module';
+import { ContactModule } from './contact/contact.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { DiscoveryModule } from './discovery/discovery.module';
 import { WaitingRoomModule } from './waiting-room/waiting-room.module';
@@ -28,6 +29,7 @@ import { OrganizationsModule } from './organizations/organizations.module';
     ConfigurationModule,
     WaitingRoomModule,
     NotificationsModule,
+    ContactModule,
     FavoritesModule,
     MetricsModule,
     HealthModule,

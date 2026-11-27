@@ -7,6 +7,7 @@ import {
   ArrowUpRight,
   ChevronRight,
   LayoutDashboard,
+  Mail,
   Menu,
   ShieldCheck,
   Ticket,
@@ -63,6 +64,7 @@ export function DashboardShell({
                   { href: '/admin/events', label: 'Phê duyệt sự kiện', icon: Ticket },
                   { href: '/admin/users', label: 'Người dùng', icon: Users },
                   { href: '/admin/organizations', label: 'Tổ chức', icon: ShieldCheck },
+                  { href: '/admin/messages', label: 'Tin nhắn liên hệ', icon: Mail },
                   { href: '/admin/monitoring', label: 'Giám sát', icon: Activity },
                 ]
               : []),
