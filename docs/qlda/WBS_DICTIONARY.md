@@ -442,15 +442,15 @@ Acceptance: Vercel environment variable `API_INTERNAL_URL` verified against back
 
 Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-048); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
 
-## 8.19 — TF2-058
+## 8.18 — TF2-057
 
-Parent: 8.0. Description/deliverable: Review and document Supabase connection limits and outage behavior. Owner: @TuanAn0311; reviewer: @nvtank.
+Parent: 8.0. Description/deliverable: CR durable apps/api hosting decision record. Owner: @TuanAn0311; reviewer: @nvtank.
 
-Inputs/dependencies: TF2-050. Estimate: 2 SP PROPOSED; due: S2 active continuation forecast (SPRINTS.md). Historical classification: W9.
+Inputs/dependencies: CR-20261112-003, CR-20261114-004. Estimate: 3 SP PROPOSED; due: S2 active continuation forecast (SPRINTS.md). Historical classification: W9.
 
-Acceptance: Documented limits of Supabase Free Tier (direct 60, session pooler 15); pool sizing analyzed and safely tuned (DatabaseService max: 5, HealthService max: 1); observed behavior for unreachable/paused DB recorded (readiness 503, liveness 200, sanitized logs, seamless recovery); evidence recorded in evidence/supabase-pool-and-outage-2026-11-15.json; integration tests pass.
+Acceptance: CR recorded with code-level constraints (HoldLifecycleService interval, Socket.IO, Redis), candidate options evaluated, decision (Dual-Track Named Tunnel + AWS gated), explicit costs and "who pays"; persistent-process and Redis requirements addressed; what is not solved clearly stated; spending/accounts flagged PENDING_HUMAN.
 
-Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-058); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
+Issue link: resolve stable ID in [live backlog](https://github.com/nvtank/ticketflowv2/issues?q=TF2-057); actual URL is captured in evidence/github-sync.json. Evidence/PR: PENDING.
 
 ## 9.1 — TF2-042
 
