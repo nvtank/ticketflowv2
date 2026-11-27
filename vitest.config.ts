@@ -1,8 +1,8 @@
-import { defineConfig } from 'vitest/config';
+﻿import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
-    include: ['apps/api/test/**/*.test.ts'],
+    include: ['apps/api/test/**/*.test.ts', 'apps/web/test/**/*.test.ts'],
     exclude: ['**/*.integration.test.ts'],
     environment: 'node',
     maxWorkers: 1,
