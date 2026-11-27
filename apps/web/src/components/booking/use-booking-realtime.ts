@@ -6,37 +6,53 @@ import type { RealtimeClientEvents, RealtimeServerEvents } from '@tixflow/shared
 import { useAuthState } from '@/stores/auth';
 import { refreshSession } from '@/lib/auth-session';
 import { bookingSchema, inventoryHintSchema } from '@/lib/booking';
+import {
+  initialRealtimeConnectionStatus,
+  resolveRealtimeOrigin,
+  type RealtimeConnectionStatus,
+} from '@/lib/realtime';
 export function useBookingRealtime(eventId: string) {
   const cache = useQueryClient(),
     userId = useAuthState((s) => s.user?.id),
-    [connection, setConnection] = useState<'connecting' | 'connected' | 'reconnecting'>(
-      'connecting',
+    [connection, setConnection] = useState<RealtimeConnectionStatus>(() =>
+      initialRealtimeConnectionStatus(
+        process.env.NEXT_PUBLIC_REALTIME_URL,
+        process.env.NODE_ENV === 'development',
+      ),
     );
   useEffect(() => {
     if (!userId) return;
     let disposed = false,
       refreshing = false;
-    const origin =
-      process.env.NEXT_PUBLIC_REALTIME_URL ??
-      `${window.location.protocol}//${window.location.hostname}:4100`;
+    const origin = resolveRealtimeOrigin(
+      process.env.NEXT_PUBLIC_REALTIME_URL,
+      process.env.NODE_ENV === 'development',
+      window.location,
+    );
+    if (!origin) return;
     const socket: Socket<RealtimeServerEvents, RealtimeClientEvents> = io(origin, {
       transports: ['websocket'],
       auth: (callback) => callback({ token: useAuthState.getState().accessToken }),
       reconnectionDelay: 500,
       reconnectionDelayMax: 5000,
     });
+    const connectionTimeout = setTimeout(() => {
+      if (!disposed) setConnection('reconnecting');
+    }, 5000);
     const resync = () => {
       void cache.invalidateQueries({ queryKey: ['booking', eventId] });
     };
     socket.on('connect', () => {
       socket.timeout(5000).emit('event:join', { eventId }, (error, result) => {
         if (disposed) return;
+        clearTimeout(connectionTimeout);
         setConnection(!error && result?.ok ? 'connected' : 'reconnecting');
         resync();
       });
     });
     socket.on('disconnect', () => setConnection('reconnecting'));
     socket.on('connect_error', (error) => {
+      clearTimeout(connectionTimeout);
       setConnection('reconnecting');
       const data: unknown = 'data' in error ? error.data : null;
       if (
@@ -66,6 +82,7 @@ export function useBookingRealtime(eventId: string) {
     socket.on('inventory:updated', hint);
     return () => {
       disposed = true;
+      clearTimeout(connectionTimeout);
       socket.removeAllListeners();
       socket.disconnect();
     };

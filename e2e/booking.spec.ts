@@ -17,6 +17,30 @@ test.beforeAll(() => {
     env: { ...process.env, NODE_ENV: 'test', DATABASE_URL: url, DEMO_PASSWORD: password },
   });
 });
+
+test('warns customers when realtime connection fails', async ({ page }, info) => {
+  await login(page, 'customer@tixflow.local');
+  let realtimeAttempts = 0;
+  await page.routeWebSocket('**/socket.io/**', (socket) => {
+    realtimeAttempts += 1;
+    socket.close({ code: 1011, reason: 'Simulated realtime outage' });
+  });
+  const response = await page.request.get('http://127.0.0.1:4100/api/v1/events?q=TixFlow%20Music');
+  expect(response.ok()).toBe(true);
+  const result = (await response.json()) as { items: { slug: string }[] };
+  const slug = result.items[0]!.slug;
+
+  await page.goto(`/events/${slug}/booking`);
+  await expect.poll(() => realtimeAttempts).toBeGreaterThan(0);
+  await expect(
+    page.getByRole('alert').filter({ hasText: 'Mất kết nối cập nhật trực tiếp' }),
+  ).toBeVisible({ timeout: 15_000 });
+  await page.screenshot({
+    path: info.outputPath('realtime-degraded-seat-map.png'),
+    fullPage: true,
+  });
+});
+
 async function login(page: Page, email: string) {
   await page.goto('/login');
   await page.getByLabel('Email', { exact: true }).fill(email);
@@ -41,8 +65,8 @@ test('two customers hold seats, receive realtime updates, reload and cancel a se
   await login(other, 'customer2@tixflow.local');
   await page.goto(`/events/${slug}/booking`);
   await other.goto(`/events/${slug}/booking`);
-  await expect(page.getByText('Đã kết nối thời gian thực', { exact: true })).toBeVisible();
-  await expect(other.getByText('Đã kết nối thời gian thực', { exact: true })).toBeVisible();
+  await expect(page.getByText('Đã kết nối cập nhật trực tiếp', { exact: true })).toBeVisible();
+  await expect(other.getByText('Đã kết nối cập nhật trực tiếp', { exact: true })).toBeVisible();
   const choices = page.getByRole('button', { name: /^Ghế .*: Còn trống$/ });
   await expect(choices.first()).toBeVisible();
   const labels = await choices.evaluateAll((elements) =>

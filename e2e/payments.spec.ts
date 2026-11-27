@@ -39,7 +39,7 @@ async function checkout(page: Page, count = 2) {
   const response = await page.request.get('http://127.0.0.1:4100/api/v1/events?q=TixFlow%20Music');
   const body = (await response.json()) as { items: { slug: string }[] };
   await page.goto(`/events/${body.items[0]!.slug}/booking`);
-  await expect(page.getByText('Đã kết nối thời gian thực', { exact: true })).toBeVisible();
+  await expect(page.getByText('Đã kết nối cập nhật trực tiếp', { exact: true })).toBeVisible();
   const available = page.getByRole('button', { name: /^Ghế .*: Còn trống$/ });
   for (let i = 0; i < count; i++) await available.nth(i).click();
   await page.getByRole('button', { name: 'Xác nhận giữ ghế', exact: true }).click();
