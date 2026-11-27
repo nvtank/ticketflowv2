@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Bell, Ticket, UserRound, ArrowUpRight } from 'lucide-react';
+import { Bell, Heart, Ticket, UserRound, ArrowUpRight } from 'lucide-react';
 import { useAuthState } from '@/stores/auth';
 import { cn } from '@/lib/utils';
 export function AccountNavigation() {
@@ -10,6 +10,7 @@ export function AccountNavigation() {
   const links = [
     { href: '/profile', label: 'Hồ sơ & đơn hàng', icon: UserRound },
     ...(role === 'CUSTOMER' ? [{ href: '/my-tickets', label: 'Vé của tôi', icon: Ticket }] : []),
+    { href: '/favorites', label: 'Yêu thích', icon: Heart },
     { href: '/notifications', label: 'Thông báo', icon: Bell },
   ];
   return (

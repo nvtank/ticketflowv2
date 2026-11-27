@@ -28,7 +28,9 @@ export { QueryNotice } from '@/components/ui/query-notice';
 import { LayoutCanvas } from '@/components/seating/layout-canvas';
 import { ArtistCollection } from '@/components/discovery/artists';
 import { EventReviews } from '@/components/discovery/reviews';
+import { useAuthState } from '@/stores/auth';
 import { EventCountdown } from './event-countdown';
+import { FavoriteToggle } from './favorite-toggle';
 
 export function EventInformation({ event }: { event: EventData }) {
   const canonicalUrl =
@@ -95,7 +97,15 @@ export function EventInformation({ event }: { event: EventData }) {
             <p className="text-sm text-primary">
               {categoryLabel[event.category] ?? event.category}
             </p>
-            <h1 className="mt-2 text-3xl font-bold md:text-4xl">{event.title}</h1>
+            <div className="mt-2 flex items-start justify-between gap-4">
+              <h1 className="text-3xl font-bold md:text-4xl">{event.title}</h1>
+              <FavoriteToggle
+                event={event}
+                listed={event.status === 'PUBLISHED'}
+                detailFavorite={event.isFavorite}
+                className="shrink-0"
+              />
+            </div>
           </div>
         </div>
         <Card>
@@ -227,10 +237,14 @@ export function EventInformation({ event }: { event: EventData }) {
   );
 }
 export function PublicEventDetail({ slug }: { slug: string }) {
+  const userId = useAuthState((state) => state.user?.id);
   const query = useQuery({
-    queryKey: ['events', 'detail', slug],
+    queryKey: ['events', 'public-detail', slug, userId],
     queryFn: ({ signal }) =>
-      apiGet(`/events/${encodeURIComponent(slug)}`, eventDetailSchema, { signal, anonymous: true }),
+      apiGet(`/events/${encodeURIComponent(slug)}`, eventDetailSchema, {
+        signal,
+        anonymous: !userId,
+      }),
     retry: false,
   });
   return (
