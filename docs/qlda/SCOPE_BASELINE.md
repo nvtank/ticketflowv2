@@ -13,3 +13,5 @@ Changes use CHANGE_REQUEST_TEMPLATE.md and an authentic CCB decision; no retroac
 ## Change Requests & Scope Amendments
 
 - **CR-20261112-003 (Hosting Split)**: Adds Vercel as a zero-cost public deployment target for `apps/web` (WBS 8.10/8.11/8.12); preserves the Docker/AWS deployment path for `apps/api` (TF2-037/038/039) to protect persistent backend requirements (in-process hold TTL interval, Socket.IO WebSocket gateway, PostgreSQL connection pooling). Formal course sign-off remains PENDING_HUMAN.
+- **CR-20261114-004 (Supabase Database Target)**: Authorizes Supabase-hosted PostgreSQL for `apps/api` (WBS 8.14 / TF2-050) at $0 cost under the Free tier, replacing self-hosted Postgres container for staging/demo.
+- **CR-20261115-005 (Durable API Hosting Target)**: Adopts a Dual-Track strategy for `apps/api` (WBS 8.18 / TF2-057): immediate zero-cost stable hostname via Durable Cloudflare Named Tunnel to resolve frontend-to-API wiring (#69) without URL regeneration; preserves AWS ECS Fargate + ALB as the future production cloud target gated behind explicit human billing authorization (`PENDING_HUMAN`, ~$51/mo).
