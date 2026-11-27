@@ -43,6 +43,7 @@ model User {
   waitingSessions  WaitingRoomSession[]
   notifications    Notification[]
   reviews          EventReview[]
+  favoriteEvents   FavoriteEvent[]
 
   @@index([role, createdAt])
 }
@@ -196,10 +197,23 @@ model Event {
   waitingSessions    WaitingRoomSession[]
   artists            EventArtist[]
   reviews            EventReview[]
+  favorites          FavoriteEvent[]
 
   @@index([status, startsAt])
   @@index([organizationId, status])
   @@index([category, startsAt])
+}
+
+model FavoriteEvent {
+  userId    String   @db.Uuid
+  eventId   String   @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@id([userId, eventId])
+  @@index([userId, createdAt, eventId])
+  @@index([eventId])
 }
 
 model TicketType {
