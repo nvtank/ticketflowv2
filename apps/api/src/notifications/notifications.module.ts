@@ -15,6 +15,8 @@ import { IsInt, Min, Max } from 'class-validator';
 import { CurrentPrincipal } from '../auth/auth.decorators';
 import type { Principal } from '../auth/auth.types';
 import { DatabaseService } from '../database/database.service';
+import { OrderEmailWorker } from './order-email.worker';
+import { OrderEmailTransport } from './order-email.transport';
 class InboxQueryDto {
   @ApiPropertyOptional({ default: 1, minimum: 1 })
   @Type(() => Number)
@@ -76,5 +78,8 @@ export class NotificationsController {
     return { read: true };
   }
 }
-@Module({ controllers: [NotificationsController] })
+@Module({
+  controllers: [NotificationsController],
+  providers: [OrderEmailWorker, OrderEmailTransport],
+})
 export class NotificationsModule {}

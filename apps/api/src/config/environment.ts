@@ -20,6 +20,9 @@ const environmentSchema = z
       .default('false')
       .transform((v) => v === 'true'),
     PAYMENT_PROVIDER: z.enum(['disabled', 'payos', 'mock']).default('disabled'),
+    ORDER_EMAIL_PROVIDER: z.enum(['disabled', 'resend']).default('disabled'),
+    RESEND_API_KEY: z.string().trim().optional(),
+    ORDER_EMAIL_FROM: z.string().trim().optional(),
     PAYMENT_RETURN_ORIGIN: z
       .url()
       .default('http://localhost:3100')
@@ -67,6 +70,20 @@ const environmentSchema = z
           context.addIssue({ code: 'custom', path: [key], message: 'Required for PayOS' });
     }
     if (value.NODE_ENV === 'production') {
+      if (value.ORDER_EMAIL_PROVIDER === 'resend') {
+        if (!value.RESEND_API_KEY)
+          context.addIssue({
+            code: 'custom',
+            path: ['RESEND_API_KEY'],
+            message: 'Required for order email',
+          });
+        if (!z.email().safeParse(value.ORDER_EMAIL_FROM).success)
+          context.addIssue({
+            code: 'custom',
+            path: ['ORDER_EMAIL_FROM'],
+            message: 'A sender email address is required for order email',
+          });
+      }
       if (value.PAYMENT_PROVIDER === 'mock')
         context.addIssue({
           code: 'custom',

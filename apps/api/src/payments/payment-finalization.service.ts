@@ -6,6 +6,7 @@ import { ENVIRONMENT } from '../config/configuration.module';
 import type { Environment } from '../config/environment';
 import { InventoryPublisher } from '../booking/inventory-publisher';
 import { HoldLifecycleService } from '../booking/hold-lifecycle.service';
+import { orderEmailMode } from '../notifications/order-email.transport';
 import { credentialHash, ticketCredential, ticketKey } from '../tickets/ticket-credential';
 import { lockPaymentOrder } from './payment-record';
 import type { VerifiedPaymentEvent } from './payment-provider';
@@ -209,6 +210,11 @@ export class PaymentFinalizationService {
                   message: `Thanh toán thành công. ${order.items.length} vé đã có trong Vé của tôi.`,
                 },
               });
+              const emailMode = orderEmailMode(this.env);
+              if (emailMode)
+                await tx.orderEmailDelivery.create({
+                  data: { orderId: order.id, mode: emailMode },
+                });
               status = 'PAID';
               outcome = 'PAID';
               changed = true;

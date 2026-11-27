@@ -1,9 +1,11 @@
 import type * as PayOSModule from '../src/payments/providers/payos.provider';
 import type * as EnvironmentModule from '../src/config/environment';
 import type * as CredentialModule from '../src/tickets/ticket-credential';
+import type * as EmailTransportModule from '../src/notifications/order-email.transport';
+import type * as EmailWorkerModule from '../src/notifications/order-email.worker';
 import { createRequire } from 'node:module';
 import { createHmac, randomInt, randomUUID } from 'node:crypto';
-import { beforeAll, afterAll, describe, expect, it } from 'vitest';
+import { beforeAll, afterAll, describe, expect, it, vi } from 'vitest';
 import { bookingFixture } from './booking-fixture';
 const require = createRequire(import.meta.url);
 const { PayOSPaymentProvider } =
@@ -11,6 +13,10 @@ const { PayOSPaymentProvider } =
 const { parseEnvironment } = require('../dist/config/environment.js') as typeof EnvironmentModule;
 const { verifyTicketCredential, ticketKey } =
   require('../dist/tickets/ticket-credential.js') as typeof CredentialModule;
+const { OrderEmailTransport } =
+  require('../dist/notifications/order-email.transport.js') as typeof EmailTransportModule;
+const { OrderEmailWorker } =
+  require('../dist/notifications/order-email.worker.js') as typeof EmailWorkerModule;
 const checksum = 'a'.repeat(64);
 const env = parseEnvironment({
   ...process.env,
@@ -89,6 +95,7 @@ describe('Verified PayOS callbacks with real PostgreSQL and Redis', () => {
     body.data.amount++;
     await f.http().post('/api/v1/payments/webhook').send(body).expect(400);
     expect(await f.db.ticket.count({ where: { eventId: x.event.id } })).toBe(0);
+    expect(await f.db.orderEmailDelivery.count({ where: { orderId: x.orderId } })).toBe(0);
     expect((await f.db.order.findUniqueOrThrow({ where: { id: x.orderId } })).status).toBe(
       'PENDING_PAYMENT',
     );
@@ -109,6 +116,37 @@ describe('Verified PayOS callbacks with real PostgreSQL and Redis', () => {
       await f.db.seat.count({ where: { eventId: x.event.id, status: 'SOLD', holdId: null } }),
     ).toBe(2);
     expect((await f.db.order.findUniqueOrThrow({ where: { id: x.orderId } })).status).toBe('PAID');
+    const delivery = () =>
+      f.db.orderEmailDelivery.findUniqueOrThrow({ where: { orderId: x.orderId } });
+    expect(await delivery()).toMatchObject({ status: 'PENDING', mode: 'STUB', attempts: 0 });
+
+    const worker = f.app.get(OrderEmailWorker);
+    const send = vi.spyOn(f.app.get(OrderEmailTransport), 'send').mockResolvedValueOnce({
+      status: 'FAILED',
+      code: 'NETWORK',
+      retryable: true,
+    });
+    try {
+      await Promise.all([worker.processNext(), worker.processNext()]);
+      const deferred = await delivery();
+      expect(deferred).toMatchObject({ status: 'PENDING', attempts: 1, lastFailure: 'NETWORK' });
+      expect(deferred.availableAt.getTime()).toBeGreaterThan(Date.now());
+      await worker.processNext();
+      expect(send).toHaveBeenCalledTimes(1);
+      expect((await f.db.order.findUniqueOrThrow({ where: { id: x.orderId } })).status).toBe(
+        'PAID',
+      );
+      expect(await f.db.ticket.count({ where: { eventId: x.event.id } })).toBe(2);
+      await f.db.orderEmailDelivery.update({
+        where: { orderId: x.orderId },
+        data: { availableAt: new Date(0) },
+      });
+      await worker.processNext();
+      expect(send).toHaveBeenCalledTimes(2);
+      expect(await delivery()).toMatchObject({ status: 'STUBBED', attempts: 2, lastFailure: null });
+    } finally {
+      send.mockRestore();
+    }
     await f.lifecycle.reconcile();
     expect(await f.db.seat.count({ where: { eventId: x.event.id, status: 'SOLD' } })).toBe(2);
     const tickets = await f
@@ -124,6 +162,32 @@ describe('Verified PayOS callbacks with real PostgreSQL and Redis', () => {
     expect(own.headers['cache-control']).toBe('no-store');
     await f.http().get(`/api/v1/tickets/${ticket.id}`).set(f.headers(1)).expect(403);
     await f.http().get(`/api/v1/payments/${x.p.id}/status`).set(f.headers(1)).expect(403);
+  });
+  it('dead-letters a permanent email failure and preserves the paid order and inbox', async () => {
+    const x = await payment(1);
+    await f.http().post('/api/v1/payments/webhook').send(callback(x.p)).expect(200);
+    const send = vi.spyOn(f.app.get(OrderEmailTransport), 'send').mockResolvedValueOnce({
+      status: 'FAILED',
+      code: 'HTTP_403',
+      retryable: false,
+    });
+    try {
+      const worker = f.app.get(OrderEmailWorker);
+      await worker.processNext();
+      await worker.processNext();
+      expect(send).toHaveBeenCalledTimes(1);
+      expect(
+        await f.db.orderEmailDelivery.findUniqueOrThrow({ where: { orderId: x.orderId } }),
+      ).toMatchObject({ status: 'DEAD_LETTER', attempts: 1, lastFailure: 'HTTP_403' });
+      expect((await f.db.order.findUniqueOrThrow({ where: { id: x.orderId } })).status).toBe(
+        'PAID',
+      );
+      expect(await f.db.ticket.count({ where: { eventId: x.event.id } })).toBe(1);
+      const inbox = await f.http().get('/api/v1/notifications/me').set(f.headers()).expect(200);
+      expect(inbox.body.unread).toBeGreaterThan(0);
+    } finally {
+      send.mockRestore();
+    }
   });
   it('records a second distinct bank transfer for review while preserving already issued tickets', async () => {
     const x = await payment();
