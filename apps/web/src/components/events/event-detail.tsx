@@ -2,8 +2,18 @@
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CalendarDays, MapPin, Ticket, ArrowLeft } from 'lucide-react';
+import {
+  CalendarDays,
+  CalendarPlus,
+  ExternalLink,
+  MapPin,
+  Share2,
+  Ticket,
+  ArrowLeft,
+} from 'lucide-react';
+import { toast } from 'sonner';
 import { apiGet } from '@/lib/api-client';
+import { buildGoogleCalendarUrl, downloadEventIcs } from '@/lib/calendar';
 import {
   eventDetailSchema,
   dateTime,
@@ -23,6 +33,46 @@ import { EventCountdown } from './event-countdown';
 import { FavoriteToggle } from './favorite-toggle';
 
 export function EventInformation({ event }: { event: EventData }) {
+  const canonicalUrl =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}/events/${event.slug}`
+      : `/events/${event.slug}`;
+  const location = `${event.venue.name}, ${event.venue.address}, ${event.city}`;
+  const calendarInput = {
+    id: event.id,
+    title: event.title,
+    description: event.description,
+    startsAt: event.startsAt,
+    endsAt: event.endsAt,
+    location,
+    url: canonicalUrl,
+  };
+
+  async function handleShare() {
+    const shareUrl = typeof window !== 'undefined' ? window.location.href : canonicalUrl;
+    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+      try {
+        await navigator.share({
+          title: event.title,
+          text: `${event.title} · ${dateTime(event.startsAt)}`,
+          url: shareUrl,
+        });
+        return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          return;
+        }
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success('Đã sao chép liên kết sự kiện.');
+    } catch {
+      toast.error('Không thể sao chép liên kết. Vui lòng thử lại.');
+    }
+  }
+
   return (
     <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1.7fr)_minmax(280px,1fr)]">
       <div className="min-w-0 space-y-7">
@@ -124,6 +174,34 @@ export function EventInformation({ event }: { event: EventData }) {
           <p className="mt-2 text-xs text-muted-foreground">
             Bán vé: {dateTime(event.salesStartAt)} – {dateTime(event.salesEndAt)}
           </p>
+          <div className="mt-5 flex flex-wrap gap-2 border-t pt-4">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                downloadEventIcs(calendarInput, `${event.slug}.ics`);
+                toast.success('Đã tải tệp lịch (.ics).');
+              }}
+            >
+              <CalendarPlus />
+              Thêm vào lịch
+            </Button>
+            <Button asChild type="button" variant="outline" size="sm">
+              <a
+                href={buildGoogleCalendarUrl(calendarInput)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink />
+                Google Calendar
+              </a>
+            </Button>
+            <Button type="button" variant="ghost" size="sm" onClick={() => void handleShare()}>
+              <Share2 />
+              Chia sẻ
+            </Button>
+          </div>
         </Card>
         <Card>
           <h2 className="flex items-center gap-2 text-xl font-semibold">
