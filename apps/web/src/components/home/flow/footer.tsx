@@ -37,6 +37,9 @@ export function FlowFooter() {
         <Link href="/system">
           System status <ArrowUpRight />
         </Link>
+        <Link href="/contact" lang="vi">
+          Liên hệ <ArrowUpRight />
+        </Link>
       </nav>
       <div className="tf-footer-bottom">
         <span>© {new Date().getFullYear()} TikFlow · Local development project</span>
