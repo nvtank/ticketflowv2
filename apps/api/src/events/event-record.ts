@@ -1,5 +1,7 @@
 import { NotFoundException, ForbiddenException } from '@nestjs/common';
-import type { Prisma } from '../generated/prisma/client';
+import type { EventStatus, Prisma } from '../generated/prisma/client';
+
+export const publicEventStatuses = ['PUBLISHED', 'COMPLETED'] satisfies EventStatus[];
 
 export const eventInclude = {
   organization: { select: { id: true, name: true, status: true } },

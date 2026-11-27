@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process';
+﻿import { execFileSync } from 'node:child_process';
 import { expect, test, type Page } from '@playwright/test';
 const password = 'TixFlowDemo!2026';
 test.beforeAll(() => {
