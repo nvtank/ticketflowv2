@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -12,6 +12,7 @@ import {
   ArrowUpRight,
   MessageCircle,
   ShieldCheck,
+  Printer,
 } from 'lucide-react';
 import { AccountNavigation } from '@/components/layout/account-navigation';
 import { BookingSteps } from '@/components/booking/booking-steps';
@@ -37,16 +38,16 @@ function TicketCard({
 }) {
   return (
     <Card className="ticket-card overflow-hidden rounded-[22px] p-0">
-      <div className="flex items-center justify-between gap-3 bg-muted p-6 text-white">
+      <div className="ticket-card-header flex items-center justify-between gap-3 bg-muted p-6 text-white">
         <span className="flex items-center gap-2 text-xs font-semibold tracking-widest">
           <Ticket aria-hidden className="size-5 text-primary" />
           TIKFLOW / E-TICKET
         </span>
-        <Badge className="border-white/20 bg-white/10 text-white">
+        <Badge className="ticket-status-badge border-white/20 bg-white/10 text-white">
           {ticketStatusLabel[t.status]}
         </Badge>
       </div>
-      <div className="space-y-4 p-6">
+      <div className="ticket-card-body space-y-4 p-6">
         <h2 className="text-xl font-bold tracking-tight">{t.event.title}</h2>
         <p className="flex items-start gap-2 text-xs leading-6 text-muted-foreground">
           <CalendarDays className="mt-1 size-3.5 shrink-0" />
@@ -79,11 +80,11 @@ function TicketCard({
               {t.event.address} · {formatCurrency(t.priceVnd)}
             </p>
             {t.qrCredential ? (
-              <div className="rounded-xl border border-dashed p-6 text-center">
+              <div className="ticket-qr-box rounded-xl border border-dashed p-6 text-center">
                 <QRCodeSVG
-                  className="mx-auto h-auto max-w-full bg-white p-3"
+                  className="ticket-qr-svg mx-auto h-auto max-w-full bg-white p-3"
                   value={t.qrCredential}
-                  size={224}
+                  size={240}
                   level="M"
                   role="img"
                   aria-label={`Mã QR vé ${t.code}`}
@@ -99,9 +100,15 @@ function TicketCard({
                     : 'Vé dữ liệu cũ chưa có mã QR có thể xác minh. Liên hệ ban tổ chức để được hỗ trợ.'}
               </p>
             )}
-            <Button asChild variant="outline">
-              <Link href={`/checkout/${t.orderId}`}>Xem đơn hàng</Link>
-            </Button>
+            <div className="print-hidden flex flex-wrap gap-3">
+              <Button type="button" onClick={() => window.print()}>
+                <Printer className="size-4" />
+                In vé
+              </Button>
+              <Button asChild variant="outline">
+                <Link href={`/checkout/${t.orderId}`}>Xem đơn hàng</Link>
+              </Button>
+            </div>
             <p className="flex items-center gap-2 text-xs leading-6 text-muted-foreground">
               <ShieldCheck className="size-4 shrink-0 text-success" />
               Giữ mã QR riêng tư. Mỗi vé chỉ check-in một lần.
@@ -114,7 +121,7 @@ function TicketCard({
         )}
         <Link
           href={`/events/${t.event.slug}#reviews`}
-          className="inline-flex items-center gap-2 text-xs font-medium text-primary"
+          className="print-hidden inline-flex items-center gap-2 text-xs font-medium text-primary"
         >
           <MessageCircle className="size-3.5" />
           Xem sự kiện & chia sẻ trải nghiệm
@@ -138,13 +145,15 @@ function TicketDetail({ id }: { id: string }) {
     retry: false,
   });
   return (
-    <div className="container max-w-3xl space-y-6 py-10">
-      <AccountNavigation />
-      <BookingSteps current={3} />
-      <Link className="text-sm text-primary" href="/my-tickets">
-        ← Vé của tôi
-      </Link>
-      <h1 className="text-3xl font-bold">Chi tiết vé</h1>
+    <div className="ticket-print-shell container max-w-3xl space-y-6 py-10">
+      <div className="print-hidden space-y-6">
+        <AccountNavigation />
+        <BookingSteps current={3} />
+        <Link className="inline-block text-sm text-primary" href="/my-tickets">
+          ← Vé của tôi
+        </Link>
+        <h1 className="text-3xl font-bold">Chi tiết vé</h1>
+      </div>
       {query.data ? (
         <TicketCard ticket={query.data} detail />
       ) : (

@@ -257,3 +257,112 @@ body {
     font-size: 16px;
   }
 }
+
+@page {
+  size: A4 portrait;
+  margin: 12mm;
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+    --background: #ffffff;
+    --foreground: #000000;
+    --card: #ffffff;
+    --primary: #000000;
+    --primary-foreground: #ffffff;
+    --muted: #ffffff;
+    --muted-foreground: #1f2937;
+    --border: #000000;
+    --success: #000000;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .tf-nav,
+  .tf-site-menu,
+  .tf-footer,
+  .skip-link,
+  .print-hidden,
+  header,
+  footer,
+  nav {
+    display: none !important;
+  }
+
+  .site-main {
+    min-height: auto !important;
+    padding-top: 0 !important;
+  }
+
+  .ticket-print-shell {
+    width: 100% !important;
+    max-width: 186mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+
+  .ticket-card {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .ticket-card * {
+    color: #000000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .ticket-card-header {
+    background: #ffffff !important;
+    border-bottom: 1.5px solid #000000 !important;
+    padding: 14px 20px !important;
+  }
+
+  .ticket-status-badge {
+    border: 1.5px solid #000000 !important;
+    background: #ffffff !important;
+  }
+
+  .ticket-card-body {
+    padding: 18px 20px !important;
+  }
+
+  .ticket-perforation {
+    background: #ffffff !important;
+    border-top: 1.5px dashed #000000 !important;
+    border-bottom: 1.5px dashed #000000 !important;
+    border-radius: 0 !important;
+  }
+
+  .ticket-perforation::before,
+  .ticket-perforation::after {
+    background: #ffffff !important;
+    border: 1.5px solid #000000 !important;
+  }
+
+  .ticket-qr-box {
+    background: #ffffff !important;
+    border: 1.5px solid #000000 !important;
+    padding: 16px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .ticket-qr-svg {
+    width: 240px !important;
+    height: 240px !important;
+    background: #ffffff !important;
+  }
+}
