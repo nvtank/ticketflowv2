@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { UserRole } from '@tixflow/shared';
 import { CheckCircle2, Clock3, CircleAlert } from 'lucide-react';
 import { AuthGate } from '@/components/auth/auth-gate';
+import { useAuthState } from '@/stores/auth';
 import { apiGet } from '@/lib/api-client';
 import { paymentSchema } from '@/lib/payments';
 import { Card } from '@/components/ui/card';
@@ -18,12 +19,14 @@ export function PaymentResult({ id }: { id: string | null }) {
   );
 }
 function Result({ id }: { id: string | null }) {
+  const authStatus = useAuthState((state) => state.status);
   const query = useQuery({
     queryKey: ['payments', id],
     queryFn: () => apiGet(`/payments/${id}/status`, paymentSchema),
-    enabled: !!id,
+    enabled: !!id && authStatus === 'authenticated',
     refetchOnMount: 'always',
-    retry: false,
+    retry: 3,
+    retryDelay: 500,
     refetchInterval: (q) => (q.state.data?.status === 'PENDING' ? 5000 : false),
   });
   if (!id)
