@@ -69,50 +69,21 @@ export const historySchema = z.array(
     actor: z.object({ name: z.string() }).nullable(),
   }),
 );
-export const eventFormSchema = z
+export function eventDatesToIso(values: z.infer<typeof eventDatesSchema>) {
+  return {
+    startsAt: new Date(values.startsAt + '+07:00').toISOString(),
+    endsAt: new Date(values.endsAt + '+07:00').toISOString(),
+    salesStartAt: new Date(values.salesStartAt + '+07:00').toISOString(),
+    salesEndAt: new Date(values.salesEndAt + '+07:00').toISOString(),
+  };
+}
+
+export const eventDatesSchema = z
   .object({
-    organizationId: z.string().min(1, 'Chọn tổ chức.'),
-    title: z
-      .string()
-      .trim()
-      .min(3, 'Tên sự kiện cần ít nhất 3 ký tự.')
-      .max(180, 'Tối đa 180 ký tự.'),
-    description: z
-      .string()
-      .min(20, 'Mô tả cần ít nhất 20 ký tự.')
-      .max(20000, 'Tối đa 20.000 ký tự.'),
-    category: z.enum(EVENT_CATEGORIES),
-    venueName: z.string().trim().min(2, 'Nhập tên địa điểm.').max(180, 'Tối đa 180 ký tự.'),
-    address: z.string().min(3, 'Nhập địa chỉ đầy đủ.').max(500, 'Tối đa 500 ký tự.'),
-    city: z.string().min(2, 'Nhập thành phố.').max(100, 'Tối đa 100 ký tự.'),
     startsAt: z.string().min(1, 'Nhập ngày giờ.'),
     endsAt: z.string().min(1, 'Nhập ngày giờ.'),
     salesStartAt: z.string().min(1, 'Nhập ngày giờ.'),
     salesEndAt: z.string().min(1, 'Nhập ngày giờ.'),
-    coverUrl: z
-      .string()
-      .refine(
-        (url) => !url || (z.url().safeParse(url).success && /^https?:/.test(url)),
-        'Nhập URL ảnh http/https hợp lệ.',
-      ),
-    galleryUrls: z.string().refine(
-      (value) =>
-        value.split('\n').filter(Boolean).length <= 8 &&
-        value
-          .split('\n')
-          .filter(Boolean)
-          .every((url) => z.url().safeParse(url.trim()).success && /^https?:/.test(url.trim())),
-      'Tối đa 8 URL ảnh http/https, mỗi dòng một ảnh.',
-    ),
-    ticketPolicy: z
-      .string()
-      .min(10, 'Chính sách cần ít nhất 10 ký tự.')
-      .max(5000, 'Tối đa 5.000 ký tự.'),
-    maxTicketsPerOrder: z
-      .number({ error: 'Nhập số vé hợp lệ.' })
-      .int('Nhập số nguyên.')
-      .min(1, 'Ít nhất 1 vé.')
-      .max(10, 'Tối đa 10 vé.'),
   })
   .superRefine((v, ctx) => {
     const start = new Date(v.startsAt + '+07:00'),
@@ -132,6 +103,39 @@ export const eventFormSchema = z
         message: 'Kiểm tra thứ tự ngày giờ và thời điểm mở/bán vé.',
       });
   });
+export const eventFormSchema = eventDatesSchema.safeExtend({
+  organizationId: z.string().min(1, 'Chọn tổ chức.'),
+  title: z.string().trim().min(3, 'Tên sự kiện cần ít nhất 3 ký tự.').max(180, 'Tối đa 180 ký tự.'),
+  description: z.string().min(20, 'Mô tả cần ít nhất 20 ký tự.').max(20000, 'Tối đa 20.000 ký tự.'),
+  category: z.enum(EVENT_CATEGORIES),
+  venueName: z.string().trim().min(2, 'Nhập tên địa điểm.').max(180, 'Tối đa 180 ký tự.'),
+  address: z.string().min(3, 'Nhập địa chỉ đầy đủ.').max(500, 'Tối đa 500 ký tự.'),
+  city: z.string().min(2, 'Nhập thành phố.').max(100, 'Tối đa 100 ký tự.'),
+  coverUrl: z
+    .string()
+    .refine(
+      (url) => !url || (z.url().safeParse(url).success && /^https?:/.test(url)),
+      'Nhập URL ảnh http/https hợp lệ.',
+    ),
+  galleryUrls: z.string().refine(
+    (value) =>
+      value.split('\n').filter(Boolean).length <= 8 &&
+      value
+        .split('\n')
+        .filter(Boolean)
+        .every((url) => z.url().safeParse(url.trim()).success && /^https?:/.test(url.trim())),
+    'Tối đa 8 URL ảnh http/https, mỗi dòng một ảnh.',
+  ),
+  ticketPolicy: z
+    .string()
+    .min(10, 'Chính sách cần ít nhất 10 ký tự.')
+    .max(5000, 'Tối đa 5.000 ký tự.'),
+  maxTicketsPerOrder: z
+    .number({ error: 'Nhập số vé hợp lệ.' })
+    .int('Nhập số nguyên.')
+    .min(1, 'Ít nhất 1 vé.')
+    .max(10, 'Tối đa 10 vé.'),
+});
 export const statusLabel: Record<z.infer<typeof eventStatusSchema>, string> = {
   DRAFT: 'Bản nháp',
   PENDING_APPROVAL: 'Chờ duyệt',
