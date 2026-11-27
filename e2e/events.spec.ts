@@ -110,9 +110,28 @@ test('organizer creates seats, admin rejects and approves, customer discovers th
   });
   const customer = await customerContext.newPage();
   await customer.goto('/events');
+  await expect(customer.getByLabel('Tìm sự kiện theo tên')).toBeVisible();
+  const mobileToggle = customer.getByRole('button', { name: /Bộ lọc/ });
+  const filterControls = customer.locator('#catalog-filter-controls');
+  if (await mobileToggle.isVisible()) {
+    await expect(async () => {
+      if ((await mobileToggle.getAttribute('aria-expanded')) !== 'true') {
+        await mobileToggle.click();
+      }
+      await expect(filterControls).toBeVisible({ timeout: 500 });
+    }).toPass({ timeout: 10_000 });
+  }
+  await customer.getByLabel('Thành phố', { exact: true }).selectOption('Đà Nẵng');
+  await expect(customer).toHaveURL(/city=/);
+  await customer.getByLabel('Sắp xếp', { exact: true }).selectOption('price_asc');
+  await expect(customer).toHaveURL(/sort=price_asc/);
   await customer.getByLabel('Tìm sự kiện theo tên').fill(title);
   await customer.getByRole('button', { name: 'Tìm kiếm', exact: true }).click();
   await expect(customer).toHaveURL(/q=/);
+  await customer.reload();
+  await expect(customer.getByLabel('Tìm sự kiện theo tên')).toHaveValue(title);
+  await expect(customer.getByLabel('Thành phố', { exact: true })).toHaveValue('Đà Nẵng');
+  await expect(customer.getByLabel('Sắp xếp', { exact: true })).toHaveValue('price_asc');
   await customer.getByRole('link', { name: 'Xem chi tiết', exact: true }).click();
   await expect(customer.getByRole('heading', { name: title, exact: true })).toBeVisible();
   await expect(customer.getByText('Còn 2/2 ghế', { exact: false })).toBeVisible();

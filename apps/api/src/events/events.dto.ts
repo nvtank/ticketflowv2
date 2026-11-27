@@ -1,3 +1,4 @@
+﻿import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type, Transform } from 'class-transformer';
 import {
   ArrayMaxSize,
@@ -16,25 +17,115 @@ import {
   MaxLength,
   Min,
   MinLength,
+  Validate,
   ValidateNested,
+  ValidatorConstraint,
+  type ValidationArguments,
+  type ValidatorConstraintInterface,
 } from 'class-validator';
-import { EVENT_CATEGORIES } from '@tixflow/shared';
+import { EVENT_CATEGORIES, EVENT_SORT_OPTIONS } from '@tixflow/shared';
+
+const ALLOWED_EVENT_SORTS = [...EVENT_SORT_OPTIONS, 'date'] as const;
+export type EventQuerySort = (typeof ALLOWED_EVENT_SORTS)[number];
+
+@ValidatorConstraint({ name: 'eventQueryRange', async: false })
+class EventQueryRangeConstraint implements ValidatorConstraintInterface {
+  validate(_value: unknown, args: ValidationArguments): boolean {
+    const query = args.object as EventQueryDto;
+    if (query.from && query.to) {
+      const fromTime = new Date(query.from).getTime();
+      const toTime = new Date(query.to).getTime();
+      if (Number.isFinite(fromTime) && Number.isFinite(toTime) && fromTime > toTime) {
+        return false;
+      }
+    }
+    if (
+      query.minPrice !== undefined &&
+      query.maxPrice !== undefined &&
+      query.minPrice > query.maxPrice
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  defaultMessage(): string {
+    return 'Khoảng ngày (from <= to) hoặc khoảng giá (minPrice <= maxPrice) không hợp lệ.';
+  }
+}
 
 export class PageDto {
   @IsOptional() @Type(() => Number) @IsInt() @Min(1) page = 1;
   @IsOptional() @Type(() => Number) @IsInt() @Min(1) @Max(50) pageSize = 12;
 }
 export class EventQueryDto extends PageDto {
-  @IsOptional() @IsString() @MaxLength(120) q?: string;
-  @IsOptional() @IsIn(EVENT_CATEGORIES) category?: string;
-  @IsOptional() @IsString() @MaxLength(100) city?: string;
-  @IsOptional() @IsISO8601({ strict: true }) from?: string;
-  @IsOptional() @IsISO8601({ strict: true }) to?: string;
-  @IsOptional() @Type(() => Number) @IsInt() @Min(0) @Max(2147483647) minPrice?: number;
-  @IsOptional() @Type(() => Number) @IsInt() @Min(0) @Max(2147483647) maxPrice?: number;
-  @IsOptional() @IsIn(['date', 'price_asc', 'price_desc']) sort:
-    'date' | 'price_asc' | 'price_desc' = 'date';
+  @ApiPropertyOptional({ description: 'Search keyword matched against event title' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  q?: string;
+
+  @ApiPropertyOptional({ enum: EVENT_CATEGORIES })
+  @IsOptional()
+  @IsIn(EVENT_CATEGORIES)
+  category?: string;
+
+  @ApiPropertyOptional({ description: 'Venue city filter (case-insensitive)' })
+  @Transform(({ value }: { value: unknown }) => (typeof value === 'string' ? value.trim() : value))
+  @IsOptional()
+  @IsString()
+  @MaxLength(100)
+  city?: string;
+
+  @ApiPropertyOptional({ description: 'Minimum event start date/time (ISO-8601)' })
+  @IsOptional()
+  @IsISO8601({ strict: true })
+  from?: string;
+
+  @ApiPropertyOptional({ description: 'Maximum event start date/time (ISO-8601)' })
+  @IsOptional()
+  @IsISO8601({ strict: true })
+  @Validate(EventQueryRangeConstraint)
+  to?: string;
+
+  @ApiPropertyOptional({ description: 'Minimum lowest ticket price in VND', minimum: 0 })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  @Max(2147483647)
+  minPrice?: number;
+
+  @ApiPropertyOptional({ description: 'Maximum lowest ticket price in VND', minimum: 0 })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  @Max(2147483647)
+  @Validate(EventQueryRangeConstraint)
+  maxPrice?: number;
+
+  @ApiPropertyOptional({
+    enum: EVENT_SORT_OPTIONS,
+    default: 'soonest',
+    description: 'Sort order for catalog results',
+  })
+  @IsOptional()
+  @IsIn(ALLOWED_EVENT_SORTS)
+  sort: EventQuerySort = 'soonest';
 }
+
+export class EventFiltersResponseDto {
+  @ApiProperty({ type: [String], example: ['Đà Nẵng', 'Hà Nội', 'Hồ Chí Minh'] })
+  cities!: string[];
+
+  @ApiProperty({ example: 150000 })
+  minPriceVnd!: number;
+
+  @ApiProperty({ example: 2500000 })
+  maxPriceVnd!: number;
+}
+
 export class OrganizerQueryDto extends PageDto {
   @IsOptional()
   @IsIn(['DRAFT', 'PENDING_APPROVAL', 'PUBLISHED', 'REJECTED', 'CANCELLED', 'COMPLETED'])
