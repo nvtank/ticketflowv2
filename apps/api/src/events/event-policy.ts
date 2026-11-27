@@ -1,10 +1,7 @@
 import { BadRequestException, ConflictException } from '@nestjs/common';
-import type { EventFieldsDto, SectionDto } from './events.dto';
+import type { EventDatesDto, SectionDto } from './events.dto';
 
-export function validateDates(
-  input: Pick<EventFieldsDto, 'startsAt' | 'endsAt' | 'salesStartAt' | 'salesEndAt'>,
-  now = new Date(),
-) {
+export function validateDates(input: EventDatesDto, now = new Date()) {
   const start = new Date(input.startsAt),
     end = new Date(input.endsAt);
   const saleStart = new Date(input.salesStartAt),
