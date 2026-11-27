@@ -1,0 +1,46 @@
+{
+  "task": "TF2-060",
+  "status": "VERIFIED_PASS",
+  "operator": "TuanAn0311",
+  "source": {
+    "provider": "Supabase Free",
+    "databaseScope": "TixFlow public schema and its data",
+    "connection": "Shared session pooler, client TLS verify-full with Supabase CA, read-only logical dump"
+  },
+  "backup": {
+    "trigger": "Manual operator run",
+    "snapshotEarliestUtc": "2026-11-24T14:22:11.616Z",
+    "snapshotLatestUtc": "2026-11-24T14:22:23.057Z",
+    "elapsedMs": 11444,
+    "storageDirectory": ".local/live-backups/",
+    "artifact": "tixflow-public-2026-11-24T14-22-11-616Z.pgdump.enc",
+    "encryptedBytes": 117793,
+    "encryptedSha256": "757afc1f5c87426fb12f9b90969a496bedffe2b3a1f2d01d926ed149c9489cb0",
+    "encryption": "AES-256-GCM",
+    "keyAccess": "Current Windows user via DPAPI",
+    "retention": "30 days, manual retention policy",
+    "offHostCopyAndEscrow": "PENDING_HUMAN"
+  },
+  "restore": {
+    "target": "Fresh PostgreSQL 17.11 Docker container, network disabled, no published port, temporary storage",
+    "completedAtUtc": "2026-11-24T14:22:57.348Z",
+    "elapsedMs": 6332,
+    "verifiedArtifactSha256": "757afc1f5c87426fb12f9b90969a496bedffe2b3a1f2d01d926ed149c9489cb0",
+    "archiveAuthenticated": true,
+    "transactionalRestoreSucceeded": true,
+    "verification": "Aggregate queries run successfully against the restored database",
+    "restoredCounts": {
+      "publicTables": 26,
+      "users": 9,
+      "events": 8,
+      "orders": 3,
+      "tickets": 2,
+      "migrations": 10
+    }
+  },
+  "recovery": {
+    "snapshotAgeAtVerifiedRestoreMs": { "minimum": 34291, "maximum": 45732 },
+    "measuredDatabaseRestoreMs": 6332,
+    "limit": "Manual snapshots only. The measured restore starts with the encrypted archive and key available on the drill host and ends at successful database verification."
+  }
+}
