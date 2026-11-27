@@ -722,6 +722,154 @@ describe('Event management with real PostgreSQL and Redis', () => {
     expect(swagger.body.paths['/api/v1/events/filters']).toBeDefined();
     expect(swagger.body.components.schemas.CreateEventDto.properties.organizationId).toBeDefined();
   });
+  const duplicateDates = () => {
+    const date = (days: number) => new Date(Date.now() + days * 86_400_000).toISOString();
+    return { startsAt: date(60), endsAt: date(61), salesStartAt: date(40), salesEndAt: date(59) };
+  };
+  const duplicateEvent = (id: string, role = 'ORGANIZER') =>
+    http().post(`/api/v1/organizer/events/${id}/duplicate`).set('Authorization', bearer(role));
+
+  it('duplicates the saved layout and inventory into an independent unpublished draft', async () => {
+    const organizer = users.get('ORGANIZER')!;
+    const source = await events.create(organizer, body());
+    await seats.saveDesign(source.id, organizer, {
+      version: 1,
+      expectedRevision: 0,
+      width: 1200,
+      height: 900,
+      stage: { x: 300, y: 100, width: 600, height: 100 },
+      zones: [{ id: 'vip', name: 'VIP', priceVnd: 850000, color: '#7c3aed' }],
+      blocks: [
+        {
+          id: 'left',
+          zoneId: 'vip',
+          x: 200,
+          y: 400,
+          rotation: 15,
+          rows: 1,
+          columns: 3,
+          disabledSeats: [0],
+        },
+      ],
+    });
+    await review.submit(source.id, organizer);
+    await review.decide(source.id, users.get('ADMIN')!, true);
+    await db.eventStaffAssignment.create({
+      data: { eventId: source.id, userId: users.get('STAFF')! },
+    });
+    const reservableSeat = await db.seat.findUniqueOrThrow({
+      where: { eventId_code: { eventId: source.id, code: 'A03' } },
+    });
+    const hold = await http()
+      .post(`/api/v1/events/${source.id}/holds`)
+      .set('Authorization', bearer('CUSTOMER'))
+      .send({ seatIds: [reservableSeat.id], idempotencyKey: randomUUID() })
+      .expect(201);
+    await http()
+      .post('/api/v1/orders')
+      .set('Authorization', bearer('CUSTOMER'))
+      .send({ holdId: hold.body.id, idempotencyKey: randomUUID() })
+      .expect(201);
+    await db.seat.updateMany({
+      where: { eventId: source.id, code: 'A02' },
+      data: { status: 'SOLD' },
+    });
+    const sourceSnapshot = () =>
+      db.event.findUniqueOrThrow({
+        where: { id: source.id },
+        include: {
+          seats: { orderBy: { code: 'asc' } },
+          assignments: true,
+          _count: { select: { orders: true, holds: true } },
+        },
+      });
+    const before = await sourceSnapshot();
+    const dates = duplicateDates();
+    const { body: copied } = await duplicateEvent(source.id).send(dates).expect(201);
+    expect(copied).toMatchObject({
+      ...dates,
+      title: `${source.title} (bản sao)`,
+      slug: `${source.slug}-copy-1`,
+      status: 'DRAFT',
+      description: source.description,
+      organization: source.organization,
+      rejectionReason: null,
+      inventoryRevision: 0,
+      availableSeats: 3,
+    });
+    expect(copied.id).not.toBe(source.id);
+    expect(copied.venue).toMatchObject({
+      name: source.venue.name,
+      address: source.venue.address,
+      city: source.venue.city,
+    });
+    expect(copied.venue.id).not.toBe(source.venue.id);
+    const [section] = copied.sections;
+    expect(section).toMatchObject({
+      name: 'VIP',
+      ticketType: { name: 'VIP', priceVnd: 850000 },
+      soldSeats: 0,
+      availableSeats: 3,
+    });
+    expect(copied.seatMapLayout.zones[0]).toMatchObject({ id: section.id, name: 'VIP' });
+    expect(copied.seatMapLayout.blocks[0]).toMatchObject({
+      zoneId: section.id,
+      rotation: 15,
+      rowLabels: ['A'],
+      disabledSeats: [],
+    });
+    const copySeats = await db.seat.findMany({
+      where: { eventId: copied.id },
+      orderBy: { code: 'asc' },
+    });
+    expect(copySeats.map((s) => s.code)).toEqual(before.seats.map((s) => s.code));
+    for (const seat of copySeats) {
+      expect(before.seats.some((s) => s.id === seat.id || s.sectionId === seat.sectionId)).toBe(
+        false,
+      );
+      expect(seat).toMatchObject({ sectionId: section.id, status: 'AVAILABLE', holdId: null });
+    }
+    const copiedCounts = await db.event.findUniqueOrThrow({
+      where: { id: copied.id },
+      select: {
+        _count: { select: { orders: true, holds: true, reviews: true, assignments: true } },
+      },
+    });
+    expect(copiedCounts._count).toEqual({ orders: 0, holds: 0, reviews: 0, assignments: 0 });
+    await http().get(`/api/v1/events/${copied.slug}`).expect(404);
+    expect(await sourceSnapshot()).toEqual(before);
+  });
+
+  it('requires organization membership and a valid new schedule to duplicate an event', async () => {
+    const source = await events.create(users.get('ORGANIZER')!, body());
+    const dates = duplicateDates();
+    await http().post(`/api/v1/organizer/events/${source.id}/duplicate`).send(dates).expect(401);
+    await duplicateEvent(source.id, 'OTHER').send(dates).expect(403);
+    await duplicateEvent(source.id, 'ADMIN').send(dates).expect(403);
+    await duplicateEvent(source.id).send({}).expect(400);
+    await duplicateEvent(source.id)
+      .send({ ...dates, endsAt: dates.startsAt })
+      .expect(400);
+    expect(await db.event.count({ where: { slug: { startsWith: `${source.slug}-copy-` } } })).toBe(
+      0,
+    );
+  });
+
+  it('skips occupied slugs and allocates distinct slugs for concurrent copies', async () => {
+    const source = await events.create(users.get('ORGANIZER')!, body());
+    const other = await events.create(users.get('OTHER')!, { ...body(), organizationId: orgs[1]! });
+    await db.event.update({ where: { id: other.id }, data: { slug: `${source.slug}-copy-1` } });
+    const results = await Promise.all(
+      [1, 2].map(() => duplicateEvent(source.id).send(duplicateDates()).expect(201)),
+    );
+    expect(results.map((r) => r.body.slug).sort()).toEqual([
+      `${source.slug}-copy-2`,
+      `${source.slug}-copy-3`,
+    ]);
+    expect(results.every((r) => r.body.status === 'DRAFT' && r.body.seatMapLayout === null)).toBe(
+      true,
+    );
+  });
   it('streams only paid active tickets to event members and admins', async () => {
     const event = await events.create(users.get('ORGANIZER')!, body());
     await seats.generate(event.id, users.get('ORGANIZER')!, grid);

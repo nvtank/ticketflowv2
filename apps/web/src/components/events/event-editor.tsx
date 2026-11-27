@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { apiGet, apiRequest } from '@/lib/api-client';
 import {
   eventFormSchema,
+  eventDatesToIso,
   eventDetailSchema,
   vnInput,
   categoryLabel,
@@ -78,10 +79,7 @@ export function EventEditor({ event }: { event?: EventDetail }) {
         description: values.description,
         category: values.category,
         venue: { name: values.venueName, address: values.address, city: values.city },
-        startsAt: new Date(values.startsAt + '+07:00').toISOString(),
-        endsAt: new Date(values.endsAt + '+07:00').toISOString(),
-        salesStartAt: new Date(values.salesStartAt + '+07:00').toISOString(),
-        salesEndAt: new Date(values.salesEndAt + '+07:00').toISOString(),
+        ...eventDatesToIso(values),
         coverUrl: values.coverUrl || null,
         galleryUrls: values.galleryUrls
           .split('\n')

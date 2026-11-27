@@ -140,7 +140,13 @@ export class VenueDto {
   @IsString() @MinLength(3) @MaxLength(500) address!: string;
   @IsString() @MinLength(2) @MaxLength(100) city!: string;
 }
-export class EventFieldsDto {
+export class EventDatesDto {
+  @IsISO8601({ strict: true }) startsAt!: string;
+  @IsISO8601({ strict: true }) endsAt!: string;
+  @IsISO8601({ strict: true }) salesStartAt!: string;
+  @IsISO8601({ strict: true }) salesEndAt!: string;
+}
+export class EventFieldsDto extends EventDatesDto {
   @Transform(({ value }: { value: unknown }) => (typeof value === 'string' ? value.trim() : value))
   @IsString()
   @MinLength(3)
@@ -149,10 +155,6 @@ export class EventFieldsDto {
   @IsString() @MinLength(20) @MaxLength(20000) description!: string;
   @IsIn(EVENT_CATEGORIES) category!: string;
   @IsDefined() @ValidateNested() @Type(() => VenueDto) venue!: VenueDto;
-  @IsISO8601({ strict: true }) startsAt!: string;
-  @IsISO8601({ strict: true }) endsAt!: string;
-  @IsISO8601({ strict: true }) salesStartAt!: string;
-  @IsISO8601({ strict: true }) salesEndAt!: string;
   @IsOptional()
   @IsUrl({ protocols: ['http', 'https'], require_protocol: true, require_tld: false })
   coverUrl?: string | null;
