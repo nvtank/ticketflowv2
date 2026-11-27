@@ -16,6 +16,7 @@ import { SeatDesigner } from './seat-designer';
 import { EventStaffEditor } from './event-staff-editor';
 import { WaitingSettings } from './waiting-settings';
 import { EventHistory } from './event-history';
+import { DuplicateEventDialog } from './duplicate-event-dialog';
 export function OrganizerEventManager({ id }: { id: string }) {
   const cache = useQueryClient(),
     router = useRouter();
@@ -71,6 +72,7 @@ export function OrganizerEventManager({ id }: { id: string }) {
           <p className="mt-2 text-xs text-muted-foreground">{event.organization.name}</p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <DuplicateEventDialog key={id} id={id} />
           {['DRAFT', 'REJECTED'].includes(event.status) && (
             <Button
               disabled={submit.isPending || seatDraftDirty}

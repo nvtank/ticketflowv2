@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -19,6 +19,7 @@ import { LayoutCanvas } from '@/components/seating/layout-canvas';
 import { ArtistCollection } from '@/components/discovery/artists';
 import { EventReviews } from '@/components/discovery/reviews';
 import { useAuthState } from '@/stores/auth';
+import { EventCountdown } from './event-countdown';
 import { FavoriteToggle } from './favorite-toggle';
 
 export function EventInformation({ event }: { event: EventData }) {
@@ -102,6 +103,7 @@ export function EventInformation({ event }: { event: EventData }) {
         </Card>
       </div>
       <aside className="space-y-5 lg:sticky lg:top-32">
+        <EventCountdown startsAt={event.startsAt} endsAt={event.endsAt} status={event.status} />
         <Card>
           <p className="flex gap-3">
             <CalendarDays className="size-5 shrink-0 text-primary" />

@@ -1,4 +1,5 @@
-import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+﻿import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import type { EventFiltersResponse } from '@tixflow/shared';
 import { Prisma } from '../generated/prisma/client';
 import { DatabaseService } from '../database/database.service';
 import type { EventQueryDto } from './events.dto';
@@ -24,9 +25,15 @@ export class PublicEventsService {
     if (query.q)
       terms.push(Prisma.sql`e."title" ILIKE ${'%' + query.q.replace(/[\\%_]/g, '\\$&') + '%'}`);
     if (query.category) terms.push(Prisma.sql`e."category"=${query.category}`);
-    if (query.city) terms.push(Prisma.sql`v."city"=${query.city}`);
+    if (query.city) terms.push(Prisma.sql`LOWER(TRIM(v."city"))=LOWER(TRIM(${query.city}))`);
     if (query.from) terms.push(Prisma.sql`e."startsAt">=${new Date(query.from)}`);
-    if (query.to) terms.push(Prisma.sql`e."startsAt"<=${new Date(query.to)}`);
+    if (query.to) {
+      const toDate =
+        query.to.length === 10
+          ? new Date(new Date(query.to).getTime() + 86400000 - 1)
+          : new Date(query.to);
+      terms.push(Prisma.sql`e."startsAt"<=${toDate}`);
+    }
     if (query.minPrice !== undefined) terms.push(Prisma.sql`${minPrice}>=${query.minPrice}`);
     if (query.maxPrice !== undefined) terms.push(Prisma.sql`${minPrice}<=${query.maxPrice}`);
     const from = Prisma.sql`FROM "Event" e JOIN "Venue" v ON v."id"=e."venueId" JOIN "Organization" o ON o."id"=e."organizationId" WHERE ${Prisma.join(terms, ' AND ')}`;
@@ -35,7 +42,9 @@ export class PublicEventsService {
         ? Prisma.sql`${minPrice} ASC`
         : query.sort === 'price_desc'
           ? Prisma.sql`${minPrice} DESC`
-          : Prisma.sql`e."startsAt" ASC`;
+          : query.sort === 'latest'
+            ? Prisma.sql`e."startsAt" DESC`
+            : Prisma.sql`e."startsAt" ASC`;
     const [ids, counts] = await Promise.all([
       this.db.$queryRaw<{ id: string }[]>(
         Prisma.sql`SELECT e."id" ${from} ORDER BY ${sort},e."id" ASC LIMIT ${query.pageSize} OFFSET ${(query.page - 1) * query.pageSize}`,
@@ -53,6 +62,38 @@ export class PublicEventsService {
         return event ? [event] : [];
       }),
       pagination: pagination(query.page, query.pageSize, counts[0]?.total ?? 0),
+    };
+  }
+  async filters(): Promise<EventFiltersResponse> {
+    const now = new Date();
+    const [cityRows, priceRows] = await Promise.all([
+      this.db.$queryRaw<{ city: string }[]>(Prisma.sql`
+        SELECT DISTINCT TRIM(v."city") AS city
+        FROM "Event" e
+        JOIN "Venue" v ON v."id" = e."venueId"
+        JOIN "Organization" o ON o."id" = e."organizationId"
+        WHERE e."status" = 'PUBLISHED'
+          AND e."startsAt" > ${now}
+          AND o."status" = 'APPROVED'
+          AND TRIM(v."city") <> ''
+        ORDER BY city ASC
+      `),
+      this.db.$queryRaw<{ minPriceVnd: number; maxPriceVnd: number }[]>(Prisma.sql`
+        SELECT
+          COALESCE(MIN(t."priceVnd"), 0)::int AS "minPriceVnd",
+          COALESCE(MAX(t."priceVnd"), 0)::int AS "maxPriceVnd"
+        FROM "TicketType" t
+        JOIN "Event" e ON e."id" = t."eventId"
+        JOIN "Organization" o ON o."id" = e."organizationId"
+        WHERE e."status" = 'PUBLISHED'
+          AND e."startsAt" > ${now}
+          AND o."status" = 'APPROVED'
+      `),
+    ]);
+    return {
+      cities: cityRows.map((row) => row.city),
+      minPriceVnd: priceRows[0]?.minPriceVnd ?? 0,
+      maxPriceVnd: priceRows[0]?.maxPriceVnd ?? 0,
     };
   }
   async resolve(key: string) {
