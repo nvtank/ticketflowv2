@@ -364,10 +364,16 @@ describe('Event management with real PostgreSQL and Redis', () => {
     const history = await review.history(eventId);
     expect(history.some((log) => log.action === 'EVENT_APPROVED')).toBe(true);
   });
-  it('lists only published events with price filters, sorting and pagination', async () => {
+  it('lists only published events with city, date, price filters, sorting and /events/filters', async () => {
+    const soonStart = new Date(Date.now() + 10 * 86400000).toISOString();
+    const soonEnd = new Date(Date.now() + 11 * 86400000).toISOString();
     const cheap = await events.create(users.get('ORGANIZER')!, {
       ...body(),
       title: `${prefix} Cheaper concert`,
+      venue: { name: `${prefix} HN Venue`, address: '45 Tràng Tiền', city: 'Hà Nội' },
+      startsAt: soonStart,
+      endsAt: soonEnd,
+      salesEndAt: new Date(Date.now() + 9 * 86400000).toISOString(),
     });
     await seats.generate(cheap.id, users.get('ORGANIZER')!, {
       sections: [
@@ -376,18 +382,79 @@ describe('Event management with real PostgreSQL and Redis', () => {
     });
     await review.submit(cheap.id, users.get('ORGANIZER')!);
     await review.decide(cheap.id, users.get('ADMIN')!, true);
-    const list = await http()
+
+    const draftHidden = await events.create(users.get('ORGANIZER')!, {
+      ...body(),
+      title: `${prefix} Draft hidden`,
+      venue: { name: `${prefix} Secret Venue`, address: '99 Bí Mật', city: 'Cần Thơ' },
+    });
+    await seats.generate(draftHidden.id, users.get('ORGANIZER')!, {
+      sections: [{ name: 'Draft', ticketName: 'Draft', priceVnd: 50000, rows: 1, columns: 1 }],
+    });
+
+    const filters = await http().get('/api/v1/events/filters').expect(200);
+    expect(filters.body.cities).toEqual(expect.arrayContaining(['Đà Nẵng', 'Hà Nội']));
+    expect(filters.body.cities).not.toContain('Cần Thơ');
+    expect(filters.body.minPriceVnd).toBeLessThanOrEqual(100000);
+    expect(filters.body.maxPriceVnd).toBeGreaterThanOrEqual(1200000);
+
+    const byCity = await http()
       .get('/api/v1/events')
-      .query({ q: prefix, category: 'MUSIC', city: 'Đà Nẵng', sort: 'price_asc', pageSize: 1 })
+      .query({ q: prefix, city: 'hà nội' })
       .expect(200);
-    expect(list.body.pagination.total).toBe(2);
-    expect(list.body.items[0].id).toBe(cheap.id);
-    const filtered = await http()
+    expect(byCity.body.items.map((e: { id: string }) => e.id)).toEqual([cheap.id]);
+
+    const byDateWindow = await http()
       .get('/api/v1/events')
-      .query({ q: prefix, minPrice: 400000, maxPrice: 600000 })
+      .query({
+        q: prefix,
+        from: new Date(Date.now() + 5 * 86400000).toISOString(),
+        to: new Date(Date.now() + 20 * 86400000).toISOString(),
+      })
       .expect(200);
-    expect(filtered.body.items.map((e: { id: string }) => e.id)).toEqual([eventId]);
+    expect(byDateWindow.body.items.map((e: { id: string }) => e.id)).toEqual([cheap.id]);
+
+    const soonest = await http()
+      .get('/api/v1/events')
+      .query({ q: prefix, sort: 'soonest' })
+      .expect(200);
+    expect(soonest.body.items.map((e: { id: string }) => e.id)).toEqual([cheap.id, eventId]);
+
+    const latest = await http()
+      .get('/api/v1/events')
+      .query({ q: prefix, sort: 'latest' })
+      .expect(200);
+    expect(latest.body.items.map((e: { id: string }) => e.id)).toEqual([eventId, cheap.id]);
+
+    const priceAsc = await http()
+      .get('/api/v1/events')
+      .query({ q: prefix, category: 'MUSIC', sort: 'price_asc', pageSize: 1 })
+      .expect(200);
+    expect(priceAsc.body.pagination.total).toBe(2);
+    expect(priceAsc.body.items[0].id).toBe(cheap.id);
+
+    const priceDesc = await http()
+      .get('/api/v1/events')
+      .query({ q: prefix, sort: 'price_desc' })
+      .expect(200);
+    expect(priceDesc.body.items.map((e: { id: string }) => e.id)).toEqual([eventId, cheap.id]);
+
+    const combined = await http()
+      .get('/api/v1/events')
+      .query({ q: prefix, city: 'Đà Nẵng', minPrice: 400000, maxPrice: 600000 })
+      .expect(200);
+    expect(combined.body.items.map((e: { id: string }) => e.id)).toEqual([eventId]);
+
     await http().get('/api/v1/events').query({ minPrice: 20, maxPrice: 10 }).expect(400);
+    await http()
+      .get('/api/v1/events')
+      .query({
+        from: new Date(Date.now() + 20 * 86400000).toISOString(),
+        to: new Date(Date.now() + 5 * 86400000).toISOString(),
+      })
+      .expect(400);
+    await http().get('/api/v1/events').query({ sort: 'invalid_sort' }).expect(400);
+
     for (const q of ["%' OR TRUE --", `${prefix}%`, `${prefix}_`]) {
       const literal = await http().get('/api/v1/events').query({ q }).expect(200);
       expect(literal.body.items).toEqual([]);
@@ -652,7 +719,156 @@ describe('Event management with real PostgreSQL and Redis', () => {
   it('documents DTO fields and event paths in Swagger', async () => {
     const swagger = await http().get('/api/docs-json').expect(200);
     expect(swagger.body.paths['/api/v1/organizer/events']).toBeDefined();
+    expect(swagger.body.paths['/api/v1/events/filters']).toBeDefined();
     expect(swagger.body.components.schemas.CreateEventDto.properties.organizationId).toBeDefined();
+  });
+  const duplicateDates = () => {
+    const date = (days: number) => new Date(Date.now() + days * 86_400_000).toISOString();
+    return { startsAt: date(60), endsAt: date(61), salesStartAt: date(40), salesEndAt: date(59) };
+  };
+  const duplicateEvent = (id: string, role = 'ORGANIZER') =>
+    http().post(`/api/v1/organizer/events/${id}/duplicate`).set('Authorization', bearer(role));
+
+  it('duplicates the saved layout and inventory into an independent unpublished draft', async () => {
+    const organizer = users.get('ORGANIZER')!;
+    const source = await events.create(organizer, body());
+    await seats.saveDesign(source.id, organizer, {
+      version: 1,
+      expectedRevision: 0,
+      width: 1200,
+      height: 900,
+      stage: { x: 300, y: 100, width: 600, height: 100 },
+      zones: [{ id: 'vip', name: 'VIP', priceVnd: 850000, color: '#7c3aed' }],
+      blocks: [
+        {
+          id: 'left',
+          zoneId: 'vip',
+          x: 200,
+          y: 400,
+          rotation: 15,
+          rows: 1,
+          columns: 3,
+          disabledSeats: [0],
+        },
+      ],
+    });
+    await review.submit(source.id, organizer);
+    await review.decide(source.id, users.get('ADMIN')!, true);
+    await db.eventStaffAssignment.create({
+      data: { eventId: source.id, userId: users.get('STAFF')! },
+    });
+    const reservableSeat = await db.seat.findUniqueOrThrow({
+      where: { eventId_code: { eventId: source.id, code: 'A03' } },
+    });
+    const hold = await http()
+      .post(`/api/v1/events/${source.id}/holds`)
+      .set('Authorization', bearer('CUSTOMER'))
+      .send({ seatIds: [reservableSeat.id], idempotencyKey: randomUUID() })
+      .expect(201);
+    await http()
+      .post('/api/v1/orders')
+      .set('Authorization', bearer('CUSTOMER'))
+      .send({ holdId: hold.body.id, idempotencyKey: randomUUID() })
+      .expect(201);
+    await db.seat.updateMany({
+      where: { eventId: source.id, code: 'A02' },
+      data: { status: 'SOLD' },
+    });
+    const sourceSnapshot = () =>
+      db.event.findUniqueOrThrow({
+        where: { id: source.id },
+        include: {
+          seats: { orderBy: { code: 'asc' } },
+          assignments: true,
+          _count: { select: { orders: true, holds: true } },
+        },
+      });
+    const before = await sourceSnapshot();
+    const dates = duplicateDates();
+    const { body: copied } = await duplicateEvent(source.id).send(dates).expect(201);
+    expect(copied).toMatchObject({
+      ...dates,
+      title: `${source.title} (bản sao)`,
+      slug: `${source.slug}-copy-1`,
+      status: 'DRAFT',
+      description: source.description,
+      organization: source.organization,
+      rejectionReason: null,
+      inventoryRevision: 0,
+      availableSeats: 3,
+    });
+    expect(copied.id).not.toBe(source.id);
+    expect(copied.venue).toMatchObject({
+      name: source.venue.name,
+      address: source.venue.address,
+      city: source.venue.city,
+    });
+    expect(copied.venue.id).not.toBe(source.venue.id);
+    const [section] = copied.sections;
+    expect(section).toMatchObject({
+      name: 'VIP',
+      ticketType: { name: 'VIP', priceVnd: 850000 },
+      soldSeats: 0,
+      availableSeats: 3,
+    });
+    expect(copied.seatMapLayout.zones[0]).toMatchObject({ id: section.id, name: 'VIP' });
+    expect(copied.seatMapLayout.blocks[0]).toMatchObject({
+      zoneId: section.id,
+      rotation: 15,
+      rowLabels: ['A'],
+      disabledSeats: [],
+    });
+    const copySeats = await db.seat.findMany({
+      where: { eventId: copied.id },
+      orderBy: { code: 'asc' },
+    });
+    expect(copySeats.map((s) => s.code)).toEqual(before.seats.map((s) => s.code));
+    for (const seat of copySeats) {
+      expect(before.seats.some((s) => s.id === seat.id || s.sectionId === seat.sectionId)).toBe(
+        false,
+      );
+      expect(seat).toMatchObject({ sectionId: section.id, status: 'AVAILABLE', holdId: null });
+    }
+    const copiedCounts = await db.event.findUniqueOrThrow({
+      where: { id: copied.id },
+      select: {
+        _count: { select: { orders: true, holds: true, reviews: true, assignments: true } },
+      },
+    });
+    expect(copiedCounts._count).toEqual({ orders: 0, holds: 0, reviews: 0, assignments: 0 });
+    await http().get(`/api/v1/events/${copied.slug}`).expect(404);
+    expect(await sourceSnapshot()).toEqual(before);
+  });
+
+  it('requires organization membership and a valid new schedule to duplicate an event', async () => {
+    const source = await events.create(users.get('ORGANIZER')!, body());
+    const dates = duplicateDates();
+    await http().post(`/api/v1/organizer/events/${source.id}/duplicate`).send(dates).expect(401);
+    await duplicateEvent(source.id, 'OTHER').send(dates).expect(403);
+    await duplicateEvent(source.id, 'ADMIN').send(dates).expect(403);
+    await duplicateEvent(source.id).send({}).expect(400);
+    await duplicateEvent(source.id)
+      .send({ ...dates, endsAt: dates.startsAt })
+      .expect(400);
+    expect(await db.event.count({ where: { slug: { startsWith: `${source.slug}-copy-` } } })).toBe(
+      0,
+    );
+  });
+
+  it('skips occupied slugs and allocates distinct slugs for concurrent copies', async () => {
+    const source = await events.create(users.get('ORGANIZER')!, body());
+    const other = await events.create(users.get('OTHER')!, { ...body(), organizationId: orgs[1]! });
+    await db.event.update({ where: { id: other.id }, data: { slug: `${source.slug}-copy-1` } });
+    const results = await Promise.all(
+      [1, 2].map(() => duplicateEvent(source.id).send(duplicateDates()).expect(201)),
+    );
+    expect(results.map((r) => r.body.slug).sort()).toEqual([
+      `${source.slug}-copy-2`,
+      `${source.slug}-copy-3`,
+    ]);
+    expect(results.every((r) => r.body.status === 'DRAFT' && r.body.seatMapLayout === null)).toBe(
+      true,
+    );
   });
   it('streams only paid active tickets to event members and admins', async () => {
     const event = await events.create(users.get('ORGANIZER')!, body());

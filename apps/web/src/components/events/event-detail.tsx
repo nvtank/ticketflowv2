@@ -28,6 +28,7 @@ export { QueryNotice } from '@/components/ui/query-notice';
 import { LayoutCanvas } from '@/components/seating/layout-canvas';
 import { ArtistCollection } from '@/components/discovery/artists';
 import { EventReviews } from '@/components/discovery/reviews';
+import { EventCountdown } from './event-countdown';
 
 export function EventInformation({ event }: { event: EventData }) {
   const canonicalUrl =
@@ -142,6 +143,7 @@ export function EventInformation({ event }: { event: EventData }) {
         </Card>
       </div>
       <aside className="space-y-5 lg:sticky lg:top-32">
+        <EventCountdown startsAt={event.startsAt} endsAt={event.endsAt} status={event.status} />
         <Card>
           <p className="flex gap-3">
             <CalendarDays className="size-5 shrink-0 text-primary" />
