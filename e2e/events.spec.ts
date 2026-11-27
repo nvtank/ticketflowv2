@@ -1,4 +1,5 @@
-import { execFileSync } from 'node:child_process';
+﻿import { execFileSync } from 'node:child_process';
+import { readFile } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 const password = 'TixFlowDemo!2026';
 test.beforeAll(() => {
@@ -42,6 +43,12 @@ test('organizer creates seats, admin rejects and approves, customer discovers th
   await page.getByRole('button', { name: 'Lưu bản nháp', exact: true }).click();
   await expect(page).toHaveURL(/\/organizer\/events\/[a-f0-9-]+$/);
   const id = page.url().split('/').pop()!;
+  const downloaded = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Xuất CSV', exact: true }).click();
+  const csv = await downloaded;
+  expect(csv.suggestedFilename()).toMatch(/^event-[a-f0-9-]+-attendees\.csv$/);
+  const file = await csv.path();
+  expect((await readFile(file, 'utf8')).startsWith('\uFEFF"Ticket code","Ticket type"')).toBe(true);
   await page.getByRole('button', { name: 'Dãy 10 ghế', exact: true }).click();
   await page.getByLabel('Số hàng', { exact: true }).fill('2');
   await page.getByLabel('Ghế mỗi hàng', { exact: true }).fill('5');
@@ -103,16 +110,53 @@ test('organizer creates seats, admin rejects and approves, customer discovers th
   });
   const customer = await customerContext.newPage();
   await customer.goto('/events');
+  await expect(customer.getByLabel('Tìm sự kiện theo tên')).toBeVisible();
+  const mobileToggle = customer.getByRole('button', { name: /Bộ lọc/ });
+  const filterControls = customer.locator('#catalog-filter-controls');
+  if (await mobileToggle.isVisible()) {
+    await expect(async () => {
+      if ((await mobileToggle.getAttribute('aria-expanded')) !== 'true') {
+        await mobileToggle.click();
+      }
+      await expect(filterControls).toBeVisible({ timeout: 500 });
+    }).toPass({ timeout: 10_000 });
+  }
+  await customer.getByLabel('Thành phố', { exact: true }).selectOption('Đà Nẵng');
+  await expect(customer).toHaveURL(/city=/);
+  await customer.getByLabel('Sắp xếp', { exact: true }).selectOption('price_asc');
+  await expect(customer).toHaveURL(/sort=price_asc/);
   await customer.getByLabel('Tìm sự kiện theo tên').fill(title);
   await customer.getByRole('button', { name: 'Tìm kiếm', exact: true }).click();
   await expect(customer).toHaveURL(/q=/);
+  await customer.reload();
+  await expect(customer.getByLabel('Tìm sự kiện theo tên')).toHaveValue(title);
+  await expect(customer.getByLabel('Thành phố', { exact: true })).toHaveValue('Đà Nẵng');
+  await expect(customer.getByLabel('Sắp xếp', { exact: true })).toHaveValue('price_asc');
   await customer.getByRole('link', { name: 'Xem chi tiết', exact: true }).click();
   await expect(customer.getByRole('heading', { name: title, exact: true })).toBeVisible();
   await expect(customer.getByText('Còn 2/2 ghế', { exact: false })).toBeVisible();
+  await expect(customer.getByTestId('event-countdown')).toBeVisible();
   await customer.screenshot({ path: info.outputPath('published-event.png'), fullPage: true });
   expect(await customer.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
     true,
   );
   await adminContext.close();
   await customerContext.close();
+
+  await page.getByRole('button', { name: 'Nhân bản', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'Nhân bản sự kiện', exact: true });
+  const date = (days: number) =>
+    new Date(Date.now() + days * 86_400_000).toISOString().slice(0, 16);
+  await dialog.getByLabel('Bắt đầu sự kiện', { exact: true }).fill(date(60));
+  await dialog.getByLabel('Kết thúc sự kiện', { exact: true }).fill(date(61));
+  await dialog.getByLabel('Bắt đầu bán vé', { exact: true }).fill(date(40));
+  await dialog.getByLabel('Kết thúc bán vé', { exact: true }).fill(date(59));
+  await dialog.getByRole('button', { name: 'Tạo bản nháp', exact: true }).click();
+  await expect(
+    page.getByRole('heading', { name: `${title} (bản sao)`, exact: true }),
+  ).toBeVisible();
+  await expect(page).toHaveURL(/\/organizer\/events\/[a-f0-9-]+$/);
+  expect(new URL(page.url()).pathname).not.toBe(`/organizer/events/${id}`);
+  await expect(page.getByText('Bản nháp', { exact: true })).toBeVisible();
+  await expect(page.locator('[data-layout-block]')).toHaveCount(2);
 });
