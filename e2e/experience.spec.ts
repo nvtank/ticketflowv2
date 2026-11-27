@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process';
+﻿import { execFileSync } from 'node:child_process';
 import { expect, test } from '@playwright/test';
 const password = 'TixFlowDemo!2026';
 test.beforeAll(() => {
@@ -143,6 +143,7 @@ test('all public experiences fit mobile widths and respect reduced motion', asyn
     '/artists/luma',
     '/community',
     '/contributors',
+    '/for-organizers',
     '/guide',
     '/events',
     '/login',
@@ -163,4 +164,25 @@ test('all public experiences fit mobile widths and respect reduced motion', asyn
       });
   }
   expect(errors).toEqual([]);
+});
+
+test('for-organizers landing page presents workflow, FAQ and registration CTA', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await page.locator('footer').getByRole('link', { name: 'For organizers', exact: true }).click();
+  await expect(page).toHaveURL(/\/for-organizers$/);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Tổ chức sự kiện.');
+  const faqButton = page.getByRole('button', {
+    name: 'Phòng chờ hoạt động như thế nào khi sự kiện có lượng truy cập cao?',
+  });
+  await faqButton.click();
+  await expect(faqButton).toHaveAttribute('aria-expanded', 'true');
+  await expect(
+    page.getByRole('region', {
+      name: 'Phòng chờ hoạt động như thế nào khi sự kiện có lượng truy cập cao?',
+    }),
+  ).toContainText('FIFO');
+  await page.getByRole('link', { name: 'Đăng ký ban tổ chức', exact: true }).click();
+  await expect(page).toHaveURL(/\/register$/);
 });

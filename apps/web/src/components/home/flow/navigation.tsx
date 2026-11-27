@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -45,7 +45,7 @@ export function FlowNavigation({ interior = false }: { interior?: boolean }) {
         { href: '/my-tickets', label: 'My tickets' },
         { href: '/guide', label: 'Booking guide' },
         { href: '/contributors', label: 'Contributors' },
-        { href: '/organizer', label: 'For organizers' },
+        { href: '/for-organizers', label: 'For organizers' },
       ],
     },
     {
