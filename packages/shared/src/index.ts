@@ -1,4 +1,4 @@
-import type { SavedSeatLayout } from './seating';
+﻿import type { SavedSeatLayout } from './seating';
 export const API_PREFIX = '/api/v1';
 export const DEFAULT_HOLD_SECONDS = 300;
 export const MAX_TICKETS_PER_ORDER = 4;
@@ -64,6 +64,46 @@ export interface EventListResponse {
   pagination: Pagination;
 }
 
+export const EVENT_SORT_OPTIONS = ['soonest', 'latest', 'price_asc', 'price_desc'] as const;
+export type EventSortOption = (typeof EVENT_SORT_OPTIONS)[number];
+
+export interface EventCatalogQuery {
+  page?: number;
+  pageSize?: number;
+  q?: string;
+  category?: EventCategory;
+  city?: string;
+  from?: string;
+  to?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  sort?: EventSortOption;
+}
+
+export interface EventFiltersResponse {
+  cities: string[];
+  minPriceVnd: number;
+  maxPriceVnd: number;
+}
+
+export interface FavoriteEventsQuery {
+  page?: number;
+  pageSize?: number;
+}
+
+export interface FavoriteEventParams {
+  eventId: string;
+}
+
+export interface FavoriteEventResponse extends FavoriteEventParams {
+  isFavorite: boolean;
+}
+
+export interface FavoriteEventsResponse {
+  items: { event: EventSummary; createdAt: string }[];
+  pagination: Pagination;
+}
+
 export type DependencyStatus = 'up' | 'down';
 export interface HealthResponse {
   status: 'ok' | 'degraded';
@@ -98,6 +138,7 @@ export interface EventSectionSummary {
   soldSeats: number;
 }
 export interface EventDetail extends EventSummary {
+  isFavorite?: boolean;
   status: EventStatus;
   description: string;
   endsAt: string;

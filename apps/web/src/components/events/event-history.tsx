@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { QueryNotice } from './event-detail';
 const labels: Record<string, string> = {
   EVENT_CREATED: 'Tạo sự kiện',
+  EVENT_DUPLICATED: 'Nhân bản sự kiện',
   EVENT_EDITED: 'Chỉnh sửa bản nháp',
   EVENT_GRID_GENERATED: 'Tạo sơ đồ ghế',
   EVENT_SEAT_LAYOUT_SAVED: 'Lưu thiết kế chỗ ngồi',
