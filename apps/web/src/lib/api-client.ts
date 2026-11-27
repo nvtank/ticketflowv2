@@ -22,15 +22,15 @@ interface RequestOptions {
   anonymous?: boolean;
 }
 
-export async function apiRequest<T>(
+async function apiResponse(
   method: string,
   path: string,
-  schema: z.ZodType<T>,
+  accept: string,
   body?: unknown,
   options?: RequestOptions,
-): Promise<T> {
+): Promise<Response> {
   const send = async (): Promise<Response> => {
-    const headers = new Headers({ Accept: 'application/json' });
+    const headers = new Headers({ Accept: accept });
     if (body !== undefined) headers.set('Content-Type', 'application/json');
     const token = useAuthState.getState().accessToken;
     if (!options?.anonymous && token) headers.set('Authorization', `Bearer ${token}`);
@@ -57,21 +57,53 @@ export async function apiRequest<T>(
       /* Preserve the original 401 for a consistent caller error. */
     }
   }
+  return response;
+}
+
+function apiFailure(response: Response, raw: unknown) {
+  const errorBody = z.object({ message: z.string() }).safeParse(raw);
+  return new ApiClientError(
+    errorBody.success ? errorBody.data.message : 'Không thể xử lý yêu cầu. Vui lòng thử lại.',
+    response.status,
+    response.headers.get('X-Request-ID') ?? undefined,
+  );
+}
+
+export async function apiRequest<T>(
+  method: string,
+  path: string,
+  schema: z.ZodType<T>,
+  body?: unknown,
+  options?: RequestOptions,
+): Promise<T> {
+  const response = await apiResponse(method, path, 'application/json', body, options);
   const requestId = response.headers.get('X-Request-ID') ?? undefined;
   const raw: unknown =
     response.status === 204 ? undefined : await response.json().catch(() => null);
-  if (!response.ok && !(options?.acceptDegraded && response.status === 503)) {
-    const errorBody = z.object({ message: z.string() }).safeParse(raw);
-    throw new ApiClientError(
-      errorBody.success ? errorBody.data.message : 'Không thể xử lý yêu cầu. Vui lòng thử lại.',
-      response.status,
-      requestId,
-    );
-  }
+  if (!response.ok && !(options?.acceptDegraded && response.status === 503))
+    throw apiFailure(response, raw);
   const parsed = schema.safeParse(raw);
   if (!parsed.success)
     throw new ApiClientError('Máy chủ chưa trả về dữ liệu hợp lệ.', response.status, requestId);
   return parsed.data;
+}
+
+export async function downloadCsv(path: string) {
+  const response = await apiResponse('GET', path, 'text/csv');
+  if (!response.ok) throw apiFailure(response, await response.json().catch(() => null));
+  if (!/^text\/csv(?:;|$)/i.test(response.headers.get('Content-Type') ?? ''))
+    throw new ApiClientError('Máy chủ chưa trả về tệp CSV hợp lệ.', response.status);
+
+  const disposition = response.headers.get('Content-Disposition') ?? '';
+  const filename = /\bfilename="([\w-]+\.csv)"(?:;|$)/i.exec(disposition)?.[1] ?? 'attendees.csv';
+  const url = URL.createObjectURL(await response.blob());
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 export function apiGet<T>(
